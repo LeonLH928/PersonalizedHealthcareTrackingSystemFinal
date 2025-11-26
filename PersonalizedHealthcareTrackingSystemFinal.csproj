@@ -8,4 +8,25 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Resources\Images\avatar.png" />
+    <None Remove="Resources\Images\icon.png" />
+    <None Remove="Resources\Images\logo.ico" />
+    <None Remove="Resources\Images\logo.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+    <PackageReference Include="FontAwesome.WPF" Version="4.7.0.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.22" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\Images\avatar.png" />
+    <Resource Include="Resources\Images\icon.png" />
+    <Resource Include="Resources\Images\logo.ico" />
+    <Resource Include="Resources\Images\logo.png" />
+  </ItemGroup>
+
 </Project>
