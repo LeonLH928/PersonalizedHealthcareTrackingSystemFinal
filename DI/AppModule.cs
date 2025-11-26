@@ -1,15 +1,32 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using PersonalizedHealthcareTrackingSystemFinal.Views.PatientView;
+using PersonalizedHealthcareTrackingSystemFinal.ViewModels;
+using PersonalizedHealthcareTrackingSystemFinal.Views;
 
 namespace PersonalizedHealthcareTrackingSystemFinal.DI;
-public static class AppModule 
+public static class AppModule
 {
-    public static IServiceCollection RegisterServices(this IServiceCollection services)
+    public static IServiceCollection RegisterDependency(this IServiceCollection services)
     {
+        // Register Database
+        
+
+        // Register Data context
+        
+
         // Register Views
-        services.AddTransient<PatientMainWindow>();
-        services.AddTransient<PatientBookingPage>();
-        services.AddTransient<PatientHomePage>();
+        services.AddTransient<IntroductionWindow>();
+        services.AddTransient<Views.PatientView.PatientMainWindow>();
+        services.AddTransient<Views.PatientView.PatientBookingPage>();
+        services.AddTransient<Views.PatientView.PatientHomePage>();
+
+        // Register ViewModels
+        services.AddTransient<IntroductionWindowViewModel>();
+
+        // Register Repositories
+
+
+        // Register Services
+
 
         return services;
     }

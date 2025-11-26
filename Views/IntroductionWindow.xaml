@@ -1,0 +1,105 @@
+﻿<Window x:Class="PersonalizedHealthcareTrackingSystemFinal.Views.IntroductionWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewmodels="clr-namespace:PersonalizedHealthcareTrackingSystemFinal.ViewModels"
+        mc:Ignorable="d"
+        Title="Personalized Healthcare System" 
+        Height="600" Width="800"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        AllowsTransparency="True"
+        Background="Transparent"
+        Icon="/Resources/Images/logo.ico">
+
+    <Border Background="#1a202c" CornerRadius="10">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel
+                       VerticalAlignment="Center" 
+                       HorizontalAlignment="Center" Height="500" Width="780">
+
+
+                <Image Source="/Resources/Images/logo.png"
+                       Width="150"
+                       Height="150"
+                       Margin="0,0,0,30"/>
+
+
+                <TextBlock Text="PERSONALIZED HEALTHCARE TRACKING SYSTEM"
+                          FontSize="28"
+                          FontWeight="Bold"
+                          Foreground="White"
+                          HorizontalAlignment="Center"
+                          Margin="0,0,0,15"/>
+
+
+                <TextBlock Text="Your Health, Your Data, Your Control"
+                          FontSize="18"
+                          FontStyle="Italic"
+                          Foreground="#A0AEC0"
+                          HorizontalAlignment="Center"
+                          Margin="0,0,0,60"/>
+
+                <Grid Width="80" Height="80" Margin="0,0,0,20">
+                    <Ellipse Width="80" Height="80"
+                            Stroke="#2D3748" 
+                            StrokeThickness="8"
+                            Fill="Transparent"/>
+
+                    <Ellipse Width="80" Height="80"
+                            Stroke="#4FD1C5" 
+                            StrokeThickness="8"
+                            Fill="Transparent"
+                            StrokeDashArray="200"
+                            StrokeDashOffset="0"
+                            RenderTransformOrigin="0.5,0.5">
+                        <Ellipse.RenderTransform>
+                            <RotateTransform x:Name="SpinnerRotate" Angle="0"/>
+                        </Ellipse.RenderTransform>
+                        <Ellipse.Triggers>
+                            <EventTrigger RoutedEvent="Loaded">
+                                <BeginStoryboard>
+                                    <Storyboard RepeatBehavior="Forever">
+                                        <DoubleAnimation Storyboard.TargetName="SpinnerRotate"
+                                                       Storyboard.TargetProperty="Angle"
+                                                       From="0" To="360"
+                                                       Duration="0:0:1.5"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </Ellipse.Triggers>
+                    </Ellipse>
+                </Grid>
+
+                <TextBlock Text="{Binding LoadingText}"
+                          FontSize="20"  
+                          FontWeight="Bold"
+                          Foreground="White"
+                          HorizontalAlignment="Center"/>
+            </StackPanel>
+
+            <ProgressBar Grid.Row="1"
+                        Height="4"
+                        Minimum="0"
+                        Maximum="100"
+                        Value="{Binding Progress}"
+                        Background="#2D3748"
+                        BorderThickness="0"
+                        Margin="0,0,0,20">
+                <ProgressBar.Foreground>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                        <GradientStop Color="#4FD1C5" Offset="0"/>
+                        <GradientStop Color="#38B2AC" Offset="1"/>
+                    </LinearGradientBrush>
+                </ProgressBar.Foreground>
+            </ProgressBar>
+        </Grid>
+    </Border>
+</Window>
