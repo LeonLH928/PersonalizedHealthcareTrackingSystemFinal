@@ -23,6 +23,7 @@ public static class AppModule
 
         // Register ViewModels
         services.AddTransient<IntroductionWindowViewModel>();
+        services.AddTransient<ViewModels.DoctorViewModel.DoctorDashboardPageViewModel>();
 
         // Register Repositories
 

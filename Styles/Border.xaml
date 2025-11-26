@@ -7,8 +7,8 @@
         <Setter Property="BorderThickness" Value="1"/>
     </Style>
     
-    <!-- Date Badge Border Style -->
-    <Style x:Key="DateBadgeBorderStyle" TargetType="Border">
+    <!-- Secondary Text Border Style -->
+    <Style x:Key="SecondaryTextBorderStyle" TargetType="Border">
         <Setter Property="Background" Value="#F1F5F9"/>
         <Setter Property="Padding" Value="5"/>
         <Setter Property="CornerRadius" Value="10"/>
@@ -17,5 +17,59 @@
         <Setter Property="HorizontalAlignment" Value="Left"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
     </Style>
-
+    
+    <!-- Default User Avatar -->
+    <Style x:Key="DefaultDoctorAvatar" TargetType="Border">
+        <Setter Property="Height" Value="60"/>
+        <Setter Property="Width" Value="60"/>
+        <Setter Property="Margin" Value="10,0,0,0"/>
+        <Setter Property="CornerRadius" Value="30"/>
+        <Setter Property="Background" Value="#cbd5e1"/>
+    </Style>
+    
+    <!-- Dashboard Border Style -->
+    <Style x:Key="DashboardBorderStyle" TargetType="Border">
+        <Setter Property="Padding" Value="32"/>
+        <Setter Property="Background" Value="#F1F5F9"/>
+    </Style> 
+    
+    <!-- Widget Border Style -->
+    <Style x:Key="WidgetBorderStyle" TargetType="Border">
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="Padding" Value="20"/>
+        <Setter Property="CornerRadius" Value="8"/>
+        <Setter Property="BorderBrush" Value="#e2e8f0"/>
+        <Setter Property="BorderThickness" Value="1"/>
+    </Style>
+    
+    <!-- Next patient Border Style -->
+    <Style x:Key="NextPatientBorderStyle" TargetType="Border">
+        <Setter Property="Padding" Value="24"/>
+        <Setter Property="CornerRadius" Value="8"/>
+        <Setter Property="BorderBrush" Value="#4A90E2"/>
+        <Setter Property="BorderThickness" Value="8,0,0,0"/>
+        <Setter Property="Background">
+            <Setter.Value>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#EFF6FF"/>
+                    <GradientStop Color="White" Offset="0.5"/>
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <!-- Default Dashboard Avatar -->
+    <Style x:Key="DefaultDashboardAvatar" TargetType="Border">
+        <Setter Property="Height" Value="80"/>
+        <Setter Property="Width" Value="80"/>
+        <Setter Property="Margin" Value="10,0,0,0"/>
+        <Setter Property="CornerRadius" Value="40"/>
+        <Setter Property="Background" Value="#e0f2fe"/>
+    </Style>
+    
+    <!-- Line -->
+    <Style x:Key="Line" TargetType="Border">
+        <Setter Property="BorderBrush" Value="#E2E8F0"/>
+        <Setter Property="BorderThickness" Value="0.5"/>
+    </Style>
 </ResourceDictionary>
