@@ -46,8 +46,8 @@ namespace PersonalizedHealthcareTrackingSystemFinal.ViewModels
                 _timer.Stop();
                 await Task.Delay(500);
 
-                //var loginWindow = _serviceProvider.GetRequiredService<LoginWindow>();
-                //loginWindow.Show();
+                var loginWindow = _serviceProvider.GetRequiredService<LoginWindow>();
+                loginWindow.Show();
 
                 //var PatientMainWindow = _serviceProvider.GetRequiredService<Views.PatientView.PatientMainWindow>();   
                 //PatientMainWindow.Show();

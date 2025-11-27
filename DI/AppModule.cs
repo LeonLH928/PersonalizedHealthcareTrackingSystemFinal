@@ -34,6 +34,7 @@ public static class AppModule
 
         // Register Views
         services.AddTransient<IntroductionWindow>();
+        services.AddTransient<LoginWindow>();
         services.AddTransient<Views.PatientView.PatientMainWindow>();
         services.AddTransient<Views.PatientView.PatientBookingPage>();
         services.AddTransient<Views.PatientView.PatientHomePage>();
@@ -42,6 +43,7 @@ public static class AppModule
 
         // Register ViewModels
         services.AddTransient<IntroductionWindowViewModel>();
+        services.AddTransient<LoginWindowViewModel>();
         services.AddTransient<ViewModels.DoctorViewModel.DoctorDashboardPageViewModel>();
 
         // Register Repositories
