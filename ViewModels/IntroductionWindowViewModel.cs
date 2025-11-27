@@ -49,8 +49,11 @@ namespace PersonalizedHealthcareTrackingSystemFinal.ViewModels
                 //var loginWindow = _serviceProvider.GetRequiredService<LoginWindow>();
                 //loginWindow.Show();
 
-                var PatientMainWindow = _serviceProvider.GetRequiredService<Views.PatientView.PatientMainWindow>();   
-                PatientMainWindow.Show();
+                //var PatientMainWindow = _serviceProvider.GetRequiredService<Views.PatientView.PatientMainWindow>();   
+                //PatientMainWindow.Show();
+
+                var DoctorMainWindow = _serviceProvider.GetRequiredService<Views.DoctorView.DoctorMainWindow>();
+                DoctorMainWindow.Show();
 
                 CloseWindow();
             }
