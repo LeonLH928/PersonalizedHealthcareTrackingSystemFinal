@@ -1,6 +1,11 @@
-﻿using System.Windows;
-using Microsoft.Extensions.DependencyInjection;
-using PersonalizedHealthcareTrackingSystem.DI;
+﻿using Microsoft.Extensions.DependencyInjection;
+using PersonalizedHealthcareTrackingSystemFinal.Configs;
+using PersonalizedHealthcareTrackingSystemFinal.DI;
+using PersonalizedHealthcareTrackingSystemFinal.Views;
+using System.Configuration;
+using System.Data;
+using System.Threading.Tasks;
+using System.Windows;
 
 namespace PersonalizedHealthcareTrackingSystemFinal
 {
@@ -14,11 +19,14 @@ namespace PersonalizedHealthcareTrackingSystemFinal
         {
             base.OnStartup(e);
 
-            var Services = new ServiceCollection();
-            Services.RegisterDependency();
-            ServiceProvider = Services.BuildServiceProvider();
+            ServiceCollection services = new();
+            services.RegisterDependency();
+            ServiceProvider = services.BuildServiceProvider();
 
-            var IntroductionWindow = ServiceProvider.GetRequiredService<Views.IntroductionWindow>();
+            var Database = ServiceProvider.GetRequiredService<DatabaseConfig>();
+            await Database.InitializeAsync();
+
+            var IntroductionWindow = ServiceProvider.GetRequiredService<IntroductionWindow>();
             IntroductionWindow.Show();
         }
     }

@@ -12,7 +12,7 @@
         WindowStartupLocation="CenterScreen"
         AllowsTransparency="True"
         Background="Transparent"
-        Icon="/Resources/logo/logo.ico">
+        Icon="/Resources/Images/logo.ico">
 
     <Border Background="#1a202c" CornerRadius="10">
         <Grid>
@@ -26,7 +26,7 @@
                        HorizontalAlignment="Center" Height="500" Width="780">
 
 
-                <Image Source="/Resources/logo/logo.png"
+                <Image Source="/Resources/Images/logo.png"
                        Width="150"
                        Height="150"
                        Margin="0,0,0,30"/>
