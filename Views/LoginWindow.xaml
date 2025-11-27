@@ -1,0 +1,113 @@
+﻿<Window x:Class="PersonalizedHealthcareTrackingSystemFinal.Views.LoginWindow"
+        x:Name="RootWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PersonalizedHealthcareTrackingSystemFinal.Helpers"
+        mc:Ignorable="d"
+        Title="Personalized Healthcare System | Login" 
+        Height="600" Width="800"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        ResizeMode="NoResize"
+        Icon="/Resources/Logo/logo.ico"
+        
+    FontFamily="/PersonalizedHealthcareTrackingSystemFinal;component/Resources/Fonts/#Poppins">
+
+    <Border Background="#11161F" CornerRadius="20" BorderThickness="1" BorderBrush="#333">
+        <Grid>
+            <StackPanel VerticalAlignment="Center" 
+                        HorizontalAlignment="Center" 
+                        Width="450">
+
+                <Image Source="/Resources/Logo/logo.png" Width="100" Height="100" Margin="0,0,0,20"/>
+
+                <TextBlock Text="PERSONALIZED HEALTHCARE TRACKING SYSTEM" 
+                           Foreground="White" FontSize="18" FontWeight="Bold" 
+                           HorizontalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap"
+                           Margin="0,0,0,5"/>
+
+                <TextBlock Text="Your Health, Your Data, Your Control" 
+                           Foreground="{StaticResource TextGray}" FontSize="14" FontStyle="Italic"
+                           HorizontalAlignment="Center" Margin="0,0,0,40"/>
+
+                <TextBox Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}"
+                         Style="{StaticResource RoundedTextBoxStyle}" 
+                         Tag="Username"
+                         Height="50" Margin="0,0,0,20" FontFamily="Poppins"/>
+
+                <Grid Margin="0,0,0,10">
+                    <PasswordBox x:Name="pwdBox"
+                                 Style="{StaticResource RoundedPasswordBoxStyle}"
+                                 Tag="Password"
+                                 Height="50"
+                                 PasswordChanged="pwdBox_PasswordChanged"/>
+
+                    <TextBox x:Name="txtVisiblePassword"
+                             Style="{StaticResource RoundedTextBoxStyle}"
+                             Tag="Password"
+                             Height="50"
+                             Visibility="Collapsed"
+                             TextChanged="txtVisiblePassword_TextChanged"/>
+
+                    <ToggleButton x:Name="btnToggleShow"
+                                  HorizontalAlignment="Right" VerticalAlignment="Center"
+                                  Width="30" Height="30" Margin="0,0,15,0"
+                                  Background="Transparent" BorderThickness="0" Cursor="Hand"
+                                  Checked="ShowPassword_Checked" Unchecked="ShowPassword_Unchecked">
+                        <ToggleButton.Template>
+                            <ControlTemplate TargetType="ToggleButton">
+                                <Border Background="Transparent">
+                                    <TextBlock x:Name="txtIcon" Text="👁" FontSize="16" Foreground="{StaticResource TextGray}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsChecked" Value="True">
+                                        <Setter TargetName="txtIcon" Property="Foreground" Value="{StaticResource PrimaryTeal}"/>
+                                    </Trigger>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter TargetName="txtIcon" Property="Opacity" Value="0.8"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </ToggleButton.Template>
+                    </ToggleButton>
+                </Grid>
+
+                <TextBlock Text="Forget Password?" 
+                           Foreground="White" TextDecorations="Underline" Cursor="Hand" 
+                           HorizontalAlignment="Right" Margin="0,0,5,30"/>
+
+                <Button Command="{Binding LoginCommand}" 
+                        Content="LOG IN" 
+                        Style="{StaticResource TealButtonStyle}" 
+                        Height="50" Margin="0,0,0,25"/>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <TextBlock Text="Don't have an account? " Foreground="White"/>
+                    <TextBlock Text="Sign Up" Foreground="White" TextDecorations="Underline" FontWeight="Bold" Cursor="Hand"/>
+                </StackPanel>
+
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" 
+                        VerticalAlignment="Top" 
+                        HorizontalAlignment="Right" 
+                        Margin="0,10,15,0">
+
+                <Button Content="—" 
+                        Style="{StaticResource WindowControlButtonStyle}"
+                        Command="{Binding MinimizeAppCommand}"
+                        CommandParameter="{Binding ElementName=RootWindow}"/>
+
+                <Button Content="✕" 
+                        Style="{StaticResource CloseButtonStyle}"
+                        Command="{Binding CloseAppCommand}"
+                        CommandParameter="{Binding ElementName=RootWindow}"/>
+            </StackPanel>
+
+        </Grid>
+    </Border>
+</Window>
