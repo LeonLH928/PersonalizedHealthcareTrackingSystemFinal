@@ -1,0 +1,17 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!-- Page Header Text Block Style-->
+    <Style x:Key="PageHeaderTextBlockStyle" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="25"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="FontFamily" Value="Arial"/>
+    </Style>
+
+    <!-- Secondary Text Text Block Style-->
+    <Style x:Key="SecondaryTextTextBlockStyle" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="Arial"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Foreground" Value="#64748b"/>
+    </Style>
+    
+</ResourceDictionary>

@@ -1,0 +1,573 @@
+﻿<Page x:Class="PersonalizedHealthcareTrackingSystemFinal.Views.DoctorView.DoctorDashboardPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:PersonalizedHealthcareTrackingSystemFinal.Views.DoctorView"
+      xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.WPF;assembly=LiveChartsCore.SkiaSharpView.WPF"
+      xmlns:fa="http://schemas.fontawesome.io/icons/"
+      mc:Ignorable="d" d:DesignWidth="800"
+      Title="DoctorDashboardPage" Height="896">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Border Style="{StaticResource PageHeaderBorderStyle}" 
+                Padding="32,16">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel
+                    HorizontalAlignment="Left"
+                    Orientation="Vertical">
+
+                    <TextBlock
+                        Style="{StaticResource PageHeaderTextBlockStyle}"
+                        Text="Doctor's Dashboard"/>
+
+                    <Border 
+                        Style="{StaticResource SecondaryTextBorderStyle}"
+                        Margin="0,8,0,0">
+                        <TextBlock
+                            Style="{StaticResource SecondaryTextTextBlockStyle}"
+                            Text="Wed, Oct 26, 2025"/>
+                    </Border>
+
+                </StackPanel>
+
+                <StackPanel
+                    Grid.Column="1"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel
+                            Orientation="Vertical"
+                            VerticalAlignment="Center">
+                            <TextBlock
+                                FontWeight="SemiBold"
+                                FontSize="18"
+                                FontFamily="Arial"
+                                TextAlignment="Right"
+                                Text="Dr. Tran Minh Tuan"/>
+
+                            <TextBlock
+                                Margin="0,4,0,0"
+                                Text="Cardiologist"
+                                Style="{StaticResource SecondaryTextTextBlockStyle}"
+                                TextAlignment="Right"/>
+                        </StackPanel>
+
+                        <Border
+                            Grid.Column="1"
+                            Style="{StaticResource DefaultDoctorAvatar}"/>
+                    </Grid>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <ScrollViewer
+            Grid.Row="1"
+            HorizontalScrollBarVisibility="Auto">
+            <Border
+                Style="{StaticResource DashboardBorderStyle}">
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Margin="0,0,0,20">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <!-- Widget 1: Total Patients -->
+                        <Border
+                            Style="{StaticResource WidgetBorderStyle}"
+                            Margin="0,0,5,0">
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <fa:FontAwesome
+                                    Icon="Calendar"
+                                    FontSize="25"
+                                    VerticalAlignment="Center"/>
+
+                                <StackPanel
+                                    Margin="10,0,0,0"
+                                    Grid.Column="1"
+                                    Orientation="Vertical">
+
+                                    <TextBlock
+                                        Text="24"
+                                        FontFamily="Arial"
+                                        FontWeight="SemiBold"
+                                        FontSize="24"/>
+
+                                    <TextBlock
+                                        Text="Total appointments"
+                                        Style="{StaticResource SecondaryTextTextBlockStyle}"/>
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+
+                        <!-- Widget 2: Upcoming -->
+                        <Border
+                            Grid.Column="1"
+                            Style="{StaticResource WidgetBorderStyle}"
+                            Margin="5,0,5,0">
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <fa:FontAwesome
+                                    Icon="ClockOutline"
+                                    FontSize="25"
+                                    VerticalAlignment="Center"/>
+
+                                <StackPanel
+                                    Margin="10,0,0,0"
+                                    Grid.Column="1"
+                                    Orientation="Vertical">
+
+                                    <TextBlock
+                                        Text="3"
+                                        FontFamily="Arial"
+                                        FontWeight="SemiBold"
+                                        FontSize="24"/>
+
+                                    <TextBlock
+                                        Text="Upcomings"
+                                        Style="{StaticResource SecondaryTextTextBlockStyle}"/>
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+
+                        <!-- Widget 3: Today Finished -->
+                        <Border
+                            Grid.Column="2"
+                            Style="{StaticResource WidgetBorderStyle}"
+                            Margin="5,0,5,0">
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <fa:FontAwesome
+                                    Icon="Check"
+                                    FontSize="25"
+                                    VerticalAlignment="Center"/>
+
+                                <StackPanel
+                                    Margin="10,0,0,0"
+                                    Grid.Column="1"
+                                    Orientation="Vertical">
+
+                                    <TextBlock
+                                        Text="5"
+                                        FontFamily="Arial"
+                                        FontWeight="SemiBold"
+                                        FontSize="24"/>
+
+                                    <TextBlock
+                                        Text="Today Finished"
+                                        Style="{StaticResource SecondaryTextTextBlockStyle}"/>
+
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+
+                        <!-- Widget 4: Overdue -->
+                        <Border
+                            Grid.Column="3"
+                            Style="{StaticResource WidgetBorderStyle}"
+                            Margin="5,0,0,0">
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <fa:FontAwesome
+                                    Icon="CalendarTimesOutline"
+                                    FontSize="25"
+                                    VerticalAlignment="Center"/>
+
+                                <StackPanel
+                                    Margin="10,0,0,0"
+                                    Grid.Column="1"
+                                    Orientation="Vertical">
+
+                                    <TextBlock
+                                        Text="2"
+                                        FontFamily="Arial"
+                                        FontWeight="SemiBold"
+                                        FontSize="24"/>
+
+                                    <TextBlock
+                                        Text="Overdue"
+                                        Style="{StaticResource SecondaryTextTextBlockStyle}"/>
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+                    </Grid>
+
+                    <Grid
+                        Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="0.6*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid Margin="0,0,20,0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <Border
+                                Background="White"
+                                BorderBrush="#e2e8f0"
+                                BorderThickness="0,1,1,1"
+                                CornerRadius="8"
+                                Margin="0,0,0,20">
+
+                                <Grid>
+                                    <Border
+                                        Style="{StaticResource NextPatientBorderStyle}"/>
+
+                                    <Grid Margin="24,16">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+
+                                        <Grid Margin="0,0,0,16">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock 
+                                                Grid.Column="0" 
+                                                Text="Next appointment" 
+                                                Foreground="#4A90E2" 
+                                                FontSize="16" 
+                                                FontWeight="Medium"/>
+                                            <TextBlock 
+                                                Grid.Column="1" 
+                                                Text="At 9:00 AM" 
+                                                Foreground="#718096" 
+                                                FontSize="14"/>
+                                        </Grid>
+
+                                        <Grid
+                                            Grid.Row="1"
+                                            Margin="0,0,0,16">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <Border
+                                                Style="{StaticResource DefaultDashboardAvatar}">
+
+                                                <TextBlock
+                                                    Text="A"
+                                                    HorizontalAlignment="Center"
+                                                    VerticalAlignment="Center"
+                                                    FontSize="30"
+                                                    Foreground="#4A90E2"
+                                                    FontFamily="Arial"
+                                                    FontWeight="SemiBold"/>
+                                            </Border>
+
+                                            <StackPanel
+                                                Grid.Column="1"
+                                                Margin="10,0,0,0">
+
+                                                <Grid>
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="Auto"/>
+                                                        <RowDefinition Height="Auto"/>
+                                                        <RowDefinition Height="Auto"/>
+                                                    </Grid.RowDefinitions>
+
+                                                    <TextBlock
+                                                        Text="Nguyen Van A"
+                                                        FontWeight="Bold"
+                                                        FontFamily="Arial"
+                                                        FontSize="25"
+                                                        Margin="0,0,0,10"/>
+
+                                                    <TextBlock
+                                                        Grid.Row="1"
+                                                        Text="Male, 45 years old"
+                                                        Style="{StaticResource SecondaryTextTextBlockStyle}"
+                                                        Margin="0,0,0,6"/>
+
+                                                    <StackPanel
+                                                        Grid.Row="2"
+                                                        Orientation="Horizontal">
+                                                        <Border
+                                                            Background="#fee2e2"
+                                                            Padding="5"
+                                                            CornerRadius="8"
+                                                            Margin="0,0,10,0">
+                                                            <TextBlock
+                                                                Text="Urgent: High blood pressure"
+                                                                FontFamily="Arial"
+                                                                FontSize="14"
+                                                                Foreground="#b91c1c"/>
+                                                        </Border>
+
+                                                        <Border
+                                                            Style="{StaticResource SecondaryTextBorderStyle}">
+                                                            <TextBlock
+                                                                Text="Follow-up visit"
+                                                                Style="{StaticResource SecondaryTextTextBlockStyle}"/>
+                                                        </Border>
+
+                                                    </StackPanel>
+                                                </Grid>
+
+                                            </StackPanel>
+                                        </Grid>
+                                        <Grid 
+                                            Grid.Row="2"
+                                            Margin="0,5,0,0">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <Button
+                                                Style="{StaticResource PrimaryButtonStyle}"
+                                                Margin="0,0,5,0">
+                                                <StackPanel 
+                                                    Orientation="Horizontal">
+                                                    <TextBlock
+                                                        Text="🔊"
+                                                        Foreground="White"
+                                                        FontSize="20"/>
+                                                    <TextBlock
+                                                        Text=" Call to the clinic"
+                                                        FontSize="20"
+                                                        Foreground="White"
+                                                        FontWeight="SemiBold"/>
+                                                </StackPanel>
+                                            </Button>
+
+                                            <Button
+                                                Grid.Column="1"
+                                                Style="{StaticResource OutlineButtonStyle}"
+                                                Margin="5,0,0,0"
+                                                Content="See medical records">
+                                            </Button>
+
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+                            </Border>
+
+                            <Border
+                                Grid.Row="1"
+                                Style="{StaticResource WidgetBorderStyle}">
+
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <TextBlock 
+                                        Text="Today's Progress"
+                                        FontSize="17"
+                                        FontFamily="Arial"
+                                        FontWeight="SemiBold"/>
+                                    <TextBlock 
+                                        Grid.Row="1"
+                                        Text="You have finished 20% of today!"
+                                        Style="{StaticResource SecondaryTextTextBlockStyle}"
+                                        Margin="0,5,0,0"/>
+                                    <lvc:PieChart 
+                                        Grid.Row="2"
+                                        LegendPosition="Right"
+                                        Height="200"
+                                        Series="{Binding Data}"/>
+                                </Grid>
+
+                            </Border>
+                        </Grid>
+
+                        <Grid Grid.Column="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                
+                            </Grid.RowDefinitions>
+                            <Border
+                                Margin="0,0,0,20"
+                                Style="{StaticResource WidgetBorderStyle}">
+
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+
+                                    <TextBlock
+                                        Margin="0,0,0,20"
+                                        Text="Notifications &amp; Reminders"
+                                        FontSize="17"
+                                        FontFamily="Arial"
+                                        FontWeight="SemiBold"/>
+
+                                    <Grid Grid.Row="1">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <fa:FontAwesome
+                                            Icon="Warning"
+                                            FontSize="20"
+                                            Margin="0,0,10,0"/>
+
+                                        <StackPanel
+                                            Grid.Column="1"
+                                            Orientation="Vertical">
+
+                                            <TextBlock
+                                                Text="Approve 3 medical records"
+                                                FontFamily="Arial"
+                                                FontWeight="Semibold"
+                                                FontSize="14"/>
+
+                                            <TextBlock
+                                                Margin="0,4,0,0"
+                                                Text="From the laboratory • 10 minutes ago"
+                                                Style="{StaticResource SecondaryTextTextBlockStyle}"
+                                                FontSize="12"/>
+                                        </StackPanel>
+
+
+                                    </Grid>
+                                    <Border
+                                       Grid.Row="2"
+                                       BorderBrush="#E2E8F0"
+                                       BorderThickness="0.5"
+                                       Margin="0,10,0,10"/>
+
+                                    <Grid Grid.Row="3">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <TextBlock
+                                            Text="💬"
+                                            FontSize="15"
+                                            VerticalAlignment="Center"
+                                            Margin="0,0,10,0"/>
+
+                                        <StackPanel
+                                            Grid.Column="1"
+                                            Orientation="Vertical">
+
+                                            <TextBlock
+                                                Text="Dr. Lan sent a consultation message"
+                                                FontFamily="Arial"
+                                                FontWeight="Semibold"
+                                                FontSize="14"/>
+
+                                            <TextBlock
+                                                Margin="0,4,0,0"
+                                                Text="Regarding patient Pham Thi D • 30 minutes ago"
+                                                Style="{StaticResource SecondaryTextTextBlockStyle}"
+                                                FontSize="12"/>
+                                        </StackPanel>
+
+
+                                    </Grid>
+                                    <Border
+                                       Grid.Row="4"
+                                       BorderBrush="#E2E8F0"
+                                       BorderThickness="0.5"
+                                       Margin="0,10,0,10"/>
+
+                                </Grid>
+
+                            </Border>
+                            <Border
+                                Grid.Row="1"
+                                Style="{StaticResource WidgetBorderStyle}">
+
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+
+                                    <TextBlock
+                                        Margin="0,0,0,20"
+                                        Text="Quick access"
+                                        FontSize="17"
+                                        FontFamily="Arial"
+                                        FontWeight="SemiBold"/>
+
+                                    <Button
+                                        Grid.Row="1"
+                                        Style="{StaticResource QuickAccessButtonStyle}"
+                                        Content="🔍 Lookup Pharmacopoeia"
+                                        Margin="0,0,0,10"/>
+                                    
+                                    <Button
+                                        Grid.Row="2"
+                                        Content="📅 Manage next week's schedule"
+                                        Style="{StaticResource QuickAccessButtonStyle}"
+                                        Margin="0,0,0,10"/>
+
+                                    <Button
+                                        Grid.Row="3"
+                                        Content="⚙️ Clinic Settings"
+                                        Style="{StaticResource QuickAccessButtonStyle}"/>
+                                </Grid>
+
+                            </Border>                            
+                        </Grid>
+                    </Grid>
+                </Grid>
+            </Border>
+        </ScrollViewer>
+    </Grid>
+</Page>

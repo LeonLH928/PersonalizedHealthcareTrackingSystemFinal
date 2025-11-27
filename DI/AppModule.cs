@@ -18,9 +18,12 @@ public static class AppModule
         services.AddTransient<Views.PatientView.PatientMainWindow>();
         services.AddTransient<Views.PatientView.PatientBookingPage>();
         services.AddTransient<Views.PatientView.PatientHomePage>();
+        services.AddTransient<Views.DoctorView.DoctorMainWindow>();
+        services.AddTransient<Views.DoctorView.DoctorDashboardPage>();
 
         // Register ViewModels
         services.AddTransient<IntroductionWindowViewModel>();
+        services.AddTransient<ViewModels.DoctorViewModel.DoctorDashboardPageViewModel>();
 
         // Register Repositories
 
