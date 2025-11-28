@@ -46,6 +46,7 @@
         <Setter Property="Foreground" Value="{StaticResource TextWhite}"/>
         <Setter Property="FontSize" Value="14"/>
         <Setter Property="Padding" Value="15,12"/>
+        <Setter Property="FontFamily" Value="{StaticResource PoppinsFont}"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="local:PasswordBoxHelper.MonitorPassword" Value="True"/>
         <Setter Property="Template">

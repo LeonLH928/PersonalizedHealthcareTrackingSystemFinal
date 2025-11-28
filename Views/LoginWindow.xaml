@@ -37,13 +37,14 @@
                 <TextBox Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}"
                          Style="{StaticResource RoundedTextBoxStyle}" 
                          Tag="Username"
-                         Height="50" Margin="0,0,0,20" FontFamily="Poppins"/>
+                         Height="50" Margin="0,0,0,20" Padding="15,12,20,12" FontFamily="Poppins"/>
 
                 <Grid Margin="0,0,0,10">
                     <PasswordBox x:Name="pwdBox"
                                  Style="{StaticResource RoundedPasswordBoxStyle}"
                                  Tag="Password"
                                  Height="50"
+                                 Padding="15,12,20,12"
                                  PasswordChanged="pwdBox_PasswordChanged"/>
 
                     <TextBox x:Name="txtVisiblePassword"
@@ -51,6 +52,7 @@
                              Tag="Password"
                              Height="50"
                              Visibility="Collapsed"
+                             Padding="15,12,20,12"
                              TextChanged="txtVisiblePassword_TextChanged"/>
 
                     <ToggleButton x:Name="btnToggleShow"
