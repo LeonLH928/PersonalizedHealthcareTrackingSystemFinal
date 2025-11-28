@@ -10,6 +10,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Resources\Images\**" />
+    <EmbeddedResource Remove="Resources\Images\**" />
+    <None Remove="Resources\Images\**" />
+    <Page Remove="Resources\Images\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\Avatar\doctor.jpg" />
+    <None Remove="Resources\Avatar\Patient.jpg" />
+    <None Remove="Resources\Avatar\pharmacist.jpg" />
     <None Remove="Resources\Fonts\Poppins-Black.ttf" />
     <None Remove="Resources\Fonts\Poppins-BlackItalic.ttf" />
     <None Remove="Resources\Fonts\Poppins-Bold.ttf" />
@@ -48,6 +58,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Resources\Avatar\doctor.jpg" />
+    <Resource Include="Resources\Avatar\Patient.jpg" />
+    <Resource Include="Resources\Avatar\pharmacist.jpg" />
     <Resource Include="Resources\Fonts\Poppins-Black.ttf" />
     <Resource Include="Resources\Fonts\Poppins-BlackItalic.ttf" />
     <Resource Include="Resources\Fonts\Poppins-Bold.ttf" />
@@ -75,6 +88,12 @@
     <Resource Include="Resources\Logo\logo.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

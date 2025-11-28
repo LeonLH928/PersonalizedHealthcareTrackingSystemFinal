@@ -6,7 +6,8 @@
         xmlns:fa="http://schemas.fontawesome.io/icons/"
         xmlns:local="clr-namespace:PersonalizedHealthcareTrackingSystemFinal.Views.DoctorView"
         mc:Ignorable="d"
-        Height="600" Width="1000" WindowState="Maximized">
+        Height="600" Width="1000" WindowState="Maximized"
+        Icon="/Resources/Logo/logo.ico">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*"/>
@@ -25,7 +26,7 @@
                     Background="#141C24"
                     BorderThickness="0,0,0,1"
                     BorderBrush="#1A252F" HorizontalAlignment="Stretch">
-                <Image Source="/Resources/Images/logo.png"                       
+                <Image Source="/Resources/Logo/logo.png"                       
                        HorizontalAlignment="Center"
                        Margin="0,-15,0,-16" Width="200"
                        />
@@ -103,7 +104,7 @@
                              DockPanel.Dock="Left" 
                              Stroke="White" StrokeThickness="1">
                         <Ellipse.Fill>
-                            <ImageBrush ImageSource="/Resources/Images/avatar.png"/>
+                            <ImageBrush ImageSource="/Resources/Avatar/doctor.jpg"/>
                         </Ellipse.Fill>
                     </Ellipse>
 
