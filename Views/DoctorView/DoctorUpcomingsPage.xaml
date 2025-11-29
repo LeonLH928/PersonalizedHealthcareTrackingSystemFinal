@@ -95,18 +95,18 @@
             HorizontalScrollBarVisibility="Auto">
 
             <Border Style="{StaticResource PageContentBorderStyle}">
-                <Grid>
+                <Grid Grid.IsSharedSizeScope="True">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto" SharedSizeGroup="HeightGroup"/>
                         <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto" SharedSizeGroup="HeightGroup"/>
                         <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto" SharedSizeGroup="HeightGroup"/>
                         <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto" SharedSizeGroup="HeightGroup"/>
                         <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto" SharedSizeGroup="HeightGroup"/>
                     </Grid.RowDefinitions>
                     
                     <StackPanel
@@ -137,18 +137,18 @@
                         <Grid>
 
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto" SharedSizeGroup="TimeGroup"/>
+                                <ColumnDefinition Width="Auto" SharedSizeGroup="IdentificationGroup"/>
+                                <ColumnDefinition Width="Auto" SharedSizeGroup="ReasonGroup"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
-
+                            
                             <StackPanel
                                 Orientation="Vertical"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center">
                                 <TextBlock
-                                    Text="In Consultation"
+                                    Text="Now"
                                     FontFamily="Segoe UI"
                                     FontWeight="SemiBold"
                                     FontSize="18"
@@ -208,7 +208,6 @@
                                         HorizontalAlignment="Right"
                                         VerticalAlignment="Center"
                                         Orientation="Horizontal">
-
                                 <Button
                                     Style="{StaticResource OutlineButtonStyle}"
                                     Margin="0,0,10,0"
@@ -250,9 +249,9 @@
                         <Grid>
 
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto" SharedSizeGroup="TimeGroup"/>
+                                <ColumnDefinition Width="Auto" SharedSizeGroup="IdentificationGroup"/>
+                                <ColumnDefinition Width="Auto" SharedSizeGroup="ReasonGroup"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
@@ -335,8 +334,8 @@
                                     Content="✕ Cancel"/>
                             </StackPanel>
                         </Grid>
-            </Border>
-            <StackPanel
+                    </Border>
+                    <StackPanel
                         Grid.Row="4"
                         Orientation="Vertical"
                         HorizontalAlignment="Left">
