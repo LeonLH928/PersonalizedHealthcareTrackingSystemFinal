@@ -6,8 +6,8 @@
       xmlns:local="clr-namespace:PersonalizedHealthcareTrackingSystemFinal.Views.DoctorView"
       xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.WPF;assembly=LiveChartsCore.SkiaSharpView.WPF"
       xmlns:fa="http://schemas.fontawesome.io/icons/"
-      mc:Ignorable="d" d:DesignWidth="800"
-      Title="DoctorDashboardPage" Height="896">
+      mc:Ignorable="d" 
+      d:DesignWidth="1000">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -335,8 +335,7 @@
                                                         Orientation="Horizontal">
                                                         <Border
                                                             Background="{StaticResource UrgentTagBorder}"
-                                                            Padding="5"
-                                                            CornerRadius="8"
+                                                            Style="{StaticResource BaseCustomBorderStyle}"
                                                             Margin="0,0,10,0">
                                                             <TextBlock
                                                                 Text="Urgent: High blood pressure"
