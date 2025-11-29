@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PersonalizedHealthcareTrackingSystemFinal.ViewModels.DoctorViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,19 +11,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace PersonalizedHealthcareTrackingSystemFinal.Views.DoctorView
 {
     /// <summary>
-    /// Interaction logic for DoctorConsultationPage.xaml
+    /// Interaction logic for DoctorConsultationWindow.xaml
     /// </summary>
-    public partial class DoctorConsultationPage : Page
+    public partial class DoctorConsultationWindow : Window
     {
-        public DoctorConsultationPage()
+        public DoctorConsultationWindow(DoctorConsultationWindowViewModel vm)
         {
             InitializeComponent();
+            DataContext = vm;
         }
     }
 }
