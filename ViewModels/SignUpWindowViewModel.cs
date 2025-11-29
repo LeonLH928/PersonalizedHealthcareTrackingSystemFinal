@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using OpenTK.Audio.OpenAL;
 using PersonalizedHealthcareTrackingSystemFinal.Models;
+using PersonalizedHealthcareTrackingSystemFinal.Views;
 using System.Text.RegularExpressions;
 using System.Windows;
 
@@ -254,11 +255,9 @@ namespace PersonalizedHealthcareTrackingSystemFinal.ViewModels
         // Navigation helper (you'll need to implement this based on your navigation strategy)
         public void NavigateToLogin(Window currentWindow)
         {
-            // TODO: Implement navigation to login window
-            // Example:
-            // var loginWindow = new LoginWindow(new LoginWindowViewModel());
-            // loginWindow.Show();
-            // currentWindow.Close();
+            var loginWindow = new LoginWindow(new LoginWindowViewModel());
+            loginWindow.Show();
+            currentWindow.Close();
         }
     }
 }

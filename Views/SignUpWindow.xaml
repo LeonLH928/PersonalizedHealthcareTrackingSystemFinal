@@ -257,7 +257,7 @@
                                    Foreground="White"
                                    FontSize="12"/>
                         <TextBlock Text="Log In" 
-                                   Foreground="White" 
+                                   Foreground="{StaticResource PrimaryTeal}"
                                    TextDecorations="Underline" 
                                    FontWeight="Bold" 
                                    FontSize="12"
