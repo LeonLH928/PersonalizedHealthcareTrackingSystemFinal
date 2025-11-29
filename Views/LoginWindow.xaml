@@ -34,9 +34,18 @@
                            Foreground="{StaticResource TextGray}" FontSize="14" FontStyle="Italic"
                            HorizontalAlignment="Center" Margin="0,0,0,40"/>
 
+                <!-- Error Message -->
+                <TextBlock Text="{Binding ErrorMessage}"
+                           Foreground="#E81123"
+                           FontSize="12"
+                           TextWrapping="Wrap"
+                           HorizontalAlignment="Center"
+                           Margin="0,0,0,15"
+                           Visibility="{Binding HasError, Converter={StaticResource BoolToVisibilityConverter}}"/>
+
                 <TextBox Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}"
                          Style="{StaticResource RoundedTextBoxStyle}" 
-                         Tag="Username"
+                         Tag="Username or Email"
                          Height="50" Margin="0,0,0,20" Padding="15,12,20,12" FontFamily="Poppins"/>
 
                 <Grid Margin="0,0,0,10">
@@ -79,8 +88,22 @@
                 </Grid>
 
                 <TextBlock Text="Forget Password?" 
-                           Foreground="White" TextDecorations="Underline" Cursor="Hand" 
-                           HorizontalAlignment="Right" Margin="0,0,5,30"/>
+                           Foreground="{StaticResource TextGray}"
+                           TextDecorations="Underline" 
+                           Cursor="Hand" 
+                           HorizontalAlignment="Right" 
+                           Margin="0,0,5,30"
+                           FontSize="12">
+                    <TextBlock.Style>
+                        <Style TargetType="TextBlock">
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Foreground" Value="{StaticResource PrimaryTeal}"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
 
                 <Button Command="{Binding LoginCommand}" 
                         Content="LOG IN" 
@@ -88,8 +111,26 @@
                         Height="50" Margin="0,0,0,25"/>
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                    <TextBlock Text="Don't have an account? " Foreground="White"/>
-                    <TextBlock Text="Sign Up" Foreground="White" TextDecorations="Underline" FontWeight="Bold" Cursor="Hand"/>
+                    <TextBlock Text="Don't have an account? " 
+                               Foreground="{StaticResource TextGray}"
+                               FontSize="13"/>
+                    <TextBlock Text="Sign Up" 
+                               Foreground="{StaticResource PrimaryTeal}"
+                               TextDecorations="Underline" 
+                               FontWeight="Bold" 
+                               FontSize="13"
+                               Cursor="Hand"
+                               MouseLeftButtonDown="SignUpLink_Click">
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Foreground" Value="#26a58c"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
                 </StackPanel>
 
             </StackPanel>

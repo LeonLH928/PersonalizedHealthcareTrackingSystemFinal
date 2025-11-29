@@ -30,5 +30,23 @@ namespace PersonalizedHealthcareTrackingSystemFinal.ViewModels
                 window.WindowState = WindowState.Minimized;
             }
         }
+
+        public void NavigateToSignUp(Window currentWindow)
+        {
+            try
+            {
+                var signUpViewModel = new SignUpWindowViewModel();
+                var signUpWindow = new Views.SignUpWindow(signUpViewModel);
+                signUpWindow.Show();
+                currentWindow.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Navigation failed: {ex.Message}",
+                               "Error",
+                               MessageBoxButton.OK,
+                               MessageBoxImage.Error);
+            }
+        }
     }
 }

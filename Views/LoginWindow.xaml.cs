@@ -1,17 +1,8 @@
 ﻿using PersonalizedHealthcareTrackingSystemFinal.ViewModels;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace PersonalizedHealthcareTrackingSystemFinal.Views
 {
@@ -32,6 +23,7 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Views
 
             pwdBox.Visibility = Visibility.Collapsed;
             txtVisiblePassword.Visibility = Visibility.Visible;
+            txtVisiblePassword.Focus();
         }
 
         private void ShowPassword_Unchecked(object sender, RoutedEventArgs e)
@@ -40,6 +32,7 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Views
 
             txtVisiblePassword.Visibility = Visibility.Collapsed;
             pwdBox.Visibility = Visibility.Visible;
+            pwdBox.Focus();
         }
 
         private void txtVisiblePassword_TextChanged(object sender, TextChangedEventArgs e)
@@ -66,6 +59,15 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Views
             if (DataContext is LoginWindowViewModel vm)
             {
                 vm.Password = pwdBox.Password;
+            }
+        }
+
+        // Navigate to Sign Up
+        private void SignUpLink_Click(object sender, MouseButtonEventArgs e)
+        {
+            if (DataContext is LoginWindowViewModel vm)
+            {
+                vm.NavigateToSignUp(this);
             }
         }
 
