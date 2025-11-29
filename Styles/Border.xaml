@@ -3,17 +3,15 @@
     <!-- Page Header Border Style -->
     <Style x:Key="PageHeaderBorderStyle" TargetType="Border">
         <Setter Property="Background" Value="White"/>
-        <Setter Property="BorderBrush" Value="#E2E8F0"/>
+        <Setter Property="BorderBrush" Value="{StaticResource LightBorder}"/>
         <Setter Property="BorderThickness" Value="1"/>
     </Style>
     
     <!-- Secondary Text Border Style -->
     <Style x:Key="SecondaryTextBorderStyle" TargetType="Border">
-        <Setter Property="Background" Value="#F1F5F9"/>
+        <Setter Property="Background" Value="{StaticResource TextSecondaryBorder}"/>
         <Setter Property="Padding" Value="5"/>
         <Setter Property="CornerRadius" Value="10"/>
-        <Setter Property="BorderBrush" Value="#E2E8F0"/>
-        <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="HorizontalAlignment" Value="Left"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
     </Style>
@@ -27,8 +25,8 @@
         <Setter Property="Background" Value="#cbd5e1"/>
     </Style>
     
-    <!-- Dashboard Border Style -->
-    <Style x:Key="DashboardBorderStyle" TargetType="Border">
+    <!-- Page content Border Style -->
+    <Style x:Key="PageContentBorderStyle" TargetType="Border">
         <Setter Property="Padding" Value="32"/>
         <Setter Property="Background" Value="#F1F5F9"/>
     </Style> 
@@ -38,7 +36,7 @@
         <Setter Property="Background" Value="White"/>
         <Setter Property="Padding" Value="20"/>
         <Setter Property="CornerRadius" Value="8"/>
-        <Setter Property="BorderBrush" Value="#e2e8f0"/>
+        <Setter Property="BorderBrush" Value="{StaticResource LightBorder}"/>
         <Setter Property="BorderThickness" Value="1"/>
     </Style>
     
@@ -69,7 +67,7 @@
     
     <!-- Line -->
     <Style x:Key="Line" TargetType="Border">
-        <Setter Property="BorderBrush" Value="#E2E8F0"/>
+        <Setter Property="BorderBrush" Value="{StaticResource LightBorder}"/>
         <Setter Property="BorderThickness" Value="0.5"/>
     </Style>
 </ResourceDictionary>

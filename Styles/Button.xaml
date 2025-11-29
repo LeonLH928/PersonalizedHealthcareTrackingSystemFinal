@@ -62,7 +62,7 @@
 
     <!-- Primary Button Style -->
     <Style x:Key="PrimaryButtonStyle" TargetType="Button">
-        <Setter Property="Background" Value="#3b82f6"/>
+        <Setter Property="Background" Value="{StaticResource AccentBlue}"/>
         <Setter Property="Padding" Value="10"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Cursor" Value="Hand"/>
@@ -126,7 +126,7 @@
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="Foreground" Value="#64748b"/>
         <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="BorderBrush" Value="#e2e8f0"/>
+        <Setter Property="BorderBrush" Value="{StaticResource LightBorder}"/>
         <Setter Property="BorderThickness" Value="2"/>
         <Setter Property="FontSize" Value="20"/>
         <Setter Property="FontFamily" Value="Arial"/>

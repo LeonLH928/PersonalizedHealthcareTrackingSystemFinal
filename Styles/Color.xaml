@@ -5,5 +5,11 @@
     <SolidColorBrush x:Key="InputBackground" Color="#4A4E55"/>
     <SolidColorBrush x:Key="TextWhite" Color="#FFFFFF"/>
     <SolidColorBrush x:Key="TextGray" Color="#AAAAAA"/>
+    <SolidColorBrush x:Key="TextSecondaryTextBlock" Color="#64748b"/>
+    <SolidColorBrush x:Key="TextSecondaryBorder" Color="#F1F5F9"/>
+    <SolidColorBrush x:Key="AccentBlue" Color="#3b82f6"/>
+    <SolidColorBrush x:Key="UrgentTagTextBlock" Color="#b91c1c"/>
+    <SolidColorBrush x:Key="UrgentTagBorder" Color="#fee2e2"/>
+    <SolidColorBrush x:Key="LightBorder" Color="#e2e8f0"/>
 
 </ResourceDictionary>
