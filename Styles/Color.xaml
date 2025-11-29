@@ -8,8 +8,15 @@
     <SolidColorBrush x:Key="TextSecondaryTextBlock" Color="#64748b"/>
     <SolidColorBrush x:Key="TextSecondaryBorder" Color="#F1F5F9"/>
     <SolidColorBrush x:Key="AccentBlue" Color="#3b82f6"/>
+    <SolidColorBrush x:Key="LightBorder" Color="#e2e8f0"/>
     <SolidColorBrush x:Key="UrgentTagTextBlock" Color="#b91c1c"/>
     <SolidColorBrush x:Key="UrgentTagBorder" Color="#fee2e2"/>
-    <SolidColorBrush x:Key="LightBorder" Color="#e2e8f0"/>
-
+    <SolidColorBrush x:Key="LightCompletedStatusBorder" Color="#f0fdf4"/>
+    <SolidColorBrush x:Key="MediumCompletedStatusBorder" Color="#22c55e"/>
+    <SolidColorBrush x:Key="LightWaitingStatusBorder" Color="#eff6ff"/>
+    <SolidColorBrush x:Key="MediumWaitingStatusBorder" Color="#dbeafe"/>
+    <SolidColorBrush x:Key="HappeningStatusBorder" Color="#26B4E2"/>
+    <SolidColorBrush x:Key="CancelledStatusBorder" Color="#ECA0A8"/>
+    <SolidColorBrush x:Key="NotShowUpStatusBorder" Color="#354863"/>
+    <SolidColorBrush x:Key="DangerColor" Color="#ef4444"/>
 </ResourceDictionary>
