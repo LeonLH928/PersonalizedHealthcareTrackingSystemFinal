@@ -183,10 +183,7 @@
                                 Margin="0,0,20,0">
 
                                 <Border
-                                    Background="{StaticResource UrgentTagBorder}"
-                                    Style="{StaticResource BaseCustomBorderStyle}"
-                                    BorderBrush="#fecaca"
-                                    BorderThickness="1"
+                                    Style="{StaticResource UrgentBorderStyle}"
                                     Margin="0,0,0,5">
                                     <TextBlock
                                         Text="⚠️ Penicillin allergy"

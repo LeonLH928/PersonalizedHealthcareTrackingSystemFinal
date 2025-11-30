@@ -14,7 +14,10 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="TextBox">
-                    <Border Background="{TemplateBinding Background}" CornerRadius="10" BorderThickness="0">
+                    <Border 
+                        Background="{TemplateBinding Background}" 
+                        CornerRadius="10" 
+                        BorderThickness="0">
                         <Grid>
                             <TextBlock Text="{TemplateBinding Tag}"
                                        Foreground="{StaticResource TextGray}"
@@ -72,6 +75,234 @@
                                 </TextBlock.Style>
                             </TextBlock>
                             <ScrollViewer x:Name="PART_ContentHost" VerticalAlignment="Center"/>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Current Exam Input Text Box Style -->
+    <Style x:Key="CurrentExamInputTextBoxStyle" TargetType="TextBox">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="FontFamily" Value="Segoe UI"/>
+        <Setter Property="Padding" Value="8,10"/>
+        <Setter Property="TextWrapping" Value="NoWrap"/>
+        <Setter Property="BorderBrush" Value="{StaticResource LightBorder}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Cursor" Value="IBeam"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TextBox">
+                    <Border 
+                        x:Name="Border"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="8">
+
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualStateGroup.Transitions>
+                                    <VisualTransition GeneratedDuration="0:0:0.2"/>
+                                </VisualStateGroup.Transitions>
+
+                                <VisualState x:Name="Normal"/>
+
+                                <VisualState x:Name="Focused">
+                                    <Storyboard>
+                                        <ColorAnimation 
+                                            Storyboard.TargetName="Border"
+                                            Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)"
+                                            To="#3b82f6"/>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+
+                        <Grid>
+                            <TextBlock Text="{TemplateBinding Tag}"
+                                       Foreground="{StaticResource TextGray}"
+                                       Margin="8,10"
+                                       VerticalAlignment="Top"
+                                       FontWeight="Bold"
+                                       IsHitTestVisible="False">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, RelativeSource={RelativeSource TemplatedParent}}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                            <ScrollViewer x:Name="PART_ContentHost" 
+                                          HorizontalScrollBarVisibility="Hidden"
+                                          VerticalScrollBarVisibility="Disabled"
+                                          VerticalAlignment="Top"/>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Current Exam Text Text Box Style -->
+    <Style x:Key="CurrentExamTextTextBoxStyle" TargetType="TextBox">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="FontFamily" Value="Segoe UI"/>
+        <Setter Property="Padding" Value="8,10"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="AcceptsReturn" Value="True"/>
+        <Setter Property="BorderBrush" Value="{StaticResource LightBorder}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Cursor" Value="IBeam"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TextBox">
+                    <Border 
+                        x:Name="Border"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="8">
+
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualStateGroup.Transitions>
+                                    <VisualTransition GeneratedDuration="0:0:0.2"/>
+                                </VisualStateGroup.Transitions>
+
+                                <VisualState x:Name="Normal"/>
+
+                                <VisualState x:Name="Focused">
+                                    <Storyboard>
+                                        <ColorAnimation 
+                                            Storyboard.TargetName="Border"
+                                            Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)"
+                                            To="#3b82f6"/>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+
+                        <Grid>
+                            <TextBlock Text="{TemplateBinding Tag}"
+                                       Foreground="{StaticResource TextGray}"
+                                       Margin="8,10"
+                                       VerticalAlignment="Top"
+                                       FontWeight="Bold"
+                                       IsHitTestVisible="False">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, RelativeSource={RelativeSource TemplatedParent}}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                            <ScrollViewer x:Name="PART_ContentHost" 
+                                          HorizontalScrollBarVisibility="Auto"
+                                          VerticalScrollBarVisibility="Disabled"
+                                          VerticalAlignment="Top"/>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <!-- Search Drug Input Text Box Style -->
+    <Style x:Key="SearchDrugInputTextBoxStyle" TargetType="TextBox">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="FontFamily" Value="Segoe UI"/>
+        <Setter Property="Padding" Value="8,10"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="AcceptsReturn" Value="True"/>
+        <Setter Property="BorderBrush" Value="{StaticResource AccentBlue}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Cursor" Value="IBeam"/>
+        <Setter Property="TextWrapping" Value="NoWrap"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TextBox">
+                    <Border 
+                        x:Name="Border"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="8">
+
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualStateGroup.Transitions>
+                                    <VisualTransition GeneratedDuration="0:0:0.2"/>
+                                </VisualStateGroup.Transitions>
+
+                                <VisualState x:Name="Normal"/>
+
+                                <VisualState x:Name="Focused">
+                                    <Storyboard>
+                                        <ColorAnimation 
+                                                Storyboard.TargetName="Border"
+                                                Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)"
+                                                To="Black"/>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock
+                                Text="🔍"
+                                VerticalAlignment="Center"
+                                FontFamily="Segoe UI"
+                                Margin="10,0,5,0"
+                                FontSize="18"
+                                IsHitTestVisible="False"/>
+
+                            <TextBlock 
+                                    Grid.Column="1"
+                                    Text="{TemplateBinding Tag}"
+                                    Foreground="{StaticResource TextGray}"
+                                    Margin="8,10"
+                                    VerticalAlignment="Top"
+                                    FontWeight="Bold"
+                                    IsHitTestVisible="False"
+                                    TextTrimming="CharacterEllipsis">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, RelativeSource={RelativeSource TemplatedParent}}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                            <ScrollViewer
+                                        Grid.Column="1"
+                                        x:Name="PART_ContentHost" 
+                                        HorizontalScrollBarVisibility="Hidden"
+                                        VerticalScrollBarVisibility="Disabled"
+                                        VerticalAlignment="Top"/>
                         </Grid>
                     </Border>
                 </ControlTemplate>

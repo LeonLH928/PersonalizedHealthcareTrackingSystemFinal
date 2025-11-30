@@ -94,37 +94,466 @@
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
+                <ScrollViewer 
+                    HorizontalScrollBarVisibility="Auto"
+                    VerticalScrollBarVisibility="Auto"
+                    Margin="0,0,10,0">
 
+                    <Border
+                        Background="White"
+                        CornerRadius="8"
+                        BorderBrush="{StaticResource LightBorder}"
+                        BorderThickness="1">
+                        <StackPanel
+                            Orientation="Vertical"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top">
+                            <Border
+                                Background="#f8fafc"
+                                Padding="10"
+                                CornerRadius="8,8,0,0"
+                                BorderBrush="{StaticResource LightBorder}"
+                                BorderThickness="0,0,0,1">
+                                <TextBlock
+                                    Text="Clinical &amp; Medical history"
+                                    FontFamily="Segoe UI"
+                                    FontWeight="SemiBold"
+                                    FontSize="18"/>
+                            </Border>
+
+
+                            <Border
+                                Padding="10">
+
+                                <StackPanel>
+                                    <TextBlock
+                                        Text="GENERAL INFO"
+                                        Style="{StaticResource SecondaryTextTextBlockStyle}"
+                                        FontSize="16"
+                                        Margin="0,0,0,10"/>
+
+                                    <TextBlock
+                                        Text="Male, 45 yo"
+                                        Style="{StaticResource CustomBaseTextBlockStyle}"
+                                        FontSize="20"/>
+
+                                    <TextBlock
+                                        Text="Blood type: A+"
+                                        Style="{StaticResource CustomBaseTextBlockStyle}"
+                                        FontSize="20"
+                                        Margin="0,0,0,20"/>
+
+                                    <TextBlock
+                                        Text="ALLERGIES"
+                                        Foreground="{StaticResource DangerColor}"
+                                        FontFamily="Segoe UI"
+                                        FontSize="16"
+                                        Margin="0,0,0,10"/>
+
+                                    <Border
+                                        Style="{StaticResource UrgentBorderStyle}"
+                                        Margin="0,0,0,20">
+                                        <TextBlock
+                                            Text="⚠ Penicillin allergy (Anaphylaxis)"
+                                            FontFamily="Segoe UI"
+                                            FontSize="20"
+                                            Foreground="{StaticResource UrgentTagTextBlock}"/>
+                                    </Border>
+
+                                    <TextBlock
+                                        Text="MEDICAL RECORD"
+                                        Style="{StaticResource SecondaryTextTextBlockStyle}"
+                                        FontSize="16"
+                                        Margin="0,0,0,10"/>
+
+                                    <TextBlock
+                                        Text="• High blood pressure (in 2020)"
+                                        Style="{StaticResource CustomBaseTextBlockStyle}"
+                                        FontSize="20"/>
+
+                                    <TextBlock
+                                        Text="• Blood fat disorder (in 2020)"
+                                        Style="{StaticResource CustomBaseTextBlockStyle}"
+                                        FontSize="20"/>
+
+                                    <TextBlock
+                                        Text="• GERD"
+                                        Style="{StaticResource CustomBaseTextBlockStyle}"
+                                        FontSize="20"
+                                        Margin="0,0,0,20"/>
+                                
+                                    <TextBlock
+                                        Text="LAST VITAL SIGNS (20/09/2023)"
+                                        Style="{StaticResource SecondaryTextTextBlockStyle}"
+                                        FontSize="16"
+                                        Margin="0,0,0,10"/>
+
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock
+                                            Text="Blood pressure: "
+                                            Style="{StaticResource CustomBaseTextBlockStyle}"
+                                            FontSize="20"/>
+
+                                        <TextBlock
+                                            Grid.Column="1"
+                                            HorizontalAlignment="Right"
+                                            Text="150/95 mmHG"
+                                            Style="{StaticResource CustomBaseTextBlockStyle}"
+                                            FontSize="20"
+                                            FontWeight="SemiBold"/>
+                                    </Grid>
+
+                                    <Rectangle
+                                        Style="{StaticResource DottedLine}"
+                                        Margin="0,10"/>
+
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock
+                                            Text="Pulse: "
+                                            Style="{StaticResource CustomBaseTextBlockStyle}"
+                                            FontSize="20"/>
+
+                                        <TextBlock
+                                            Grid.Column="1"
+                                            HorizontalAlignment="Right"
+                                            Text="88 bpm"
+                                            Style="{StaticResource CustomBaseTextBlockStyle}"
+                                            FontSize="20"
+                                            FontWeight="SemiBold"/>
+                                    </Grid>
+
+                                    <Rectangle
+                                        Style="{StaticResource DottedLine}"
+                                        Margin="0,10"/>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock
+                                            Text="Weight: "
+                                            Style="{StaticResource CustomBaseTextBlockStyle}"
+                                            FontSize="20"/>
+
+                                        <TextBlock
+                                            Grid.Column="1"
+                                            HorizontalAlignment="Right"
+                                            Text="78 kg"
+                                            Style="{StaticResource CustomBaseTextBlockStyle}"
+                                            FontSize="20"
+                                            FontWeight="SemiBold"/>
+                                    </Grid>
+
+                                    <Rectangle
+                                        Style="{StaticResource DottedLine}"
+                                        Margin="0,10"/>
+                            
+                                </StackPanel>
+                            </Border>
+                        </StackPanel>
+                    </Border>
+                </ScrollViewer>
+
+                <ScrollViewer 
+                    Grid.Column="1"
+                    HorizontalScrollBarVisibility="Disabled"
+                    VerticalScrollBarVisibility="Auto"
+                    Margin="0,0,10,0">
+
+                    <Border
+                        Background="White"
+                        CornerRadius="8"
+                        BorderBrush="{StaticResource LightBorder}"
+                        BorderThickness="1,0,1,1"
+                        HorizontalAlignment="Stretch">
+                        <Border
+                            BorderBrush="{StaticResource AccentBlue}"
+                            BorderThickness="0,5,0,0"
+                            CornerRadius="8">
+                            <StackPanel
+                                Orientation="Vertical"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Top">
+                                <Border
+                                    Background="#f8fafc"
+                                    Padding="10"
+                                    CornerRadius="8,8,0,0"
+                                    BorderBrush="{StaticResource LightBorder}"
+                                    BorderThickness="0,0,0,1">
+                                        <TextBlock
+                                            Text="Current Exam"
+                                            FontFamily="Segoe UI"
+                                            FontWeight="SemiBold"
+                                            FontSize="18"/>
+                                </Border>
+
+
+                                <Border
+                                    Padding="10">
+
+                                    <StackPanel>
+                                        <TextBlock
+                                            Text="Chief Complaint"
+                                            Style="{StaticResource CustomBaseTextBlockStyle}"
+                                            FontSize="16"
+                                            FontWeight="SemiBold"
+                                            Margin="0,0,0,10"/>
+
+                                        <Border
+                                            BorderBrush="{StaticResource LightBorder}"
+                                            BorderThickness="1"
+                                            Padding="8,10"
+                                            CornerRadius="8"
+                                            Margin="0,0,0,20">
+
+                                            <TextBlock
+                                                Text="Follow-up visit, mild headache sometimes."
+                                                Style="{StaticResource CustomBaseTextBlockStyle}"/>
+
+                                        </Border>
+                                        
+                                        <TextBlock
+                                            Text="Current Vitals"
+                                            Style="{StaticResource CustomBaseTextBlockStyle}"
+                                            FontSize="16"
+                                            FontWeight="SemiBold"
+                                            Margin="0,0,0,10"/>
+
+                                        <Grid Margin="0,0,0,20">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="15"/>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="15"/>
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+
+                                            <StackPanel Grid.Column="0">
+                                                <TextBlock Text="Blood pressure (mmHg)"
+                                                           Style="{StaticResource CustomBaseTextBlockStyle}"
+                                                           FontSize="14"
+                                                           Margin="0,0,0,5"/>
+                                                <TextBox Tag="Example: 130/85"
+                                                         Style="{StaticResource CurrentExamInputTextBoxStyle}"/>
+                                            </StackPanel>
+
+                                            <StackPanel Grid.Column="2">
+                                                <TextBlock Text="Pulse (bpm)"
+                                                           Style="{StaticResource CustomBaseTextBlockStyle}"
+                                                           FontSize="14"
+                                                           Margin="0,0,0,5"/>
+                                                <TextBox Tag="Example: 80"
+                                                        Style="{StaticResource CurrentExamInputTextBoxStyle}"/>
+                                            </StackPanel>
+
+                                            <StackPanel Grid.Column="4">
+                                                <TextBlock Text="SpO2 (%)"
+                                                           Style="{StaticResource CustomBaseTextBlockStyle}"
+                                                           FontSize="14"
+                                                           Margin="0,0,0,5"/>
+                                                <TextBox Tag="Example: 98"
+                                                         Style="{StaticResource CurrentExamInputTextBoxStyle}"/>
+                                            </StackPanel>
+                                        </Grid>
+
+                                        <TextBlock
+                                            Text="Symptoms &amp; Clinical examination"
+                                            Style="{StaticResource CustomBaseTextBlockStyle}"
+                                            FontSize="16"
+                                            FontWeight="SemiBold"
+                                            Margin="0,0,0,10"/>
+                                        
+                                        <TextBox
+                                            Tag="Describe subjective symptons, objective signs, etc."
+                                            Height="200"
+                                            Style="{StaticResource CurrentExamTextTextBoxStyle}"
+                                            Margin="0,0,0,20"/>
+
+
+                                        <TextBlock
+                                            Text="Diagnosis"
+                                            Style="{StaticResource CustomBaseTextBlockStyle}"
+                                            FontWeight="SemiBold"
+                                            Foreground="{StaticResource AccentBlue}"
+                                            Margin="0,0,0,10"/>
+
+                                        <TextBox
+                                            FontWeight="Bold"
+                                            FontSize="18"
+                                            Style="{StaticResource CurrentExamInputTextBoxStyle}"
+                                            Margin="0,0,0,20"/>
+
+                                    </StackPanel>
+                                </Border>
+                            </StackPanel>
+                        </Border>
+                    </Border>
+                </ScrollViewer>
                 <Border
+                    Grid.Column="2"
                     Background="White"
                     CornerRadius="8"
                     BorderBrush="{StaticResource LightBorder}"
-                    BorderThickness="1">
-
+                    BorderThickness="1"
+                    Margin="0,0,0,20">
                     <StackPanel
                         Orientation="Vertical"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top">
                         <Border
-                            Background="#f8fafc"
+                            Background="{StaticResource LightWaitingStatusBorder}"
                             Padding="10"
                             CornerRadius="8,8,0,0"
                             BorderBrush="{StaticResource LightBorder}"
                             BorderThickness="0,0,0,1">
                             <TextBlock
-                                Text="Clinical &amp; Medical history"
+                                Text="E-Prescribing"
                                 FontFamily="Segoe UI"
                                 FontWeight="SemiBold"
+                                Foreground="{StaticResource AccentBlue}"
                                 FontSize="18"/>
                         </Border>
 
+                        <Border Padding="10">
+                            <StackPanel>
+                                <TextBox Tag="Search drugs, active ingredients, etc."
+                                            Width="350"
+                                            Style="{StaticResource SearchDrugInputTextBoxStyle}"
+                                            Margin="0,0,0,20"/>
+                                <ScrollViewer
+                                    VerticalScrollBarVisibility="Auto"
+                                    HorizontalScrollBarVisibility="Disabled">
+                                    <StackPanel>
+                                        <Border
+                                            Style="{StaticResource SecondaryTextBorderStyle}"
+                                            Padding="10"
+                                            Margin="0,0,0,10">
+
+                                            <StackPanel
+                                                Orientation="Vertical"
+                                                Width="350">
+
+                                                <Grid Margin="0,0,0,5">
+                                                    <TextBlock Text="1. Amlodipine 5mg (Tablet)"
+                                                                Style="{StaticResource CustomBaseTextBlockStyle}"
+                                                                FontSize="20"
+                                                                FontWeight="SemiBold"/>
+                                                    <Button
+                                                        HorizontalAlignment="Right"
+                                                        Content="X"
+                                                        Style="{StaticResource CloseButtonStyle}"
+                                                        Foreground="{StaticResource DangerColor}"/>
+                                                </Grid>
+                                                <Grid Margin="0,0,0,5">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="100"/>
+                                                        <ColumnDefinition Width="*"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <TextBox
+                                                        Style="{StaticResource CurrentExamInputTextBoxStyle}"
+                                                        Background="White"/>
+
+                                                    <TextBlock
+                                                        Grid.Column="1"
+                                                        Style="{StaticResource CustomBaseTextBlockStyle}"
+                                                        Margin="10,0,0,0"
+                                                        VerticalAlignment="Center"
+                                                        Text="Tablets"/>
+                                                </Grid>
+
+                                                <TextBox
+                                                    Style="{StaticResource CurrentExamInputTextBoxStyle}"
+                                                    Tag="Note here."
+                                                    BorderBrush="Transparent"
+                                                    Margin="0,0,0,5"/>
+
+                                                <Border
+                                                    Style="{StaticResource Line}"/>
+                                            </StackPanel>
+
+                                        </Border>
+                                        <Border
+                                            Style="{StaticResource SecondaryTextBorderStyle}"
+                                            Padding="10"
+                                            Margin="0,0,0,10">
+
+                                            <StackPanel
+                                                Orientation="Vertical"
+                                                Width="350">
+
+                                                <Grid Margin="0,0,0,5">
+                                                    <TextBlock Text="2. Simvastatin 20mg (Tablet)"
+                                                                Style="{StaticResource CustomBaseTextBlockStyle}"
+                                                                FontSize="20"
+                                                                FontWeight="SemiBold"/>
+                                                    <Button
+                                                        HorizontalAlignment="Right"
+                                                        Content="X"
+                                                        Style="{StaticResource CloseButtonStyle}"
+                                                        Foreground="{StaticResource DangerColor}"/>
+                                                </Grid>
+                                                <Grid Margin="0,0,0,5">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="100"/>
+                                                        <ColumnDefinition Width="*"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <TextBox
+                                                        Style="{StaticResource CurrentExamInputTextBoxStyle}"
+                                                        Background="White"/>
+
+                                                    <TextBlock
+                                                        Grid.Column="1"
+                                                        Style="{StaticResource CustomBaseTextBlockStyle}"
+                                                        Margin="10,0,0,0"
+                                                        VerticalAlignment="Center"
+                                                        Text="Tablets"/>
+                                                </Grid>
+
+                                                <TextBox
+                                                    Style="{StaticResource CurrentExamInputTextBoxStyle}"
+                                                    Tag="Note here."
+                                                    BorderBrush="Transparent"
+                                                    Margin="0,0,0,5"/>
+
+                                                <Border
+                                                    Style="{StaticResource Line}"/>
+                                            </StackPanel>
+                                        </Border>
+                                        <Border
+                                            BorderBrush="{StaticResource DangerColor}"
+                                            BorderThickness="10">
+
+                                            <StackPanel>
+                                                <Border
+                                                    Background="{StaticResource DangerColor}"
+                                                    BorderBrush="Transparent">
+
+                                                    <TextBlock
+                                                        Style="{StaticResource CustomBaseTextBlockStyle}"
+                                                        />
+
+                                                </Border>
+                                            </StackPanel>
+                                            
+                                        </Border>
+                                    </StackPanel>
+                                </ScrollViewer>
+                            </StackPanel>
+                        </Border>
+
                     </StackPanel>
-
                 </Border>
-
             </Grid>
         </Border>
     </Grid>
