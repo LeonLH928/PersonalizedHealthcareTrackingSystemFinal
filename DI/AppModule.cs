@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Npgsql;
 using PersonalizedHealthcareTrackingSystemFinal.Configs;
 using PersonalizedHealthcareTrackingSystemFinal.Data;
+using PersonalizedHealthcareTrackingSystemFinal.Services;
 using PersonalizedHealthcareTrackingSystemFinal.ViewModels;
 using PersonalizedHealthcareTrackingSystemFinal.Views;
 
@@ -52,6 +53,7 @@ public static class AppModule
 
 
         // Register Services
+        services.AddSingleton<SupabaseService>();
 
 
         return services;
