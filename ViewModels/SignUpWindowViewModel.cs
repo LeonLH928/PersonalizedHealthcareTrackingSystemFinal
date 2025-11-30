@@ -1,14 +1,19 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using OpenTK.Audio.OpenAL;
 using PersonalizedHealthcareTrackingSystemFinal.Models;
+using PersonalizedHealthcareTrackingSystemFinal.Services;
+using System;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace PersonalizedHealthcareTrackingSystemFinal.ViewModels
 {
     public partial class SignUpWindowViewModel : ObservableObject
     {
+        private readonly SupabaseService _supabaseService;
+        private readonly IServiceProvider _serviceProvider;
+
         [ObservableProperty]
         private string _firstName = string.Empty;
 
@@ -31,7 +36,7 @@ namespace PersonalizedHealthcareTrackingSystemFinal.ViewModels
         private string _confirmPassword = string.Empty;
 
         [ObservableProperty]
-        private bool _isPatientSelected = true; // Default role
+        private bool _isPatientSelected = true;
 
         [ObservableProperty]
         private bool _isDoctorSelected = false;
@@ -45,19 +50,40 @@ namespace PersonalizedHealthcareTrackingSystemFinal.ViewModels
         [ObservableProperty]
         private bool _hasError = false;
 
-        // Commands
+        [ObservableProperty]
+        private bool _isLoading = false;
+
+        public SignUpWindowViewModel(IServiceProvider serviceProvider)
+        {
+            _supabaseService = SupabaseService.Instance;
+            InitializeSupabase();
+            _serviceProvider = serviceProvider;
+        }
+
+        private async void InitializeSupabase()
+        {
+            try
+            {
+                await _supabaseService.InitializeAsync();
+            }
+            catch (Exception ex)
+            {
+                ShowError($"Failed to initialize: {ex.Message}");
+            }
+        }
+
         [RelayCommand]
         private async Task SignUp()
         {
-            // Clear previous error
             HasError = false;
             ErrorMessage = string.Empty;
 
-            // Validation
             if (!ValidateInput())
             {
                 return;
             }
+
+            IsLoading = true;
 
             try
             {
@@ -68,42 +94,33 @@ namespace PersonalizedHealthcareTrackingSystemFinal.ViewModels
                 else if (IsPharmacistSelected)
                     selectedRole = UserRole.Pharmacist;
 
-                // Create new user model
-                var newUser = new UserModel
-                {
-                    FirstName = FirstName.Trim(),
-                    LastName = LastName.Trim(),
-                    Username = Username.Trim(),
-                    Email = Email.Trim(),
-                    PhoneNumber = PhoneNumber.Trim(),
-                    PasswordHash = Password, // Note: In production, hash this password!
-                    Role = selectedRole,
-                    IsActive = true
-                };
-
-                // TODO: Add database save logic here
-                // Example: await _userService.CreateUserAsync(newUser);
-
-                // Show success message
-                MessageBox.Show(
-                    $"Registration successful!\n\n" +
-                    $"Name: {FirstName} {LastName}\n" +
-                    $"Username: {Username}\n" +
-                    $"Email: {Email}\n" +
-                    $"Role: {selectedRole}\n\n" +
-                    $"You can now log in with your credentials.",
-                    "Success",
-                    MessageBoxButton.OK,
-                    MessageBoxImage.Information
+                // Sign up
+                var user = await _supabaseService.SignUpAsync(
+                    Email.Trim(),
+                    Password,
+                    selectedRole,
+                    FirstName.Trim(),
+                    LastName.Trim(),
+                    Username.Trim(),
+                    PhoneNumber.Trim()
                 );
 
-                // Navigate to login (you'll need to implement this)
-                // Example: NavigateToLogin();
+                if (user != null)
+                {
+                    NavigateToLogin(Window.GetWindow(Application.Current.MainWindow));
+                }
+                else
+                {
+                    ShowError("Registration failed. Please try again.");
+                }
             }
             catch (Exception ex)
             {
-                HasError = true;
-                ErrorMessage = $"Registration failed: {ex.Message}";
+                ShowError(ex.Message);
+            }
+            finally
+            {
+                IsLoading = false;
             }
         }
 
@@ -125,10 +142,8 @@ namespace PersonalizedHealthcareTrackingSystemFinal.ViewModels
             }
         }
 
-        // Validation Methods
         private bool ValidateInput()
         {
-            // Check if all fields are filled
             if (string.IsNullOrWhiteSpace(FirstName))
             {
                 ShowError("Please enter your first name.");
@@ -147,7 +162,6 @@ namespace PersonalizedHealthcareTrackingSystemFinal.ViewModels
                 return false;
             }
 
-            // Validate email format
             if (!IsValidEmail(Email))
             {
                 ShowError("Please enter a valid email address.");
@@ -160,7 +174,6 @@ namespace PersonalizedHealthcareTrackingSystemFinal.ViewModels
                 return false;
             }
 
-            // Validate phone number format (basic validation)
             if (!IsValidPhoneNumber(PhoneNumber))
             {
                 ShowError("Please enter a valid phone number.");
@@ -185,7 +198,6 @@ namespace PersonalizedHealthcareTrackingSystemFinal.ViewModels
                 return false;
             }
 
-            // Validate password strength
             if (!IsValidPassword(Password))
             {
                 ShowError("Password must be at least 8 characters long and include at least one letter, one number, and one special character.");
@@ -198,14 +210,12 @@ namespace PersonalizedHealthcareTrackingSystemFinal.ViewModels
                 return false;
             }
 
-            // Check if passwords match
             if (Password != ConfirmPassword)
             {
                 ShowError("Passwords do not match.");
                 return false;
             }
 
-            // Check if a role is selected
             if (!IsPatientSelected && !IsDoctorSelected && !IsPharmacistSelected)
             {
                 ShowError("Please select a role.");
@@ -230,17 +240,12 @@ namespace PersonalizedHealthcareTrackingSystemFinal.ViewModels
 
         private bool IsValidPhoneNumber(string phone)
         {
-            // Basic phone validation - accepts digits, spaces, +, -, (, )
             var phoneRegex = new Regex(@"^[\d\s\+\-\(\)]+$");
             return phoneRegex.IsMatch(phone) && phone.Replace(" ", "").Length >= 10;
         }
 
         private bool IsValidPassword(string password)
         {
-            // Password must be at least 8 characters and contain:
-            // - At least one letter
-            // - At least one digit
-            // - At least one special character
             var passwordRegex = new Regex(@"^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$");
             return passwordRegex.IsMatch(password);
         }
@@ -251,14 +256,22 @@ namespace PersonalizedHealthcareTrackingSystemFinal.ViewModels
             ErrorMessage = message;
         }
 
-        // Navigation helper (you'll need to implement this based on your navigation strategy)
         public void NavigateToLogin(Window currentWindow)
         {
-            // TODO: Implement navigation to login window
-            // Example:
-            // var loginWindow = new LoginWindow(new LoginWindowViewModel());
-            // loginWindow.Show();
-            // currentWindow.Close();
+            try
+            {
+                var loginViewModel = new LoginWindowViewModel(_serviceProvider);
+                var loginWindow = new Views.LoginWindow(loginViewModel);
+                loginWindow.Show();
+                currentWindow.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Navigation failed: {ex.Message}",
+                               "Error",
+                               MessageBoxButton.OK,
+                               MessageBoxImage.Error);
+            }
         }
     }
 }
