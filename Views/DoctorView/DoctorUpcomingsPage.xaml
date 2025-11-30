@@ -1,0 +1,400 @@
+﻿<Page x:Class="PersonalizedHealthcareTrackingSystemFinal.Views.DoctorView.DoctorUpcomingsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:PersonalizedHealthcareTrackingSystemFinal.Views.DoctorView"
+      mc:Ignorable="d" 
+      d:DesignHeight="2000" d:DesignWidth="1100">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Border Style="{StaticResource PageHeaderBorderStyle}" 
+                Padding="32,16">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel
+                    HorizontalAlignment="Left"
+                    Orientation="Vertical">
+
+                    <TextBlock
+                        Style="{StaticResource PageHeaderTextBlockStyle}"
+                        Text="Today's Upcomings"/>
+
+                    <Border 
+                        Style="{StaticResource SecondaryTextBorderStyle}"
+                        Margin="0,8,0,0">
+                        <TextBlock
+                            Style="{StaticResource SecondaryTextTextBlockStyle}"
+                            Text="Wed, Oct 26, 2025"/>
+                    </Border>
+
+                </StackPanel>
+                <StackPanel
+                    Grid.Column="1"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    Orientation="Horizontal">
+
+                    <Border
+                        Background="#dbeafe"
+                        BorderBrush="{StaticResource LightBorder}"
+                        BorderThickness="1"
+                        Padding="8,2"
+                        CornerRadius="8"
+                        Margin="0,0,20,0">
+                        <StackPanel
+                            Orientation="Horizontal"
+                            VerticalAlignment="Center">
+                            <TextBlock
+                                Text="👨‍⚕️ 3"
+                                Style="{StaticResource SecondaryTextTextBlockStyle}"
+                                VerticalAlignment="Center"
+                                Margin="0,0,5,0"
+                                FontSize="18"/>
+                            <TextBlock
+                                Text="Waiting to check-in"
+                                Style="{StaticResource SecondaryTextTextBlockStyle}"
+                                FontSize="13"
+                                VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Border>
+                    <Border
+                        Style="{StaticResource SecondaryTextBorderStyle}">
+                        <StackPanel
+                            Orientation="Horizontal"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center">
+                            <TextBlock
+                                Text="📅 15"
+                                Style="{StaticResource SecondaryTextTextBlockStyle}"
+                                VerticalAlignment="Center"
+                                Margin="0,0,5,0"
+                                FontSize="18"/>
+                            <TextBlock
+                                Text="Upcomings"
+                                Style="{StaticResource SecondaryTextTextBlockStyle}"
+                                FontSize="13"
+                                VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <ScrollViewer
+            Grid.Row="1"
+            HorizontalScrollBarVisibility="Auto">
+
+            <Border Style="{StaticResource PageContentBorderStyle}">
+                <Grid Grid.IsSharedSizeScope="True">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto" SharedSizeGroup="HeightGroup"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto" SharedSizeGroup="HeightGroup"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto" SharedSizeGroup="HeightGroup"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto" SharedSizeGroup="HeightGroup"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto" SharedSizeGroup="HeightGroup"/>
+                    </Grid.RowDefinitions>
+                    
+                    <StackPanel
+                        Orientation="Vertical"
+                        HorizontalAlignment="Left">
+
+                        <StackPanel
+                            VerticalAlignment="Center"
+                            Orientation="Horizontal">
+
+                            <Border Style="{StaticResource Dot}" Background="{StaticResource HappeningStatusBorder}"/>
+                            
+                            <TextBlock
+                                Text="Happening"
+                                FontFamily="Segoe UI"
+                                FontWeight="Bold"
+                                FontSize="20"
+                                VerticalAlignment="Center"/>
+                            
+                        </StackPanel>
+                    </StackPanel>
+
+                    <Border
+                        Grid.Row="1"
+                        Style="{StaticResource HappeningPatientBorderStyle}"
+                        Margin="0,10">
+                            
+                        <Grid>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" SharedSizeGroup="TimeGroup"/>
+                                <ColumnDefinition Width="Auto" SharedSizeGroup="IdentificationGroup"/>
+                                <ColumnDefinition Width="Auto" SharedSizeGroup="ReasonGroup"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            
+                            <StackPanel
+                                Orientation="Vertical"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center">
+                                <TextBlock
+                                    Text="Now"
+                                    FontFamily="Segoe UI"
+                                    FontWeight="SemiBold"
+                                    FontSize="18"
+                                    Margin="0,0,20,0"/>
+                            </StackPanel>
+
+                            <StackPanel
+                                Grid.Column="1"
+                                Orientation="Vertical"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Margin="0,0,20,0">
+
+                                <TextBlock
+                                    Text="Nguyen Van A"
+                                    FontFamily="Segoe UI"
+                                    FontWeight="SemiBold"
+                                    FontSize="16"
+                                    Margin="0,0,0,5"/>
+
+                                <TextBlock
+                                    Text="Nam, 45 tuổi • ID: P-123456"
+                                    Style="{StaticResource SecondaryTextTextBlockStyle}"/>
+
+                            </StackPanel>
+
+                            <StackPanel
+                                Grid.Column="2"
+                                Orientation="Vertical"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Margin="0,0,20,0">
+
+                                <Border
+                                    Background="{StaticResource UrgentTagBorder}"
+                                    Style="{StaticResource BaseCustomBorderStyle}"
+                                    BorderBrush="#fecaca"
+                                    BorderThickness="1"
+                                    Margin="0,0,0,5">
+                                    <TextBlock
+                                        Text="⚠️ Penicillin allergy"
+                                        FontFamily="Segoe UI"
+                                        FontSize="14"
+                                        Foreground="{StaticResource UrgentTagTextBlock}"/>
+                                </Border>
+
+                                <Border
+                                    Style="{StaticResource SecondaryTextBorderStyle}">
+                                    <TextBlock
+                                        Text="Chef complaint: Blood pressure follow-up"
+                                        Style="{StaticResource SecondaryTextTextBlockStyle}"/>
+                                </Border>
+
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="3"
+                                        HorizontalAlignment="Right"
+                                        VerticalAlignment="Center"
+                                        Orientation="Horizontal">
+                                <Button
+                                    Style="{StaticResource OutlineButtonStyle}"
+                                    Margin="0,0,10,0"
+                                    Background="White"
+                                    Content="See medical records">
+                                </Button>
+
+                                <Button
+                                    Style="{StaticResource CancelOutlineButtonStyle}"
+                                    Content="✕ Cancel"/>
+                            </StackPanel>
+
+                        </Grid>
+                    </Border>
+
+                    <StackPanel
+                        Grid.Row="2"
+                        Orientation="Vertical"
+                        HorizontalAlignment="Left">
+
+                        <StackPanel
+                            VerticalAlignment="Center"
+                            Orientation="Horizontal">
+
+                            <Border Style="{StaticResource Dot}" Background="{StaticResource AccentBlue}"/>
+                            <TextBlock
+                                Text="Upcoming appointments"
+                                FontFamily="Segoe UI"
+                                FontWeight="Bold"
+                                FontSize="20"
+                                VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </StackPanel>
+                    <Border
+                        Style="{StaticResource UpcomingPatientBorderStyle}"
+                        Margin="0,10"
+                        Grid.Row="3">
+
+                        <Grid>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" SharedSizeGroup="TimeGroup"/>
+                                <ColumnDefinition Width="Auto" SharedSizeGroup="IdentificationGroup"/>
+                                <ColumnDefinition Width="Auto" SharedSizeGroup="ReasonGroup"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel
+                                Orientation="Vertical"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center">
+                                <TextBlock
+                                    Text="09:30"
+                                    FontFamily="Segoe UI"
+                                    FontWeight="SemiBold"
+                                    FontSize="18"
+                                    Margin="0,0,20,0"/>
+                            </StackPanel>
+
+                            <StackPanel
+                                Grid.Column="1"
+                                Orientation="Vertical"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Margin="0,0,20,0">
+
+                                <TextBlock
+                                    Text="Tran Thi B"
+                                    FontFamily="Segoe UI"
+                                    FontWeight="SemiBold"
+                                    FontSize="16"
+                                    Margin="0,0,0,5"/>
+
+                                <TextBlock
+                                    Text="Nữ, 32 tuổi • ID: P-987654"
+                                    Style="{StaticResource SecondaryTextTextBlockStyle}"/>
+
+                            </StackPanel>
+
+                            <StackPanel
+                                Grid.Column="2"
+                                Orientation="Vertical"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Margin="0,0,20,0">
+
+                                <Border
+                                    Style="{StaticResource SecondaryTextBorderStyle}">
+                                    <TextBlock
+                                        Text="Chef complaint: Results follow-up"
+                                        Style="{StaticResource SecondaryTextTextBlockStyle}"/>
+                                </Border>
+
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="3"
+                                        HorizontalAlignment="Right"
+                                        VerticalAlignment="Center"
+                                        Orientation="Horizontal">
+                                <Button
+                                    Style="{StaticResource PrimaryButtonStyle}"
+                                    Margin="0,0,10,0">
+                                    <StackPanel 
+                                        Orientation="Horizontal">
+                                        <TextBlock
+                                            Text="🔊"
+                                            Foreground="White"
+                                            FontSize="20"/>
+                                        <TextBlock
+                                            Text=" Call to the clinic"
+                                            FontSize="20"
+                                            Foreground="White"
+                                            FontWeight="SemiBold"/>
+                                    </StackPanel>
+                                </Button>
+                                <Button
+                                    Style="{StaticResource OutlineButtonStyle}"
+                                    Margin="0,0,10,0"
+                                    Background="White"
+                                    Content="See medical records">
+                                </Button>
+                                <Button
+                                    Style="{StaticResource CancelOutlineButtonStyle}"
+                                    Content="✕ Cancel"/>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                    <StackPanel
+                        Grid.Row="4"
+                        Orientation="Vertical"
+                        HorizontalAlignment="Left">
+
+                        <StackPanel
+                            VerticalAlignment="Center"
+                            Orientation="Horizontal">
+
+                            <Border Style="{StaticResource Dot}" Background="{StaticResource MediumCompletedStatusBorder}"/>
+                            <TextBlock
+                                Text="Completed"
+                                FontFamily="Segoe UI"
+                                FontWeight="Bold"
+                                FontSize="20"
+                                VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <StackPanel
+                        Grid.Row="6"
+                        Orientation="Vertical"
+                        HorizontalAlignment="Left">
+
+                        <StackPanel
+                            VerticalAlignment="Center"
+                            Orientation="Horizontal">
+
+                            <Border Style="{StaticResource Dot}" Background="{StaticResource CancelledStatusBorder}"/>
+                            <TextBlock
+                                Text="Cancelled"
+                                FontFamily="Segoe UI"
+                                FontWeight="Bold"
+                                FontSize="20"
+                                VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <StackPanel
+                        Grid.Row="8"
+                        Orientation="Vertical"
+                        HorizontalAlignment="Left">
+
+                        <StackPanel
+                            VerticalAlignment="Center"
+                            Orientation="Horizontal">
+
+                            <Border Style="{StaticResource Dot}" Background="{StaticResource NotShowUpStatusBorder}"/>
+                            <TextBlock
+                                Text="Not show up"
+                                FontFamily="Segoe UI"
+                                FontWeight="Bold"
+                                FontSize="20"
+                                VerticalAlignment="Center"/>
+                            
+                        </StackPanel>
+                    </StackPanel>
+
+                </Grid>
+            </Border>
+        </ScrollViewer>
+    </Grid>
+</Page>

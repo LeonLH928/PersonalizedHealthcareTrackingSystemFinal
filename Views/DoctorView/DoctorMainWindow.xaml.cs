@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -36,9 +37,13 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Views.DoctorView
         {
             switch (NamePage)
             {
-                case "DashboardPage":
+                case "Dashboard":
                     var DashboardPage = _serviceProvider.GetRequiredService<DoctorDashboardPage>();
                     DoctorMainContent.Navigate(DashboardPage);
+                    break;
+                case "PatientQueue":
+                    var PatientQueuePage = _serviceProvider.GetRequiredService<DoctorUpcomingsPage>();
+                    DoctorMainContent.Navigate(PatientQueuePage);
                     break;
             }
         }
@@ -46,7 +51,9 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Views.DoctorView
         {
             if (Sidebar.SelectedItem is ListBoxItem lbi
                 && lbi.Tag is string NamePage)
+            {
                 NavigateToPage(NamePage);
+            }
         }
     }
 }

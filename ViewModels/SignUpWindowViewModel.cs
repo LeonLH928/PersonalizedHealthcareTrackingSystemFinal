@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 using PersonalizedHealthcareTrackingSystemFinal.Models;
 using PersonalizedHealthcareTrackingSystemFinal.Services;
 using System;
+using PersonalizedHealthcareTrackingSystemFinal.Views;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;

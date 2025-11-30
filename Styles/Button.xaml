@@ -62,7 +62,7 @@
 
     <!-- Primary Button Style -->
     <Style x:Key="PrimaryButtonStyle" TargetType="Button">
-        <Setter Property="Background" Value="#3b82f6"/>
+        <Setter Property="Background" Value="{StaticResource AccentBlue}"/>
         <Setter Property="Padding" Value="10"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Cursor" Value="Hand"/>
@@ -126,7 +126,7 @@
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="Foreground" Value="#64748b"/>
         <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="BorderBrush" Value="#e2e8f0"/>
+        <Setter Property="BorderBrush" Value="{StaticResource LightBorder}"/>
         <Setter Property="BorderThickness" Value="2"/>
         <Setter Property="FontSize" Value="20"/>
         <Setter Property="FontFamily" Value="Arial"/>
@@ -181,6 +181,61 @@
         </Setter>
     </Style>
 
+    <!-- Cancel Outline Button Style-->
+    <Style x:Key="CancelOutlineButtonStyle" TargetType="Button">
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Foreground" Value="{StaticResource DangerColor}"/>
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="BorderBrush" Value="#ef4444"/>
+        <Setter Property="BorderThickness" Value="2"/>
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="FontFamily" Value="Arial"/>
+        <Setter Property="FontWeight" Value="Semibold"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border
+                        x:Name="Border"
+                        Padding="10"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        TextElement.Foreground="{TemplateBinding Foreground}"
+                        TextElement.FontSize="{TemplateBinding FontSize}"
+                        TextElement.FontFamily="{TemplateBinding FontFamily}"
+                        TextElement.FontWeight="{TemplateBinding FontWeight}"
+                        CornerRadius="8">
+
+                        <ContentPresenter x:Name="Container"
+                                          HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"/>
+
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualStateGroup.Transitions>
+                                    <VisualTransition GeneratedDuration="0:0:0.2"/>
+                                </VisualStateGroup.Transitions>
+
+                                <VisualState x:Name="Normal"/>
+
+                                <VisualState x:Name="MouseOver">
+                                    <Storyboard>
+                                        <ColorAnimation 
+                                            Storyboard.TargetName="Border"
+                                            Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
+                                            To="#fef2f2"/>
+                                    </Storyboard>
+                                </VisualState>
+
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
     <!-- Quick Access Button Style-->
     <Style x:Key="QuickAccessButtonStyle" TargetType="Button">
         <Setter Property="Cursor" Value="Hand"/>

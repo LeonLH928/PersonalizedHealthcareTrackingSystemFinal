@@ -6,8 +6,8 @@
       xmlns:local="clr-namespace:PersonalizedHealthcareTrackingSystemFinal.Views.DoctorView"
       xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.WPF;assembly=LiveChartsCore.SkiaSharpView.WPF"
       xmlns:fa="http://schemas.fontawesome.io/icons/"
-      mc:Ignorable="d" d:DesignWidth="800"
-      Title="DoctorDashboardPage" Height="896">
+      mc:Ignorable="d" 
+      d:DesignWidth="1000">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -57,7 +57,7 @@
                             <TextBlock
                                 FontWeight="SemiBold"
                                 FontSize="18"
-                                FontFamily="Arial"
+                                FontFamily="Segoe UI"
                                 TextAlignment="Right"
                                 Text="Dr. Tran Minh Tuan"/>
 
@@ -80,7 +80,7 @@
             Grid.Row="1"
             HorizontalScrollBarVisibility="Auto">
             <Border
-                Style="{StaticResource DashboardBorderStyle}">
+                Style="{StaticResource PageContentBorderStyle}">
 
                 <Grid>
                     <Grid.RowDefinitions>
@@ -119,7 +119,7 @@
 
                                     <TextBlock
                                         Text="24"
-                                        FontFamily="Arial"
+                                        FontFamily="Segoe UI"
                                         FontWeight="SemiBold"
                                         FontSize="24"/>
 
@@ -154,7 +154,7 @@
 
                                     <TextBlock
                                         Text="3"
-                                        FontFamily="Arial"
+                                        FontFamily="Segoe UI"
                                         FontWeight="SemiBold"
                                         FontSize="24"/>
 
@@ -189,7 +189,7 @@
 
                                     <TextBlock
                                         Text="5"
-                                        FontFamily="Arial"
+                                        FontFamily="Segoe UI"
                                         FontWeight="SemiBold"
                                         FontSize="24"/>
 
@@ -225,7 +225,7 @@
 
                                     <TextBlock
                                         Text="2"
-                                        FontFamily="Arial"
+                                        FontFamily="Segoe UI"
                                         FontWeight="SemiBold"
                                         FontSize="24"/>
 
@@ -275,13 +275,13 @@
                                             <TextBlock 
                                                 Grid.Column="0" 
                                                 Text="Next appointment" 
-                                                Foreground="#4A90E2" 
+                                                Foreground="{StaticResource AccentBlue}" 
                                                 FontSize="16" 
                                                 FontWeight="Medium"/>
                                             <TextBlock 
                                                 Grid.Column="1" 
                                                 Text="At 9:00 AM" 
-                                                Foreground="#718096" 
+                                                Foreground="{StaticResource TextSecondaryTextBlock}" 
                                                 FontSize="14"/>
                                         </Grid>
 
@@ -301,8 +301,8 @@
                                                     HorizontalAlignment="Center"
                                                     VerticalAlignment="Center"
                                                     FontSize="30"
-                                                    Foreground="#4A90E2"
-                                                    FontFamily="Arial"
+                                                    Foreground="{StaticResource AccentBlue}"
+                                                    FontFamily="Segoe UI"
                                                     FontWeight="SemiBold"/>
                                             </Border>
 
@@ -320,7 +320,7 @@
                                                     <TextBlock
                                                         Text="Nguyen Van A"
                                                         FontWeight="Bold"
-                                                        FontFamily="Arial"
+                                                        FontFamily="Segoe UI"
                                                         FontSize="25"
                                                         Margin="0,0,0,10"/>
 
@@ -334,15 +334,14 @@
                                                         Grid.Row="2"
                                                         Orientation="Horizontal">
                                                         <Border
-                                                            Background="#fee2e2"
-                                                            Padding="5"
-                                                            CornerRadius="8"
+                                                            Background="{StaticResource UrgentTagBorder}"
+                                                            Style="{StaticResource BaseCustomBorderStyle}"
                                                             Margin="0,0,10,0">
                                                             <TextBlock
                                                                 Text="Urgent: High blood pressure"
-                                                                FontFamily="Arial"
+                                                                FontFamily="Segoe UI"
                                                                 FontSize="14"
-                                                                Foreground="#b91c1c"/>
+                                                                Foreground="{StaticResource UrgentTagTextBlock}"/>
                                                         </Border>
 
                                                         <Border
@@ -407,7 +406,7 @@
                                     <TextBlock 
                                         Text="Today's Progress"
                                         FontSize="17"
-                                        FontFamily="Arial"
+                                        FontFamily="Segoe UI"
                                         FontWeight="SemiBold"/>
                                     <TextBlock 
                                         Grid.Row="1"
@@ -447,7 +446,7 @@
                                         Margin="0,0,0,20"
                                         Text="Notifications &amp; Reminders"
                                         FontSize="17"
-                                        FontFamily="Arial"
+                                        FontFamily="Segoe UI"
                                         FontWeight="SemiBold"/>
 
                                     <Grid Grid.Row="1">
@@ -467,7 +466,7 @@
 
                                             <TextBlock
                                                 Text="Approve 3 medical records"
-                                                FontFamily="Arial"
+                                                FontFamily="Segoe UI"
                                                 FontWeight="Semibold"
                                                 FontSize="14"/>
 
@@ -482,8 +481,7 @@
                                     </Grid>
                                     <Border
                                        Grid.Row="2"
-                                       BorderBrush="#E2E8F0"
-                                       BorderThickness="0.5"
+                                       Style="{StaticResource Line}"
                                        Margin="0,10,0,10"/>
 
                                     <Grid Grid.Row="3">
@@ -504,7 +502,7 @@
 
                                             <TextBlock
                                                 Text="Dr. Lan sent a consultation message"
-                                                FontFamily="Arial"
+                                                FontFamily="Segoe UI"
                                                 FontWeight="Semibold"
                                                 FontSize="14"/>
 
@@ -519,8 +517,7 @@
                                     </Grid>
                                     <Border
                                        Grid.Row="4"
-                                       BorderBrush="#E2E8F0"
-                                       BorderThickness="0.5"
+                                       Style="{StaticResource Line}"
                                        Margin="0,10,0,10"/>
 
                                 </Grid>
@@ -542,7 +539,7 @@
                                         Margin="0,0,0,20"
                                         Text="Quick access"
                                         FontSize="17"
-                                        FontFamily="Arial"
+                                        FontFamily="Segoe UI"
                                         FontWeight="SemiBold"/>
 
                                     <Button

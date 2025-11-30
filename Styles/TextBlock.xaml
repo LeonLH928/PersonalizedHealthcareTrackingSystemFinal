@@ -4,14 +4,14 @@
     <Style x:Key="PageHeaderTextBlockStyle" TargetType="TextBlock">
         <Setter Property="FontSize" Value="25"/>
         <Setter Property="FontWeight" Value="Bold"/>
-        <Setter Property="FontFamily" Value="Arial"/>
+        <Setter Property="FontFamily" Value="Segoe UI"/>
     </Style>
 
     <!-- Secondary Text Text Block Style-->
     <Style x:Key="SecondaryTextTextBlockStyle" TargetType="TextBlock">
-        <Setter Property="FontFamily" Value="Arial"/>
+        <Setter Property="FontFamily" Value="Segoe UI"/>
         <Setter Property="FontSize" Value="14"/>
-        <Setter Property="Foreground" Value="#64748b"/>
+        <Setter Property="Foreground" Value="{StaticResource TextSecondaryTextBlock}"/>
     </Style>
     
 </ResourceDictionary>
