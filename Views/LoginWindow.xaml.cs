@@ -23,7 +23,6 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Views
 
             pwdBox.Visibility = Visibility.Collapsed;
             txtVisiblePassword.Visibility = Visibility.Visible;
-            txtVisiblePassword.Focus();
         }
 
         private void ShowPassword_Unchecked(object sender, RoutedEventArgs e)
@@ -32,7 +31,6 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Views
 
             txtVisiblePassword.Visibility = Visibility.Collapsed;
             pwdBox.Visibility = Visibility.Visible;
-            pwdBox.Focus();
         }
 
         private void txtVisiblePassword_TextChanged(object sender, TextChangedEventArgs e)

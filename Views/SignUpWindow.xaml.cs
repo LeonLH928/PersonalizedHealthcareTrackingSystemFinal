@@ -19,7 +19,6 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Views
             txtVisiblePassword.Text = pwdBox.Password;
             pwdBox.Visibility = Visibility.Collapsed;
             txtVisiblePassword.Visibility = Visibility.Visible;
-            txtVisiblePassword.Focus();
         }
 
         private void ShowPassword_Unchecked(object sender, RoutedEventArgs e)
@@ -27,7 +26,6 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Views
             pwdBox.Password = txtVisiblePassword.Text;
             txtVisiblePassword.Visibility = Visibility.Collapsed;
             pwdBox.Visibility = Visibility.Visible;
-            pwdBox.Focus();
         }
 
         private void txtVisiblePassword_TextChanged(object sender, TextChangedEventArgs e)
@@ -63,7 +61,6 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Views
             txtVisibleConfirmPassword.Text = pwdConfirmBox.Password;
             pwdConfirmBox.Visibility = Visibility.Collapsed;
             txtVisibleConfirmPassword.Visibility = Visibility.Visible;
-            txtVisibleConfirmPassword.Focus();
         }
 
         private void ShowConfirmPassword_Unchecked(object sender, RoutedEventArgs e)
@@ -71,7 +68,6 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Views
             pwdConfirmBox.Password = txtVisibleConfirmPassword.Text;
             txtVisibleConfirmPassword.Visibility = Visibility.Collapsed;
             pwdConfirmBox.Visibility = Visibility.Visible;
-            pwdConfirmBox.Focus();
         }
 
         private void txtVisibleConfirmPassword_TextChanged(object sender, TextChangedEventArgs e)
