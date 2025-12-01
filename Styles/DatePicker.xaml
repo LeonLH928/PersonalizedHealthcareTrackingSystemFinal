@@ -30,6 +30,7 @@
                                                Background="Transparent"
                                                Grid.Column="0"
                                                VerticalAlignment="Center"
+                                               HorizontalContentAlignment="Left"
                                                Padding="{TemplateBinding Padding}"
                                                FontSize="{TemplateBinding FontSize}"
                                                FontFamily="{TemplateBinding FontFamily}"/>
