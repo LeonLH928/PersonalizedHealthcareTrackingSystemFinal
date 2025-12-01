@@ -19,4 +19,6 @@
     <SolidColorBrush x:Key="CancelledStatusBorder" Color="#ECA0A8"/>
     <SolidColorBrush x:Key="NotShowUpStatusBorder" Color="#354863"/>
     <SolidColorBrush x:Key="DangerColor" Color="#ef4444"/>
+    <SolidColorBrush x:Key="StatusPendingBackground" Color="#ea580c"/>
+    <SolidColorBrush x:Key="StatusPendingText" Color="#fff7ed"/>
 </ResourceDictionary>

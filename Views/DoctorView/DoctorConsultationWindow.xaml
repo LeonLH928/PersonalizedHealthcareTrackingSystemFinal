@@ -438,7 +438,7 @@
                                 </Grid.RowDefinitions>
                                 <TextBox  
                                         Tag="Search drugs, active ingredients, etc."
-                                        Style="{StaticResource SearchDrugInputTextBoxStyle}"
+                                        Style="{StaticResource SearchInputTextBoxStyle}"
                                         Margin="0,0,0,20"/>
                                 <ScrollViewer
                                     Grid.Row="1"

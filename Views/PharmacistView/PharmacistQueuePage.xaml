@@ -16,7 +16,86 @@
         <Border
             Style="{StaticResource PageContentBorderStyle}"
             BorderBrush="{StaticResource LightBorder}"
-            BorderThickness="0,0,1,0">
+            Background="#f8fafc"
+            BorderThickness="0,0,1,0"
+            Padding="0">
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <StackPanel>
+                    <Grid Margin="10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock
+                            VerticalAlignment="Center"
+                            Text="Waiting to verify"
+                            Style="{StaticResource CustomBaseTextBlockStyle}"
+                            HorizontalAlignment="Left"
+                            FontSize="20"
+                            FontWeight="Bold"/>
+                        <Border 
+                            Grid.Column="1"
+                            Style="{StaticResource BaseCustomBorderStyle}"
+                            Background="{StaticResource StatusPendingBackground}"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center">
+                            <TextBlock
+                                Text="5 pending"
+                                FontSize="14"
+                                Foreground="{StaticResource StatusPendingText}"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Style="{StaticResource CustomBaseTextBlockStyle}"/>
+                        </Border>
+                    </Grid>
+                    <Grid Margin="10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBox
+                            Tag="Find by patient ID, drug ID, etc."
+                            FontSize="14"
+                            Width="274"
+                            Style="{StaticResource SearchInputTextBoxStyle}"
+                            Margin="0,0,10,0"
+                            VerticalAlignment="Center"/>
+
+                        <Button
+                            Grid.Column="1"
+                            Content="&#128472;"
+                            Style="{StaticResource ReloadButtonStyle}"/>
+                    </Grid>
+                </StackPanel>
+
+                <ScrollViewer
+                    HorizontalScrollBarVisibility="Disabled"
+                    VerticalScrollBarVisibility="Auto"
+                    Grid.Row="1">
+                    <Border
+                        BorderBrush="{StaticResource LightBorder}"
+                        BorderThickness="0,1,0,0"
+                        Background="{StaticResource LightBorder}"
+                        Padding="10">
+
+                        <StackPanel>
+
+                            <Border
+                                Style="{StaticResource NextPatientBorderStyle}"
+                                BorderBrush="#15803d">
+                                
+                            </Border>
+                        </StackPanel>
+
+                    </Border>
+                </ScrollViewer>
+            </Grid>
             
         </Border>
     </Grid>
