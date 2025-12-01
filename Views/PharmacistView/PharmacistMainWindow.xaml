@@ -1,0 +1,139 @@
+﻿<Window x:Class="PersonalizedHealthcareTrackingSystemFinal.Views.PharmacistView.PharmacistMainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:fa="http://schemas.fontawesome.io/icons/"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PersonalizedHealthcareTrackingSystemFinal.Views.PharmacistView"
+        mc:Ignorable="d"
+        Height="600" Width="1000" WindowState="Maximized"
+        Icon="/Resources/Logo/logo.ico">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Border
+            Style="{StaticResource SidebarBorderStyle}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="110"/>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Image Source="/Resources/Logo/logo.png"                       
+                       HorizontalAlignment="Left" 
+                       Height="100"
+                       Width="100" Margin="59.5,0,0,0"/>
+
+                <ListBox x:Name="Sidebar"
+                         Grid.Row="1"
+                         Background="Transparent"
+                         Foreground="White"
+                         BorderThickness="0"
+                         FontSize="18" SelectionChanged="Sidebar_SelectionChanged"
+                         ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="Padding" Value="15"/>
+                            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                            <Setter Property="Cursor" Value="Hand"/>
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="Foreground" Value="White"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="Background" Value="#34495E"/>
+                                    <Setter Property="FontWeight" Value="Bold"/>
+                                </Trigger>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#3E5060"/>
+                                    <Setter Property="FontWeight" Value="Bold"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+
+                    <ListBoxItem Tag="Dashboard">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:ImageAwesome 
+                                Icon="Dashboard" 
+                                Width="20" 
+                                Height="20" 
+                                Margin="0,0,20,0" 
+                                VerticalAlignment="Center" 
+                                Foreground="White"/>
+
+                            <TextBlock Text="Dashboard"/>
+                        </StackPanel>
+                    </ListBoxItem>
+
+                    <ListBoxItem Tag="VerifyingQueue">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:ImageAwesome 
+                                Icon="AlignJustify" 
+                                Width="20" 
+                                Height="20" 
+                                Margin="0,0,20,0" 
+                                VerticalAlignment="Center" 
+                                Foreground="White"/>
+                            <TextBlock Text="Patient Queue"/>
+                        </StackPanel>
+                    </ListBoxItem>
+
+                    <ListBoxItem Tag="Settings">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:ImageAwesome Icon="Cog" 
+                                             Width="20" 
+                                             Height="20" 
+                                             Margin="0,0,20,0" 
+                                             VerticalAlignment="Center" 
+                                             Foreground="White"/>
+                            <TextBlock Text="Settings"/>
+                        </StackPanel>
+                    </ListBoxItem>
+
+                </ListBox>
+
+                <Border Grid.Row="2"
+                        Background="#1A252F"
+                        BorderThickness="0,1,0,0"
+                        BorderBrush="#3A4A58"
+                        VerticalAlignment="Bottom"
+                        HorizontalAlignment="Center">
+                    <StackPanel
+                            Orientation="Horizontal"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Margin="12,12,12,12">
+                        <Ellipse Width="30" Height="30"
+                                     Margin="0,0,5,0"
+                                     Stroke="White" StrokeThickness="1">
+                            <Ellipse.Fill>
+                                <ImageBrush ImageSource="/Resources/Avatar/doctor.jpg"/>
+                            </Ellipse.Fill>
+                        </Ellipse>
+
+                        <StackPanel Orientation="Vertical" Margin="10,0,0,0" VerticalAlignment="Center">
+                            <TextBlock Text="Nguyễn Đại Hưng"
+                                           Foreground="White"
+                                           FontWeight="SemiBold"
+                                           FontSize="14"/>
+                            <TextBlock Text="hun9nd@gmail.com"
+                                           Foreground="#BDC3C7"
+                                           FontSize="11"
+                                           TextTrimming="CharacterEllipsis"
+                                           Width="150"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </Border>
+
+        <Frame x:Name="DoctorMainContent"
+               Grid.Column="1"
+               NavigationUIVisibility="Hidden"
+               Background="#ECF0F1"/>
+    </Grid>
+</Window>
