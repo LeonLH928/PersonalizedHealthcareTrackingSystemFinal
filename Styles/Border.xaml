@@ -191,7 +191,7 @@
         <Setter Property="BorderBrush" Value="{StaticResource LightBorder}"/>
         <Setter Property="BorderThickness" Value="0.5"/>
     </Style>
-    
+
     <!-- Dot -->
     <Style x:Key="Dot" TargetType="Border">
         <Setter Property="Height" Value="16"/>
@@ -200,5 +200,13 @@
         <Setter Property="Margin" Value="0,0,8,0"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="HorizontalAlignment" Value="Right"/>
+    </Style>
+    
+    <!-- Urgent Border Style -->
+    <Style x:Key="UrgentBorderStyle" TargetType="Border" BasedOn="{StaticResource BaseCustomBorderStyle}">
+        <Setter Property="Background" Value="{StaticResource UrgentTagBorder}"/>
+        <Setter Property="Background" Value="{StaticResource UrgentTagBorder}"/>
+        <Setter Property="BorderBrush" Value="#fecaca"/>
+        <Setter Property="BorderThickness" Value="1"/>
     </Style>
 </ResourceDictionary>

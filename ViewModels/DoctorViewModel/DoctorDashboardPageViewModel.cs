@@ -1,18 +1,24 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using LiveChartsCore;
 using LiveChartsCore.SkiaSharpView;
+using Microsoft.Extensions.DependencyInjection;
+using PersonalizedHealthcareTrackingSystemFinal.Views.DoctorView;
 using System.Collections.ObjectModel;
+using System.Windows;
 
 namespace PersonalizedHealthcareTrackingSystemFinal.ViewModels.DoctorViewModel;
 
 public partial class DoctorDashboardPageViewModel : ObservableObject
 {
-    [ObservableProperty]
-    private ObservableCollection<ISeries> data = [];
-    public DoctorDashboardPageViewModel()
+    private readonly IServiceProvider _serviceProvider;
+    public DoctorDashboardPageViewModel (IServiceProvider serviceProvider)
     {
         InitializeChart();
+        _serviceProvider = serviceProvider;
     }
+    [ObservableProperty]
+    private ObservableCollection<ISeries> data = [];
     public void InitializeChart()
     {
         Data = [
@@ -41,5 +47,14 @@ public partial class DoctorDashboardPageViewModel : ObservableObject
                 MaxRadialColumnWidth = 60
             }
         ];
+    }
+    [RelayCommand]
+    public void CallToTheClinicButton()
+    {
+        if (Application.Current.Windows.OfType<DoctorConsultationWindow>().FirstOrDefault() == null)
+        {
+            var Popup = _serviceProvider.GetRequiredService<DoctorConsultationWindow>();
+            Popup.Show();
+        }
     }
 }

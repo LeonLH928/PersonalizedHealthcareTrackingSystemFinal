@@ -42,13 +42,13 @@ public static class AppModule
         services.AddTransient<Views.DoctorView.DoctorMainWindow>();
         services.AddTransient<Views.DoctorView.DoctorDashboardPage>();
         services.AddTransient<Views.DoctorView.DoctorUpcomingsPage>();
-        services.AddTransient<Views.DoctorView.DoctorConsultationPage>();
+        services.AddTransient<Views.DoctorView.DoctorConsultationWindow>();
 
         // Register ViewModels
         services.AddTransient<IntroductionWindowViewModel>();
         services.AddTransient<LoginWindowViewModel>();
         services.AddTransient<ViewModels.DoctorViewModel.DoctorDashboardPageViewModel>();
-
+        services.AddTransient<ViewModels.DoctorViewModel.DoctorConsultationWindowViewModel>();
         // Register Repositories
 
 
