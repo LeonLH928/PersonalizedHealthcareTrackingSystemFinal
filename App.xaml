@@ -13,6 +13,7 @@
                 <ResourceDictionary Source="/Styles/Border.xaml"/>
                 <ResourceDictionary Source="/Styles/Icon.xaml"/>
                 <ResourceDictionary Source="/Styles/Rectangle.xaml"/>
+                <ResourceDictionary Source="/Styles/DatePicker.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <local:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
         </ResourceDictionary>

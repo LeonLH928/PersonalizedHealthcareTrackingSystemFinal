@@ -406,11 +406,13 @@
                     CornerRadius="8"
                     BorderBrush="{StaticResource LightBorder}"
                     BorderThickness="1"
-                    Margin="0,0,0,20">
-                    <StackPanel
-                        Orientation="Vertical"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Top">
+                    Width="350">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
                         <Border
                             Background="{StaticResource LightWaitingStatusBorder}"
                             Padding="10"
@@ -425,16 +427,29 @@
                                 FontSize="18"/>
                         </Border>
 
-                        <Border Padding="10">
-                            <StackPanel>
-                                <TextBox Tag="Search drugs, active ingredients, etc."
-                                            Width="350"
-                                            Style="{StaticResource SearchDrugInputTextBoxStyle}"
-                                            Margin="0,0,0,20"/>
+                        <Border 
+                            Padding="10"
+                            Grid.Row="1">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <TextBox  
+                                        Tag="Search drugs, active ingredients, etc."
+                                        Style="{StaticResource SearchDrugInputTextBoxStyle}"
+                                        Margin="0,0,0,20"/>
                                 <ScrollViewer
+                                    Grid.Row="1"
                                     VerticalScrollBarVisibility="Auto"
                                     HorizontalScrollBarVisibility="Disabled">
-                                    <StackPanel>
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
                                         <Border
                                             Style="{StaticResource SecondaryTextBorderStyle}"
                                             Padding="10"
@@ -484,6 +499,7 @@
 
                                         </Border>
                                         <Border
+                                            Grid.Row="1"
                                             Style="{StaticResource SecondaryTextBorderStyle}"
                                             Padding="10"
                                             Margin="0,0,0,10">
@@ -530,29 +546,145 @@
                                                     Style="{StaticResource Line}"/>
                                             </StackPanel>
                                         </Border>
-                                        <Border
-                                            BorderBrush="{StaticResource DangerColor}"
-                                            BorderThickness="10">
 
-                                            <StackPanel>
+                                        <Border
+                                            Grid.Row="2"
+                                            Background="White"
+                                            CornerRadius="8"
+                                            BorderBrush="{StaticResource LightBorder}"
+                                            BorderThickness="1"
+                                            Margin="0,0,0,20">
+                                            <StackPanel
+                                                Orientation="Vertical"
+                                                HorizontalAlignment="Stretch"
+                                                VerticalAlignment="Top">
                                                 <Border
                                                     Background="{StaticResource DangerColor}"
-                                                    BorderBrush="Transparent">
-
+                                                    Padding="10"
+                                                    CornerRadius="8,8,0,0"
+                                                    BorderBrush="{StaticResource LightBorder}"
+                                                    BorderThickness="0,0,0,1">
                                                     <TextBlock
-                                                        Style="{StaticResource CustomBaseTextBlockStyle}"
-                                                        />
+                                                        Text="⚠️ DETECTING DRUG INTERACTIONS (Level: Moderate)"
+                                                        FontFamily="Segoe UI"
+                                                        FontWeight="SemiBold"
+                                                        Foreground="White"
+                                                        TextWrapping="Wrap"
+                                                        FontSize="18"/>
+                                                </Border>
 
+                                                <Border Padding="10"
+                                                        Style="{StaticResource BaseCustomBorderStyle}"
+                                                        Background="{StaticResource UrgentTagBorder}"
+                                                        CornerRadius="0,0,8,8">
+
+                                                    <StackPanel>
+                                                        <Grid>
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="Auto"/>
+                                                                <ColumnDefinition Width="*"/>
+                                                            </Grid.ColumnDefinitions>
+                                                            <TextBlock
+                                                                Text="Between: "
+                                                                TextWrapping="Wrap"
+                                                                Margin="0,0,0,10"
+                                                                Style="{StaticResource CustomBaseTextBlockStyle}"
+                                                                Foreground="#7f1d1d"
+                                                                FontWeight="SemiBold"/>
+
+                                                            <TextBlock
+                                                                Grid.Column="1"
+                                                                Text="Amlodipine ↔️ Simvastatin"
+                                                                TextWrapping="Wrap"
+                                                                Margin="0,0,0,10"
+                                                                Style="{StaticResource CustomBaseTextBlockStyle}"
+                                                                Foreground="#7f1d1d"/>
+                                                        </Grid>
+                                                        <Grid>
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="Auto"/>
+                                                                <ColumnDefinition Width="*"/>
+                                                            </Grid.ColumnDefinitions>
+                                                            <TextBlock
+                                                                Text="Consequences: "
+                                                                TextWrapping="Wrap"
+                                                                Margin="0,0,0,10"
+                                                                Style="{StaticResource CustomBaseTextBlockStyle}"
+                                                                Foreground="#7f1d1d"
+                                                                FontWeight="SemiBold"/>
+
+                                                            <TextBlock
+                                                                Grid.Column="1"
+                                                                Text="Increased risk of myopathy and rhabdomyolysis due to Simvastatin (Amlodipine increases Simvastatin concentrations)."
+                                                                TextWrapping="Wrap"
+                                                                Margin="0,0,0,10"
+                                                                Style="{StaticResource CustomBaseTextBlockStyle}"
+                                                                Foreground="#7f1d1d"/>
+                                                        </Grid>
+                                                        <Grid>
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="Auto"/>
+                                                                <ColumnDefinition Width="*"/>
+                                                            </Grid.ColumnDefinitions>
+                                                            <TextBlock
+                                                                Text="Recommendation: "
+                                                                TextWrapping="Wrap"
+                                                                Margin="0,0,0,10"
+                                                                Style="{StaticResource CustomBaseTextBlockStyle}"
+                                                                Foreground="#7f1d1d"
+                                                                FontWeight="SemiBold"/>
+
+                                                            <TextBlock
+                                                                Grid.Column="1"
+                                                                Text="Do not exceed 20 mg Simvastatin/day when used with Amlodipine. Monitor closely for signs of muscle pain."
+                                                                TextWrapping="Wrap"
+                                                                Style="{StaticResource CustomBaseTextBlockStyle}"
+                                                                Foreground="#7f1d1d"/>
+                                                        </Grid>
+                                                    </StackPanel>
                                                 </Border>
                                             </StackPanel>
-                                            
                                         </Border>
-                                    </StackPanel>
+                                    </Grid>
                                 </ScrollViewer>
-                            </StackPanel>
+
+                            </Grid>
+                        </Border>
+                        <Border Grid.Row="2"
+                                Margin="0,30,0,0"
+                                CornerRadius="8,0,8,8"
+                                VerticalAlignment="Bottom"
+                                Style="{StaticResource BaseCustomBorderStyle}"
+                                Background="{StaticResource LightBorder}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="70"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock
+                                    Text="Follow-up visit: "
+                                    Style="{StaticResource CustomBaseTextBlockStyle}"
+                                    TextWrapping="Wrap"
+                                    FontWeight="SemiBold"
+                                    FontSize="14"/>
+
+                                <DatePicker Style="{StaticResource StandardDatePicker}"
+                                            Grid.Column="1"
+                                            FontSize="16"
+                                            Margin="0,0,5,0"/>
+
+                                <Button
+                                    Grid.Column="2"
+                                    Style="{StaticResource PrimaryButtonStyle}"
+                                    Content="Submit" 
+                                    FontSize="16"
+                                    Foreground="White"/>
+                            </Grid>
                         </Border>
 
-                    </StackPanel>
+                    </Grid>
+            
                 </Border>
             </Grid>
         </Border>
