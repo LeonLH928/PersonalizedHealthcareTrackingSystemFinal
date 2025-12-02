@@ -9,7 +9,7 @@ public class MedicationStockLogModel
     [Required]
     public int QuantityChange { get; set; }
     public string Reason { get; set; } = "";
-    public DateTime CreatedAt { get; set; } = DateTime.Now;
+    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     [ForeignKey(nameof(MedicationModel))]
     public string MedicationID { get; set; } = "";
     public virtual MedicationModel Medication { get; set; } = null!;

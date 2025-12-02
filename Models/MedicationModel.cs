@@ -3,14 +3,14 @@
 namespace PersonalizedHealthcareTrackingSystemFinal.Models;
 public enum Form
 {
-    tablet,
-    capsule,
-    syrup,
-    injection,
-    cream,
-    drops,
-    inhaler,
-    other
+    Tablet,
+    Capsule,
+    Syrup,
+    Injection,
+    Cream,
+    Drops,
+    Inhaler,
+    Other
 }
 public class MedicationModel
 {
@@ -27,6 +27,7 @@ public class MedicationModel
     public string StockQuantityUnit { get; set; } = "";
     public int Price { get; set; }
     public virtual List<PrescriptionItemModel> PrescriptionItems { get; set; } = [];
-    public virtual List<MedicationInteractionModel> MedicationInteractions { get; set; } = [];
+    public virtual List<MedicationInteractionModel> MedicationInteractions1 { get; set; } = [];
+    public virtual List<MedicationInteractionModel> MedicationInteractions2 { get; set; } = [];
     public virtual List<MedicationStockLogModel> MedicationStockLogs { get; set; } = []; 
 }

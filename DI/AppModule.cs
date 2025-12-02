@@ -4,9 +4,14 @@ using Microsoft.Extensions.DependencyInjection;
 using Npgsql;
 using PersonalizedHealthcareTrackingSystemFinal.Configs;
 using PersonalizedHealthcareTrackingSystemFinal.Data;
+using PersonalizedHealthcareTrackingSystemFinal.Interfaces;
+using PersonalizedHealthcareTrackingSystemFinal.Repositories;
+using PersonalizedHealthcareTrackingSystemFinal.ServiceImpls;
 using PersonalizedHealthcareTrackingSystemFinal.Services;
 using PersonalizedHealthcareTrackingSystemFinal.ViewModels;
 using PersonalizedHealthcareTrackingSystemFinal.Views;
+using Supabase;
+using System.Security.Policy;
 
 namespace PersonalizedHealthcareTrackingSystemFinal.DI;
 public static class AppModule
@@ -33,9 +38,26 @@ public static class AppModule
             options.UseNpgsql(builder.ConnectionString);      
         });
 
+        // Register Client
+        services.AddSingleton<Client>(provider =>
+        {
+           var SUPABASE_URL = "https://acrsnysomjcvidbbadac.supabase.co"; 
+           var SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFjcnNueXNvbWpjdmlkYmJhZGFjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQxNzU1MDAsImV4cCI6MjA3OTc1MTUwMH0.8NL3tECh1ZMQBI_H7gFz0ecFqPFMrznTGk95oGO1Dg8";
+           var options = new SupabaseOptions
+           {
+               AutoRefreshToken = false,
+               AutoConnectRealtime = false
+           };
+
+            var client = new Supabase.Client(SUPABASE_URL, SUPABASE_KEY, options);
+
+            return client;
+        });
+
         // Register Views
         services.AddTransient<IntroductionWindow>();
         services.AddTransient<LoginWindow>();
+        services.AddTransient<SignUpWindow>();
         services.AddTransient<Views.PatientView.PatientMainWindow>();
         services.AddTransient<Views.PatientView.PatientBookingPage>();
         services.AddTransient<Views.PatientView.PatientHomePage>();
@@ -49,14 +71,21 @@ public static class AppModule
         // Register ViewModels
         services.AddTransient<IntroductionWindowViewModel>();
         services.AddTransient<LoginWindowViewModel>();
+        services.AddTransient<SignUpWindowViewModel>();
         services.AddTransient<ViewModels.DoctorViewModel.DoctorDashboardPageViewModel>();
         services.AddTransient<ViewModels.DoctorViewModel.DoctorConsultationWindowViewModel>();
-        // Register Repositories
 
+        // Register Repositories
+        services.AddScoped<IAppointmentRepository, AppointmentRepository>();
+        services.AddScoped<ICurrentUserStoreRepository, CurrentUserStoreRepository>();
+        services.AddScoped<IRoleRepository<SupabaseModels.PatientModel>, RoleRepository<SupabaseModels.PatientModel>>();
+        services.AddScoped<IRoleRepository<SupabaseModels.DoctorModel>, RoleRepository<SupabaseModels.DoctorModel>>();
+        services.AddScoped<IRoleRepository<SupabaseModels.PharmacistModel>, RoleRepository<SupabaseModels.PharmacistModel>>();
+        services.AddScoped<IUserRepository, UserRepository>();
 
         // Register Services
-        services.AddSingleton<SupabaseService>();
-
+        services.AddScoped<IAppointmentService, AppointmentService>();
+        services.AddScoped<IAuthService, AuthService>();
 
         return services;
     }

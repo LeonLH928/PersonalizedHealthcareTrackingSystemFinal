@@ -8,10 +8,11 @@ public class MedicalRecordModel
     [Key]
     public string RecordID { get; set; } = "";
     [Required]
-    public DateTime VisitTime { get; set; } = DateTime.Now;
+    public DateTime VisitTime { get; set; } = DateTime.UtcNow;
     public string Diagnosis { get; set; } = "";
+    public string TreatmentPlan { get; set; } = "";
     public string DoctorNotes { get; set; } = "";
-    public DateTime NextVisitDate { get; set; }= DateTime.Now;
+    public DateTime NextVisitDate { get; set; }= DateTime.UtcNow;
     [ForeignKey(nameof(AppointmentModel))]
     public string AppointmentID { get; set; } = "";
     public virtual AppointmentModel Appointment { get; set; } = null!;

@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 using LiveChartsCore;
 using LiveChartsCore.SkiaSharpView;
 using Microsoft.Extensions.DependencyInjection;
+using PersonalizedHealthcareTrackingSystemFinal.Services;
 using PersonalizedHealthcareTrackingSystemFinal.Views.DoctorView;
 using System.Collections.ObjectModel;
 using System.Windows;
@@ -12,11 +13,14 @@ namespace PersonalizedHealthcareTrackingSystemFinal.ViewModels.DoctorViewModel;
 public partial class DoctorDashboardPageViewModel : ObservableObject
 {
     private readonly IServiceProvider _serviceProvider;
-    public DoctorDashboardPageViewModel (IServiceProvider serviceProvider)
+    private readonly IAppointmentService _appointmentService;
+    public DoctorDashboardPageViewModel (IServiceProvider serviceProvider, IAppointmentService appointmentService)
     {
         InitializeChart();
         _serviceProvider = serviceProvider;
+        _appointmentService = appointmentService;
     }
+    #region Doghnut Chart
     [ObservableProperty]
     private ObservableCollection<ISeries> data = [];
     public void InitializeChart()
@@ -48,6 +52,8 @@ public partial class DoctorDashboardPageViewModel : ObservableObject
             }
         ];
     }
+    #endregion
+
     [RelayCommand]
     public void CallToTheClinicButton()
     {

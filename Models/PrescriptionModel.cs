@@ -4,22 +4,22 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace PersonalizedHealthcareTrackingSystemFinal.Models;
 public enum PrescriptionStatus
 {
-    pending,
-    verified,
-    dispensed,
-    cancelled
+    Pending,
+    Verified,
+    Dispensed,
+    Cancelled
 }
 public class PrescriptionModel
 {
     [Key]
-    public string PrescriptionId { get; set; } = "";
+    public string PrescriptionID { get; set; } = "";
     [Required]
-    public DateTime PrescriptionDateTime { get; set; } = DateTime.Now;
-    public PrescriptionStatus Status { get; set; } = PrescriptionStatus.pending;
-    public DateTime VerifiedAt { get; set; } = DateTime.Now;
-    public DateTime DispensedAt { get; set; } = DateTime.Now;
+    public DateTime PrescriptionDateTime { get; set; } = DateTime.UtcNow;
+    public PrescriptionStatus Status { get; set; } = PrescriptionStatus.Pending;
+    public DateTime VerifiedAt { get; set; } = DateTime.UtcNow;
+    public DateTime DispensedAt { get; set; } = DateTime.UtcNow;
     [Required]
-    public Priority Priority { get; set; } = Priority.routine;
+    public Priority Priority { get; set; } = Priority.Routine;
     [ForeignKey(nameof(MedicalRecordModel))]
     public string RecordID { get; set; } = "";
     public virtual MedicalRecordModel MedicalRecord { get; set; } = null!;

@@ -4,15 +4,15 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace PersonalizedHealthcareTrackingSystemFinal.Models;
 public enum Severity
 {
-    mild,
-    moderate,
-    severe,
-    contraindicated
+    Mild,
+    Moderate,
+    Severe,
+    Contraindicated
 }
 public class MedicationInteractionModel
 {
     [Key]
-    public int InteractionId { get; set; }
+    public string InteractionId { get; set; } = "";
     [Required]
     public Severity Severity { get; set; }
     public string Description { get; set; } = "";

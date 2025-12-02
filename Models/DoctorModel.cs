@@ -15,4 +15,6 @@ public class DoctorModel
     [ForeignKey(nameof(UserModel))]
     public string UserID { get; set; } = "";
     public virtual UserModel User { get; set; } = null!;
+    public virtual List<DoctorScheduleModel> DoctorSchedules { get; set; } = [];
+    public virtual List<AppointmentModel> Appointments { get; set; } = [];
 }
