@@ -24,9 +24,6 @@ namespace PersonalizedHealthcareTrackingSystemFinal
             services.RegisterDependency();
             ServiceProvider = services.BuildServiceProvider();
 
-            //var Database = ServiceProvider.GetRequiredService<DatabaseConfig>();
-            //await Database.InitializeAsync();
-
             var IntroductionWindow = ServiceProvider.GetRequiredService<IntroductionWindow>();
             IntroductionWindow.Show();
         }

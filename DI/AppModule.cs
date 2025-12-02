@@ -18,25 +18,27 @@ public static class AppModule
 {
     public static IServiceCollection RegisterDependency(this IServiceCollection services)
     {
+        // ----------- Dead code
         // Register Database
-        services.AddSingleton<DatabaseConfig>();
+        //services.AddSingleton<DatabaseConfig>();
 
         // Register Data context
-        services.AddDbContext<DataContext>(options =>
-        {
-            IConfigurationRoot configuration = new ConfigurationBuilder()
-                                                    .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
-                                                    .AddUserSecrets<DataContextFactory>()
-                                                    .Build();
+        //services.AddDbContext<DataContext>(options =>
+        //{
+        //    IConfigurationRoot configuration = new ConfigurationBuilder()
+        //                                            .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
+        //                                            .AddUserSecrets<DataContextFactory>()
+        //                                            .Build();
 
-            string dbPassword = configuration["Supabase:DbPassword"] ?? throw new InvalidOperationException("Could not find 'Supabase:DbPassword' in User Secrets. Did you run 'dotnet user-secrets set...'?");
+        //    string dbPassword = configuration["Supabase:DbPassword"] ?? throw new InvalidOperationException("Could not find 'Supabase:DbPassword' in User Secrets. Did you run 'dotnet user-secrets set...'?");
 
-            var builder = new NpgsqlConnectionStringBuilder("User Id=postgres.acrsnysomjcvidbbadac;Server=aws-1-ap-south-1.pooler.supabase.com;Port=5432;Database=postgres");
+        //    var builder = new NpgsqlConnectionStringBuilder("User Id=postgres.acrsnysomjcvidbbadac;Server=aws-1-ap-south-1.pooler.supabase.com;Port=5432;Database=postgres");
 
-            builder.Password = dbPassword;
+        //    builder.Password = dbPassword;
 
-            options.UseNpgsql(builder.ConnectionString);      
-        });
+        //    options.UseNpgsql(builder.ConnectionString);      
+        //});
+        // -----------
 
         // Register Client
         services.AddSingleton<Client>(provider =>
