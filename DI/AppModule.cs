@@ -45,6 +45,7 @@ public static class AppModule
         services.AddTransient<Views.DoctorView.DoctorUpcomingsPage>();
         services.AddTransient<Views.PharmacistView.PharmacistMainWindow>();
         services.AddTransient<Views.PharmacistView.PharmacistQueuePage>();
+        services.AddTransient<Views.PharmacistView.PharmacistDashboard>();
 
         // Register ViewModels
         services.AddTransient<IntroductionWindowViewModel>();
