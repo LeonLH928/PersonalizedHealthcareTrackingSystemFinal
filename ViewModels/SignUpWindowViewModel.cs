@@ -1,19 +1,23 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using PersonalizedHealthcareTrackingSystemFinal.Models;
-using PersonalizedHealthcareTrackingSystemFinal.Services;
+using PersonalizedHealthcareTrackingSystemFinal.ServiceImpls;
 using System;
 using PersonalizedHealthcareTrackingSystemFinal.Views;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
+using PersonalizedHealthcareTrackingSystemFinal.Services;
+using Supabase;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace PersonalizedHealthcareTrackingSystemFinal.ViewModels
 {
     public partial class SignUpWindowViewModel : ObservableObject
     {
-        private readonly SupabaseService _supabaseService;
+        private readonly IAuthService _authService;
         private readonly IServiceProvider _serviceProvider;
+        private readonly Client _client;
 
         [ObservableProperty]
         private string _firstName = string.Empty;
@@ -54,18 +58,19 @@ namespace PersonalizedHealthcareTrackingSystemFinal.ViewModels
         [ObservableProperty]
         private bool _isLoading = false;
 
-        public SignUpWindowViewModel(IServiceProvider serviceProvider)
+        public SignUpWindowViewModel(IAuthService authService, IServiceProvider serviceProvider, Client client)
         {
-            _supabaseService = SupabaseService.Instance;
-            InitializeSupabase();
+            _authService = authService;
             _serviceProvider = serviceProvider;
+            _client = client;
+            InitializeSupabase();
         }
 
         private async void InitializeSupabase()
         {
             try
             {
-                await _supabaseService.InitializeAsync();
+                await _client.InitializeAsync();
             }
             catch (Exception ex)
             {
@@ -96,7 +101,7 @@ namespace PersonalizedHealthcareTrackingSystemFinal.ViewModels
                     selectedRole = UserRole.Pharmacist;
 
                 // Sign up
-                var user = await _supabaseService.SignUpAsync(
+                var user = await _authService.SignUpAsync(
                     Email.Trim(),
                     Password,
                     selectedRole,
@@ -261,8 +266,7 @@ namespace PersonalizedHealthcareTrackingSystemFinal.ViewModels
         {
             try
             {
-                var loginViewModel = new LoginWindowViewModel(_serviceProvider);
-                var loginWindow = new Views.LoginWindow(loginViewModel);
+                var loginWindow = _serviceProvider.GetRequiredService<LoginWindow>();
                 loginWindow.Show();
                 currentWindow.Close();
             }

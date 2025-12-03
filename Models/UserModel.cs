@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Security.RightsManagement;
 
 namespace PersonalizedHealthcareTrackingSystemFinal.Models;
 public enum UserRole
@@ -11,10 +10,10 @@ public enum UserRole
     Pharmacist
 }
 [Index(nameof(Username), IsUnique = true)]
-public class UserModel
+public class UserModel 
 {
     [Key]
-    public int UserID { get; set; }
+    public string UserID { get; set; } = "";
     [MaxLength(50, ErrorMessage = "Maximum length is 50")]
     public string FirstName { get; set; } = "";
     [MaxLength(50, ErrorMessage = "Maximum length is 50")]
@@ -32,4 +31,7 @@ public class UserModel
     [Phone]
     public string PhoneNumber { get; set; } = "";
     public bool IsActive { get; set; } = false;
+    public virtual PatientModel Patient { get; set; } = null!;
+    public virtual DoctorModel Doctor { get; set; } = null!;
+    public virtual PharmacistModel Pharmacist { get; set; } = null!;
 }

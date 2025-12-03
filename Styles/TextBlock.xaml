@@ -10,7 +10,7 @@
     <!-- Secondary Text Text Block Style-->
     <Style x:Key="SecondaryTextTextBlockStyle" TargetType="TextBlock">
         <Setter Property="FontFamily" Value="Segoe UI"/>
-        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontSize" Value="16"/>
         <Setter Property="Foreground" Value="{StaticResource TextSecondaryTextBlock}"/>
     </Style>
 
@@ -19,5 +19,18 @@
         <Setter Property="FontFamily" Value="Segoe UI"/>
         <Setter Property="FontSize" Value="16"/>
         <Setter Property="FontWeight" Value="Regular"/>
+    </Style>
+    
+    <!-- Priority Text Block Style-->
+    <Style x:Key="PriorityTextBlockStyle" TargetType="TextBlock" BasedOn="{StaticResource CustomBaseTextBlockStyle}">
+        <Setter Property="Foreground" Value="{StaticResource RoutineTagTextBlock}"/>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding Priority}" Value="Urgent">
+                <Setter Property="Foreground" Value="{StaticResource UrgentTagTextBlock}"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Priority}" Value="Stat">
+                <Setter Property="Foreground" Value="{StaticResource StatTagTextBlock}"/>
+            </DataTrigger>
+        </Style.Triggers>
     </Style>
 </ResourceDictionary>

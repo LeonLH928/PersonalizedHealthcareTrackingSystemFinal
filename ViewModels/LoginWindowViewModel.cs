@@ -1,7 +1,10 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.DependencyInjection;
+using PersonalizedHealthcareTrackingSystemFinal.ServiceImpls;
 using PersonalizedHealthcareTrackingSystemFinal.Services;
+using PersonalizedHealthcareTrackingSystemFinal.Views;
+using Supabase;
 using System;
 using System.Threading.Tasks;
 using System.Windows;
@@ -10,7 +13,8 @@ namespace PersonalizedHealthcareTrackingSystemFinal.ViewModels
 {
     public partial class LoginWindowViewModel : ObservableObject
     {
-        private readonly SupabaseService _supabaseService;
+        private readonly IAuthService _authService;
+        private readonly Client _client;
         private readonly IServiceProvider _serviceProvider;
 
         [ObservableProperty]
@@ -28,24 +32,25 @@ namespace PersonalizedHealthcareTrackingSystemFinal.ViewModels
         [ObservableProperty]
         private bool _isLoading = false;
 
-        public LoginWindowViewModel(IServiceProvider serviceProvider)
+        public LoginWindowViewModel(IServiceProvider serviceProvider, IAuthService authService, Client client)
         {
             _serviceProvider = serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
-            _supabaseService = SupabaseService.Instance;
+            _authService = authService;
+            _client = client;
             InitializeSupabase();
         }
-
         private async void InitializeSupabase()
         {
             try
             {
-                await _supabaseService.InitializeAsync();
+                await _client.InitializeAsync();
             }
             catch (Exception ex)
             {
                 ShowError($"Failed to initialize: {ex.Message}");
             }
         }
+
 
         [RelayCommand]
         private async Task Login()
@@ -72,15 +77,15 @@ namespace PersonalizedHealthcareTrackingSystemFinal.ViewModels
             try
             {
                 // Sign in
-                var user = await _supabaseService.SignInAsync(Username.Trim(), Password);
+                var user = await _authService.SignInAsync(Username.Trim(), Password);
 
                 if (user != null)
                 {
-                    if (user.Role == "patient")
+                    if (user.Role == Models.UserRole.Patient)
                     {
                         NavigateToPatientHomePage();
                     }
-                    else if (user.Role == "doctor")
+                    else if (user.Role == Models.UserRole.Doctor)
                     {
                         NavigateToDoctorMainWindow();
                     }
@@ -110,8 +115,7 @@ namespace PersonalizedHealthcareTrackingSystemFinal.ViewModels
             {
                 var PatientMainWindow = _serviceProvider.GetRequiredService<Views.PatientView.PatientMainWindow>();
                 PatientMainWindow.Show();
-                // Close the login window
-                Application.Current.Windows[0]?.Close();
+                Application.Current.Windows.OfType<LoginWindow>().FirstOrDefault()?.Close();
             }
             catch (Exception ex)
             {
@@ -128,8 +132,7 @@ namespace PersonalizedHealthcareTrackingSystemFinal.ViewModels
             {
                 var doctorMainWindow = _serviceProvider.GetRequiredService<Views.DoctorView.DoctorMainWindow>();
                 doctorMainWindow.Show();
-                // Close the login window
-                Application.Current.Windows[0]?.Close();
+                Application.Current.Windows.OfType<LoginWindow>().FirstOrDefault()?.Close();
             }
             catch (Exception ex)
             {
@@ -162,8 +165,7 @@ namespace PersonalizedHealthcareTrackingSystemFinal.ViewModels
         {
             try
             {
-                var signUpViewModel = new SignUpWindowViewModel(_serviceProvider);
-                var signUpWindow = new Views.SignUpWindow(signUpViewModel);
+                var signUpWindow = _serviceProvider.GetRequiredService<SignUpWindow>();
                 signUpWindow.Show();
                 currentWindow.Close();
             }

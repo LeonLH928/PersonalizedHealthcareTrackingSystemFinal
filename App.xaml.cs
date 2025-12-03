@@ -2,6 +2,7 @@
 using PersonalizedHealthcareTrackingSystemFinal.Configs;
 using PersonalizedHealthcareTrackingSystemFinal.DI;
 using PersonalizedHealthcareTrackingSystemFinal.Views;
+using Supabase;
 using System.Configuration;
 using System.Data;
 using System.Threading.Tasks;
@@ -22,9 +23,6 @@ namespace PersonalizedHealthcareTrackingSystemFinal
             ServiceCollection services = new();
             services.RegisterDependency();
             ServiceProvider = services.BuildServiceProvider();
-
-            var Database = ServiceProvider.GetRequiredService<DatabaseConfig>();
-            await Database.InitializeAsync();
 
             var IntroductionWindow = ServiceProvider.GetRequiredService<IntroductionWindow>();
             IntroductionWindow.Show();
