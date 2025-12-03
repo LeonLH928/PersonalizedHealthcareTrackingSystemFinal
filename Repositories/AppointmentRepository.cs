@@ -36,4 +36,13 @@ public class AppointmentRepository : IAppointmentRepository
                                     .Get();
         return response.Model ?? throw new Exception("No upcomings!");
     }
+    public async Task<IEnumerable<AppointmentModel>> GetAllAppointmentIDsByPatientIDAsync(string PatientID)
+    {
+        var response = await _client.From<AppointmentModel>()
+                            .Select("AppointmentID")
+                            .Filter("PatientID", Supabase.Postgrest.Constants.Operator.Equals, PatientID)
+                            .Get();
+
+        return response.Models;
+    }
 }

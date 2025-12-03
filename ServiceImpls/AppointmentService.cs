@@ -13,7 +13,6 @@ public class AppointmentService : IAppointmentService
         _appointmentRepository = appointmentRepository;
         _currentUserStoreRepository = currentUserStoreRepository;
     }
-    // Doctors' Business logic
     public async Task<IEnumerable<AppointmentModel>> GetAllAppointmentsByDoctorIDAsync()
     {
         var Doctor = await _currentUserStoreRepository.GetDoctorFromUserAsync();

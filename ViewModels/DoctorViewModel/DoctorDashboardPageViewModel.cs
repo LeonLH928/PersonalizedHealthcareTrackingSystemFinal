@@ -1,9 +1,11 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 using LiveChartsCore;
 using LiveChartsCore.SkiaSharpView;
 using Microsoft.Extensions.DependencyInjection;
 using PersonalizedHealthcareTrackingSystemFinal.Interfaces;
+using PersonalizedHealthcareTrackingSystemFinal.Messages;
 using PersonalizedHealthcareTrackingSystemFinal.Services;
 using PersonalizedHealthcareTrackingSystemFinal.SupabaseModels;
 using PersonalizedHealthcareTrackingSystemFinal.Views.DoctorView;
@@ -33,6 +35,8 @@ public partial class DoctorDashboardPageViewModel : ObservableObject
     }
     [ObservableProperty]
     private bool isLoading = true;
+    [ObservableProperty]
+    private PatientModel nearestPatient = null!;
     [ObservableProperty]
     private int totalAppointments;
     [ObservableProperty]
@@ -70,7 +74,7 @@ public partial class DoctorDashboardPageViewModel : ObservableObject
         {
             var Appointments = await _appointmentService.GetAllAppointmentsByDoctorIDAsync();
             var NearestUpcoming = await _appointmentService.GetNearestAppointmentByDoctorIDAsync();
-            var NearestPatient = await _patientService.GetPatientByIDAsync(NearestUpcoming.PatientID);
+            NearestPatient = await _patientService.GetPatientByIDAsync(NearestUpcoming.PatientID);
             var NearestPatientUser = await _userService.GetUserByIDAsync(NearestPatient.UserID);
 
             TotalAppointments = Appointments.Count();
@@ -87,6 +91,11 @@ public partial class DoctorDashboardPageViewModel : ObservableObject
             ChiefComplaint = NearestUpcoming.ChiefComplaint;
             AppointmentDateTime = NearestUpcoming.AppointmentDateTime;
             VisitNumber = NearestUpcoming.VisitNumber;
+        }
+        catch (Exception e)
+        {
+            IsLoading = false;
+            MessageBox.Show($"An error occured: {e.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
         }
         finally
         {
@@ -134,6 +143,7 @@ public partial class DoctorDashboardPageViewModel : ObservableObject
         {
             var Popup = _serviceProvider.GetRequiredService<DoctorConsultationWindow>();
             Popup.Show();
+            WeakReferenceMessenger.Default.Send(new SelectedPatientIDMessage(NearestPatient.PatientID));
         }
     }
     protected override void OnPropertyChanged(PropertyChangedEventArgs e)
