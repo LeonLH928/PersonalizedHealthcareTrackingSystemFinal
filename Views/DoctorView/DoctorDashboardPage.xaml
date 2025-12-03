@@ -14,7 +14,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-
+                
         <Border Style="{StaticResource PageHeaderBorderStyle}" 
                 Padding="32,16">
             <Grid>
@@ -575,5 +575,16 @@
                 </Grid>
             </Border>
         </ScrollViewer>
+
+        <Grid Visibility="{Binding IsLoading, Converter={StaticResource BoolToVisibilityConverter}}"
+              Grid.RowSpan="2" 
+              Background="#80FFFFFF" 
+              d:IsHidden="False">
+            <fa:ImageAwesome 
+                Icon="Spinner" 
+                Spin="True" 
+                Height="48" 
+                Width="48" />
+        </Grid>
     </Grid>
 </Page>

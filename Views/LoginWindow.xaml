@@ -152,18 +152,18 @@
             </StackPanel>
 
             <Grid Background="#AA000000" 
-      Visibility="{Binding IsLoading, Converter={StaticResource BoolToVisibilityConverter}}">
+                  Visibility="{Binding IsLoading, Converter={StaticResource BoolToVisibilityConverter}}">
                 <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
                     <ProgressBar IsIndeterminate="True" 
-                     Width="100" 
-                     Height="5" 
-                     Foreground="{StaticResource PrimaryTeal}"
-                     Background="#333"
-                     Margin="0,0,0,15"/>
+                                 Width="100" 
+                                 Height="5" 
+                                 Foreground="{StaticResource PrimaryTeal}"
+                                 Background="#333"
+                                 Margin="0,0,0,15"/>
                     <TextBlock Text="Logging in..." 
-                   Foreground="White" 
-                   FontSize="14"
-                   HorizontalAlignment="Center"/>
+                               Foreground="White" 
+                               FontSize="14"
+                               HorizontalAlignment="Center"/>
                 </StackPanel>
             </Grid>
         </Grid>

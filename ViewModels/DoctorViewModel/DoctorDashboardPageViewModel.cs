@@ -8,6 +8,7 @@ using PersonalizedHealthcareTrackingSystemFinal.Services;
 using PersonalizedHealthcareTrackingSystemFinal.SupabaseModels;
 using PersonalizedHealthcareTrackingSystemFinal.Views.DoctorView;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Windows;
 
@@ -24,7 +25,6 @@ public partial class DoctorDashboardPageViewModel : ObservableObject
                                          IPatientService patientService,
                                          IUserService userService)
     {
-        InitializeChart();
         _serviceProvider = serviceProvider;
         _appointmentService = appointmentService;
         _patientService = patientService;
@@ -32,14 +32,20 @@ public partial class DoctorDashboardPageViewModel : ObservableObject
         _ = LoadDataAsync();
     }
     [ObservableProperty]
+    private bool isLoading = true;
+    [ObservableProperty]
     private int totalAppointments;
     [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(Data))]
     private int upcomings;
     [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(Data))]
     private int todayFinisheds;
     [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(Data))]
     private int overdues;
     [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(Data))]
     private int cancelleds;
     [ObservableProperty]
     private int age;
@@ -59,24 +65,33 @@ public partial class DoctorDashboardPageViewModel : ObservableObject
     private int visitNumber;
     public async Task LoadDataAsync()
     {
-        var Appointments = await _appointmentService.GetAllAppointmentsByDoctorIDAsync();
-        TotalAppointments = Appointments.Count();
-        Upcomings = Appointments.Count(a => a.Status == Models.StatusAppointment.Scheduled);
-        TodayFinisheds = Appointments.Count(a => a.Status == Models.StatusAppointment.Completed);
-        Overdues = Appointments.Count(a => a.Status == Models.StatusAppointment.No_show);
-        Cancelleds = Appointments.Count(a => a.Status == Models.StatusAppointment.Cancelled);
-        var NearestUpcoming = await _appointmentService.GetNearestAppointmentByDoctorIDAsync();
-        var NearestPatient = await _patientService.GetPatientByIDAsync(NearestUpcoming.PatientID);
-        var NearestPatientUser = await _userService.GetUserByIDAsync(NearestPatient.UserID);
-        Age = DateTime.Now.Year - NearestPatient.DateOfBirth.Year;
-        Gender = NearestPatient.Gender.ToString();
-        foreach (var c in NearestPatientUser.FirstName.Split())
-            DefaultAvatar += c[0];
-        Priority = NearestUpcoming.Status.ToString();
-        FullName = NearestPatientUser.FirstName + " " + NearestPatientUser.LastName;
-        ChiefComplaint = NearestUpcoming.ChiefComplaint;
-        AppointmentDateTime = NearestUpcoming.AppointmentDateTime;
-        VisitNumber = NearestUpcoming.VisitNumber;
+        IsLoading = true;
+        try
+        {
+            var Appointments = await _appointmentService.GetAllAppointmentsByDoctorIDAsync();
+            var NearestUpcoming = await _appointmentService.GetNearestAppointmentByDoctorIDAsync();
+            var NearestPatient = await _patientService.GetPatientByIDAsync(NearestUpcoming.PatientID);
+            var NearestPatientUser = await _userService.GetUserByIDAsync(NearestPatient.UserID);
+
+            TotalAppointments = Appointments.Count();
+            Upcomings = Appointments.Count(a => a.Status == Models.StatusAppointment.Scheduled);
+            TodayFinisheds = Appointments.Count(a => a.Status == Models.StatusAppointment.Completed);
+            Overdues = Appointments.Count(a => a.Status == Models.StatusAppointment.No_show);
+            Cancelleds = Appointments.Count(a => a.Status == Models.StatusAppointment.Cancelled);
+            Age = DateTime.Now.Year - NearestPatient.DateOfBirth.Year;
+            Gender = NearestPatient.Gender.ToString();
+            foreach (var c in NearestPatientUser.FirstName.Split())
+                DefaultAvatar += c[0];
+            Priority = NearestUpcoming.Status.ToString();
+            FullName = NearestPatientUser.FirstName + " " + NearestPatientUser.LastName;
+            ChiefComplaint = NearestUpcoming.ChiefComplaint;
+            AppointmentDateTime = NearestUpcoming.AppointmentDateTime;
+            VisitNumber = NearestUpcoming.VisitNumber;
+        }
+        finally
+        {
+            IsLoading = false;
+        }
     }
     #region Doghnut Chart
     [ObservableProperty]
@@ -84,25 +99,25 @@ public partial class DoctorDashboardPageViewModel : ObservableObject
     public void InitializeChart()
     {
         Data = [
-            new PieSeries<double>
+            new PieSeries<int>
             {
                 Name = "Finished",
                 Values = [ TodayFinisheds ],
                 MaxRadialColumnWidth = 60
             },
-            new PieSeries<double>
+            new PieSeries<int>
             {
                 Name = "Upcoming",
                 Values = [ Upcomings ],
                 MaxRadialColumnWidth = 60
             },
-            new PieSeries<double>
+            new PieSeries<int>
             {
                 Name = "Not show up",
                 Values = [ Overdues ],
                 MaxRadialColumnWidth = 60
             },
-            new PieSeries<double>
+            new PieSeries<int>
             {
                 Name = "Cancelled",
                 Values = [ Cancelleds ],
@@ -120,5 +135,15 @@ public partial class DoctorDashboardPageViewModel : ObservableObject
             var Popup = _serviceProvider.GetRequiredService<DoctorConsultationWindow>();
             Popup.Show();
         }
+    }
+    protected override void OnPropertyChanged(PropertyChangedEventArgs e)
+    {
+        base.OnPropertyChanged(e);
+
+        if (e.PropertyName == nameof(TodayFinisheds) ||
+            e.PropertyName == nameof(Upcomings) ||
+            e.PropertyName == nameof(Overdues) ||
+            e.PropertyName == nameof(Cancelleds))
+            InitializeChart();
     }
 }
