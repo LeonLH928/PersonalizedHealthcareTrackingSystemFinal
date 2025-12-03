@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using PersonalizedHealthcareTrackingSystemFinal.Data;
@@ -11,9 +12,11 @@ using PersonalizedHealthcareTrackingSystemFinal.Data;
 namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20251202092312_SeedData2")]
+    partial class SeedData2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -71,7 +74,7 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                         new
                         {
                             AppointmentID = "appt-01",
-                            AppointmentDateTime = new DateTime(2025, 12, 2, 14, 35, 18, 456, DateTimeKind.Utc).AddTicks(9525),
+                            AppointmentDateTime = new DateTime(2025, 12, 1, 18, 23, 12, 235, DateTimeKind.Utc).AddTicks(7076),
                             ChiefComplaint = "Sore throat and mild fever lasting 2 days.",
                             DoctorID = "doc-01",
                             Location = "Room 101",
@@ -84,7 +87,7 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                         new
                         {
                             AppointmentID = "appt-02",
-                            AppointmentDateTime = new DateTime(2025, 12, 1, 19, 35, 18, 456, DateTimeKind.Utc).AddTicks(9537),
+                            AppointmentDateTime = new DateTime(2025, 11, 30, 23, 23, 12, 235, DateTimeKind.Utc).AddTicks(7087),
                             ChiefComplaint = "Regular checkup for hypertension.",
                             DoctorID = "doc-02",
                             Location = "Room 205",
@@ -97,7 +100,7 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                         new
                         {
                             AppointmentID = "appt-03",
-                            AppointmentDateTime = new DateTime(2025, 11, 28, 15, 35, 18, 456, DateTimeKind.Utc).AddTicks(9540),
+                            AppointmentDateTime = new DateTime(2025, 11, 27, 19, 23, 12, 235, DateTimeKind.Utc).AddTicks(7091),
                             ChiefComplaint = "Chest pain after exercise.",
                             DoctorID = "doc-02",
                             Location = "Room 205",
@@ -110,7 +113,7 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                         new
                         {
                             AppointmentID = "appt-04",
-                            AppointmentDateTime = new DateTime(2025, 12, 4, 14, 35, 18, 456, DateTimeKind.Utc).AddTicks(9543),
+                            AppointmentDateTime = new DateTime(2025, 12, 3, 18, 23, 12, 235, DateTimeKind.Utc).AddTicks(7094),
                             ChiefComplaint = "Vaccination schedule.",
                             DoctorID = "doc-01",
                             Location = "Room 102",
@@ -123,7 +126,7 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                         new
                         {
                             AppointmentID = "appt-05",
-                            AppointmentDateTime = new DateTime(2025, 11, 23, 19, 35, 18, 456, DateTimeKind.Utc).AddTicks(9546),
+                            AppointmentDateTime = new DateTime(2025, 11, 22, 23, 23, 12, 235, DateTimeKind.Utc).AddTicks(7096),
                             ChiefComplaint = "Unexplained leg pain.",
                             DoctorID = "doc-03",
                             Location = "Room 303",
@@ -136,7 +139,7 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                         new
                         {
                             AppointmentID = "appt-06",
-                            AppointmentDateTime = new DateTime(2025, 12, 3, 7, 35, 18, 456, DateTimeKind.Utc).AddTicks(9549),
+                            AppointmentDateTime = new DateTime(2025, 12, 2, 11, 23, 12, 235, DateTimeKind.Utc).AddTicks(7099),
                             ChiefComplaint = "Follow up on surgical scar.",
                             DoctorID = "doc-04",
                             Location = "Room 401",
@@ -365,64 +368,6 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                     b.HasIndex("DoctorID");
 
                     b.ToTable("DoctorSchedules");
-
-                    b.HasData(
-                        new
-                        {
-                            ScheduleID = "sch-01",
-                            DoctorID = "doc-01",
-                            EndTime = new DateTime(2025, 12, 2, 17, 0, 0, 0, DateTimeKind.Utc),
-                            StartTime = new DateTime(2025, 12, 2, 8, 0, 0, 0, DateTimeKind.Utc)
-                        },
-                        new
-                        {
-                            ScheduleID = "sch-02",
-                            DoctorID = "doc-01",
-                            EndTime = new DateTime(2025, 12, 4, 17, 0, 0, 0, DateTimeKind.Utc),
-                            StartTime = new DateTime(2025, 12, 4, 8, 0, 0, 0, DateTimeKind.Utc)
-                        },
-                        new
-                        {
-                            ScheduleID = "sch-03",
-                            DoctorID = "doc-02",
-                            EndTime = new DateTime(2025, 12, 1, 21, 0, 0, 0, DateTimeKind.Utc),
-                            StartTime = new DateTime(2025, 12, 1, 13, 0, 0, 0, DateTimeKind.Utc)
-                        },
-                        new
-                        {
-                            ScheduleID = "sch-04",
-                            DoctorID = "doc-02",
-                            EndTime = new DateTime(2025, 11, 28, 16, 0, 0, 0, DateTimeKind.Utc),
-                            StartTime = new DateTime(2025, 11, 28, 8, 0, 0, 0, DateTimeKind.Utc)
-                        },
-                        new
-                        {
-                            ScheduleID = "sch-05",
-                            DoctorID = "doc-03",
-                            EndTime = new DateTime(2025, 11, 23, 18, 0, 0, 0, DateTimeKind.Utc),
-                            StartTime = new DateTime(2025, 11, 23, 9, 0, 0, 0, DateTimeKind.Utc)
-                        },
-                        new
-                        {
-                            ScheduleID = "sch-06",
-                            DoctorID = "doc-04",
-                            EndTime = new DateTime(2025, 12, 3, 19, 0, 0, 0, DateTimeKind.Utc),
-                            StartTime = new DateTime(2025, 12, 3, 7, 0, 0, 0, DateTimeKind.Utc)
-                        },
-                        new
-                        {
-                            ScheduleID = "sch-07",
-                            DoctorID = "doc-03",
-                            EndTime = new DateTime(2025, 12, 5, 17, 0, 0, 0, DateTimeKind.Utc),
-                            StartTime = new DateTime(2025, 12, 5, 9, 0, 0, 0, DateTimeKind.Utc)
-                        },
-                        new
-                        {
-                            ScheduleID = "sch-08",
-                            DoctorID = "doc-04",
-                            EndTime = new DateTime(2025, 12, 6, 16, 0, 0, 0, DateTimeKind.Utc),
-                            StartTime = new DateTime(2025, 12, 6, 8, 0, 0, 0, DateTimeKind.Utc)
-                        });
                 });
 
             modelBuilder.Entity("PersonalizedHealthcareTrackingSystemFinal.Models.MedicalRecordModel", b =>
@@ -466,9 +411,9 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                             AppointmentID = "appt-01",
                             Diagnosis = "Acute Pharyngitis (Strep Throat)",
                             DoctorNotes = "Patient advised to finish full course of medication.",
-                            NextVisitDate = new DateTime(2025, 12, 10, 5, 35, 18, 456, DateTimeKind.Utc).AddTicks(9611),
+                            NextVisitDate = new DateTime(2025, 12, 9, 9, 23, 12, 235, DateTimeKind.Utc).AddTicks(7138),
                             TreatmentPlan = "Antibiotics course and rest.",
-                            VisitTime = new DateTime(2025, 12, 2, 14, 50, 18, 456, DateTimeKind.Utc).AddTicks(9606)
+                            VisitTime = new DateTime(2025, 12, 1, 18, 38, 12, 235, DateTimeKind.Utc).AddTicks(7134)
                         },
                         new
                         {
@@ -476,9 +421,9 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                             AppointmentID = "appt-02",
                             Diagnosis = "Essential Hypertension",
                             DoctorNotes = "BP slightly elevated. Monitoring required.",
-                            NextVisitDate = new DateTime(2026, 1, 3, 5, 35, 18, 456, DateTimeKind.Utc).AddTicks(9615),
+                            NextVisitDate = new DateTime(2026, 1, 2, 9, 23, 12, 235, DateTimeKind.Utc).AddTicks(7142),
                             TreatmentPlan = "Lifestyle modification and daily medication.",
-                            VisitTime = new DateTime(2025, 12, 1, 20, 5, 18, 456, DateTimeKind.Utc).AddTicks(9614)
+                            VisitTime = new DateTime(2025, 11, 30, 23, 53, 12, 235, DateTimeKind.Utc).AddTicks(7140)
                         },
                         new
                         {
@@ -486,9 +431,9 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                             AppointmentID = "appt-03",
                             Diagnosis = "Stable Angina",
                             DoctorNotes = "Patient needs to monitor heart rate.",
-                            NextVisitDate = new DateTime(2025, 12, 17, 5, 35, 18, 456, DateTimeKind.Utc).AddTicks(9625),
+                            NextVisitDate = new DateTime(2025, 12, 16, 9, 23, 12, 235, DateTimeKind.Utc).AddTicks(7166),
                             TreatmentPlan = "Prescribed statins and nitroglycerin. Cardiac stress test ordered.",
-                            VisitTime = new DateTime(2025, 11, 28, 16, 5, 18, 456, DateTimeKind.Utc).AddTicks(9624)
+                            VisitTime = new DateTime(2025, 11, 27, 19, 53, 12, 235, DateTimeKind.Utc).AddTicks(7164)
                         },
                         new
                         {
@@ -496,15 +441,15 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                             AppointmentID = "appt-05",
                             Diagnosis = "Deep Vein Thrombosis (DVT)",
                             DoctorNotes = "Confirmed via Ultrasound.",
-                            NextVisitDate = new DateTime(2025, 12, 6, 5, 35, 18, 456, DateTimeKind.Utc).AddTicks(9629),
+                            NextVisitDate = new DateTime(2025, 12, 5, 9, 23, 12, 235, DateTimeKind.Utc).AddTicks(7169),
                             TreatmentPlan = "Anticoagulant therapy immediately.",
-                            VisitTime = new DateTime(2025, 11, 23, 20, 35, 18, 456, DateTimeKind.Utc).AddTicks(9628)
+                            VisitTime = new DateTime(2025, 11, 23, 0, 23, 12, 235, DateTimeKind.Utc).AddTicks(7168)
                         });
                 });
 
             modelBuilder.Entity("PersonalizedHealthcareTrackingSystemFinal.Models.MedicationInteractionModel", b =>
                 {
-                    b.Property<string>("InteractionID")
+                    b.Property<string>("InteractionId")
                         .HasColumnType("text");
 
                     b.Property<string>("ClinicalEffects")
@@ -519,56 +464,24 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("Medication1ID")
+                    b.Property<string>("MedicationID1")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("Medication2ID")
+                    b.Property<string>("MedicationID2")
                         .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<int>("Severity")
                         .HasColumnType("integer");
 
-                    b.HasKey("InteractionID");
+                    b.HasKey("InteractionId");
 
-                    b.HasIndex("Medication1ID");
+                    b.HasIndex("MedicationID1");
 
-                    b.HasIndex("Medication2ID");
+                    b.HasIndex("MedicationID2");
 
                     b.ToTable("MedicationInteractions");
-
-                    b.HasData(
-                        new
-                        {
-                            InteractionID = "int-01",
-                            ClinicalEffects = "NSAIDs may impair renal function, increasing the risk of metformin-associated lactic acidosis.",
-                            Description = "Potential reduction in renal function.",
-                            Management = "Monitor renal function periodically.",
-                            Medication1ID = "med-ibu-400",
-                            Medication2ID = "med-met-850",
-                            Severity = 1
-                        },
-                        new
-                        {
-                            InteractionID = "int-02",
-                            ClinicalEffects = "Omeprazole may slightly increase the serum concentration of Atorvastatin.",
-                            Description = "Altered absorption.",
-                            Management = "Monitor for statin-related side effects like muscle pain.",
-                            Medication1ID = "med-ator-20",
-                            Medication2ID = "med-omep-20",
-                            Severity = 0
-                        },
-                        new
-                        {
-                            InteractionID = "int-03",
-                            ClinicalEffects = "NSAIDs may reduce the cardiovascular protection of statins in high risk patients.",
-                            Description = "Potential reduced antihypertensive effect.",
-                            Management = "Use lowest effective dose of NSAID.",
-                            Medication1ID = "med-ibu-400",
-                            Medication2ID = "med-ator-20",
-                            Severity = 0
-                        });
                 });
 
             modelBuilder.Entity("PersonalizedHealthcareTrackingSystemFinal.Models.MedicationModel", b =>
@@ -740,6 +653,7 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("RelatedPrescriptionID")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("LogID");
@@ -749,69 +663,6 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                     b.HasIndex("RelatedPrescriptionID");
 
                     b.ToTable("MedicationStockLogs");
-
-                    b.HasData(
-                        new
-                        {
-                            LogID = "log-01",
-                            CreatedAt = new DateTime(2025, 11, 3, 5, 35, 18, 456, DateTimeKind.Utc).AddTicks(9974),
-                            MedicationID = "med-amox-500",
-                            QuantityChange = 1000,
-                            Reason = "Initial Stock Import"
-                        },
-                        new
-                        {
-                            LogID = "log-02",
-                            CreatedAt = new DateTime(2025, 11, 3, 5, 35, 18, 456, DateTimeKind.Utc).AddTicks(9978),
-                            MedicationID = "med-ibu-400",
-                            QuantityChange = 500,
-                            Reason = "Initial Stock Import"
-                        },
-                        new
-                        {
-                            LogID = "log-03",
-                            CreatedAt = new DateTime(2025, 12, 2, 15, 20, 18, 456, DateTimeKind.Utc).AddTicks(9980),
-                            MedicationID = "med-amox-500",
-                            QuantityChange = -21,
-                            Reason = "Dispensed to Patient",
-                            RelatedPrescriptionID = "presc-01"
-                        },
-                        new
-                        {
-                            LogID = "log-04",
-                            CreatedAt = new DateTime(2025, 12, 2, 15, 20, 18, 456, DateTimeKind.Utc).AddTicks(9982),
-                            MedicationID = "med-ibu-400",
-                            QuantityChange = -10,
-                            Reason = "Dispensed to Patient",
-                            RelatedPrescriptionID = "presc-01"
-                        },
-                        new
-                        {
-                            LogID = "log-05",
-                            CreatedAt = new DateTime(2025, 12, 1, 21, 20, 18, 456, DateTimeKind.Utc).AddTicks(9985),
-                            MedicationID = "med-met-850",
-                            QuantityChange = -60,
-                            Reason = "Dispensed to Patient",
-                            RelatedPrescriptionID = "presc-02"
-                        },
-                        new
-                        {
-                            LogID = "log-06",
-                            CreatedAt = new DateTime(2025, 11, 28, 17, 5, 18, 456, DateTimeKind.Utc).AddTicks(9987),
-                            MedicationID = "med-ator-20",
-                            QuantityChange = -30,
-                            Reason = "Dispensed to Patient",
-                            RelatedPrescriptionID = "presc-03"
-                        },
-                        new
-                        {
-                            LogID = "log-07",
-                            CreatedAt = new DateTime(2025, 11, 28, 17, 5, 18, 456, DateTimeKind.Utc).AddTicks(9989),
-                            MedicationID = "med-omep-20",
-                            QuantityChange = -14,
-                            Reason = "Dispensed to Patient",
-                            RelatedPrescriptionID = "presc-03"
-                        });
                 });
 
             modelBuilder.Entity("PersonalizedHealthcareTrackingSystemFinal.Models.PatientModel", b =>
@@ -1086,44 +937,44 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                         new
                         {
                             PrescriptionID = "presc-01",
-                            DispensedAt = new DateTime(2025, 12, 3, 5, 35, 18, 456, DateTimeKind.Utc).AddTicks(9746),
-                            PrescriptionDateTime = new DateTime(2025, 12, 2, 15, 5, 18, 456, DateTimeKind.Utc).AddTicks(9741),
+                            DispensedAt = new DateTime(2025, 12, 2, 9, 23, 12, 235, DateTimeKind.Utc).AddTicks(7252),
+                            PrescriptionDateTime = new DateTime(2025, 12, 1, 18, 53, 12, 235, DateTimeKind.Utc).AddTicks(7244),
                             Priority = 0,
                             RecordID = "rec-01",
                             Status = 0,
-                            VerifiedAt = new DateTime(2025, 12, 3, 5, 35, 18, 456, DateTimeKind.Utc).AddTicks(9744)
+                            VerifiedAt = new DateTime(2025, 12, 2, 9, 23, 12, 235, DateTimeKind.Utc).AddTicks(7250)
                         },
                         new
                         {
                             PrescriptionID = "presc-02",
-                            DispensedAt = new DateTime(2025, 12, 1, 21, 20, 18, 456, DateTimeKind.Utc).AddTicks(9752),
+                            DispensedAt = new DateTime(2025, 12, 1, 1, 8, 12, 235, DateTimeKind.Utc).AddTicks(7257),
                             PharmacistID = "phar-01",
-                            PrescriptionDateTime = new DateTime(2025, 12, 1, 20, 35, 18, 456, DateTimeKind.Utc).AddTicks(9749),
+                            PrescriptionDateTime = new DateTime(2025, 12, 1, 0, 23, 12, 235, DateTimeKind.Utc).AddTicks(7255),
                             Priority = 0,
                             RecordID = "rec-02",
                             Status = 1,
-                            VerifiedAt = new DateTime(2025, 12, 1, 21, 5, 18, 456, DateTimeKind.Utc).AddTicks(9751)
+                            VerifiedAt = new DateTime(2025, 12, 1, 0, 53, 12, 235, DateTimeKind.Utc).AddTicks(7256)
                         },
                         new
                         {
                             PrescriptionID = "presc-03",
-                            DispensedAt = new DateTime(2025, 11, 28, 17, 5, 18, 456, DateTimeKind.Utc).AddTicks(9757),
+                            DispensedAt = new DateTime(2025, 11, 27, 20, 53, 12, 235, DateTimeKind.Utc).AddTicks(7262),
                             PharmacistID = "phar-02",
-                            PrescriptionDateTime = new DateTime(2025, 11, 28, 16, 35, 18, 456, DateTimeKind.Utc).AddTicks(9755),
+                            PrescriptionDateTime = new DateTime(2025, 11, 27, 20, 23, 12, 235, DateTimeKind.Utc).AddTicks(7260),
                             Priority = 1,
                             RecordID = "rec-03",
                             Status = 1,
-                            VerifiedAt = new DateTime(2025, 11, 28, 16, 50, 18, 456, DateTimeKind.Utc).AddTicks(9756)
+                            VerifiedAt = new DateTime(2025, 11, 27, 20, 38, 12, 235, DateTimeKind.Utc).AddTicks(7261)
                         },
                         new
                         {
                             PrescriptionID = "presc-04",
-                            DispensedAt = new DateTime(2025, 12, 3, 5, 35, 18, 456, DateTimeKind.Utc).AddTicks(9762),
-                            PrescriptionDateTime = new DateTime(2025, 11, 23, 21, 5, 18, 456, DateTimeKind.Utc).AddTicks(9760),
+                            DispensedAt = new DateTime(2025, 12, 2, 9, 23, 12, 235, DateTimeKind.Utc).AddTicks(7267),
+                            PrescriptionDateTime = new DateTime(2025, 11, 23, 0, 53, 12, 235, DateTimeKind.Utc).AddTicks(7265),
                             Priority = 2,
                             RecordID = "rec-04",
                             Status = 3,
-                            VerifiedAt = new DateTime(2025, 11, 23, 21, 35, 18, 456, DateTimeKind.Utc).AddTicks(9761)
+                            VerifiedAt = new DateTime(2025, 11, 23, 1, 23, 12, 235, DateTimeKind.Utc).AddTicks(7266)
                         });
                 });
 
@@ -1362,13 +1213,13 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                 {
                     b.HasOne("PersonalizedHealthcareTrackingSystemFinal.Models.MedicationModel", "Medication1")
                         .WithMany("MedicationInteractions1")
-                        .HasForeignKey("Medication1ID")
+                        .HasForeignKey("MedicationID1")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("PersonalizedHealthcareTrackingSystemFinal.Models.MedicationModel", "Medication2")
                         .WithMany("MedicationInteractions2")
-                        .HasForeignKey("Medication2ID")
+                        .HasForeignKey("MedicationID2")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
@@ -1388,7 +1239,8 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                     b.HasOne("PersonalizedHealthcareTrackingSystemFinal.Models.PrescriptionModel", "Prescription")
                         .WithMany("MedicationStockLogs")
                         .HasForeignKey("RelatedPrescriptionID")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.Navigation("Medication");
 

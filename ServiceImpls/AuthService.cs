@@ -69,7 +69,7 @@ public class AuthService : IAuthService
             PhoneNumber = phoneNumber,
             PasswordHash = password,
             Role = role,
-            IsActive = true
+            IsActive = false
         };
         var insertedUser = await _userRepository.AddUserAsync(newUser);
 

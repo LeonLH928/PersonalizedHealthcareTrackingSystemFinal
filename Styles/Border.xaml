@@ -1,5 +1,9 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:converters="clr-namespace:PersonalizedHealthcareTrackingSystemFinal.Helpers">
+    
+    <converters:GreaterThanOneToVisibilityConverter x:Key="GreaterThanOneToVisibilityConverter"/>
+    
     <!-- Page Header Border Style -->
     <Style x:Key="PageHeaderBorderStyle" TargetType="Border">
         <Setter Property="Background" Value="White"/>
@@ -206,7 +210,35 @@
     <Style x:Key="UrgentBorderStyle" TargetType="Border" BasedOn="{StaticResource BaseCustomBorderStyle}">
         <Setter Property="Background" Value="{StaticResource UrgentTagBorder}"/>
         <Setter Property="Background" Value="{StaticResource UrgentTagBorder}"/>
-        <Setter Property="BorderBrush" Value="#fecaca"/>
+        <Setter Property="BorderBrush" Value="{StaticResource UrgentTagBorderBrush}"/>
         <Setter Property="BorderThickness" Value="1"/>
     </Style>
+    
+    <!-- Priority Tag Border Style -->
+    <Style x:Key="PriorityTagBorderStyle" TargetType="Border" BasedOn="{StaticResource BaseCustomBorderStyle}">
+        <Setter Property="Background" Value="{StaticResource RoutineTagBorder}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource RoutineTagBorderBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding Priority}" Value="Urgent">
+                <Setter Property="Background" Value="{StaticResource UrgentTagBorder}"/>
+                <Setter Property="BorderBrush" Value="{StaticResource UrgentTagBorderBrush}"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Priority}" Value="Stat">
+                <Setter Property="Background" Value="{StaticResource StatTagBorder}"/>
+                <Setter Property="BorderBrush" Value="{StaticResource StatTagBorderBrush}"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- Follow up Border Style-->
+    <Style x:Key="FollowUpBorderStyle" TargetType="Border" BasedOn="{StaticResource SecondaryTextBorderStyle}">
+        <Setter Property="Visibility" Value="Collapsed"/>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding VisitNumber, Converter={StaticResource GreaterThanOneToVisibilityConverter}}" Value="True">
+                <Setter Property="Visibility" Value="Visible"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+    
 </ResourceDictionary>

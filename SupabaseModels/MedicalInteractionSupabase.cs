@@ -8,8 +8,8 @@ namespace PersonalizedHealthcareTrackingSystemFinal.SupabaseModels;
 public class MedicationInteractionModel : BaseModel
 {
     [PrimaryKey]
-    [Column("InteractionId")]
-    public string InteractionId { get; set; } = "";
+    [Column("InteractionID")]
+    public string InteractionID { get; set; } = "";
 
     [Column("Severity")]
     public Severity Severity { get; set; }
@@ -23,9 +23,9 @@ public class MedicationInteractionModel : BaseModel
     [Column("Management")]
     public string Management { get; set; } = "";
 
-    [Column("MedicationID1")]
-    public string MedicationID1 { get; set; } = "";
+    [Column("Medication1ID")]
+    public string Medication1ID { get; set; } = "";
 
-    [Column("MedicationID2")]
-    public string MedicationID2 { get; set; } = "";
+    [Column("Medication2ID")]
+    public string Medication2ID { get; set; } = "";
 }

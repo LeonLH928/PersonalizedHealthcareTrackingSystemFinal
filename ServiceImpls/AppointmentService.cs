@@ -1,17 +1,27 @@
 ﻿using PersonalizedHealthcareTrackingSystemFinal.Interfaces;
-using PersonalizedHealthcareTrackingSystemFinal.Models;
+using PersonalizedHealthcareTrackingSystemFinal.SupabaseModels;
 using PersonalizedHealthcareTrackingSystemFinal.Services;
 
 namespace PersonalizedHealthcareTrackingSystemFinal.ServiceImpls;
 public class AppointmentService : IAppointmentService
 {
-    public readonly IAppointmentRepository _appointmentRepository;
-    public AppointmentService(IAppointmentRepository appointmentRepository)
+    private readonly ICurrentUserStoreRepository _currentUserStoreRepository;
+    private readonly IAppointmentRepository _appointmentRepository;
+    public AppointmentService(IAppointmentRepository appointmentRepository,
+                              ICurrentUserStoreRepository currentUserStoreRepository)
     {
         _appointmentRepository = appointmentRepository;
+        _currentUserStoreRepository = currentUserStoreRepository;
     }
-    public async Task<IEnumerable<AppointmentModel>> GetAllAppointmentsByDoctorID(string DoctorID)
+    // Doctors' Business logic
+    public async Task<IEnumerable<AppointmentModel>> GetAllAppointmentsByDoctorIDAsync()
     {
-        return await _appointmentRepository.GetAllAppointmentsByDoctorIDAsync(DoctorID);
+        var Doctor = await _currentUserStoreRepository.GetDoctorFromUserAsync();
+        return await _appointmentRepository.GetAllAppointmentsByDoctorIDAsync(Doctor.DoctorID);
+    }
+    public async Task<AppointmentModel> GetNearestAppointmentByDoctorIDAsync()
+    {
+        var Doctor = await _currentUserStoreRepository.GetDoctorFromUserAsync();
+        return await _appointmentRepository.GetNearestAppointmentByDoctorIDAsync(Doctor.DoctorID);
     }
 }

@@ -37,7 +37,18 @@ namespace PersonalizedHealthcareTrackingSystemFinal.ViewModels
             _serviceProvider = serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
             _authService = authService;
             _client = client;
-            _client.InitializeAsync();
+            InitializeSupabase();
+        }
+        private async void InitializeSupabase()
+        {
+            try
+            {
+                await _client.InitializeAsync();
+            }
+            catch (Exception ex)
+            {
+                ShowError($"Failed to initialize: {ex.Message}");
+            }
         }
 
 

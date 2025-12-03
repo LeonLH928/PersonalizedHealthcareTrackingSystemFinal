@@ -13,21 +13,21 @@ public class UserRepository : IUserRepository
     {
         _client = client;
     }
-    public async Task<UserModel> GetUserByIdAsync(string userId)
+    public async Task<UserModel> GetUserByIDAsync(string userId)
     {
         var result = await _client
-                .From<UserModel>()
-                .Where(x => x.UserID == userId)
-                .Single();
+                                .From<UserModel>()
+                                .Where(x => x.UserID == userId)
+                                .Single();
 
         return result ?? throw new Exception("User not existed");
     }
     public async Task<UserModel> GetUserByUsernameAsync(string username)
     {
         var result = await _client
-                .From<UserModel>()
-                .Where(x => x.Username == username)
-                .Single();
+                                .From<UserModel>()
+                                .Where(x => x.Username == username)
+                                .Single();
 
         return result ?? throw new Exception("User not existed");
     }
@@ -43,7 +43,6 @@ public class UserRepository : IUserRepository
     }
     public async Task<UserModel> AddUserAsync(UserModel NewUser)
     {
-        Debug.Write($"\n{NewUser.UserID}\n");
         var result = await _client.From<UserModel>().Insert(NewUser);
         return result.Models.FirstOrDefault() ?? throw new Exception("Add unsuccessfully. Please try again.");
     }

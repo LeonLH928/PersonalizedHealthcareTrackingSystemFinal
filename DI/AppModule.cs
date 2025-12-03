@@ -84,10 +84,13 @@ public static class AppModule
         services.AddScoped<IRoleRepository<SupabaseModels.DoctorModel>, RoleRepository<SupabaseModels.DoctorModel>>();
         services.AddScoped<IRoleRepository<SupabaseModels.PharmacistModel>, RoleRepository<SupabaseModels.PharmacistModel>>();
         services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IPatientRepository, PatientRepository>();
 
         // Register Services
         services.AddScoped<IAppointmentService, AppointmentService>();
         services.AddScoped<IAuthService, AuthService>();
+        services.AddScoped<IUserService, UserService>();
+        services.AddScoped<IPatientService, PatientService>();
 
         return services;
     }

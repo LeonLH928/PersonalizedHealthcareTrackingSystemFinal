@@ -129,20 +129,21 @@ public class DataContext : DbContext
            .HasMany(p => p.MedicationStockLogs)
            .WithOne(msl => msl.Prescription)
            .HasForeignKey(msl => msl.RelatedPrescriptionID)
+           .IsRequired(false)
            .OnDelete(DeleteBehavior.Restrict);
 
         // Medication 1 -> Interactions
         modelBuilder.Entity<MedicationModel>()
             .HasMany(m => m.MedicationInteractions1)
             .WithOne(mi1 => mi1.Medication1)
-            .HasForeignKey(mi1 => mi1.MedicationID1)
+            .HasForeignKey(mi1 => mi1.Medication1ID)
             .OnDelete(DeleteBehavior.Restrict);
 
         // Medication 2 -> Interactions
         modelBuilder.Entity<MedicationModel>()
             .HasMany(m => m.MedicationInteractions2)
             .WithOne(mi2 => mi2.Medication2)
-            .HasForeignKey(mi2 => mi2.MedicationID2)
+            .HasForeignKey(mi2 => mi2.Medication2ID)
             .OnDelete(DeleteBehavior.Restrict);
 
         DatabaseSeeder.Seed(modelBuilder);
