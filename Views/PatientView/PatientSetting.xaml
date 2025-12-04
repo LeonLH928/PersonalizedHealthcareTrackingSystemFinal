@@ -28,7 +28,6 @@
                 </Style>
             </TabControl.Resources>
 
-            <!-- TAB 1 -->
             <TabItem Style="{StaticResource SettingsTabItem}">
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
@@ -65,7 +64,6 @@
                             </StackPanel>
                         </Border>
 
-                        <!-- Personal info -->
                         <Border Style="{StaticResource CardStyle}">
                             <StackPanel>
                                 <TextBlock Text="Personal And Medical Information" Style="{StaticResource CardTitleStyle}"/>
@@ -127,7 +125,6 @@
                             </StackPanel>
                         </Border>
 
-                        <!-- Contact info -->
                         <Border Style="{StaticResource CardStyle}">
                             <StackPanel>
                                 <TextBlock Text="Contact Information" Style="{StaticResource CardTitleStyle}"/>
@@ -169,7 +166,6 @@
                 </ScrollViewer>
             </TabItem>
 
-            <!-- TAB 2: SECURITY -->
             <TabItem Style="{StaticResource SettingsTabItem}">
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
@@ -181,7 +177,6 @@
                 <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="0,0,32,32">
                     <StackPanel MaxWidth="800" HorizontalAlignment="Left">
 
-                        <!-- Change Password -->
                         <Border Style="{StaticResource CardStyle}">
                             <StackPanel>
                                 <TextBlock Text="Change Password" Style="{StaticResource CardTitleStyle}"/>
@@ -235,7 +230,6 @@
                             </StackPanel>
                         </Border>
 
-                        <!-- 2FA -->
                         <Border Style="{StaticResource CardStyle}">
                             <StackPanel>
                                 <Grid Margin="0,0,0,16">
@@ -251,7 +245,6 @@
                             </StackPanel>
                         </Border>
 
-                        <!-- Logged in devices -->
                         <Border Style="{StaticResource CardStyle}">
                             <StackPanel>
                                 <TextBlock Text="Active Devices" Style="{StaticResource CardTitleStyle}"/>
@@ -322,7 +315,6 @@
                             </StackPanel>
                         </Border>
 
-                        <!-- Danger Zone -->
                         <Border Background="{StaticResource DangerBg}" BorderBrush="#fca5a5" BorderThickness="1" CornerRadius="16" Padding="24">
                             <StackPanel>
                                 <TextBlock Text="Danger Zone" Style="{StaticResource CardTitleStyle}" Foreground="{StaticResource DangerColor}" Margin="0,0,0,12"/>
@@ -353,12 +345,10 @@
                                 </StackPanel>
                             </StackPanel>
                         </Border>
-
                     </StackPanel>
                 </ScrollViewer>
             </TabItem>
 
-            <!-- TAB 3 Notifications -->
             <TabItem Style="{StaticResource SettingsTabItem}">
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
