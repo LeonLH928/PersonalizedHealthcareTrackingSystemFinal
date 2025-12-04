@@ -36,4 +36,6 @@
     <SolidColorBrush x:Key="SuccessColor" Color="#22c55e"/>
     <SolidColorBrush x:Key="BorderColor" Color="#E2E8F0"/>
     <SolidColorBrush x:Key="DarkText" Color="#0f172a"/>
+    <SolidColorBrush x:Key="PrimaryDarkColor" Color="#0369a1"/>
+    <SolidColorBrush x:Key="DangerBg" Color="#fef2f2"/>
 </ResourceDictionary>
