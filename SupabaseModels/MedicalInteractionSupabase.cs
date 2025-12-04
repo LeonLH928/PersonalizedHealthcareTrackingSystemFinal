@@ -28,4 +28,10 @@ public class MedicationInteractionModel : BaseModel
 
     [Column("Medication2ID")]
     public string Medication2ID { get; set; } = "";
+
+    [Reference(typeof(MedicationModel))]
+    public MedicationModel Medication1 { get; set; } = null!;
+    
+    [Reference(typeof(MedicationModel))]
+    public MedicationModel Medication2 { get; set; } = null!;
 }
