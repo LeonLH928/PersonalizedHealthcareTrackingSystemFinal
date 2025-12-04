@@ -10,10 +10,6 @@
       FontFamily="Segoe UI"
       Background="#F1F5F9">
 
-    <Page.Resources>
-        
-    </Page.Resources>
-
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -21,7 +17,7 @@
         </Grid.RowDefinitions>
 
         <Border Grid.Row="0" Background="White" Padding="32" BorderBrush="{StaticResource BorderColor}" BorderThickness="0,0,0,1">
-            <TextBlock Text="Cài đặt tài khoản" FontSize="28" FontWeight="Bold" Foreground="{StaticResource DarkText}"/>
+            <TextBlock Text="Account Settings" FontSize="28" FontWeight="Bold" Foreground="{StaticResource DarkText}"/>
         </Border>
 
         <TabControl Grid.Row="1" TabStripPlacement="Left" Background="Transparent" BorderThickness="0" Margin="0,32,0,0" Padding="0">
@@ -32,20 +28,22 @@
                 </Style>
             </TabControl.Resources>
 
+            <!-- TAB 1 -->
             <TabItem Style="{StaticResource SettingsTabItem}">
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
                         <fa:ImageAwesome Icon="User" Width="16" Height="16" Margin="0,0,12,0" Foreground="{Binding RelativeSource={RelativeSource AncestorType=TabItem}, Path=Foreground}"/>
-                        <TextBlock Text="Thông tin chung"/>
+                        <TextBlock Text="General Information"/>
                     </StackPanel>
                 </TabItem.Header>
 
                 <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="0,0,32,32">
                     <StackPanel MaxWidth="800" HorizontalAlignment="Left">
 
+                        <!-- Avatar -->
                         <Border Style="{StaticResource CardStyle}">
                             <StackPanel>
-                                <TextBlock Text="Ảnh đại diện" Style="{StaticResource CardTitleStyle}"/>
+                                <TextBlock Text="Profile Picture" Style="{StaticResource CardTitleStyle}"/>
                                 <StackPanel Orientation="Horizontal">
                                     <Ellipse Width="80" Height="80" Stroke="White" StrokeThickness="3">
                                         <Ellipse.Fill>
@@ -58,20 +56,19 @@
 
                                     <StackPanel Margin="24,0,0,0" VerticalAlignment="Center">
                                         <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
-                                            <Button Content="📷 Tải ảnh mới lên" Style="{StaticResource BtnSecondary}" Padding="16,8" FontSize="13" Margin="0,0,12,0"/>
-                                            <Button Content="Xóa ảnh hiện tại" Background="Transparent" Foreground="{StaticResource DangerColor}" 
-                                                    BorderThickness="0" FontWeight="SemiBold" Cursor="Hand"/>
+                                            <Button Content="📷 Upload new photo" Style="{StaticResource BtnSecondary}" Padding="16,8" FontSize="13" Margin="0,0,12,0"/>
+                                            <Button Content="Remove current photo" Background="Transparent" Foreground="{StaticResource DangerColor}" BorderThickness="0" FontWeight="SemiBold" Cursor="Hand"/>
                                         </StackPanel>
-                                        <TextBlock Text="Cho phép định dạng JPG, GIF hoặc PNG. Kích thước tối đa 2MB." 
-                                                   FontSize="12" Foreground="{StaticResource SecondaryText}"/>
+                                        <TextBlock Text="Supports JPG, GIF, or PNG. Max size 2MB." FontSize="12" Foreground="{StaticResource SecondaryText}"/>
                                     </StackPanel>
                                 </StackPanel>
                             </StackPanel>
                         </Border>
 
+                        <!-- Personal info -->
                         <Border Style="{StaticResource CardStyle}">
                             <StackPanel>
-                                <TextBlock Text="Thông tin cá nhân &amp; Y tế" Style="{StaticResource CardTitleStyle}"/>
+                                <TextBlock Text="Personal And Medical Information" Style="{StaticResource CardTitleStyle}"/>
 
                                 <Grid>
                                     <Grid.ColumnDefinitions>
@@ -88,18 +85,17 @@
                                     </Grid.RowDefinitions>
 
                                     <StackPanel Grid.Row="0" Grid.Column="0">
-                                        <TextBlock Text="Họ và tên đệm" Style="{StaticResource FormLabel}"/>
-                                        <TextBox Text="Nguyễn Văn" Style="{StaticResource FormInput}" IsReadOnly="True" ToolTip="Liên hệ CSKH để thay đổi"/>
+                                        <TextBlock Text="Middle And Last Name" Style="{StaticResource FormLabel}"/>
+                                        <TextBox Text="Nguyen Van" Style="{StaticResource FormInput}" IsReadOnly="True" ToolTip="Contact support to update"/>
                                     </StackPanel>
                                     <StackPanel Grid.Row="0" Grid.Column="2">
-                                        <TextBlock Text="Tên" Style="{StaticResource FormLabel}"/>
+                                        <TextBlock Text="First Name" Style="{StaticResource FormLabel}"/>
                                         <TextBox Text="A" Style="{StaticResource FormInput}" IsReadOnly="True"/>
                                     </StackPanel>
 
                                     <StackPanel Grid.Row="2" Grid.Column="0">
-                                        <TextBlock Text="Ngày sinh" Style="{StaticResource FormLabel}"/>
-                                        <DatePicker SelectedDate="1978-10-26" Padding="4" BorderBrush="{StaticResource BorderColor}" 
-                                                    VerticalContentAlignment="Center" Height="42">
+                                        <TextBlock Text="Date of Birth" Style="{StaticResource FormLabel}"/>
+                                        <DatePicker SelectedDate="1978-10-26" Padding="4" BorderBrush="{StaticResource BorderColor}" VerticalContentAlignment="Center" Height="42">
                                             <DatePicker.Resources>
                                                 <Style TargetType="DatePickerTextBox">
                                                     <Setter Property="VerticalContentAlignment" Value="Center"/>
@@ -107,32 +103,34 @@
                                             </DatePicker.Resources>
                                         </DatePicker>
                                     </StackPanel>
+
                                     <StackPanel Grid.Row="2" Grid.Column="2">
-                                        <TextBlock Text="Giới tính" Style="{StaticResource FormLabel}"/>
+                                        <TextBlock Text="Gender" Style="{StaticResource FormLabel}"/>
                                         <ComboBox SelectedIndex="0" Padding="12" BorderBrush="{StaticResource BorderColor}" Height="42" VerticalContentAlignment="Center">
-                                            <ComboBoxItem Content="Nam"/>
-                                            <ComboBoxItem Content="Nữ"/>
-                                            <ComboBoxItem Content="Khác"/>
+                                            <ComboBoxItem Content="Male"/>
+                                            <ComboBoxItem Content="Female"/>
+                                            <ComboBoxItem Content="Other"/>
                                         </ComboBox>
                                     </StackPanel>
 
                                     <StackPanel Grid.Row="4" Grid.Column="0">
-                                        <TextBlock Text="Số thẻ BHYT" Style="{StaticResource FormLabel}"/>
-                                        <TextBox Text="DN4790123456789" Style="{StaticResource FormInput}" 
-                                                 IsReadOnly="True" FontFamily="Consolas" FontWeight="SemiBold"/>
-                                        <TextBlock Text="Thông tin này được xác thực bởi bệnh viện." FontSize="12" Foreground="{StaticResource SecondaryText}" Margin="0,4,0,0"/>
+                                        <TextBlock Text="Health Insurance ID" Style="{StaticResource FormLabel}"/>
+                                        <TextBox Text="DN4790123456789" Style="{StaticResource FormInput}" IsReadOnly="True" FontFamily="Consolas" FontWeight="SemiBold"/>
+                                        <TextBlock Text="This information is verified by the hospital." FontSize="12" Foreground="{StaticResource SecondaryText}" Margin="0,4,0,0"/>
                                     </StackPanel>
+
                                     <StackPanel Grid.Row="4" Grid.Column="2">
-                                        <TextBlock Text="Nhóm máu" Style="{StaticResource FormLabel}"/>
+                                        <TextBlock Text="Blood Type" Style="{StaticResource FormLabel}"/>
                                         <TextBox Text="A+" Style="{StaticResource FormInput}" IsReadOnly="True"/>
                                     </StackPanel>
                                 </Grid>
                             </StackPanel>
                         </Border>
 
+                        <!-- Contact info -->
                         <Border Style="{StaticResource CardStyle}">
                             <StackPanel>
-                                <TextBlock Text="Thông tin liên hệ" Style="{StaticResource CardTitleStyle}"/>
+                                <TextBlock Text="Contact Information" Style="{StaticResource CardTitleStyle}"/>
 
                                 <Grid Margin="0,0,0,20">
                                     <Grid.ColumnDefinitions>
@@ -142,55 +140,57 @@
                                     </Grid.ColumnDefinitions>
 
                                     <StackPanel Grid.Column="0">
-                                        <TextBlock Text="Số điện thoại (Đăng nhập)" Style="{StaticResource FormLabel}"/>
+                                        <TextBlock Text="Phone Number (Login)" Style="{StaticResource FormLabel}"/>
                                         <TextBox Text="0901234567" Style="{StaticResource FormInput}" IsReadOnly="True"/>
-                                        <TextBlock Text="Thay đổi số điện thoại xác thực →" Foreground="{StaticResource PrimaryColor}" 
-                                                   FontSize="13" Margin="0,6,0,0" Cursor="Hand" TextDecorations="Underline"/>
+                                        <TextBlock Text="Change verified phone number →" Foreground="{StaticResource PrimaryColor}" FontSize="13" Margin="0,6,0,0" Cursor="Hand" TextDecorations="Underline"/>
                                     </StackPanel>
+
                                     <StackPanel Grid.Column="2">
-                                        <TextBlock Text="Địa chỉ Email" Style="{StaticResource FormLabel}"/>
+                                        <TextBlock Text="Email Address" Style="{StaticResource FormLabel}"/>
                                         <TextBox Text="nguyenva@email.com" Style="{StaticResource FormInput}"/>
                                     </StackPanel>
                                 </Grid>
 
                                 <StackPanel Margin="0,0,0,32">
-                                    <TextBlock Text="Địa chỉ hiện tại" Style="{StaticResource FormLabel}"/>
-                                    <TextBox Text="Số 123, Đường ABC, Quận 1, TP.HCM" Style="{StaticResource FormInput}"/>
+                                    <TextBlock Text="Current Address" Style="{StaticResource FormLabel}"/>
+                                    <TextBox Text="123 ABC Street, District 1, Ho Chi Minh City" Style="{StaticResource FormInput}"/>
                                 </StackPanel>
 
                                 <Border BorderBrush="{StaticResource BorderColor}" BorderThickness="0,1,0,0" Padding="0,24,0,0">
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                                        <Button Content="Hủy bỏ" Style="{StaticResource BtnSecondary}" Margin="0,0,12,0"/>
-                                        <Button Content="Lưu thay đổi" Style="{StaticResource BtnPrimary}"/>
+                                        <Button Content="Cancel" Style="{StaticResource BtnSecondary}" Margin="0,0,12,0"/>
+                                        <Button Content="Save Changes" Style="{StaticResource BtnPrimary}"/>
                                     </StackPanel>
                                 </Border>
                             </StackPanel>
                         </Border>
+
                     </StackPanel>
                 </ScrollViewer>
             </TabItem>
 
+            <!-- TAB 2: SECURITY -->
             <TabItem Style="{StaticResource SettingsTabItem}">
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
                         <fa:ImageAwesome Icon="Lock" Width="16" Height="16" Margin="0,0,12,0" Foreground="{Binding RelativeSource={RelativeSource AncestorType=TabItem}, Path=Foreground}"/>
-                        <TextBlock Text="Bảo mật &amp; Đăng nhập"/>
+                        <TextBlock Text="Security And Login"/>
                     </StackPanel>
                 </TabItem.Header>
 
                 <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="0,0,32,32">
                     <StackPanel MaxWidth="800" HorizontalAlignment="Left">
 
+                        <!-- Change Password -->
                         <Border Style="{StaticResource CardStyle}">
                             <StackPanel>
-                                <TextBlock Text="Đổi mật khẩu" Style="{StaticResource CardTitleStyle}"/>
+                                <TextBlock Text="Change Password" Style="{StaticResource CardTitleStyle}"/>
 
                                 <StackPanel Margin="0,0,0,20">
-                                    <TextBlock Text="Mật khẩu hiện tại" Style="{StaticResource FormLabel}"/>
+                                    <TextBlock Text="Current Password" Style="{StaticResource FormLabel}"/>
                                     <Grid>
                                         <PasswordBox Style="{StaticResource FormPassword}" Height="44" VerticalContentAlignment="Center" PasswordChar="•"/>
-                                        <TextBlock Text="👁️" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,12,0" 
-                                                   Foreground="{StaticResource SecondaryText}" Cursor="Hand"/>
+                                        <TextBlock Text="👁️" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,12,0" Foreground="{StaticResource SecondaryText}" Cursor="Hand"/>
                                     </Grid>
                                 </StackPanel>
 
@@ -202,57 +202,60 @@
                                     </Grid.ColumnDefinitions>
 
                                     <StackPanel Grid.Column="0">
-                                        <TextBlock Text="Mật khẩu mới" Style="{StaticResource FormLabel}"/>
+                                        <TextBlock Text="New Password" Style="{StaticResource FormLabel}"/>
                                         <PasswordBox Style="{StaticResource FormPassword}" Height="44" VerticalContentAlignment="Center" PasswordChar="•"/>
                                     </StackPanel>
+
                                     <StackPanel Grid.Column="2">
-                                        <TextBlock Text="Nhập lại mật khẩu mới" Style="{StaticResource FormLabel}"/>
+                                        <TextBlock Text="Re-enter New Password" Style="{StaticResource FormLabel}"/>
                                         <PasswordBox Style="{StaticResource FormPassword}" Height="44" VerticalContentAlignment="Center" PasswordChar="•"/>
                                     </StackPanel>
                                 </Grid>
 
                                 <StackPanel Margin="0,0,0,24">
-                                    <TextBlock Text="Mật khẩu phải bao gồm:" FontWeight="SemiBold" FontSize="13" Margin="0,0,0,8" Foreground="{StaticResource SecondaryText}"/>
-                                    <StackPanel Orientation="Horizontal" Margin="0,0,0,4">
-                                        <TextBlock Text="✓" Foreground="{StaticResource SuccessColor}" Margin="0,0,6,0"/>
-                                        <TextBlock Text="Ít nhất 8 ký tự" Foreground="{StaticResource SecondaryText}" FontSize="13"/>
-                                    </StackPanel>
+                                    <TextBlock Text="Password must include:" FontWeight="SemiBold" FontSize="13" Margin="0,0,0,8" Foreground="{StaticResource SecondaryText}"/>
+
                                     <StackPanel Orientation="Horizontal" Margin="0,0,0,4">
                                         <TextBlock Text="○" Foreground="{StaticResource BorderColor}" Margin="0,0,6,0"/>
-                                        <TextBlock Text="Ít nhất 1 chữ hoa và 1 chữ thường" Foreground="{StaticResource SecondaryText}" FontSize="13"/>
+                                        <TextBlock Text="At least 8 characters" Foreground="{StaticResource SecondaryText}" FontSize="13"/>
                                     </StackPanel>
+
+                                    <StackPanel Orientation="Horizontal" Margin="0,0,0,4">
+                                        <TextBlock Text="○" Foreground="{StaticResource BorderColor}" Margin="0,0,6,0"/>
+                                        <TextBlock Text="At least one uppercase and one lowercase letter" Foreground="{StaticResource SecondaryText}" FontSize="13"/>
+                                    </StackPanel>
+
                                     <StackPanel Orientation="Horizontal">
                                         <TextBlock Text="○" Foreground="{StaticResource BorderColor}" Margin="0,0,6,0"/>
-                                        <TextBlock Text="Ít nhất 1 số hoặc ký tự đặc biệt" Foreground="{StaticResource SecondaryText}" FontSize="13"/>
+                                        <TextBlock Text="At least one number or special character" Foreground="{StaticResource SecondaryText}" FontSize="13"/>
                                     </StackPanel>
                                 </StackPanel>
 
-                                <Button Content="Lưu mật khẩu mới" Style="{StaticResource BtnPrimary}" HorizontalAlignment="Right" IsEnabled="False"/>
+                                <Button Content="Save New Password" Style="{StaticResource BtnPrimary}" HorizontalAlignment="Right" IsEnabled="False"/>
                             </StackPanel>
                         </Border>
 
+                        <!-- 2FA -->
                         <Border Style="{StaticResource CardStyle}">
                             <StackPanel>
                                 <Grid Margin="0,0,0,16">
-                                    <TextBlock Text="Xác thực 2 yếu tố (2FA)" Style="{StaticResource CardTitleStyle}" Margin="0"/>
+                                    <TextBlock Text="Two-Factor Authentication (2FA)" Style="{StaticResource CardTitleStyle}"/>
                                     <Border Background="#f1f5f9" CornerRadius="20" HorizontalAlignment="Right" Padding="12,6">
-                                        <TextBlock Text="Chưa kích hoạt" FontSize="12" FontWeight="SemiBold" Foreground="{StaticResource SecondaryText}"/>
+                                        <TextBlock Text="Not Activated" FontSize="12" FontWeight="SemiBold" Foreground="{StaticResource SecondaryText}"/>
                                     </Border>
                                 </Grid>
 
-                                <TextBlock Text="Tăng cường bảo mật cho tài khoản của bạn bằng cách yêu cầu mã xác thực thứ hai (gửi qua SMS hoặc ứng dụng Authenticator) khi đăng nhập." 
-                                           Foreground="{StaticResource SecondaryText}" TextWrapping="Wrap" LineHeight="22" Margin="0,0,0,20"/>
+                                <TextBlock Text="Enhance your account security by requiring a second verification code (sent via SMS or Authenticator app) when logging in." Foreground="{StaticResource SecondaryText}" TextWrapping="Wrap" LineHeight="22" Margin="0,0,0,20"/>
 
-                                <Button Content="Thiết lập 2FA" Style="{StaticResource BtnSecondary}" 
-                                        BorderBrush="{StaticResource PrimaryColor}" Foreground="{StaticResource PrimaryColor}" HorizontalAlignment="Left"/>
+                                <Button Content="Set up 2FA" Style="{StaticResource BtnSecondary}" BorderBrush="{StaticResource PrimaryColor}" Foreground="{StaticResource PrimaryColor}" HorizontalAlignment="Left"/>
                             </StackPanel>
                         </Border>
 
+                        <!-- Logged in devices -->
                         <Border Style="{StaticResource CardStyle}">
                             <StackPanel>
-                                <TextBlock Text="Thiết bị đang đăng nhập" Style="{StaticResource CardTitleStyle}"/>
-                                <TextBlock Text="Đây là danh sách các thiết bị đã đăng nhập vào tài khoản của bạn gần đây. Nếu thấy thiết bị lạ, hãy đăng xuất ngay lập tức."
-                                           Foreground="{StaticResource SecondaryText}" FontSize="13" Margin="0,0,0,20"/>
+                                <TextBlock Text="Active Devices" Style="{StaticResource CardTitleStyle}"/>
+                                <TextBlock Text="Below is a list of devices that recently logged into your account. If you see an unknown device, log out immediately." Foreground="{StaticResource SecondaryText}" FontSize="13" Margin="0,0,0,20"/>
 
                                 <Grid Margin="0,0,0,16">
                                     <Grid.ColumnDefinitions>
@@ -266,11 +269,12 @@
 
                                     <StackPanel Grid.Column="1" VerticalAlignment="Center">
                                         <TextBlock FontSize="15" FontWeight="SemiBold" Foreground="{StaticResource DarkText}">
-                                            Chrome trên Windows <Run Text="Thiết bị này" Foreground="{StaticResource SuccessColor}" FontSize="12" FontWeight="Bold"/>
+                                            Chrome on Windows <Run Text="This device" Foreground="{StaticResource SuccessColor}" FontSize="12" FontWeight="Bold"/>
                                         </TextBlock>
-                                        <TextBlock Text="TP. Hồ Chí Minh • Đang hoạt động" FontSize="13" Foreground="{StaticResource SecondaryText}" Margin="0,2,0,0"/>
+                                        <TextBlock Text="Ho Chi Minh City • Active now" FontSize="13" Foreground="{StaticResource SecondaryText}" Margin="0,2,0,0"/>
                                     </StackPanel>
                                 </Grid>
+
                                 <Rectangle Height="1" Fill="{StaticResource BorderColor}" Margin="0,0,0,16"/>
 
                                 <Grid Margin="0,0,0,16">
@@ -285,12 +289,11 @@
                                     </Border>
 
                                     <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                                        <TextBlock Text="Ứng dụng Mobile trên iPhone 13" FontSize="15" FontWeight="SemiBold" Foreground="{StaticResource DarkText}"/>
-                                        <TextBlock Text="Hà Nội • Hoạt động 2 giờ trước" FontSize="13" Foreground="{StaticResource SecondaryText}" Margin="0,2,0,0"/>
+                                        <TextBlock Text="Mobile App on iPhone 13" FontSize="15" FontWeight="SemiBold" Foreground="{StaticResource DarkText}"/>
+                                        <TextBlock Text="Hanoi • Active 2 hours ago" FontSize="13" Foreground="{StaticResource SecondaryText}" Margin="0,2,0,0"/>
                                     </StackPanel>
 
-                                    <Button Grid.Column="2" Content="Đăng xuất" Background="Transparent" BorderBrush="{StaticResource DangerColor}" BorderThickness="1"
-                                            Foreground="{StaticResource DangerColor}" Padding="12,6" FontSize="13" FontWeight="SemiBold" Cursor="Hand">
+                                    <Button Grid.Column="2" Content="Log out" Background="Transparent" BorderBrush="{StaticResource DangerColor}" BorderThickness="1" Foreground="{StaticResource DangerColor}" Padding="12,6" FontSize="13" FontWeight="SemiBold" Cursor="Hand">
                                         <Button.Template>
                                             <ControlTemplate TargetType="Button">
                                                 <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" CornerRadius="6" Padding="{TemplateBinding Padding}">
@@ -301,8 +304,7 @@
                                     </Button>
                                 </Grid>
 
-                                <Button Content="Đăng xuất khỏi tất cả các thiết bị khác" Background="Transparent" BorderBrush="{StaticResource DangerColor}" BorderThickness="1"
-                                        Foreground="{StaticResource DangerColor}" Padding="0,12" FontSize="14" FontWeight="SemiBold" Margin="0,16,0,0" Cursor="Hand">
+                                <Button Content="Log out of all other devices" Background="Transparent" BorderBrush="{StaticResource DangerColor}" BorderThickness="1" Foreground="{StaticResource DangerColor}" Padding="0,12" FontSize="14" FontWeight="SemiBold" Margin="0,16,0,0" Cursor="Hand">
                                     <Button.Template>
                                         <ControlTemplate TargetType="Button">
                                             <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" CornerRadius="8" Padding="{TemplateBinding Padding}">
@@ -316,20 +318,20 @@
                                         </ControlTemplate>
                                     </Button.Template>
                                 </Button>
+
                             </StackPanel>
                         </Border>
 
+                        <!-- Danger Zone -->
                         <Border Background="{StaticResource DangerBg}" BorderBrush="#fca5a5" BorderThickness="1" CornerRadius="16" Padding="24">
                             <StackPanel>
-                                <TextBlock Text="Vùng nguy hiểm" Style="{StaticResource CardTitleStyle}" Foreground="{StaticResource DangerColor}" Margin="0,0,0,12"/>
+                                <TextBlock Text="Danger Zone" Style="{StaticResource CardTitleStyle}" Foreground="{StaticResource DangerColor}" Margin="0,0,0,12"/>
                                 <Rectangle Height="1" Fill="#fca5a5" Margin="0,0,0,16"/>
 
-                                <TextBlock Text="Việc vô hiệu hóa tài khoản sẽ ẩn hồ sơ của bạn. Việc xóa tài khoản là vĩnh viễn và không thể khôi phục dữ liệu sức khỏe."
-                                           Foreground="{StaticResource SecondaryText}" Margin="0,0,0,20"/>
+                                <TextBlock Text="Disabling your account will hide your profile. Deleting your account is permanent and your health data cannot be recovered." Foreground="{StaticResource SecondaryText}" Margin="0,0,0,20"/>
 
                                 <StackPanel Orientation="Horizontal">
-                                    <Button Content="Vô hiệu hóa tài khoản" Background="White" BorderBrush="{StaticResource DangerColor}" BorderThickness="1"
-                                            Foreground="{StaticResource DangerColor}" Padding="16,10" FontWeight="SemiBold" Margin="0,0,16,0">
+                                    <Button Content="Disable Account" Background="White" BorderBrush="{StaticResource DangerColor}" BorderThickness="1" Foreground="{StaticResource DangerColor}" Padding="16,10" FontWeight="SemiBold" Margin="0,0,16,0">
                                         <Button.Template>
                                             <ControlTemplate TargetType="Button">
                                                 <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" CornerRadius="8" Padding="{TemplateBinding Padding}">
@@ -339,8 +341,7 @@
                                         </Button.Template>
                                     </Button>
 
-                                    <Button Content="Xóa tài khoản vĩnh viễn" Background="{StaticResource DangerColor}" 
-                                            Foreground="White" Padding="16,10" FontWeight="SemiBold" BorderThickness="0">
+                                    <Button Content="Delete Account Permanently" Background="{StaticResource DangerColor}" Foreground="White" Padding="16,10" FontWeight="SemiBold" BorderThickness="0">
                                         <Button.Template>
                                             <ControlTemplate TargetType="Button">
                                                 <Border Background="{TemplateBinding Background}" CornerRadius="8" Padding="{TemplateBinding Padding}">
@@ -357,16 +358,17 @@
                 </ScrollViewer>
             </TabItem>
 
+            <!-- TAB 3 Notifications -->
             <TabItem Style="{StaticResource SettingsTabItem}">
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
                         <fa:ImageAwesome Icon="Bell" Width="16" Height="16" Margin="0,0,12,0" Foreground="{Binding RelativeSource={RelativeSource AncestorType=TabItem}, Path=Foreground}"/>
-                        <TextBlock Text="Thông báo"/>
+                        <TextBlock Text="Notifications"/>
                     </StackPanel>
                 </TabItem.Header>
+
                 <Grid>
-                    <TextBlock Text="Cài đặt thông báo (Đang cập nhật...)" Foreground="{StaticResource SecondaryText}" 
-                               HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,100,0,0" FontStyle="Italic"/>
+                    <TextBlock Text="Notification settings (Updating...)" Foreground="{StaticResource SecondaryText}" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,100,0,0" FontStyle="Italic"/>
                 </Grid>
             </TabItem>
 
