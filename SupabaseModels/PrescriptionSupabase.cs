@@ -35,6 +35,6 @@ public class PrescriptionModel : BaseModel
     [Reference(typeof(MedicationModel))]
     public MedicalRecordModel MedicalRecord { get; set; } = null!;
 
-    [Reference(typeof(PharmacistModel)]
+    [Reference(typeof(PharmacistModel))]
     public PharmacistModel Pharmacist { get; set; } = null!;
 }

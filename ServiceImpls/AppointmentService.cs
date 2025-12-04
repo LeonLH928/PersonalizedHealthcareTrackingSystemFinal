@@ -23,4 +23,8 @@ public class AppointmentService : IAppointmentService
         var Doctor = await _currentUserStoreRepository.GetDoctorFromUserAsync();
         return await _appointmentRepository.GetNearestAppointmentByDoctorIDAsync(Doctor.DoctorID);
     }
+    public async Task<AppointmentModel> GetAppointmentByIDAsync(string AppointmentID)
+    {
+        return await _appointmentRepository.GetAppointmentByIDAsync(AppointmentID);
+    }
 }

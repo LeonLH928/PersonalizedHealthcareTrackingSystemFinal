@@ -5,5 +5,6 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Interfaces;
 public interface IClinicalExaminationRepository
 {
     Task AddClinicalExaminationAsync(ClinicalExaminationModel NewExam);
-    Task<IEnumerable<ClinicalExaminationModel>> GetAllClinicalExaminationsByPatientIDAsync(string PatientID);
+    Task<ClinicalExaminationModel> GetClinicalExaminationByMedicalRecordIDAsync(string RecordID);
+    Task<IEnumerable<ClinicalExaminationModel>> GetAllClinicalExaminationsByMedicalRecordIDsAsync(List<string> MedicalRecordIDs);
 }

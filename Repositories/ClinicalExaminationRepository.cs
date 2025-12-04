@@ -21,13 +21,21 @@ public class ClinicalExaminationRepository : IClinicalExaminationRepository
                     .From<ClinicalExaminationModel>()
                     .Insert(NewExam);
     }
-    public async Task<IEnumerable<ClinicalExaminationModel>> GetAllClinicalExaminationsByPatientIDAsync(string PatientID)
+    public async Task<ClinicalExaminationModel> GetClinicalExaminationByMedicalRecordIDAsync(string RecordID)
     {
-        var response = await _client
-                                .From<ClinicalExaminationModel>()
-                                .Select("*, MedicalRecro(Appointments())")
-                                .Filter("MedicalRecords.Appointments.PatientID", Supabase.Postgrest.Constants.Operator.Equals, PatientID)
-                                .Get();
+        var response = await _client.From<ClinicalExaminationModel>()
+                                    .Select("*, MedicalRecord:MedicalRecords(*)")
+                                    .Filter("MedicalRecords.RecordID", Supabase.Postgrest.Constants.Operator.Equals, RecordID)
+                                    .Get();
+
+        return response.Model ?? throw new Exception("No such examination!");
+    }
+    public async Task<IEnumerable<ClinicalExaminationModel>> GetAllClinicalExaminationsByMedicalRecordIDsAsync(List<string> MedicalRecordIDs)
+    {
+        var response = await _client.From<ClinicalExaminationModel>()
+                                    .Select("*, MedicalRecord:MedicalRecords(*, Appointment:Appointments(*))")
+                                    .Filter("RecordID", Supabase.Postgrest.Constants.Operator.In, MedicalRecordIDs)
+                                    .Get();
 
         return response.Models;
     }

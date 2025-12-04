@@ -36,7 +36,7 @@ public partial class DoctorDashboardPageViewModel : ObservableObject
     [ObservableProperty]
     private bool isLoading = true;
     [ObservableProperty]
-    private PatientModel nearestPatient = null!;
+    private AppointmentModel nearestUpcoming = null!;
     [ObservableProperty]
     private int totalAppointments;
     [ObservableProperty]
@@ -73,8 +73,8 @@ public partial class DoctorDashboardPageViewModel : ObservableObject
         try
         {
             var Appointments = await _appointmentService.GetAllAppointmentsByDoctorIDAsync();
-            var NearestUpcoming = await _appointmentService.GetNearestAppointmentByDoctorIDAsync();
-            NearestPatient = await _patientService.GetPatientByIDAsync(NearestUpcoming.PatientID);
+            NearestUpcoming = await _appointmentService.GetNearestAppointmentByDoctorIDAsync();
+            var NearestPatient = await _patientService.GetPatientByIDAsync(NearestUpcoming.PatientID);
             var NearestPatientUser = await _userService.GetUserByIDAsync(NearestPatient.UserID);
 
             TotalAppointments = Appointments.Count();
@@ -143,7 +143,7 @@ public partial class DoctorDashboardPageViewModel : ObservableObject
         {
             var Popup = _serviceProvider.GetRequiredService<DoctorConsultationWindow>();
             Popup.Show();
-            WeakReferenceMessenger.Default.Send(new SelectedPatientIDMessage(NearestPatient.PatientID));
+            WeakReferenceMessenger.Default.Send(new SelectedAppointmentIDMessage(NearestUpcoming.AppointmentID));
         }
     }
     protected override void OnPropertyChanged(PropertyChangedEventArgs e)

@@ -5,4 +5,5 @@ public interface IAppointmentService
 {
     Task<IEnumerable<AppointmentModel>> GetAllAppointmentsByDoctorIDAsync();
     Task<AppointmentModel> GetNearestAppointmentByDoctorIDAsync();
+    Task<AppointmentModel> GetAppointmentByIDAsync(string AppointmentID);
 }

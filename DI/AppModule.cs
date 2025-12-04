@@ -86,6 +86,9 @@ public static class AppModule
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IPatientRepository, PatientRepository>();
         services.AddScoped<IClinicalExaminationRepository, ClinicalExaminationRepository>();
+        services.AddScoped<IMedicalRecordRepository, MedicalRecordRepository>();
+        services.AddScoped<IMedicationRepository, MedicationRepository>();
+        services.AddScoped<IMedicationInteractionRepository, MedicationInteractionRepository>();
 
         // Register Services
         services.AddScoped<IAppointmentService, AppointmentService>();
@@ -93,6 +96,9 @@ public static class AppModule
         services.AddScoped<IUserService, UserService>();
         services.AddScoped<IPatientService, PatientService>();
         services.AddScoped<IClinicalExaminationService, ClinicalExaminationService>();
+        services.AddScoped<IMedicalRecordService, MedicalRecordService>();
+        services.AddScoped<IMedicationService, MedicationService>();
+        services.AddScoped<IMedicationInteractionService, MedicationInteractionService>();
 
         return services;
     }

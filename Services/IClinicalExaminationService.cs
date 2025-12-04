@@ -3,5 +3,6 @@
 namespace PersonalizedHealthcareTrackingSystemFinal.Services;
 public interface IClinicalExaminationService
 {
-    Task<IEnumerable<ClinicalExaminationModel>> GetAllClinicalExaminationsByPatientIDAsync(string PatientID);
+    Task<ClinicalExaminationModel> GetLatestClinicalExaminationByPatientID(string PatientID);
+    Task<IEnumerable<ClinicalExaminationModel>> GetClinicalExaminationsByPatientID(string PatientID);
 }

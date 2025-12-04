@@ -29,9 +29,11 @@ public class MedicationInteractionModel : BaseModel
     [Column("Medication2ID")]
     public string Medication2ID { get; set; } = "";
 
-    [Reference(typeof(MedicationModel))]
+    [Reference(typeof(MedicationModel), foreignKey: "FK_MedicationInteractions_Medications_Medication1ID")]
+
     public MedicationModel Medication1 { get; set; } = null!;
-    
-    [Reference(typeof(MedicationModel))]
+
+    [Reference(typeof(MedicationModel), foreignKey: "FK_MedicationInteractions_Medications_Medication2ID")]
+
     public MedicationModel Medication2 { get; set; } = null!;
 }

@@ -21,7 +21,7 @@ public class AppointmentRepository : IAppointmentRepository
     public async Task<IEnumerable<AppointmentModel>> GetAllAppointmentsByDoctorIDAsync(string DoctorID)
     {
         var response = await _client.From<AppointmentModel>()
-                                    .Select("*, Doctors(*), Patients(*)")
+                                    .Select("*, Doctor:Doctors(*), Patient:Patients(*)")
                                     .Filter("DoctorID", Supabase.Postgrest.Constants.Operator.Equals, DoctorID)
                                     .Get();
         return response.Models;
@@ -29,20 +29,19 @@ public class AppointmentRepository : IAppointmentRepository
     public async Task<AppointmentModel> GetNearestAppointmentByDoctorIDAsync(string DoctorID)
     {
         var response = await _client.From<AppointmentModel>()
-                                    .Select("*, Doctors(*), Patients(*)")
+                                    .Select("*, Doctor:Doctors(*), Patient:Patients(*)")
                                     .Filter("DoctorID", Supabase.Postgrest.Constants.Operator.Equals, DoctorID)
                                     .Filter("Status", Supabase.Postgrest.Constants.Operator.Equals, (int)Models.StatusAppointment.Scheduled)
                                     .Order("AppointmentDateTime", Supabase.Postgrest.Constants.Ordering.Ascending)
                                     .Get();
         return response.Model ?? throw new Exception("No upcomings!");
     }
-    public async Task<IEnumerable<AppointmentModel>> GetAllAppointmentIDsByPatientIDAsync(string PatientID)
+    public async Task<AppointmentModel> GetAppointmentByIDAsync(string AppointmentID)
     {
         var response = await _client.From<AppointmentModel>()
-                            .Select("AppointmentID")
-                            .Filter("PatientID", Supabase.Postgrest.Constants.Operator.Equals, PatientID)
-                            .Get();
-
-        return response.Models;
+                                    .Select("*, Doctor:Doctors(*), Patient:Patients(*)")
+                                    .Where(a => a.AppointmentID == AppointmentID)
+                                    .Single();
+        return response ?? throw new Exception("Appointment not existed!");
     }
 }
