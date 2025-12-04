@@ -33,4 +33,46 @@
             </DataTrigger>
         </Style.Triggers>
     </Style>
+
+    <Style x:Key="FormLabel" TargetType="TextBlock">
+        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Foreground" Value="{StaticResource DarkText}"/>
+        <Setter Property="Margin" Value="0,0,0,8"/>
+    </Style>
+
+    <Style x:Key="FormInput" TargetType="TextBox">
+        <Setter Property="Padding" Value="12"/>
+        <Setter Property="BorderBrush" Value="{StaticResource BorderColor}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Margin" Value="0,0,0,16"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TextBox">
+                    <Border Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="8"
+                        Padding="{TemplateBinding Padding}">
+                        <ScrollViewer x:Name="PART_ContentHost"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="FormComboBox" TargetType="ComboBox">
+        <Setter Property="Padding" Value="12"/>
+        <Setter Property="BorderBrush" Value="{StaticResource BorderColor}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Margin" Value="0,0,0,16"/>
+    </Style>
+
+    <Storyboard x:Key="BlinkAnimation" RepeatBehavior="Forever">
+        <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                   From="1.0" To="0.4" Duration="0:0:0.75"
+                   AutoReverse="True"/>
+    </Storyboard>
 </ResourceDictionary>

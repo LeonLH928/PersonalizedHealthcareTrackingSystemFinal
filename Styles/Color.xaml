@@ -28,4 +28,12 @@
     <SolidColorBrush x:Key="DangerColor" Color="#ef4444"/>
     <SolidColorBrush x:Key="StatusPendingBackground" Color="#ea580c"/>
     <SolidColorBrush x:Key="StatusPendingText" Color="#fff7ed"/>
+    <SolidColorBrush x:Key="PrimaryColor" Color="#0284c7"/>
+    <SolidColorBrush x:Key="PrimaryDark" Color="#0369a1"/>
+    <SolidColorBrush x:Key="SecondaryText" Color="#64748b"/>
+    <SolidColorBrush x:Key="BgLight" Color="#F1F5F9"/>
+    <SolidColorBrush x:Key="BgWhite" Color="#FFFFFF"/>
+    <SolidColorBrush x:Key="SuccessColor" Color="#22c55e"/>
+    <SolidColorBrush x:Key="BorderColor" Color="#E2E8F0"/>
+    <SolidColorBrush x:Key="DarkText" Color="#0f172a"/>
 </ResourceDictionary>

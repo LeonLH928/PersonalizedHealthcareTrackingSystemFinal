@@ -14,6 +14,7 @@
                 <ResourceDictionary Source="/Styles/Icon.xaml"/>
                 <ResourceDictionary Source="/Styles/Rectangle.xaml"/>
                 <ResourceDictionary Source="/Styles/DatePicker.xaml"/>
+                <ResourceDictionary Source="/Styles/DoctorCard.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <local:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
         </ResourceDictionary>
