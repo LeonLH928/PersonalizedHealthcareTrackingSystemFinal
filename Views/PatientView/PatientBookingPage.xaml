@@ -293,7 +293,7 @@
                             </Button>
 
                             <TextBlock Grid.Column="1"
-                                       Text="Today, Friday – 27/10/2023"
+                                       Text="Today, Friday – 05/12/2025"
                                        FontSize="18"
                                        FontWeight="Bold"
                                        Foreground="{StaticResource DarkText}"
