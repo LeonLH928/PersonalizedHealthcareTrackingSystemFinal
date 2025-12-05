@@ -61,14 +61,16 @@ public static class AppModule
         services.AddTransient<LoginWindow>();
         services.AddTransient<SignUpWindow>();
         services.AddTransient<Views.PatientView.PatientMainWindow>();
-        services.AddTransient<Views.PatientView.PatientBookingPage>();
         services.AddTransient<Views.PatientView.PatientHomePage>();
+        services.AddTransient<Views.PatientView.PatientBookingPage>();
+        
         services.AddTransient<Views.DoctorView.DoctorMainWindow>();
         services.AddTransient<Views.DoctorView.DoctorDashboardPage>();
         services.AddTransient<Views.DoctorView.DoctorConsultationWindow>();
         services.AddTransient<Views.DoctorView.DoctorUpcomingsPage>();
         services.AddTransient<Views.PharmacistView.PharmacistMainWindow>();
         services.AddTransient<Views.PharmacistView.PharmacistQueuePage>();
+        services.AddTransient<Views.PharmacistView.PharmacistDashboard>();
 
         // Register ViewModels
         services.AddTransient<IntroductionWindowViewModel>();
