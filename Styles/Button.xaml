@@ -59,7 +59,7 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-
+    
     <!-- Primary Button Style -->
     <Style x:Key="PrimaryButtonStyle" TargetType="Button">
         <Setter Property="Background" Value="{StaticResource AccentBlue}"/>

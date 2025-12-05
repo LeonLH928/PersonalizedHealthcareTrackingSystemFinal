@@ -1,7 +1,10 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using CommunityToolkit.Mvvm.Messaging;
+using Microsoft.Extensions.DependencyInjection;
 using PersonalizedHealthcareTrackingSystemFinal.Configs;
 using PersonalizedHealthcareTrackingSystemFinal.DI;
+using PersonalizedHealthcareTrackingSystemFinal.Messages;
 using PersonalizedHealthcareTrackingSystemFinal.Views;
+using PersonalizedHealthcareTrackingSystemFinal.Views.DoctorView;
 using Supabase;
 using System.Configuration;
 using System.Data;
@@ -24,8 +27,11 @@ namespace PersonalizedHealthcareTrackingSystemFinal
             services.RegisterDependency();
             ServiceProvider = services.BuildServiceProvider();
 
-            var IntroductionWindow = ServiceProvider.GetRequiredService<IntroductionWindow>();
-            IntroductionWindow.Show();
+            //var IntroductionWindow = ServiceProvider.GetRequiredService<IntroductionWindow>();
+            //IntroductionWindow.Show();
+            var emily = ServiceProvider.GetRequiredService<DoctorConsultationWindow>();
+            emily.Show();
+            WeakReferenceMessenger.Default.Send(new SelectedAppointmentIDMessage("appt-04"));
         }
     }
 

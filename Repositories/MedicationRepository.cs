@@ -38,4 +38,21 @@ public class MedicationRepository : IMedicationRepository
 
         return response.Models;
     }
+    public async Task<IEnumerable<MedicationModel>> GetAllMedications()
+    {
+        var response = await _client
+                                    .From<MedicationModel>()
+                                    .Select("*")
+                                    .Get();
+        return response.Models;
+    }
+    public async Task<IEnumerable<MedicationModel>> GetAllMedicationsByIDs(List<string> MedicationIDs)
+    {
+        var response = await _client
+                                    .From<MedicationModel>()
+                                    .Select("*")
+                                    .Filter("MedicationID", Operator.In, MedicationIDs)
+                                    .Get();
+        return response.Models;
+    }
 }

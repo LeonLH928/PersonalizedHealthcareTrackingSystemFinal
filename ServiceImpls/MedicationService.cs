@@ -14,4 +14,12 @@ public class MedicationService : IMedicationService
     {
         return await _medicationRepository.SearchByText(SearchText);
     }
+    public async Task<IEnumerable<MedicationModel>> GetAllMedications()
+    {
+        return await _medicationRepository.GetAllMedications();
+    }
+    public async Task<IEnumerable<MedicationModel>> GetAllMedicationsByIDs(List<string> MedicationIDs)
+    {
+        return await _medicationRepository.GetAllMedicationsByIDs(MedicationIDs);
+    }
 }

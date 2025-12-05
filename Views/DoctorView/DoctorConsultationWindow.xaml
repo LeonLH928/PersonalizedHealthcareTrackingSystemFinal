@@ -496,6 +496,7 @@
                                                            FontSize="14"
                                                            Margin="0,0,0,5"/>
                                                 <TextBox Tag="Example: 32"
+                                                         Text="{Binding Temperature}"
                                                          Style="{StaticResource CurrentExamInputTextBoxStyle}"/>
                                             </StackPanel>
 
@@ -505,6 +506,7 @@
                                                            FontSize="14"
                                                            Margin="0,0,0,5"/>
                                                 <TextBox Tag="Example: 165"
+                                                         Text="{Binding Height}"
                                                          Style="{StaticResource CurrentExamInputTextBoxStyle}"/>
                                             </StackPanel>
 
@@ -514,6 +516,7 @@
                                                            FontSize="14"
                                                            Margin="0,0,0,5"/>
                                                 <TextBox Tag="Example: 65"
+                                                         Text="{Binding Weight}"
                                                         Style="{StaticResource CurrentExamInputTextBoxStyle}"/>
                                             </StackPanel>
 
@@ -523,6 +526,7 @@
                                                            FontSize="14"
                                                            Margin="0,0,0,5"/>
                                                 <TextBox Tag="Example: 80"
+                                                         Text="{Binding Pulse}"
                                                          Style="{StaticResource CurrentExamInputTextBoxStyle}"/>
                                             </StackPanel>
                                             
@@ -543,6 +547,7 @@
                                                            FontSize="14"
                                                            Margin="0,0,0,5"/>
                                                 <TextBox Tag="Example: 130/85"
+                                                         Text="{Binding BloodPressure}"
                                                          Style="{StaticResource CurrentExamInputTextBoxStyle}"/>
                                             </StackPanel>
 
@@ -552,6 +557,7 @@
                                                            FontSize="14"
                                                            Margin="0,0,0,5"/>
                                                 <TextBox Tag="Example: 80"
+                                                         Text="{Binding RespiratoryRate}"
                                                         Style="{StaticResource CurrentExamInputTextBoxStyle}"/>
                                             </StackPanel>
 
@@ -561,6 +567,7 @@
                                                            FontSize="14"
                                                            Margin="0,0,0,5"/>
                                                 <TextBox Tag="Example: 98"
+                                                         Text="{Binding OxygenSaturation}"
                                                          Style="{StaticResource CurrentExamInputTextBoxStyle}"/>
                                             </StackPanel>
                                         </Grid>
@@ -575,6 +582,7 @@
                                         <TextBox
                                             Tag="Describe subjective symptons, objective signs, etc."
                                             Height="200"
+                                            Text="{Binding Symptoms}"
                                             Style="{StaticResource CurrentExamTextTextBoxStyle}"
                                             Margin="0,0,0,20"/>
 
@@ -589,6 +597,7 @@
                                         <TextBox
                                             FontWeight="Bold"
                                             FontSize="18"
+                                            Text="{Binding Diagnosis}"
                                             Style="{StaticResource CurrentExamInputTextBoxStyle}"
                                             Margin="0,0,0,20"/>
 
@@ -634,17 +643,26 @@
                                     <RowDefinition Height="*"/>
                                 </Grid.RowDefinitions>
                                 
-                                <TextBox  
-                                        Tag="Search drugs, descriptions, etc."
-                                        Style="{StaticResource SearchInputTextBoxStyle}"
-                                        Margin="0,0,0,20"
-                                        Text="{Binding SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                                    
-                                    <TextBox.InputBindings>
-                                        <KeyBinding Key="Enter" Command="{Binding SearchCommand}"/>
-                                    </TextBox.InputBindings>
-                                    
-                                </TextBox>
+                                <Grid Margin="0,0,0,20">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="15"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Button
+                                        Style="{StaticResource OutlineButtonStyle}"
+                                        BorderThickness="1"
+                                        Content="＋ Add drugs"
+                                        Command="{Binding AddDrugButtonCommand}"/>
+
+                                    <Button
+                                        Grid.Column="2"
+                                        Style="{StaticResource CancelOutlineButtonStyle}"
+                                        BorderThickness="1"
+                                        Content="&#x2715; Delete all"
+                                        Command="{Binding DeleteAllCommand}"/>
+                                </Grid>
                                 
                                 <ScrollViewer
                                     Grid.Row="1"
@@ -656,7 +674,7 @@
                                             <RowDefinition Height="Auto"/>
                                             <RowDefinition Height="Auto"/>
                                         </Grid.RowDefinitions>
-                                        <ItemsControl ItemsSource="{Binding Medications}" AlternationCount="20">
+                                        <ItemsControl ItemsSource="{Binding SelectedMedications}" AlternationCount="9999">
                                             <ItemsControl.ItemTemplate>
                                                 <DataTemplate>
                                                     <Border
@@ -700,29 +718,94 @@
                                                             </Grid>
                                                             <Grid Margin="0,0,0,5">
                                                                 <Grid.ColumnDefinitions>
-                                                                    <ColumnDefinition Width="100"/>
+                                                                    <ColumnDefinition Width="*"/>
+                                                                    <ColumnDefinition Width="15"/>
                                                                     <ColumnDefinition Width="*"/>
                                                                 </Grid.ColumnDefinitions>
                                                                 <TextBox
+                                                                    Tag="Quantity"
                                                                     Style="{StaticResource CurrentExamInputTextBoxStyle}"
                                                                     Background="White"/>
 
-                                                                <TextBlock
-                                                                    Grid.Column="1"
-                                                                    Style="{StaticResource CustomBaseTextBlockStyle}"
-                                                                    Margin="10,0,0,0"
-                                                                    VerticalAlignment="Center"
-                                                                    Text="{Binding Form, StringFormat={}{0}s}"/>
+                                                                <TextBox
+                                                                    Grid.Column="2"
+                                                                    Tag="Dosage"
+                                                                    Style="{StaticResource CurrentExamInputTextBoxStyle}"
+                                                                    Background="White"/>
+                                                            </Grid>
+                                                            <Grid Margin="0,0,0,5">
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="*"/>
+                                                                    <ColumnDefinition Width="15"/>
+                                                                    <ColumnDefinition Width="*"/>
+                                                                </Grid.ColumnDefinitions>
+                                                                <TextBox
+                                                                    Tag="Frequency"
+                                                                    Style="{StaticResource CurrentExamInputTextBoxStyle}"
+                                                                    Background="White"/>
+
+                                                                <TextBox
+                                                                    Grid.Column="2"
+                                                                    Tag="Duration (days)"
+                                                                    Style="{StaticResource CurrentExamInputTextBoxStyle}"
+                                                                    Background="White"/>
+                                                            </Grid>
+                                                            <Grid Margin="0,0,0,5">
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="*"/>
+                                                                    <ColumnDefinition Width="15"/>
+                                                                    <ColumnDefinition Width="*"/>
+                                                                </Grid.ColumnDefinitions>
+                                                                <TextBox
+                                                                    Tag="Instruction"
+                                                                    Style="{StaticResource CurrentExamInputTextBoxStyle}"
+                                                                    Background="White"/>
+
+                                                                <TextBox
+                                                                    Grid.Column="2"
+                                                                    Tag="Indication"
+                                                                    Style="{StaticResource CurrentExamInputTextBoxStyle}"
+                                                                    Background="White"/>
+                                                            </Grid>
+                                                            <Grid Margin="0,0,0,10">
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="*"/>
+                                                                    <ColumnDefinition Width="15"/>
+                                                                    <ColumnDefinition Width="*"/>
+                                                                </Grid.ColumnDefinitions>
+                                                                <TextBox
+                                                                    Tag="Morning"
+                                                                    Style="{StaticResource CurrentExamInputTextBoxStyle}"
+                                                                    Background="White"/>
+
+                                                                <TextBox
+                                                                    Grid.Column="2"
+                                                                    Tag="Noon"
+                                                                    Style="{StaticResource CurrentExamInputTextBoxStyle}"
+                                                                    Background="White"/>
                                                             </Grid>
 
-                                                            <TextBox
-                                                                Style="{StaticResource CurrentExamInputTextBoxStyle}"
-                                                                Tag="Note here."
-                                                                BorderBrush="Transparent"
-                                                                Margin="0,0,0,5"/>
+                                                            <Grid Margin="0,0,0,10">
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="*"/>
+                                                                    <ColumnDefinition Width="15"/>
+                                                                    <ColumnDefinition Width="*"/>
+                                                                </Grid.ColumnDefinitions>
+                                                                <TextBox
+                                                                    Tag="Afternoon"
+                                                                    Style="{StaticResource CurrentExamInputTextBoxStyle}"
+                                                                    Background="White"/>
+
+                                                                <TextBox
+                                                                    Grid.Column="2"
+                                                                    Tag="Night"
+                                                                    Style="{StaticResource CurrentExamInputTextBoxStyle}"
+                                                                    Background="White"/>
+                                                            </Grid>
 
                                                             <Border
-                                                                Style="{StaticResource Line}"/>
+                                                                Style="{StaticResource Line}"
+                                                                BorderBrush="{StaticResource TextGray}"/>
                                                         </StackPanel>
 
                                                     </Border>
@@ -748,7 +831,7 @@
                                                     <Button
                                                         HorizontalAlignment="Right"
                                                         Content="X"
-                                                        Style="{StaticResource CloseButtonStyle}"
+                                                        Style="{StaticResource DeleteCardButtonStyle}"
                                                         Foreground="{StaticResource DangerColor}"/>
                                                 </Grid>
                                                 <Grid Margin="0,0,0,5">

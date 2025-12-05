@@ -31,3 +31,18 @@ public class AddOneConverter : IValueConverter
         throw new NotImplementedException();
     }
 }
+
+public class ZeroToEmptyStringConverter : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        if (value is string text && text == "0")
+            return string.Empty;
+        return value;
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}

@@ -68,6 +68,8 @@ public static class AppModule
         services.AddTransient<Views.DoctorView.DoctorDashboardPage>();
         services.AddTransient<Views.DoctorView.DoctorConsultationWindow>();
         services.AddTransient<Views.DoctorView.DoctorUpcomingsPage>();
+        services.AddTransient<Views.DoctorView.AddDrugWindow>();
+
         services.AddTransient<Views.PharmacistView.PharmacistMainWindow>();
         services.AddTransient<Views.PharmacistView.PharmacistQueuePage>();
         services.AddTransient<Views.PharmacistView.PharmacistDashboard>();
@@ -78,6 +80,7 @@ public static class AppModule
         services.AddTransient<SignUpWindowViewModel>();
         services.AddTransient<ViewModels.DoctorViewModel.DoctorDashboardPageViewModel>();
         services.AddTransient<ViewModels.DoctorViewModel.DoctorConsultationWindowViewModel>();
+        services.AddTransient<ViewModels.DoctorViewModel.AddDrugWindowViewModel>();
 
         // Register Repositories
         services.AddScoped<IAppointmentRepository, AppointmentRepository>();
