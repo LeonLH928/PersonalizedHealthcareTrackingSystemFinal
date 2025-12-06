@@ -34,28 +34,8 @@ public class CurrentUserStoreRepository : ICurrentUserStoreRepository
                 .Update();
         CurrentUser = null!;
     }
-    public async Task<DoctorModel> GetDoctorFromUserAsync()
+    public UserModel? GetCurrentUserAsync()
     {
-        var Doctor = await _client
-                .From<DoctorModel>()
-                .Where(d => d.UserID == CurrentUser.UserID)
-                .Get();
-        return Doctor.Model ?? throw new Exception("You are not a doctor!");
-    }
-    public async Task<PatientModel> GetPatientFromUserAsync()
-    {
-        var Patient = await _client
-                .From<PatientModel>()
-                .Where(p => p.UserID == CurrentUser.UserID)
-                .Get();
-        return Patient.Model ?? throw new Exception("You are not a patient!");
-    }
-    public async Task<PharmacistModel> GetPharmacistFromUserAsync()
-    {
-        var Pharmacist = await _client
-                .From<PharmacistModel>()
-                .Where(p => p.UserID == CurrentUser.UserID)
-                .Get();
-        return Pharmacist.Model ?? throw new Exception("You are not a pharmacist!");
+        return CurrentUser;
     }
 }

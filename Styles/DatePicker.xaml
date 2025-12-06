@@ -33,7 +33,10 @@
                                                HorizontalContentAlignment="Left"
                                                Padding="{TemplateBinding Padding}"
                                                FontSize="{TemplateBinding FontSize}"
-                                               FontFamily="{TemplateBinding FontFamily}"/>
+                                               FontFamily="{TemplateBinding FontFamily}"
+                                               Text="{Binding Path=SelectedDate, StringFormat='dd/MM/yyyy', 
+                                                      RelativeSource={RelativeSource AncestorType={x:Type DatePicker}}}">
+                            </DatePickerTextBox>
 
                             <Button x:Name="PART_Button"
                                 Grid.Column="1"

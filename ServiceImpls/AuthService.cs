@@ -46,7 +46,7 @@ public class AuthService : IAuthService
         if (!user.IsActive) 
             throw new Exception("Account is deactivated");
 
-        _currentUserStore.SetUser(user);
+        await _currentUserStore.SetUser(user);
 
         return user;
     }

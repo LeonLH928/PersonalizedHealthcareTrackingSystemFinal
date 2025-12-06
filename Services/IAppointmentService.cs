@@ -3,6 +3,8 @@
 namespace PersonalizedHealthcareTrackingSystemFinal.Services;
 public interface IAppointmentService
 {
-    Task<IEnumerable<AppointmentModel>> GetAllAppointmentsByDoctorIDAsync();
-    Task<AppointmentModel> GetNearestAppointmentByDoctorIDAsync();
+    Task AddAppointmentAsync(AppointmentModel NewAppointment);
+    Task<IEnumerable<AppointmentModel>> GetAllAppointmentsByDoctorIDAsync(string DoctorID);
+    Task<AppointmentModel?> GetNearestAppointmentByDoctorIDAsync(string DoctorID);
+    Task<AppointmentModel?> GetAppointmentByIDAsync(string AppointmentID);
 }

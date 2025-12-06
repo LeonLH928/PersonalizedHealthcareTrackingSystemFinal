@@ -18,10 +18,10 @@ public class PrescriptionModel : BaseModel
     public PrescriptionStatus Status { get; set; } = PrescriptionStatus.Pending;
 
     [Column("VerifiedAt")]
-    public DateTime VerifiedAt { get; set; } = DateTime.UtcNow;
+    public DateTime? VerifiedAt { get; set; } = null!;
 
     [Column("DispensedAt")]
-    public DateTime DispensedAt { get; set; } = DateTime.UtcNow;
+    public DateTime? DispensedAt { get; set; } = null!;
 
     [Column("Priority")]
     public Priority Priority { get; set; } = Priority.Routine;
@@ -31,4 +31,10 @@ public class PrescriptionModel : BaseModel
 
     [Column("PharmacistID")]
     public string PharmacistID { get; set; } = "";
+
+    [Reference(typeof(MedicationModel))]
+    public MedicalRecordModel MedicalRecord { get; set; } = null!;
+
+    [Reference(typeof(PharmacistModel))]
+    public PharmacistModel Pharmacist { get; set; } = null!;
 }

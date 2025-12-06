@@ -7,7 +7,5 @@ public interface ICurrentUserStoreRepository
     Task SetUser(UserModel user);
     Task ClearUser();
     bool IsLoggedIn => CurrentUser != null;
-    Task<DoctorModel> GetDoctorFromUserAsync();
-    Task<PatientModel> GetPatientFromUserAsync();
-    Task<PharmacistModel> GetPharmacistFromUserAsync();
+    UserModel? GetCurrentUserAsync();
 }

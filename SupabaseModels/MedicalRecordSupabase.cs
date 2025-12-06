@@ -1,32 +1,33 @@
 ﻿using Supabase.Postgrest.Attributes;
 using Supabase.Postgrest.Models;
-using System;
 
-namespace PersonalizedHealthcareTrackingSystemFinal.SupabaseModels
+namespace PersonalizedHealthcareTrackingSystemFinal.SupabaseModels;
+
+[Table("MedicalRecords")]
+public class MedicalRecordModel : BaseModel
 {
-    [Table("MedicalRecords")]
-    public class MedicalRecordModel : BaseModel
-    {
-        [PrimaryKey]
-        [Column("RecordID")]
-        public string RecordID { get; set; } = "";
+    [PrimaryKey]
+    [Column("RecordID")]
+    public string RecordID { get; set; } = "";
 
-        [Column("VisitTime")]
-        public DateTime VisitTime { get; set; } = DateTime.UtcNow;
+    [Column("VisitTime")]
+    public DateTime VisitTime { get; set; } = DateTime.UtcNow;
 
-        [Column("Diagnosis")]
-        public string Diagnosis { get; set; } = "";
+    [Column("Diagnosis")]
+    public string Diagnosis { get; set; } = "";
 
-        [Column("TreatmentPlan")]
-        public string TreatmentPlan { get; set; } = "";
+    [Column("TreatmentPlan")]
+    public string TreatmentPlan { get; set; } = "";
 
-        [Column("DoctorNotes")]
-        public string DoctorNotes { get; set; } = "";
+    [Column("DoctorNotes")]
+    public string DoctorNotes { get; set; } = "";
 
-        [Column("NextVisitDate")]
-        public DateTime NextVisitDate { get; set; } = DateTime.UtcNow;
+    [Column("NextVisitDate")]
+    public DateTime NextVisitDate { get; set; } = DateTime.UtcNow;
 
-        [Column("AppointmentID")]
-        public string AppointmentID { get; set; } = "";
-    }
+    [Column("AppointmentID")]
+    public string AppointmentID { get; set; } = "";
+
+    [Reference(typeof(AppointmentModel))]
+    public AppointmentModel Appointment { get; set; } = null!;
 }

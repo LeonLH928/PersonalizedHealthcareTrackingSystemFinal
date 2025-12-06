@@ -16,8 +16,8 @@ public class PrescriptionModel
     [Required]
     public DateTime PrescriptionDateTime { get; set; } = DateTime.UtcNow;
     public PrescriptionStatus Status { get; set; } = PrescriptionStatus.Pending;
-    public DateTime VerifiedAt { get; set; } = DateTime.UtcNow;
-    public DateTime DispensedAt { get; set; } = DateTime.UtcNow;
+    public DateTime? VerifiedAt { get; set; } = null!;
+    public DateTime? DispensedAt { get; set; } = null!;
     [Required]
     public Priority Priority { get; set; } = Priority.Routine;
     [ForeignKey(nameof(MedicalRecordModel))]

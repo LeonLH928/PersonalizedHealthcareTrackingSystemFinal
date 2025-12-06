@@ -3,5 +3,5 @@
 namespace PersonalizedHealthcareTrackingSystemFinal.Interfaces;
 public interface IPatientRepository
 {
-    Task<PatientModel> GetPatientByIDAsync(string PatientID);
+    Task<PatientModel?> GetPatientByIDAsync(string PatientID);
 }

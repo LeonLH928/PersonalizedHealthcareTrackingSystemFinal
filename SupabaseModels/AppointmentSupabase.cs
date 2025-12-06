@@ -37,4 +37,10 @@ public class AppointmentModel : BaseModel
 
     [Column("DoctorID")]
     public string DoctorID { get; set; } = "";
+    
+    [Reference(typeof(PatientModel))]
+    public PatientModel Patient { get; set; } = null!;
+    
+    [Reference(typeof(DoctorModel))]
+    public DoctorModel Doctor { get; set; } = null!;
 }

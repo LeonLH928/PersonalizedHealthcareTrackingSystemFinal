@@ -68,6 +68,8 @@ public static class AppModule
         services.AddTransient<Views.DoctorView.DoctorDashboardPage>();
         services.AddTransient<Views.DoctorView.DoctorConsultationWindow>();
         services.AddTransient<Views.DoctorView.DoctorUpcomingsPage>();
+        services.AddTransient<Views.DoctorView.AddDrugWindow>();
+
         services.AddTransient<Views.PharmacistView.PharmacistMainWindow>();
         services.AddTransient<Views.PharmacistView.PharmacistQueuePage>();
         services.AddTransient<Views.PharmacistView.PharmacistDashboard>();
@@ -78,6 +80,7 @@ public static class AppModule
         services.AddTransient<SignUpWindowViewModel>();
         services.AddTransient<ViewModels.DoctorViewModel.DoctorDashboardPageViewModel>();
         services.AddTransient<ViewModels.DoctorViewModel.DoctorConsultationWindowViewModel>();
+        services.AddTransient<ViewModels.DoctorViewModel.AddDrugWindowViewModel>();
 
         // Register Repositories
         services.AddScoped<IAppointmentRepository, AppointmentRepository>();
@@ -87,12 +90,28 @@ public static class AppModule
         services.AddScoped<IRoleRepository<SupabaseModels.PharmacistModel>, RoleRepository<SupabaseModels.PharmacistModel>>();
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IPatientRepository, PatientRepository>();
+        services.AddScoped<IClinicalExaminationRepository, ClinicalExaminationRepository>();
+        services.AddScoped<IMedicalRecordRepository, MedicalRecordRepository>();
+        services.AddScoped<IMedicationRepository, MedicationRepository>();
+        services.AddScoped<IMedicationInteractionRepository, MedicationInteractionRepository>();
+        services.AddScoped<IMedicalRecordRepository, MedicalRecordRepository>();
+        services.AddScoped<IPrescriptionItemRepository, PrescriptionItemRepository>();
+        services.AddScoped<IPrescriptionRepository, PrescriptionRepository>();
+        services.AddScoped<IDoctorRepository, DoctorRepository>();
 
         // Register Services
         services.AddScoped<IAppointmentService, AppointmentService>();
         services.AddScoped<IAuthService, AuthService>();
         services.AddScoped<IUserService, UserService>();
         services.AddScoped<IPatientService, PatientService>();
+        services.AddScoped<IClinicalExaminationService, ClinicalExaminationService>();
+        services.AddScoped<IMedicalRecordService, MedicalRecordService>();
+        services.AddScoped<IMedicationService, MedicationService>();
+        services.AddScoped<IMedicationInteractionService, MedicationInteractionService>();
+        services.AddScoped<IPrescriptionItemService, PrescriptionItemService>();
+        services.AddScoped<IPrescriptionService, PrescriptionService>();
+        services.AddScoped<IDoctorService, DoctorService>();
+        services.AddScoped<ICurrentUserStoreService, CurrentUserStoreService>();
 
         return services;
     }

@@ -1,5 +1,4 @@
-﻿using PersonalizedHealthcareTrackingSystemFinal.Models;
-using Supabase.Postgrest.Attributes;
+﻿using Supabase.Postgrest.Attributes;
 using Supabase.Postgrest.Models;
 
 namespace PersonalizedHealthcareTrackingSystemFinal.SupabaseModels;
@@ -49,4 +48,7 @@ public class ClinicalExaminationModel : BaseModel
 
     [Column("RecordID")]
     public string RecordID { get; set; } = "";
+
+    [Reference(typeof(MedicalRecordModel))]
+    public MedicalRecordModel MedicalRecord { get; set; } = null!;
 }

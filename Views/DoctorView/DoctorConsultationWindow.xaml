@@ -5,6 +5,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PersonalizedHealthcareTrackingSystemFinal.Views.DoctorView"
+        xmlns:converters="clr-namespace:PersonalizedHealthcareTrackingSystemFinal.Helpers"
         mc:Ignorable="d"
         Style="{StaticResource WindowPopup}"
         WindowStartupLocation="CenterScreen"
@@ -12,6 +13,11 @@
         Width="1500"
         d:DesignHeight="2000" d:DesignWidth="1500">
 
+    <Window.Resources>
+        <converters:AddOneConverter x:Key="AddOneConverter"/>
+        <converters:ZeroToEmptyStringConverter x:Key="ZeroToEmptyStringConverter"/>
+    </Window.Resources>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -33,14 +39,14 @@
 
                     <TextBlock
                         Style="{StaticResource PageHeaderTextBlockStyle}"
-                        Text="Nguyen Van A"
+                        Text="{Binding FullName}"
                         Margin="0,0,10,0"/>
 
                     <TextBlock
                         Style="{StaticResource SecondaryTextTextBlockStyle}"
                         VerticalAlignment="Center"
                         FontSize="18"
-                        Text="(ID: P-123456)"
+                        Text="{Binding PatientID, StringFormat={}(ID: {0})}"
                         Margin="0,0,10,0"/>
 
                     <Border
@@ -48,7 +54,7 @@
                         Background="{StaticResource LightWaitingStatusBorder}">
 
                         <TextBlock
-                            Text="Happening: Blood Pressure Follow-up"
+                            Text="{Binding ChiefComplaint, StringFormat={}Happening: {0}}"
                             FontSize="16"
                             FontFamily="Segoe UI"
                             Foreground="{StaticResource AccentBlue}"
@@ -66,18 +72,20 @@
                         Orientation="Horizontal"
                         HorizontalAlignment="Right">
                         
+                        <!--
                         <Border
                             Style="{StaticResource BaseCustomBorderStyle}"
-                            Background="{StaticResource UrgentTagBorder}"
+                            Background="{StaticResource StatTagBorder}"
                             VerticalAlignment="Center">
                             <TextBlock
-                                Text="⚠️ Warning: The patient has extreme Penicillin allergy"
+                                Text="{Binding Allergy, StringFormat={}⚠️ Warning: The patient has {0}}"
                                 FontFamily="Segoe UI"
-                                Foreground="{StaticResource UrgentTagTextBlock}"
+                                Foreground="{StaticResource StatTagTextBlock}"
                                 FontWeight="SemiBold"
                                 FontSize="18"/>
                         </Border>
-
+                        -->
+                        
                         <Button
                             Margin="30,0,0,0"
                             Style="{StaticResource CloseWindowButton}"
@@ -98,7 +106,7 @@
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
                 <ScrollViewer 
-                    HorizontalScrollBarVisibility="Auto"
+                    HorizontalScrollBarVisibility="Disabled"
                     VerticalScrollBarVisibility="Auto"
                     Margin="0,0,10,0">
 
@@ -136,15 +144,69 @@
                                         Margin="0,0,0,10"/>
 
                                     <TextBlock
-                                        Text="Male, 45 yo"
                                         Style="{StaticResource CustomBaseTextBlockStyle}"
-                                        FontSize="20"/>
+                                        FontSize="16">
+                                        <TextBlock.Text>
+                                            <MultiBinding StringFormat="{}{0}, {1} yo">
+                                                <Binding Path="Gender"/>
+                                                <Binding Path="Age"/>
+                                            </MultiBinding>
+                                        </TextBlock.Text>
+                                    </TextBlock>
 
                                     <TextBlock
-                                        Text="Blood type: A+"
+                                        Text="{Binding BloodType, StringFormat={}Blood type: {0}}"
                                         Style="{StaticResource CustomBaseTextBlockStyle}"
-                                        FontSize="20"
+                                        FontSize="16"
                                         Margin="0,0,0,20"/>
+
+                                    <TextBlock
+                                        Text="FAMILY HISTORY"
+                                        Style="{StaticResource SecondaryTextTextBlockStyle}"
+                                        FontSize="16"
+                                        Margin="0,0,0,10"/>
+
+                                    <ItemsControl ItemsSource="{Binding ClinicalExaminations}"
+                                                  Margin="0,0,0,20">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <TextBlock
+                                                    Style="{StaticResource CustomBaseTextBlockStyle}"
+                                                    FontSize="16">
+                                                    <TextBlock.Text>
+                                                        <MultiBinding StringFormat="{}• {0:dd/MM/yyyy}: {1}">
+                                                            <Binding Path="MedicalRecord.VisitTime"/>
+                                                            <Binding Path="FamilyHistory"/>
+                                                        </MultiBinding>
+                                                    </TextBlock.Text>
+                                                </TextBlock>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+
+                                    <TextBlock
+                                        Text="LIFESTYLE HABITS"
+                                        Style="{StaticResource SecondaryTextTextBlockStyle}"
+                                        FontSize="16"
+                                        Margin="0,0,0,10"/>
+
+                                    <ItemsControl ItemsSource="{Binding ClinicalExaminations}"
+                                                  Margin="0,0,0,20">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <TextBlock
+                                                    Style="{StaticResource CustomBaseTextBlockStyle}"
+                                                    FontSize="16">
+                                                    <TextBlock.Text>
+                                                        <MultiBinding StringFormat="{}• {0:dd/MM/yyyy}: {1}">
+                                                            <Binding Path="MedicalRecord.VisitTime"/>
+                                                            <Binding Path="LifestyleHabits"/>
+                                                        </MultiBinding>
+                                                    </TextBlock.Text>
+                                                </TextBlock>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
 
                                     <TextBlock
                                         Text="ALLERGIES"
@@ -153,15 +215,32 @@
                                         FontSize="16"
                                         Margin="0,0,0,10"/>
 
-                                    <Border
-                                        Style="{StaticResource UrgentBorderStyle}"
-                                        Margin="0,0,0,20">
-                                        <TextBlock
-                                            Text="⚠ Penicillin allergy (Anaphylaxis)"
-                                            FontFamily="Segoe UI"
-                                            FontSize="20"
-                                            Foreground="{StaticResource UrgentTagTextBlock}"/>
-                                    </Border>
+                                    <ItemsControl ItemsSource="{Binding ClinicalExaminations}"
+                                             Margin="0,0,0,20"
+                                             Background="Transparent"
+                                             BorderBrush="Transparent">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <Border
+                                                    Style="{StaticResource BaseCustomBorderStyle}"
+                                                    Background="{StaticResource StatTagBorder}"
+                                                    BorderBrush="{StaticResource StatTagBorderBrush}"
+                                                    Margin="0,0,0,10">
+                                                    <TextBlock
+                                                        FontFamily="Segoe UI"
+                                                        FontSize="16"
+                                                        Foreground="{StaticResource StatTagTextBlock}">
+                                                        <TextBlock.Text>
+                                                            <MultiBinding StringFormat="{}⚠ {0} ({1:dd/MM/yyy})">
+                                                                <Binding Path="Allergies"/>
+                                                                <Binding Path="MedicalRecord.VisitTime"/>
+                                                            </MultiBinding>
+                                                        </TextBlock.Text>
+                                                    </TextBlock>
+                                                </Border>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
 
                                     <TextBlock
                                         Text="MEDICAL RECORD"
@@ -169,24 +248,26 @@
                                         FontSize="16"
                                         Margin="0,0,0,10"/>
 
+                                    <ItemsControl ItemsSource="{Binding ClinicalExaminations}"
+                                                  Margin="0,0,0,20">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <TextBlock
+                                                    Style="{StaticResource CustomBaseTextBlockStyle}"
+                                                    FontSize="16">
+                                                    <TextBlock.Text>
+                                                        <MultiBinding StringFormat="{}• {0:dd/MM/yyyy}: {1}">
+                                                            <Binding Path="MedicalRecord.VisitTime"/>
+                                                            <Binding Path="MedicalHistory"/>
+                                                        </MultiBinding>
+                                                    </TextBlock.Text>
+                                                </TextBlock>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                    
                                     <TextBlock
-                                        Text="• High blood pressure (in 2020)"
-                                        Style="{StaticResource CustomBaseTextBlockStyle}"
-                                        FontSize="20"/>
-
-                                    <TextBlock
-                                        Text="• Blood fat disorder (in 2020)"
-                                        Style="{StaticResource CustomBaseTextBlockStyle}"
-                                        FontSize="20"/>
-
-                                    <TextBlock
-                                        Text="• GERD"
-                                        Style="{StaticResource CustomBaseTextBlockStyle}"
-                                        FontSize="20"
-                                        Margin="0,0,0,20"/>
-                                
-                                    <TextBlock
-                                        Text="LAST VITAL SIGNS (20/09/2023)"
+                                        Text="{Binding LatestClinicalExamination.MedicalRecord.VisitTime, StringFormat={}LAST VITAL SIGNS ({0:dd/MM/yyyy})}"
                                         Style="{StaticResource SecondaryTextTextBlockStyle}"
                                         FontSize="16"
                                         Margin="0,0,0,10"/>
@@ -197,39 +278,38 @@
                                             <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
                                         <TextBlock
-                                            Text="Blood pressure: "
+                                            Text="Temperature: "
                                             Style="{StaticResource CustomBaseTextBlockStyle}"
-                                            FontSize="20"/>
+                                            FontSize="16"/>
 
                                         <TextBlock
                                             Grid.Column="1"
                                             HorizontalAlignment="Right"
-                                            Text="150/95 mmHG"
+                                            Text="{Binding LatestClinicalExamination.Temperature, StringFormat={}{0}℃}"
                                             Style="{StaticResource CustomBaseTextBlockStyle}"
-                                            FontSize="20"
+                                            FontSize="16"
                                             FontWeight="SemiBold"/>
                                     </Grid>
 
                                     <Rectangle
                                         Style="{StaticResource DottedLine}"
                                         Margin="0,10"/>
-
                                     <Grid>
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="*"/>
                                             <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
                                         <TextBlock
-                                            Text="Pulse: "
+                                            Text="Height: "
                                             Style="{StaticResource CustomBaseTextBlockStyle}"
-                                            FontSize="20"/>
+                                            FontSize="16"/>
 
                                         <TextBlock
                                             Grid.Column="1"
                                             HorizontalAlignment="Right"
-                                            Text="88 bpm"
+                                            Text="{Binding LatestClinicalExamination.Height, StringFormat={}{0} cm}"
                                             Style="{StaticResource CustomBaseTextBlockStyle}"
-                                            FontSize="20"
+                                            FontSize="16"
                                             FontWeight="SemiBold"/>
                                     </Grid>
 
@@ -244,21 +324,140 @@
                                         <TextBlock
                                             Text="Weight: "
                                             Style="{StaticResource CustomBaseTextBlockStyle}"
-                                            FontSize="20"/>
+                                            FontSize="16"/>
 
                                         <TextBlock
                                             Grid.Column="1"
                                             HorizontalAlignment="Right"
-                                            Text="78 kg"
+                                            Text="{Binding LatestClinicalExamination.Weight, StringFormat={}{0} kg}"
                                             Style="{StaticResource CustomBaseTextBlockStyle}"
-                                            FontSize="20"
+                                            FontSize="16"
                                             FontWeight="SemiBold"/>
                                     </Grid>
 
                                     <Rectangle
                                         Style="{StaticResource DottedLine}"
                                         Margin="0,10"/>
-                            
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock
+                                            Text="Pulse: "
+                                            Style="{StaticResource CustomBaseTextBlockStyle}"
+                                            FontSize="16"/>
+
+                                        <TextBlock
+                                            Grid.Column="1"
+                                            HorizontalAlignment="Right"
+                                            Text="{Binding LatestClinicalExamination.Pulse, StringFormat={}{0} bpm}"
+                                            Style="{StaticResource CustomBaseTextBlockStyle}"
+                                            FontSize="16"
+                                            FontWeight="SemiBold"/>
+                                    </Grid>
+
+                                    <Rectangle
+                                        Style="{StaticResource DottedLine}"
+                                        Margin="0,10"/>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock
+                                            Text="Blood pressure: "
+                                            Style="{StaticResource CustomBaseTextBlockStyle}"
+                                            FontSize="16"/>
+
+                                        <TextBlock
+                                            Grid.Column="1"
+                                            HorizontalAlignment="Right"
+                                            Text="{Binding LatestClinicalExamination.BloodPressure, StringFormat={}{0} mmHG}"
+                                            Style="{StaticResource CustomBaseTextBlockStyle}"
+                                            FontSize="16"
+                                            FontWeight="SemiBold"/>
+                                    </Grid>
+
+                                    <Rectangle
+                                        Style="{StaticResource DottedLine}"
+                                        Margin="0,10"/>
+
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock
+                                            Text="Respiratory rate: "
+                                            Style="{StaticResource CustomBaseTextBlockStyle}"
+                                            FontSize="16"/>
+
+                                        <TextBlock
+                                            Grid.Column="1"
+                                            HorizontalAlignment="Right"
+                                            Text="{Binding LatestClinicalExamination.RespiratoryRate, StringFormat={}{0}%}"
+                                            Style="{StaticResource CustomBaseTextBlockStyle}"
+                                            FontSize="16"
+                                            FontWeight="SemiBold"/>
+                                    </Grid>
+
+                                    <Rectangle
+                                        Style="{StaticResource DottedLine}"
+                                        Margin="0,10"/>
+                                    
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock
+                                            Text="Oxygen saturation: "
+                                            Style="{StaticResource CustomBaseTextBlockStyle}"
+                                            FontSize="16"/>
+
+                                        <TextBlock
+                                            Grid.Column="1"
+                                            HorizontalAlignment="Right"
+                                            Text="{Binding LatestClinicalExamination.OxygenSaturation, StringFormat={}{0}%}"
+                                            Style="{StaticResource CustomBaseTextBlockStyle}"
+                                            FontSize="16"
+                                            FontWeight="SemiBold"/>
+                                    </Grid>
+
+                                    <Rectangle
+                                        Style="{StaticResource DottedLine}"
+                                        Margin="0,10,0,20"/>
+
+                                    <TextBlock
+                                        Text="DIAGNOSIS"
+                                        Style="{StaticResource SecondaryTextTextBlockStyle}"
+                                        FontSize="16"
+                                        Margin="0,0,0,10"/>
+
+                                    <ItemsControl 
+                                        ItemsSource="{Binding MedicalRecords}">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="*"/>
+                                                        <ColumnDefinition Width="*"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <TextBlock
+                                                        Style="{StaticResource CustomBaseTextBlockStyle}"
+                                                        FontSize="16">
+                                                        <TextBlock.Text>
+                                                            <MultiBinding StringFormat="{}• {0:dd/MM/yyyy}: {1}">
+                                                                <Binding Path="VisitTime"/>
+                                                                <Binding Path="Diagnosis"/>
+                                                            </MultiBinding>
+                                                        </TextBlock.Text>
+                                                    </TextBlock>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
                                 </StackPanel>
                             </Border>
                         </StackPanel>
@@ -318,7 +517,7 @@
                                             Margin="0,0,0,20">
 
                                             <TextBlock
-                                                Text="Follow-up visit, mild headache sometimes."
+                                                Text="{Binding LatestAppointment.ChiefComplaint}"
                                                 Style="{StaticResource CustomBaseTextBlockStyle}"/>
 
                                         </Border>
@@ -329,6 +528,63 @@
                                             FontSize="16"
                                             FontWeight="SemiBold"
                                             Margin="0,0,0,10"/>
+
+                                        <Grid Margin="0,0,0,10">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="15"/>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="15"/>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="15"/>
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+
+                                            <StackPanel Grid.Column="0">
+                                                <TextBlock Text="Temperature (℃)"
+                                                           Style="{StaticResource CustomBaseTextBlockStyle}"
+                                                           FontSize="14"
+                                                           Margin="0,0,0,5"/>
+                                                <TextBox Tag="Example: 32"
+                                                         Text="{Binding Temperature,
+                                                                        Converter={StaticResource ZeroToEmptyStringConverter}}"
+                                                         Style="{StaticResource CurrentExamInputTextBoxStyle}"/>
+                                            </StackPanel>
+
+                                            <StackPanel Grid.Column="2">
+                                                <TextBlock Text="Height (cm)"
+                                                           Style="{StaticResource CustomBaseTextBlockStyle}"
+                                                           FontSize="14"
+                                                           Margin="0,0,0,5"/>
+                                                <TextBox Tag="Example: 165"
+                                                         Text="{Binding Height,
+                                                                        Converter={StaticResource ZeroToEmptyStringConverter}}"
+                                                         Style="{StaticResource CurrentExamInputTextBoxStyle}"/>
+                                            </StackPanel>
+
+                                            <StackPanel Grid.Column="4">
+                                                <TextBlock Text="Weight (kg)"
+                                                           Style="{StaticResource CustomBaseTextBlockStyle}"
+                                                           FontSize="14"
+                                                           Margin="0,0,0,5"/>
+                                                <TextBox Tag="Example: 65"
+                                                         Text="{Binding Weight,
+                                                                        Converter={StaticResource ZeroToEmptyStringConverter}}"
+                                                        Style="{StaticResource CurrentExamInputTextBoxStyle}"/>
+                                            </StackPanel>
+
+                                            <StackPanel Grid.Column="6">
+                                                <TextBlock Text="Pulse (bpm)"
+                                                           Style="{StaticResource CustomBaseTextBlockStyle}"
+                                                           FontSize="14"
+                                                           Margin="0,0,0,5"/>
+                                                <TextBox Tag="Example: 80"
+                                                         Text="{Binding Pulse,
+                                                                        Converter={StaticResource ZeroToEmptyStringConverter}}"
+                                                         Style="{StaticResource CurrentExamInputTextBoxStyle}"/>
+                                            </StackPanel>
+                                            
+                                        </Grid>
 
                                         <Grid Margin="0,0,0,20">
                                             <Grid.ColumnDefinitions>
@@ -345,15 +601,18 @@
                                                            FontSize="14"
                                                            Margin="0,0,0,5"/>
                                                 <TextBox Tag="Example: 130/85"
+                                                         Text="{Binding BloodPressure}"
                                                          Style="{StaticResource CurrentExamInputTextBoxStyle}"/>
                                             </StackPanel>
 
                                             <StackPanel Grid.Column="2">
-                                                <TextBlock Text="Pulse (bpm)"
+                                                <TextBlock Text="Respiratory rate (%)"
                                                            Style="{StaticResource CustomBaseTextBlockStyle}"
                                                            FontSize="14"
                                                            Margin="0,0,0,5"/>
                                                 <TextBox Tag="Example: 80"
+                                                         Text="{Binding RespiratoryRate,
+                                                                        Converter={StaticResource ZeroToEmptyStringConverter}}"
                                                         Style="{StaticResource CurrentExamInputTextBoxStyle}"/>
                                             </StackPanel>
 
@@ -363,20 +622,51 @@
                                                            FontSize="14"
                                                            Margin="0,0,0,5"/>
                                                 <TextBox Tag="Example: 98"
+                                                         Text="{Binding OxygenSaturation,
+                                                                        Converter={StaticResource ZeroToEmptyStringConverter}}"
                                                          Style="{StaticResource CurrentExamInputTextBoxStyle}"/>
                                             </StackPanel>
                                         </Grid>
 
+                                        <TextBlock
+                                            Text="Family history"
+                                            Style="{StaticResource CustomBaseTextBlockStyle}"
+                                            FontSize="16"
+                                            FontWeight="SemiBold"
+                                            Margin="0,0,0,10"/>
+
+                                        <TextBox
+                                            Tag="Describe the medical problems of the family tree."
+                                            Height="100"
+                                            Text="{Binding FamilyHistory}"
+                                            Style="{StaticResource CurrentExamTextTextBoxStyle}"
+                                            Margin="0,0,0,20"/>
+                                        
+                                        <TextBlock
+                                            Text="Lifestyle habits"
+                                            Style="{StaticResource CustomBaseTextBlockStyle}"
+                                            FontSize="16"
+                                            FontWeight="SemiBold"
+                                            Margin="0,0,0,10"/>
+
+                                        <TextBox
+                                            Tag="Describe what relating to health might the patient do everyday."
+                                            Height="100"
+                                            Text="{Binding LifestyleHabits}"
+                                            Style="{StaticResource CurrentExamTextTextBoxStyle}"
+                                            Margin="0,0,0,20"/>
+                                        
                                         <TextBlock
                                             Text="Symptoms &amp; Clinical examination"
                                             Style="{StaticResource CustomBaseTextBlockStyle}"
                                             FontSize="16"
                                             FontWeight="SemiBold"
                                             Margin="0,0,0,10"/>
-                                        
+
                                         <TextBox
                                             Tag="Describe subjective symptons, objective signs, etc."
                                             Height="200"
+                                            Text="{Binding Symptoms}"
                                             Style="{StaticResource CurrentExamTextTextBoxStyle}"
                                             Margin="0,0,0,20"/>
 
@@ -391,6 +681,34 @@
                                         <TextBox
                                             FontWeight="Bold"
                                             FontSize="18"
+                                            Text="{Binding Diagnosis}"
+                                            Style="{StaticResource CurrentExamInputTextBoxStyle}"
+                                            Margin="0,0,0,20"/>
+
+                                        <TextBlock
+                                            Text="Treatment Plan"
+                                            Style="{StaticResource CustomBaseTextBlockStyle}"
+                                            FontWeight="SemiBold"
+                                            Foreground="{StaticResource AccentBlue}"
+                                            Margin="0,0,0,10"/>
+
+                                        <TextBox
+                                            FontWeight="Bold"
+                                            FontSize="18"
+                                            Text="{Binding TreatmentPlan}"
+                                            Style="{StaticResource CurrentExamInputTextBoxStyle}"
+                                            Margin="0,0,0,20"/>
+                                        
+                                        <TextBlock
+                                            Text="Note"
+                                            Style="{StaticResource CustomBaseTextBlockStyle}"
+                                            FontWeight="SemiBold"
+                                            Foreground="{StaticResource TextGray}"
+                                            Margin="0,0,0,10"/>
+
+                                        <TextBox
+                                            FontSize="18"
+                                            Text="{Binding Note}"
                                             Style="{StaticResource CurrentExamInputTextBoxStyle}"
                                             Margin="0,0,0,20"/>
 
@@ -434,12 +752,29 @@
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="*"/>
-                                    <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
-                                <TextBox  
-                                        Tag="Search drugs, active ingredients, etc."
-                                        Style="{StaticResource SearchInputTextBoxStyle}"
-                                        Margin="0,0,0,20"/>
+                                
+                                <Grid Margin="0,0,0,20">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="15"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Button
+                                        Style="{StaticResource OutlineButtonStyle}"
+                                        BorderThickness="1"
+                                        Content="＋ Add drugs"
+                                        Command="{Binding AddDrugButtonCommand}"/>
+
+                                    <Button
+                                        Grid.Column="2"
+                                        Style="{StaticResource CancelOutlineButtonStyle}"
+                                        BorderThickness="1"
+                                        Content="&#x2715; Delete all"
+                                        Command="{Binding DeleteAllCommand}"/>
+                                </Grid>
+                                
                                 <ScrollViewer
                                     Grid.Row="1"
                                     VerticalScrollBarVisibility="Auto"
@@ -450,54 +785,175 @@
                                             <RowDefinition Height="Auto"/>
                                             <RowDefinition Height="Auto"/>
                                         </Grid.RowDefinitions>
-                                        <Border
-                                            Style="{StaticResource SecondaryTextBorderStyle}"
-                                            Padding="10"
-                                            Margin="0,0,0,10">
+                                        <ItemsControl ItemsSource="{Binding SelectedMedications}" AlternationCount="9999">
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Border
+                                                        Style="{StaticResource SecondaryTextBorderStyle}"
+                                                        Padding="10"
+                                                        Margin="0,0,0,10">
 
-                                            <StackPanel
-                                                Orientation="Vertical"
-                                                Width="350">
+                                                        <StackPanel
+                                                            Orientation="Vertical"
+                                                            Width="305">
 
-                                                <Grid Margin="0,0,0,5">
-                                                    <TextBlock Text="1. Amlodipine 5mg (Tablet)"
-                                                                Style="{StaticResource CustomBaseTextBlockStyle}"
-                                                                FontSize="20"
-                                                                FontWeight="SemiBold"/>
-                                                    <Button
-                                                        HorizontalAlignment="Right"
-                                                        Content="X"
-                                                        Style="{StaticResource CloseButtonStyle}"
-                                                        Foreground="{StaticResource DangerColor}"/>
-                                                </Grid>
-                                                <Grid Margin="0,0,0,5">
-                                                    <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="100"/>
-                                                        <ColumnDefinition Width="*"/>
-                                                    </Grid.ColumnDefinitions>
-                                                    <TextBox
-                                                        Style="{StaticResource CurrentExamInputTextBoxStyle}"
-                                                        Background="White"/>
+                                                            <Grid Margin="0,0,0,5">
+                                                                <StackPanel
+                                                                    Orientation="Horizontal">
+                                                                    <TextBlock 
+                                                                        Style="{StaticResource CustomBaseTextBlockStyle}"
+                                                                        FontSize="18"
+                                                                        FontWeight="SemiBold"
+                                                                        Text="{Binding (ItemsControl.AlternationIndex),
+                                                                                       RelativeSource={RelativeSource AncestorType=ContentPresenter},
+                                                                                       Converter={StaticResource AddOneConverter}}"/>
+                                                                    <TextBlock 
+                                                                        Style="{StaticResource CustomBaseTextBlockStyle}"
+                                                                        FontSize="18"
+                                                                        FontWeight="SemiBold">
+                                                                        <TextBlock.Text>
+                                                                            <MultiBinding StringFormat="{}. {0} ({1})">
+                                                                                <Binding Path="Name"/>
+                                                                                <Binding Path="Form"/>
+                                                                            </MultiBinding>
+                                                                        </TextBlock.Text>
+                                                                    </TextBlock>
+                                                                </StackPanel>
+                                                                <Button
+                                                                    HorizontalAlignment="Right"
+                                                                    Content="X"
+                                                                    Style="{StaticResource DeleteCardButtonStyle}"
+                                                                    Command="{Binding DataContext.DeleteMedicationCommand, 
+                                                                              RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                                                    CommandParameter="{Binding}"/>
+                                                            </Grid>
+                                                            <Grid Margin="0,0,0,5">
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="*"/>
+                                                                    <ColumnDefinition Width="15"/>
+                                                                    <ColumnDefinition Width="*"/>
+                                                                </Grid.ColumnDefinitions>
+                                                                <TextBox
+                                                                    Tag="Quantity"
+                                                                    Text="{Binding DataContext.Quantity,        
+                                                                                   RelativeSource={RelativeSource AncestorType=ItemsControl},
+                                                                                   Converter={StaticResource ZeroToEmptyStringConverter}}"
+                                                                    Style="{StaticResource CurrentExamInputTextBoxStyle}"
+                                                                    Background="White"/>
 
-                                                    <TextBlock
-                                                        Grid.Column="1"
-                                                        Style="{StaticResource CustomBaseTextBlockStyle}"
-                                                        Margin="10,0,0,0"
-                                                        VerticalAlignment="Center"
-                                                        Text="Tablets"/>
-                                                </Grid>
+                                                                <TextBox
+                                                                    Grid.Column="2"
+                                                                    Tag="Dosage"
+                                                                    Text="{Binding DataContext.Dosage,
+                                                                                   RelativeSource={RelativeSource AncestorType=ItemsControl},
+                                                                                   Converter={StaticResource ZeroToEmptyStringConverter}}"
+                                                                    Style="{StaticResource CurrentExamInputTextBoxStyle}"
+                                                                    Background="White"/>
+                                                            </Grid>
+                                                            <Grid Margin="0,0,0,5">
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="*"/>
+                                                                    <ColumnDefinition Width="15"/>
+                                                                    <ColumnDefinition Width="*"/>
+                                                                </Grid.ColumnDefinitions>
+                                                                <TextBox
+                                                                    Tag="Frequency"
+                                                                    Text="{Binding DataContext.Frequency,
+                                                                                   RelativeSource={RelativeSource AncestorType=ItemsControl},
+                                                                                   Converter={StaticResource ZeroToEmptyStringConverter}}"
+                                                                    Style="{StaticResource CurrentExamInputTextBoxStyle}"
+                                                                    Background="White"/>
 
-                                                <TextBox
-                                                    Style="{StaticResource CurrentExamInputTextBoxStyle}"
-                                                    Tag="Note here."
-                                                    BorderBrush="Transparent"
-                                                    Margin="0,0,0,5"/>
+                                                                <TextBox
+                                                                    Grid.Column="2"
+                                                                    Tag="Duration (days)"
+                                                                    Text="{Binding DataContext.Duration,
+                                                                                   RelativeSource={RelativeSource AncestorType=ItemsControl},
+                                                                                   Converter={StaticResource ZeroToEmptyStringConverter}}"
+                                                                    Style="{StaticResource CurrentExamInputTextBoxStyle}"
+                                                                    Background="White"/>
+                                                            </Grid>
+                                                            <Grid Margin="0,0,0,5">
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="*"/>
+                                                                    <ColumnDefinition Width="15"/>
+                                                                    <ColumnDefinition Width="*"/>
+                                                                </Grid.ColumnDefinitions>
+                                                                <TextBox
+                                                                    Tag="Instruction"
+                                                                    Text="{Binding DataContext.Instruction,
+                                                                                   RelativeSource={RelativeSource AncestorType=ItemsControl},
+                                                                                   Converter={StaticResource ZeroToEmptyStringConverter}}"
+                                                                    Style="{StaticResource CurrentExamInputTextBoxStyle}"
+                                                                    Background="White"/>
 
-                                                <Border
-                                                    Style="{StaticResource Line}"/>
-                                            </StackPanel>
+                                                                <TextBox
+                                                                    Grid.Column="2"
+                                                                    Tag="Indication"
+                                                                    Text="{Binding DataContext.Indication,
+                                                                                   RelativeSource={RelativeSource AncestorType=ItemsControl},
+                                                                                   Converter={StaticResource ZeroToEmptyStringConverter}}"
+                                                                    Style="{StaticResource CurrentExamInputTextBoxStyle}"
+                                                                    Background="White"/>
+                                                            </Grid>
+                                                            <Grid Margin="0,0,0,10">
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="*"/>
+                                                                    <ColumnDefinition Width="15"/>
+                                                                    <ColumnDefinition Width="*"/>
+                                                                </Grid.ColumnDefinitions>
+                                                                <TextBox
+                                                                    Tag="Morning"
+                                                                    Text="{Binding DataContext.Morning,
+                                                                                   RelativeSource={RelativeSource AncestorType=ItemsControl},
+                                                                                   Converter={StaticResource ZeroToEmptyStringConverter}}"
+                                                                    Style="{StaticResource CurrentExamInputTextBoxStyle}"
+                                                                    Background="White"/>
 
-                                        </Border>
+                                                                <TextBox
+                                                                    Grid.Column="2"
+                                                                    Tag="Noon"
+                                                                    Text="{Binding DataContext.Noon,
+                                                                                   RelativeSource={RelativeSource AncestorType=ItemsControl},
+                                                                                   Converter={StaticResource ZeroToEmptyStringConverter}}"
+                                                                    Style="{StaticResource CurrentExamInputTextBoxStyle}"
+                                                                    Background="White"/>
+                                                            </Grid>
+
+                                                            <Grid Margin="0,0,0,10">
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="*"/>
+                                                                    <ColumnDefinition Width="15"/>
+                                                                    <ColumnDefinition Width="*"/>
+                                                                </Grid.ColumnDefinitions>
+                                                                <TextBox
+                                                                    Tag="Afternoon"
+                                                                    Text="{Binding DataContext.Afternoon,
+                                                                                   RelativeSource={RelativeSource AncestorType=ItemsControl},
+                                                                                   Converter={StaticResource ZeroToEmptyStringConverter}}"
+                                                                    Style="{StaticResource CurrentExamInputTextBoxStyle}"
+                                                                    Background="White"/>
+
+                                                                <TextBox
+                                                                    Grid.Column="2"
+                                                                    Tag="Night"
+                                                                    Text="{Binding DataContext.Night,
+                                                                                   RelativeSource={RelativeSource AncestorType=ItemsControl},
+                                                                                   Converter={StaticResource ZeroToEmptyStringConverter}}"
+                                                                    Style="{StaticResource CurrentExamInputTextBoxStyle}"
+                                                                    Background="White"/>
+                                                            </Grid>
+
+                                                            <Border
+                                                                Style="{StaticResource Line}"
+                                                                BorderBrush="{StaticResource TextGray}"/>
+                                                        </StackPanel>
+
+                                                    </Border>
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
+                                        <!--
                                         <Border
                                             Grid.Row="1"
                                             Style="{StaticResource SecondaryTextBorderStyle}"
@@ -516,7 +972,7 @@
                                                     <Button
                                                         HorizontalAlignment="Right"
                                                         Content="X"
-                                                        Style="{StaticResource CloseButtonStyle}"
+                                                        Style="{StaticResource DeleteCardButtonStyle}"
                                                         Foreground="{StaticResource DangerColor}"/>
                                                 </Grid>
                                                 <Grid Margin="0,0,0,5">
@@ -546,105 +1002,144 @@
                                                     Style="{StaticResource Line}"/>
                                             </StackPanel>
                                         </Border>
+                                        -->
+                                        <ItemsControl ItemsSource="{Binding MedicationInteractions}"
+                                                      Background="Transparent"
+                                                      BorderBrush="Transparent"
+                                                      Margin="0,0,0,20"
+                                                    Grid.Row="1">
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Border
+                                                        Background="White"
+                                                        CornerRadius="8"
+                                                        BorderBrush="{StaticResource LightBorder}"
+                                                        BorderThickness="1"
+                                                        Margin="0,0,0,10">
+                                                        <StackPanel
+                                                            Orientation="Vertical"
+                                                            HorizontalAlignment="Stretch"
+                                                            VerticalAlignment="Top">
+                                                            <Border
+                                                                Background="{StaticResource DangerColor}"
+                                                                Padding="10"
+                                                                CornerRadius="8,8,0,0"
+                                                                BorderBrush="{StaticResource LightBorder}"
+                                                                BorderThickness="0,0,0,1">
+                                                                <TextBlock
+                                                                    Text="{Binding Severity, StringFormat={}⚠️ DETECTING DRUG INTERACTIONS (Level: {0})}"
+                                                                    FontFamily="Segoe UI"
+                                                                    FontWeight="SemiBold"
+                                                                    Foreground="White"
+                                                                    TextWrapping="Wrap"
+                                                                    FontSize="18"/>
+                                                            </Border>
 
-                                        <Border
-                                            Grid.Row="2"
-                                            Background="White"
-                                            CornerRadius="8"
-                                            BorderBrush="{StaticResource LightBorder}"
-                                            BorderThickness="1"
-                                            Margin="0,0,0,20">
-                                            <StackPanel
-                                                Orientation="Vertical"
-                                                HorizontalAlignment="Stretch"
-                                                VerticalAlignment="Top">
-                                                <Border
-                                                    Background="{StaticResource DangerColor}"
-                                                    Padding="10"
-                                                    CornerRadius="8,8,0,0"
-                                                    BorderBrush="{StaticResource LightBorder}"
-                                                    BorderThickness="0,0,0,1">
-                                                    <TextBlock
-                                                        Text="⚠️ DETECTING DRUG INTERACTIONS (Level: Moderate)"
-                                                        FontFamily="Segoe UI"
-                                                        FontWeight="SemiBold"
-                                                        Foreground="White"
-                                                        TextWrapping="Wrap"
-                                                        FontSize="18"/>
-                                                </Border>
+                                                            <Border Padding="10"
+                                                                    Style="{StaticResource BaseCustomBorderStyle}"
+                                                                    Background="{StaticResource StatTagBorder}"
+                                                                    BorderBrush="{StaticResource StatTagBorderBrush}"
+                                                                    CornerRadius="0,0,8,8">
 
-                                                <Border Padding="10"
-                                                        Style="{StaticResource BaseCustomBorderStyle}"
-                                                        Background="{StaticResource UrgentTagBorder}"
-                                                        CornerRadius="0,0,8,8">
+                                                                <StackPanel>
+                                                                    <Grid>
+                                                                        <Grid.ColumnDefinitions>
+                                                                            <ColumnDefinition Width="Auto"/>
+                                                                            <ColumnDefinition Width="*"/>
+                                                                        </Grid.ColumnDefinitions>
+                                                                        <TextBlock
+                                                                            Text="Between: "
+                                                                            TextWrapping="Wrap"
+                                                                            Margin="0,0,0,10"
+                                                                            Style="{StaticResource CustomBaseTextBlockStyle}"
+                                                                            Foreground="#7f1d1d"
+                                                                            FontWeight="SemiBold"/>
 
-                                                    <StackPanel>
-                                                        <Grid>
-                                                            <Grid.ColumnDefinitions>
-                                                                <ColumnDefinition Width="Auto"/>
-                                                                <ColumnDefinition Width="*"/>
-                                                            </Grid.ColumnDefinitions>
-                                                            <TextBlock
-                                                                Text="Between: "
-                                                                TextWrapping="Wrap"
-                                                                Margin="0,0,0,10"
-                                                                Style="{StaticResource CustomBaseTextBlockStyle}"
-                                                                Foreground="#7f1d1d"
-                                                                FontWeight="SemiBold"/>
+                                                                        <TextBlock
+                                                                            Grid.Column="1"
+                                                                            TextWrapping="Wrap"
+                                                                            Margin="0,0,0,10"
+                                                                            Style="{StaticResource CustomBaseTextBlockStyle}"
+                                                                            Foreground="#7f1d1d">
+                                                                            <TextBlock.Text>
+                                                                                <MultiBinding StringFormat="{}{0} ↔️ {1}">
+                                                                                    <Binding Path="Medication1.Name"/>
+                                                                                    <Binding Path="Medication2.Name"/>
+                                                                                </MultiBinding>
+                                                                            </TextBlock.Text>
+                                                                        </TextBlock>
+                                                                    </Grid>
+                                                                    <Grid>
+                                                                        <Grid.ColumnDefinitions>
+                                                                            <ColumnDefinition Width="Auto"/>
+                                                                            <ColumnDefinition Width="*"/>
+                                                                        </Grid.ColumnDefinitions>
+                                                                        <TextBlock
+                                                                            Text="Description: "
+                                                                            TextWrapping="Wrap"
+                                                                            Margin="0,0,0,10"
+                                                                            Style="{StaticResource CustomBaseTextBlockStyle}"
+                                                                            Foreground="#7f1d1d"
+                                                                            FontWeight="SemiBold"/>
 
-                                                            <TextBlock
-                                                                Grid.Column="1"
-                                                                Text="Amlodipine ↔️ Simvastatin"
-                                                                TextWrapping="Wrap"
-                                                                Margin="0,0,0,10"
-                                                                Style="{StaticResource CustomBaseTextBlockStyle}"
-                                                                Foreground="#7f1d1d"/>
-                                                        </Grid>
-                                                        <Grid>
-                                                            <Grid.ColumnDefinitions>
-                                                                <ColumnDefinition Width="Auto"/>
-                                                                <ColumnDefinition Width="*"/>
-                                                            </Grid.ColumnDefinitions>
-                                                            <TextBlock
-                                                                Text="Consequences: "
-                                                                TextWrapping="Wrap"
-                                                                Margin="0,0,0,10"
-                                                                Style="{StaticResource CustomBaseTextBlockStyle}"
-                                                                Foreground="#7f1d1d"
-                                                                FontWeight="SemiBold"/>
+                                                                        <TextBlock
+                                                                            Grid.Column="1"
+                                                                            Text="{Binding Description}"
+                                                                            TextWrapping="Wrap"
+                                                                            Margin="0,0,0,10"
+                                                                            Style="{StaticResource CustomBaseTextBlockStyle}"
+                                                                            Foreground="#7f1d1d"/>
+                                                                    </Grid>
+                                                                    <Grid>
+                                                                        <Grid.ColumnDefinitions>
+                                                                            <ColumnDefinition Width="Auto"/>
+                                                                            <ColumnDefinition Width="*"/>
+                                                                        </Grid.ColumnDefinitions>
+                                                                        <TextBlock
+                                                                            Text="Effects: "
+                                                                            TextWrapping="Wrap"
+                                                                            Margin="0,0,0,10"
+                                                                            Style="{StaticResource CustomBaseTextBlockStyle}"
+                                                                            Foreground="#7f1d1d"
+                                                                            FontWeight="SemiBold"/>
 
-                                                            <TextBlock
-                                                                Grid.Column="1"
-                                                                Text="Increased risk of myopathy and rhabdomyolysis due to Simvastatin (Amlodipine increases Simvastatin concentrations)."
-                                                                TextWrapping="Wrap"
-                                                                Margin="0,0,0,10"
-                                                                Style="{StaticResource CustomBaseTextBlockStyle}"
-                                                                Foreground="#7f1d1d"/>
-                                                        </Grid>
-                                                        <Grid>
-                                                            <Grid.ColumnDefinitions>
-                                                                <ColumnDefinition Width="Auto"/>
-                                                                <ColumnDefinition Width="*"/>
-                                                            </Grid.ColumnDefinitions>
-                                                            <TextBlock
-                                                                Text="Recommendation: "
-                                                                TextWrapping="Wrap"
-                                                                Margin="0,0,0,10"
-                                                                Style="{StaticResource CustomBaseTextBlockStyle}"
-                                                                Foreground="#7f1d1d"
-                                                                FontWeight="SemiBold"/>
+                                                                        <TextBlock
+                                                                            Grid.Column="1"
+                                                                            Text="{Binding ClinicalEffects}"
+                                                                            TextWrapping="Wrap"
+                                                                            Margin="0,0,0,10"
+                                                                            Style="{StaticResource CustomBaseTextBlockStyle}"
+                                                                            Foreground="#7f1d1d"/>
+                                                                    </Grid>
+                                                                    <Grid>
+                                                                        <Grid.ColumnDefinitions>
+                                                                            <ColumnDefinition Width="Auto"/>
+                                                                            <ColumnDefinition Width="*"/>
+                                                                        </Grid.ColumnDefinitions>
+                                                                        <TextBlock
+                                                                            Text="Management: "
+                                                                            TextWrapping="Wrap"
+                                                                            Margin="0,0,0,10"
+                                                                            Style="{StaticResource CustomBaseTextBlockStyle}"
+                                                                            Foreground="#7f1d1d"
+                                                                            FontWeight="SemiBold"/>
 
-                                                            <TextBlock
-                                                                Grid.Column="1"
-                                                                Text="Do not exceed 20 mg Simvastatin/day when used with Amlodipine. Monitor closely for signs of muscle pain."
-                                                                TextWrapping="Wrap"
-                                                                Style="{StaticResource CustomBaseTextBlockStyle}"
-                                                                Foreground="#7f1d1d"/>
-                                                        </Grid>
-                                                    </StackPanel>
-                                                </Border>
-                                            </StackPanel>
-                                        </Border>
+                                                                        <TextBlock
+                                                                            Grid.Column="1"
+                                                                            Text="{Binding Management}"
+                                                                            TextWrapping="Wrap"
+                                                                            Margin="0,0,0,10"
+                                                                            Style="{StaticResource CustomBaseTextBlockStyle}"
+                                                                            Foreground="#7f1d1d"/>
+                                                                    </Grid>
+
+                                                                </StackPanel>
+                                                            </Border>
+                                                        </StackPanel>
+                                                    </Border>
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
                                     </Grid>
                                 </ScrollViewer>
 
@@ -671,7 +1166,8 @@
 
                                 <DatePicker Style="{StaticResource StandardDatePicker}"
                                             Grid.Column="1"
-                                            FontSize="16"
+                                            SelectedDate="{Binding FollowUpVisit}"
+                                            FontSize="14"
                                             Margin="0,0,5,0"/>
 
                                 <Button
@@ -679,7 +1175,8 @@
                                     Style="{StaticResource PrimaryButtonStyle}"
                                     Content="Submit" 
                                     FontSize="16"
-                                    Foreground="White"/>
+                                    Foreground="White"
+                                    Command="{Binding SubmitButtonCommand}"/>
                             </Grid>
                         </Border>
 
@@ -688,5 +1185,18 @@
                 </Border>
             </Grid>
         </Border>
+        
+        <!--
+        <Grid Visibility="{Binding IsLoading, Converter={StaticResource BoolToVisibilityConverter}}"
+              Grid.RowSpan="2" 
+              Background="#80FFFFFF" 
+              d:IsHidden="False">
+            <fa:ImageAwesome 
+                Icon="Spinner" 
+                Spin="True" 
+                Height="48" 
+                Width="48" />
+        </Grid>
+        -->
     </Grid>
 </Window>
