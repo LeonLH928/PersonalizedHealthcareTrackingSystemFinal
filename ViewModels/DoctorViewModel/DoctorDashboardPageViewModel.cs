@@ -22,21 +22,28 @@ public partial class DoctorDashboardPageViewModel : ObservableObject
     private readonly IAppointmentService _appointmentService;
     private readonly IPatientService _patientService;
     private readonly IUserService _userService;
-    public DoctorDashboardPageViewModel (IServiceProvider serviceProvider, 
-                                         IAppointmentService appointmentService,
-                                         IPatientService patientService,
-                                         IUserService userService)
+    private readonly ICurrentUserStoreService _currentUserStoreService;
+    private readonly IDoctorService _doctorService;
+    public DoctorDashboardPageViewModel(IServiceProvider serviceProvider, 
+                                        IAppointmentService appointmentService,
+                                        IPatientService patientService,
+                                        IUserService userService, 
+                                        ICurrentUserStoreService currentUserStoreService,
+                                        IDoctorService doctorService)
     {
         _serviceProvider = serviceProvider;
         _appointmentService = appointmentService;
         _patientService = patientService;
         _userService = userService;
+        _currentUserStoreService = currentUserStoreService;
+        _doctorService = doctorService;
+
         _ = LoadDataAsync();
     }
     [ObservableProperty]
     private bool isLoading = true;
     [ObservableProperty]
-    private AppointmentModel nearestUpcoming = null!;
+    private AppointmentModel? nearestUpcoming = null;
     [ObservableProperty]
     private int totalAppointments;
     [ObservableProperty]
@@ -72,10 +79,12 @@ public partial class DoctorDashboardPageViewModel : ObservableObject
         IsLoading = true;
         try
         {
-            var Appointments = await _appointmentService.GetAllAppointmentsByDoctorIDAsync();
-            NearestUpcoming = await _appointmentService.GetNearestAppointmentByDoctorIDAsync();
-            var NearestPatient = await _patientService.GetPatientByIDAsync(NearestUpcoming.PatientID);
-            var NearestPatientUser = await _userService.GetUserByIDAsync(NearestPatient.UserID);
+            var CurrentUser = _currentUserStoreService.GetCurrentUserAsync();
+            var Doctor = await  _doctorService.GetDoctorByUserIDAsync(CurrentUser!.UserID);
+            var Appointments = await _appointmentService.GetAllAppointmentsByDoctorIDAsync(Doctor!.DoctorID);
+            NearestUpcoming = await _appointmentService.GetNearestAppointmentByDoctorIDAsync(Doctor.DoctorID);
+            var NearestPatient = await _patientService.GetPatientByIDAsync(NearestUpcoming!.PatientID);
+            var NearestPatientUser = await _userService.GetUserByIDAsync(NearestPatient!.UserID);
 
             TotalAppointments = Appointments.Count();
             Upcomings = Appointments.Count(a => a.Status == Models.StatusAppointment.Scheduled);

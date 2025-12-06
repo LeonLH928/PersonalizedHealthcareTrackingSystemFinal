@@ -1,7 +1,7 @@
 ﻿using PersonalizedHealthcareTrackingSystemFinal.SupabaseModels;
 
 namespace PersonalizedHealthcareTrackingSystemFinal.Services;
-public interface IPatientService
+public interface ICurrentUserStoreService
 {
-    Task<PatientModel?> GetPatientByIDAsync(string PatientID);
+    UserModel? GetCurrentUserAsync();
 }

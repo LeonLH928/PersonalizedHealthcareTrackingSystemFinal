@@ -1,7 +1,7 @@
 ﻿using PersonalizedHealthcareTrackingSystemFinal.SupabaseModels;
 
-namespace PersonalizedHealthcareTrackingSystemFinal.Interfaces;
-public interface IPrescriptionItemRepository
+namespace PersonalizedHealthcareTrackingSystemFinal.Services;
+public interface IPrescriptionItemService
 {
     Task AddPrescriptionItemAsync(PrescriptionItemModel NewItem);
 }

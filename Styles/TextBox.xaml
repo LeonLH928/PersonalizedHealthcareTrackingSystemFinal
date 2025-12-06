@@ -136,9 +136,8 @@
                                     <Style TargetType="TextBlock">
                                         <Setter Property="Visibility" Value="Collapsed"/>
                                         <Style.Triggers>
-                                            <DataTrigger Binding="{Binding Text,
-                                                                   RelativeSource={RelativeSource TemplatedParent},
-                                                                   Converter={StaticResource ZeroToEmptyStringConverter}}" Value="">
+                                            <DataTrigger Binding="{Binding Text, 
+                                                                           RelativeSource={RelativeSource TemplatedParent}}" Value="">
                                                 <Setter Property="Visibility" Value="Visible"/>
                                             </DataTrigger>
                                         </Style.Triggers>

@@ -3,10 +3,10 @@ using PersonalizedHealthcareTrackingSystemFinal.SupabaseModels;
 using Supabase;
 
 namespace PersonalizedHealthcareTrackingSystemFinal.Repositories;
-public class PrescriptionItemRepository : IPrescriptionItemRepository
+public class PrescriptionRepository : IPrescriptionRepository
 {
-    private readonly Client _client;
-    public PrescriptionItemRepository(Client client)
+    public readonly Client _client;
+    public PrescriptionRepository(Client client)
     {
         _client = client;
         InitializeSupabase();
@@ -15,9 +15,9 @@ public class PrescriptionItemRepository : IPrescriptionItemRepository
     {
         await _client.InitializeAsync();
     }
-    public async Task AddPrescriptionItemAsync(PrescriptionItemModel NewItem)
+    public async Task AddPrescriptionAsync(PrescriptionModel NewPrescription)
     {
-        await _client.From<PrescriptionItemModel>()
-                     .Upsert(NewItem);
+        await _client.From<PrescriptionModel>()
+                     .Upsert(NewPrescription);
     }
 }

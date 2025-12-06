@@ -10,7 +10,7 @@ public class PatientService : IPatientService
     {
         _patientRepository = patientRepository;
     }
-    public async Task<PatientModel> GetPatientByIDAsync(string PatientID)
+    public async Task<PatientModel?> GetPatientByIDAsync(string PatientID)
     {
         return await _patientRepository.GetPatientByIDAsync(PatientID);
     }

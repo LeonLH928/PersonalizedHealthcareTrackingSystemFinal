@@ -10,6 +10,10 @@ public class MedicalRecordService : IMedicalRecordService
     {
         _medicalRecordRepository = medicalRecordRepository;
     }
+    public async Task AddMedicalRecordAsync(MedicalRecordModel NewRecord)
+    {
+        await _medicalRecordRepository.AddMedicalRecordAsync(NewRecord);
+    }
     public async Task<IEnumerable<MedicalRecordModel>> GetAllMedicalRecordsByPatientIDAsync(string PatientID)
     {
         return await _medicalRecordRepository.GetAllMedicalRecordsByPatientIDAsync(PatientID);

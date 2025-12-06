@@ -94,6 +94,10 @@ public static class AppModule
         services.AddScoped<IMedicalRecordRepository, MedicalRecordRepository>();
         services.AddScoped<IMedicationRepository, MedicationRepository>();
         services.AddScoped<IMedicationInteractionRepository, MedicationInteractionRepository>();
+        services.AddScoped<IMedicalRecordRepository, MedicalRecordRepository>();
+        services.AddScoped<IPrescriptionItemRepository, PrescriptionItemRepository>();
+        services.AddScoped<IPrescriptionRepository, PrescriptionRepository>();
+        services.AddScoped<IDoctorRepository, DoctorRepository>();
 
         // Register Services
         services.AddScoped<IAppointmentService, AppointmentService>();
@@ -104,6 +108,10 @@ public static class AppModule
         services.AddScoped<IMedicalRecordService, MedicalRecordService>();
         services.AddScoped<IMedicationService, MedicationService>();
         services.AddScoped<IMedicationInteractionService, MedicationInteractionService>();
+        services.AddScoped<IPrescriptionItemService, PrescriptionItemService>();
+        services.AddScoped<IPrescriptionService, PrescriptionService>();
+        services.AddScoped<IDoctorService, DoctorService>();
+        services.AddScoped<ICurrentUserStoreService, CurrentUserStoreService>();
 
         return services;
     }

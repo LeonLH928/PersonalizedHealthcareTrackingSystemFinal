@@ -15,7 +15,9 @@
 
     <Window.Resources>
         <converters:AddOneConverter x:Key="AddOneConverter"/>
+        <converters:ZeroToEmptyStringConverter x:Key="ZeroToEmptyStringConverter"/>
     </Window.Resources>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -157,6 +159,54 @@
                                         Style="{StaticResource CustomBaseTextBlockStyle}"
                                         FontSize="16"
                                         Margin="0,0,0,20"/>
+
+                                    <TextBlock
+                                        Text="FAMILY HISTORY"
+                                        Style="{StaticResource SecondaryTextTextBlockStyle}"
+                                        FontSize="16"
+                                        Margin="0,0,0,10"/>
+
+                                    <ItemsControl ItemsSource="{Binding ClinicalExaminations}"
+                                                  Margin="0,0,0,20">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <TextBlock
+                                                    Style="{StaticResource CustomBaseTextBlockStyle}"
+                                                    FontSize="16">
+                                                    <TextBlock.Text>
+                                                        <MultiBinding StringFormat="{}• {0:dd/MM/yyyy}: {1}">
+                                                            <Binding Path="MedicalRecord.VisitTime"/>
+                                                            <Binding Path="FamilyHistory"/>
+                                                        </MultiBinding>
+                                                    </TextBlock.Text>
+                                                </TextBlock>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+
+                                    <TextBlock
+                                        Text="LIFESTYLE HABITS"
+                                        Style="{StaticResource SecondaryTextTextBlockStyle}"
+                                        FontSize="16"
+                                        Margin="0,0,0,10"/>
+
+                                    <ItemsControl ItemsSource="{Binding ClinicalExaminations}"
+                                                  Margin="0,0,0,20">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <TextBlock
+                                                    Style="{StaticResource CustomBaseTextBlockStyle}"
+                                                    FontSize="16">
+                                                    <TextBlock.Text>
+                                                        <MultiBinding StringFormat="{}• {0:dd/MM/yyyy}: {1}">
+                                                            <Binding Path="MedicalRecord.VisitTime"/>
+                                                            <Binding Path="LifestyleHabits"/>
+                                                        </MultiBinding>
+                                                    </TextBlock.Text>
+                                                </TextBlock>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
 
                                     <TextBlock
                                         Text="ALLERGIES"
@@ -496,7 +546,8 @@
                                                            FontSize="14"
                                                            Margin="0,0,0,5"/>
                                                 <TextBox Tag="Example: 32"
-                                                         Text="{Binding Temperature}"
+                                                         Text="{Binding Temperature,
+                                                                        Converter={StaticResource ZeroToEmptyStringConverter}}"
                                                          Style="{StaticResource CurrentExamInputTextBoxStyle}"/>
                                             </StackPanel>
 
@@ -506,7 +557,8 @@
                                                            FontSize="14"
                                                            Margin="0,0,0,5"/>
                                                 <TextBox Tag="Example: 165"
-                                                         Text="{Binding Height}"
+                                                         Text="{Binding Height,
+                                                                        Converter={StaticResource ZeroToEmptyStringConverter}}"
                                                          Style="{StaticResource CurrentExamInputTextBoxStyle}"/>
                                             </StackPanel>
 
@@ -516,7 +568,8 @@
                                                            FontSize="14"
                                                            Margin="0,0,0,5"/>
                                                 <TextBox Tag="Example: 65"
-                                                         Text="{Binding Weight}"
+                                                         Text="{Binding Weight,
+                                                                        Converter={StaticResource ZeroToEmptyStringConverter}}"
                                                         Style="{StaticResource CurrentExamInputTextBoxStyle}"/>
                                             </StackPanel>
 
@@ -526,7 +579,8 @@
                                                            FontSize="14"
                                                            Margin="0,0,0,5"/>
                                                 <TextBox Tag="Example: 80"
-                                                         Text="{Binding Pulse}"
+                                                         Text="{Binding Pulse,
+                                                                        Converter={StaticResource ZeroToEmptyStringConverter}}"
                                                          Style="{StaticResource CurrentExamInputTextBoxStyle}"/>
                                             </StackPanel>
                                             
@@ -557,7 +611,8 @@
                                                            FontSize="14"
                                                            Margin="0,0,0,5"/>
                                                 <TextBox Tag="Example: 80"
-                                                         Text="{Binding RespiratoryRate}"
+                                                         Text="{Binding RespiratoryRate,
+                                                                        Converter={StaticResource ZeroToEmptyStringConverter}}"
                                                         Style="{StaticResource CurrentExamInputTextBoxStyle}"/>
                                             </StackPanel>
 
@@ -567,18 +622,47 @@
                                                            FontSize="14"
                                                            Margin="0,0,0,5"/>
                                                 <TextBox Tag="Example: 98"
-                                                         Text="{Binding OxygenSaturation}"
+                                                         Text="{Binding OxygenSaturation,
+                                                                        Converter={StaticResource ZeroToEmptyStringConverter}}"
                                                          Style="{StaticResource CurrentExamInputTextBoxStyle}"/>
                                             </StackPanel>
                                         </Grid>
 
+                                        <TextBlock
+                                            Text="Family history"
+                                            Style="{StaticResource CustomBaseTextBlockStyle}"
+                                            FontSize="16"
+                                            FontWeight="SemiBold"
+                                            Margin="0,0,0,10"/>
+
+                                        <TextBox
+                                            Tag="Describe the medical problems of the family tree."
+                                            Height="100"
+                                            Text="{Binding FamilyHistory}"
+                                            Style="{StaticResource CurrentExamTextTextBoxStyle}"
+                                            Margin="0,0,0,20"/>
+                                        
+                                        <TextBlock
+                                            Text="Lifestyle habits"
+                                            Style="{StaticResource CustomBaseTextBlockStyle}"
+                                            FontSize="16"
+                                            FontWeight="SemiBold"
+                                            Margin="0,0,0,10"/>
+
+                                        <TextBox
+                                            Tag="Describe what relating to health might the patient do everyday."
+                                            Height="100"
+                                            Text="{Binding LifestyleHabits}"
+                                            Style="{StaticResource CurrentExamTextTextBoxStyle}"
+                                            Margin="0,0,0,20"/>
+                                        
                                         <TextBlock
                                             Text="Symptoms &amp; Clinical examination"
                                             Style="{StaticResource CustomBaseTextBlockStyle}"
                                             FontSize="16"
                                             FontWeight="SemiBold"
                                             Margin="0,0,0,10"/>
-                                        
+
                                         <TextBox
                                             Tag="Describe subjective symptons, objective signs, etc."
                                             Height="200"
@@ -598,6 +682,33 @@
                                             FontWeight="Bold"
                                             FontSize="18"
                                             Text="{Binding Diagnosis}"
+                                            Style="{StaticResource CurrentExamInputTextBoxStyle}"
+                                            Margin="0,0,0,20"/>
+
+                                        <TextBlock
+                                            Text="Treatment Plan"
+                                            Style="{StaticResource CustomBaseTextBlockStyle}"
+                                            FontWeight="SemiBold"
+                                            Foreground="{StaticResource AccentBlue}"
+                                            Margin="0,0,0,10"/>
+
+                                        <TextBox
+                                            FontWeight="Bold"
+                                            FontSize="18"
+                                            Text="{Binding TreatmentPlan}"
+                                            Style="{StaticResource CurrentExamInputTextBoxStyle}"
+                                            Margin="0,0,0,20"/>
+                                        
+                                        <TextBlock
+                                            Text="Note"
+                                            Style="{StaticResource CustomBaseTextBlockStyle}"
+                                            FontWeight="SemiBold"
+                                            Foreground="{StaticResource TextGray}"
+                                            Margin="0,0,0,10"/>
+
+                                        <TextBox
+                                            FontSize="18"
+                                            Text="{Binding Note}"
                                             Style="{StaticResource CurrentExamInputTextBoxStyle}"
                                             Margin="0,0,0,20"/>
 
@@ -724,12 +835,18 @@
                                                                 </Grid.ColumnDefinitions>
                                                                 <TextBox
                                                                     Tag="Quantity"
+                                                                    Text="{Binding DataContext.Quantity,        
+                                                                                   RelativeSource={RelativeSource AncestorType=ItemsControl},
+                                                                                   Converter={StaticResource ZeroToEmptyStringConverter}}"
                                                                     Style="{StaticResource CurrentExamInputTextBoxStyle}"
                                                                     Background="White"/>
 
                                                                 <TextBox
                                                                     Grid.Column="2"
                                                                     Tag="Dosage"
+                                                                    Text="{Binding DataContext.Dosage,
+                                                                                   RelativeSource={RelativeSource AncestorType=ItemsControl},
+                                                                                   Converter={StaticResource ZeroToEmptyStringConverter}}"
                                                                     Style="{StaticResource CurrentExamInputTextBoxStyle}"
                                                                     Background="White"/>
                                                             </Grid>
@@ -741,12 +858,18 @@
                                                                 </Grid.ColumnDefinitions>
                                                                 <TextBox
                                                                     Tag="Frequency"
+                                                                    Text="{Binding DataContext.Frequency,
+                                                                                   RelativeSource={RelativeSource AncestorType=ItemsControl},
+                                                                                   Converter={StaticResource ZeroToEmptyStringConverter}}"
                                                                     Style="{StaticResource CurrentExamInputTextBoxStyle}"
                                                                     Background="White"/>
 
                                                                 <TextBox
                                                                     Grid.Column="2"
                                                                     Tag="Duration (days)"
+                                                                    Text="{Binding DataContext.Duration,
+                                                                                   RelativeSource={RelativeSource AncestorType=ItemsControl},
+                                                                                   Converter={StaticResource ZeroToEmptyStringConverter}}"
                                                                     Style="{StaticResource CurrentExamInputTextBoxStyle}"
                                                                     Background="White"/>
                                                             </Grid>
@@ -758,12 +881,18 @@
                                                                 </Grid.ColumnDefinitions>
                                                                 <TextBox
                                                                     Tag="Instruction"
+                                                                    Text="{Binding DataContext.Instruction,
+                                                                                   RelativeSource={RelativeSource AncestorType=ItemsControl},
+                                                                                   Converter={StaticResource ZeroToEmptyStringConverter}}"
                                                                     Style="{StaticResource CurrentExamInputTextBoxStyle}"
                                                                     Background="White"/>
 
                                                                 <TextBox
                                                                     Grid.Column="2"
                                                                     Tag="Indication"
+                                                                    Text="{Binding DataContext.Indication,
+                                                                                   RelativeSource={RelativeSource AncestorType=ItemsControl},
+                                                                                   Converter={StaticResource ZeroToEmptyStringConverter}}"
                                                                     Style="{StaticResource CurrentExamInputTextBoxStyle}"
                                                                     Background="White"/>
                                                             </Grid>
@@ -775,12 +904,18 @@
                                                                 </Grid.ColumnDefinitions>
                                                                 <TextBox
                                                                     Tag="Morning"
+                                                                    Text="{Binding DataContext.Morning,
+                                                                                   RelativeSource={RelativeSource AncestorType=ItemsControl},
+                                                                                   Converter={StaticResource ZeroToEmptyStringConverter}}"
                                                                     Style="{StaticResource CurrentExamInputTextBoxStyle}"
                                                                     Background="White"/>
 
                                                                 <TextBox
                                                                     Grid.Column="2"
                                                                     Tag="Noon"
+                                                                    Text="{Binding DataContext.Noon,
+                                                                                   RelativeSource={RelativeSource AncestorType=ItemsControl},
+                                                                                   Converter={StaticResource ZeroToEmptyStringConverter}}"
                                                                     Style="{StaticResource CurrentExamInputTextBoxStyle}"
                                                                     Background="White"/>
                                                             </Grid>
@@ -793,12 +928,18 @@
                                                                 </Grid.ColumnDefinitions>
                                                                 <TextBox
                                                                     Tag="Afternoon"
+                                                                    Text="{Binding DataContext.Afternoon,
+                                                                                   RelativeSource={RelativeSource AncestorType=ItemsControl},
+                                                                                   Converter={StaticResource ZeroToEmptyStringConverter}}"
                                                                     Style="{StaticResource CurrentExamInputTextBoxStyle}"
                                                                     Background="White"/>
 
                                                                 <TextBox
                                                                     Grid.Column="2"
                                                                     Tag="Night"
+                                                                    Text="{Binding DataContext.Night,
+                                                                                   RelativeSource={RelativeSource AncestorType=ItemsControl},
+                                                                                   Converter={StaticResource ZeroToEmptyStringConverter}}"
                                                                     Style="{StaticResource CurrentExamInputTextBoxStyle}"
                                                                     Background="White"/>
                                                             </Grid>
@@ -1025,6 +1166,7 @@
 
                                 <DatePicker Style="{StaticResource StandardDatePicker}"
                                             Grid.Column="1"
+                                            SelectedDate="{Binding FollowUpVisit}"
                                             FontSize="14"
                                             Margin="0,0,5,0"/>
 
@@ -1033,7 +1175,8 @@
                                     Style="{StaticResource PrimaryButtonStyle}"
                                     Content="Submit" 
                                     FontSize="16"
-                                    Foreground="White"/>
+                                    Foreground="White"
+                                    Command="{Binding SubmitButtonCommand}"/>
                             </Grid>
                         </Border>
 

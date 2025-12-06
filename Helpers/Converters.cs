@@ -36,13 +36,18 @@ public class ZeroToEmptyStringConverter : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        if (value is string text && text == "0")
+        if (value is double number && number == 0)
             return string.Empty;
-        return value;
+        if (value is int inumber && inumber == 0)
+            return string.Empty;
+        return value is null ? string.Empty : value.ToString()!;
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        throw new NotImplementedException();
+        if (value is not string s || string.IsNullOrWhiteSpace(s))
+            return 0;
+
+        return double.TryParse(s, out var result) ? result : 0;
     }
 }

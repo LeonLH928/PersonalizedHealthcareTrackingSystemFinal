@@ -27,11 +27,8 @@ namespace PersonalizedHealthcareTrackingSystemFinal
             services.RegisterDependency();
             ServiceProvider = services.BuildServiceProvider();
 
-            //var IntroductionWindow = ServiceProvider.GetRequiredService<IntroductionWindow>();
-            //IntroductionWindow.Show();
-            var emily = ServiceProvider.GetRequiredService<DoctorConsultationWindow>();
-            emily.Show();
-            WeakReferenceMessenger.Default.Send(new SelectedAppointmentIDMessage("appt-04"));
+            var IntroductionWindow = ServiceProvider.GetRequiredService<IntroductionWindow>();
+            IntroductionWindow.Show();
         }
     }
 

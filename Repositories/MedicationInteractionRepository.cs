@@ -21,9 +21,7 @@ public class MedicationInteractionRepository : IMedicationInteractionRepository
     {
         var response = await _client
                                     .From<MedicationInteractionModel>()
-                                    .Select("*, " +
-                                            "Med1:Medications!FK_MedicationInteractions_Medications_Medication1ID(*), " +
-                                            "Med2:Medications!FK_MedicationInteractions_Medications_Medication2ID(*)")
+                                    .Select("*")
                                     .Filter("Medication1ID", Operator.In, MedicationIDs)
                                     .Filter("Medication2ID", Operator.In, MedicationIDs)
                                     .Get();

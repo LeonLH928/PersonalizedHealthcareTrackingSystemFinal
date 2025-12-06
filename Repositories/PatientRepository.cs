@@ -15,12 +15,12 @@ public class PatientRepository : IPatientRepository
     {
         await _client.InitializeAsync();
     }
-    public async Task<PatientModel> GetPatientByIDAsync(string PatientID)
+    public async Task<PatientModel?> GetPatientByIDAsync(string PatientID)
     {
         var response = await _client.From<PatientModel>()
-                                    .Select("*, User:Users(*)")
+                                    .Select("*")
                                     .Filter("PatientID", Supabase.Postgrest.Constants.Operator.Equals, PatientID)
                                     .Get();
-        return response.Model ?? throw new Exception("No such patients!");
+        return response.Model;
     }
 }

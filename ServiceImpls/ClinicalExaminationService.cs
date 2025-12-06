@@ -1,6 +1,7 @@
 ﻿using PersonalizedHealthcareTrackingSystemFinal.Interfaces;
 using PersonalizedHealthcareTrackingSystemFinal.Services;
 using PersonalizedHealthcareTrackingSystemFinal.SupabaseModels;
+using System.Diagnostics;
 
 namespace PersonalizedHealthcareTrackingSystemFinal.ServiceImpls;
 public class ClinicalExaminationService : IClinicalExaminationService
@@ -13,9 +14,15 @@ public class ClinicalExaminationService : IClinicalExaminationService
         _clinicalExaminationRepository = clinicalExaminationRepository;
         _medicalRecordRepository = medicalRecordRepository;
     }
-    public async Task<ClinicalExaminationModel> GetLatestClinicalExaminationByPatientID(string PatientID)
+    public async Task AddClinicalExaminationAsync(ClinicalExaminationModel NewExam)
+    {
+        await _clinicalExaminationRepository.AddClinicalExaminationAsync(NewExam);
+    }
+    public async Task<ClinicalExaminationModel?> GetLatestClinicalExaminationByPatientID(string PatientID)
     {
         var LatestRecord = await _medicalRecordRepository.GetLatestMedicalRecordByPatientIDAsync(PatientID);
+        if (LatestRecord == null)
+            return null;   
         return await _clinicalExaminationRepository.GetClinicalExaminationByMedicalRecordIDAsync(LatestRecord.RecordID);
     }
     public async Task<IEnumerable<ClinicalExaminationModel>> GetClinicalExaminationsByPatientID(string PatientID)

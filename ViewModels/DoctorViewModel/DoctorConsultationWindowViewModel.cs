@@ -26,6 +26,8 @@ public partial class DoctorConsultationWindowViewModel : ObservableObject,
     private readonly IMedicalRecordService _medicalRecordService;
     private readonly IMedicationInteractionService _medicationInteractionService;
     private readonly IMedicationService _medicationService;
+    private readonly IPrescriptionService _prescriptionService;
+    private readonly IPrescriptionItemService _prescriptionItemService;
     public DoctorConsultationWindowViewModel(IClinicalExaminationService clinicalExaminationService,
                                              IPatientService patientService,
                                              IUserService userService,
@@ -33,7 +35,9 @@ public partial class DoctorConsultationWindowViewModel : ObservableObject,
                                              IMedicalRecordService medicalRecordService,
                                              IMedicationInteractionService medicationInteractionService,
                                              IServiceProvider serviceProvider,
-                                             IMedicationService medicationService)
+                                             IMedicationService medicationService,
+                                             IPrescriptionService prescriptionService,
+                                             IPrescriptionItemService prescriptionItemService)
     {
         _clinicalExaminationService = clinicalExaminationService;
         _patientService = patientService;
@@ -43,6 +47,8 @@ public partial class DoctorConsultationWindowViewModel : ObservableObject,
         _medicationInteractionService = medicationInteractionService;
         _serviceProvider = serviceProvider;
         _medicationService = medicationService;
+        _prescriptionService = prescriptionService;
+        _prescriptionItemService = prescriptionItemService;
         WeakReferenceMessenger.Default.Register<SelectedAppointmentIDMessage>(this);
         WeakReferenceMessenger.Default.Register<SelectedMedicationIDsMessage>(this);
     }
@@ -60,7 +66,7 @@ public partial class DoctorConsultationWindowViewModel : ObservableObject,
     [ObservableProperty]
     private ObservableCollection<ClinicalExaminationModel> clinicalExaminations = [];
     [ObservableProperty]
-    private ClinicalExaminationModel latestClinicalExamination = null!;
+    private ClinicalExaminationModel? latestClinicalExamination = null;
     [ObservableProperty]
     private AppointmentModel latestAppointment = null!;
     [ObservableProperty]
@@ -92,17 +98,45 @@ public partial class DoctorConsultationWindowViewModel : ObservableObject,
     [ObservableProperty]
     private string diagnosis = "";
     [ObservableProperty]
-    private DateTime followUpVisit = DateTime.Now;
+    private string treatmentPlan = "";
+    [ObservableProperty]
+    private string note = "";
+    [ObservableProperty]
+    private string familyHistory = "";
+    [ObservableProperty]
+    private string lifestyleHabits = "";
+    [ObservableProperty]
+    private DateTime? followUpVisit = null;
+    [ObservableProperty]
+    private int quantity;
+    [ObservableProperty]
+    private string dosage = "";
+    [ObservableProperty]
+    private string frequency = "";
+    [ObservableProperty]
+    private int duration;
+    [ObservableProperty]
+    private string instruction = "";
+    [ObservableProperty]
+    private string indication = "";
+    [ObservableProperty]
+    private int morning;
+    [ObservableProperty]
+    private int noon;
+    [ObservableProperty]
+    private int afternoon;
+    [ObservableProperty]
+    private int night;
     #endregion
     public async Task LoadDataAsync()
     {
         IsLoading = true;
         try
         {
-            LatestAppointment = await _appointmentService.GetAppointmentByIDAsync(SelectedAppointmentIDMessage);
+            LatestAppointment = (await _appointmentService.GetAppointmentByIDAsync(SelectedAppointmentIDMessage))!;
             
             var Patient = await _patientService.GetPatientByIDAsync(LatestAppointment.PatientID);
-            var User = await _userService.GetUserByIDAsync(Patient.UserID);
+            var User = await _userService.GetUserByIDAsync(Patient!.UserID);
             var Records = await _medicalRecordService.GetAllMedicalRecordsByPatientIDAsync(Patient.PatientID);
             var Examinations = await _clinicalExaminationService.GetClinicalExaminationsByPatientID(Patient.PatientID);
 
@@ -184,30 +218,117 @@ public partial class DoctorConsultationWindowViewModel : ObservableObject,
         }
     }
     [RelayCommand]
-    public void SubmitButton()
+    public async Task SubmitButton()
     {
-        if (Diagnosis.IsNullOrEmpty())
+        try
         {
-            MessageBox.Show("Please enter the diagnosis!", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
-            return;
+
+            if (FollowUpVisit == null)
+            {
+                MessageBox.Show("Please select a follow-up date!", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+            if (Diagnosis.IsNullOrEmpty())
+            {
+                MessageBox.Show("Please enter the diagnosis!", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+            if (TreatmentPlan.IsNullOrEmpty())
+            {
+                MessageBox.Show("Please enter the treatment plan!", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+            if (((DateTime)FollowUpVisit! - DateTime.Now).TotalSeconds <= 0)
+            {
+                MessageBox.Show("Please choose a proper follow-up date!", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            MedicalRecordModel NewMedicalRecord = new()
+            {
+                RecordID = Guid.NewGuid().ToString(),
+                AppointmentID = SelectedAppointmentIDMessage,
+                VisitTime = DateTime.Now,
+                Diagnosis = Diagnosis,
+                TreatmentPlan = TreatmentPlan,
+                DoctorNotes = Note,
+                NextVisitDate = (DateTime)FollowUpVisit
+            };
+            await _medicalRecordService.AddMedicalRecordAsync(NewMedicalRecord);
+
+            AppointmentModel NewAppointment = new()
+            {
+                AppointmentID = Guid.NewGuid().ToString(),
+                PatientID = LatestAppointment.PatientID,
+                DoctorID = LatestAppointment.DoctorID,
+                AppointmentDateTime = (DateTime)FollowUpVisit,
+                ChiefComplaint = LatestAppointment.ChiefComplaint,
+                Location = LatestAppointment.Location,
+                Status = LatestAppointment.Status,
+                Note = Note,
+                Priority = LatestAppointment.Priority,
+                VisitNumber = LatestAppointment.VisitNumber + 1,
+            };
+            await _appointmentService.AddAppointmentAsync(NewAppointment);
+
+            LatestAppointment.Status = Models.StatusAppointment.Completed;
+            await _appointmentService.AddAppointmentAsync(LatestAppointment);
+
+            ClinicalExaminationModel NewClinicalExamination = new()
+            {
+                ClinicalID = Guid.NewGuid().ToString(),
+                RecordID = NewMedicalRecord.RecordID,
+                Symptoms = Symptoms,
+                Temperature = Temperature,
+                Height = Height,
+                Weight = Weight,
+                Pulse = Pulse,
+                BloodPressure = BloodPressure,
+                RespiratoryRate = RespiratoryRate,
+                OxygenSaturation = OxygenSaturation,
+                LifestyleHabits = LifestyleHabits,
+                FamilyHistory = FamilyHistory
+            };
+            await _clinicalExaminationService.AddClinicalExaminationAsync(NewClinicalExamination);
+
+            PrescriptionModel NewPrescription = new()
+            {
+                PrescriptionID = Guid.NewGuid().ToString(),
+                RecordID = NewMedicalRecord.RecordID,
+                PrescriptionDateTime = DateTime.UtcNow,
+                Status = Models.PrescriptionStatus.Pending,
+                PharmacistID = null!,
+                VerifiedAt = null!,
+                Priority = LatestAppointment.Priority,
+                DispensedAt = null!
+            };
+            await _prescriptionService.AddPrescriptionAsync(NewPrescription);
+
+            foreach (var medication in SelectedMedications)
+            {
+                PrescriptionItemModel PrescriptionItem = new()
+                {
+                    ItemID = Guid.NewGuid().ToString(),
+                    PrescriptionID = NewPrescription.PrescriptionID,
+                    MedicationID = medication.MedicationID,
+                    Quantity = Quantity,
+                    Dosage = Dosage,
+                    Frequency = Frequency,
+                    DurationDays = Duration,
+                    Instruction = Instruction,
+                    Indication = Indication,
+                    DoseScheduleJSON = $@"{{ ""morning"": {Morning}, ""noon"": {Noon}, ""afternoon"": {Afternoon}, ""night"": {Night} }}"
+                };
+                await _prescriptionItemService.AddPrescriptionItemAsync(PrescriptionItem);
+            }
+
+            MessageBox.Show("Submit successfully!", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+            CloseWindowButton();
         }
-        if ((FollowUpVisit - DateTime.Now).TotalSeconds > 0)
+        catch (Exception e)
         {
-            MessageBox.Show("Please choose a proper follow-up date!", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
-            return;
+            MessageBox.Show($"An error occured: {e.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
         }
-        ClinicalExaminationModel ClinicalExamination = new()
-        {
-            ClinicalID=Guid.NewGuid().ToString(),
-            Symptoms=Symptoms,
-            Temperature=Temperature,
-            Height=Height,
-            Weight=Weight,
-            Pulse=Pulse,
-            BloodPressure=BloodPressure,
-            RespiratoryRate=RespiratoryRate,
-            OxygenSaturation=OxygenSaturation
-        };
     }
     [RelayCommand]
     public void AddDrugButton()

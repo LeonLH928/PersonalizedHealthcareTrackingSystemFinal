@@ -1,6 +1,7 @@
 ﻿using PersonalizedHealthcareTrackingSystemFinal.Interfaces;
 using PersonalizedHealthcareTrackingSystemFinal.SupabaseModels;
 using Supabase;
+using System.Diagnostics;
 using System.Numerics;
 
 namespace PersonalizedHealthcareTrackingSystemFinal.Repositories;
@@ -16,26 +17,48 @@ public class MedicalRecordRepository : IMedicalRecordRepository
     {
         await _client.InitializeAsync();
     }
+    public async Task AddMedicalRecordAsync(MedicalRecordModel NewRecord)
+    {
+        await _client.From<MedicalRecordModel>()
+                     .Insert(NewRecord);
+    }
     public async Task<IEnumerable<MedicalRecordModel>> GetAllMedicalRecordsByPatientIDAsync(string PatientID)
     {
-        var response = await _client
+        var appointmentResponse = await _client
+                                            .From<AppointmentModel>()
+                                            .Select("AppointmentID")
+                                            .Filter("PatientID", Supabase.Postgrest.Constants.Operator.Equals, PatientID)
+                                            .Get();
+
+        var appointmentIds = appointmentResponse.Models.Select(a => a.AppointmentID).ToList();
+
+        var recordsResponse = await _client
                                     .From<MedicalRecordModel>()
-                                    .Select("*, Appointment:Appointments(*)")
-                                    .Filter("Appointment.PatientID", Supabase.Postgrest.Constants.Operator.Equals, PatientID)
+                                    .Select("*")
+                                    .Filter("AppointmentID", Supabase.Postgrest.Constants.Operator.In, appointmentIds)
                                     .Order("VisitTime", Supabase.Postgrest.Constants.Ordering.Descending)
                                     .Get();
-        return response.Models;
+
+        return recordsResponse.Models;
     }
-    public async Task<MedicalRecordModel> GetLatestMedicalRecordByPatientIDAsync(string PatientID)
+    public async Task<MedicalRecordModel?> GetLatestMedicalRecordByPatientIDAsync(string PatientID)
     {
+        var appointmentResponse = await _client
+                                            .From<AppointmentModel>()
+                                            .Select("AppointmentID")
+                                            .Filter("PatientID", Supabase.Postgrest.Constants.Operator.Equals, PatientID)
+                                            .Get();
+
+        var appointmentIds = appointmentResponse.Models.Select(a => a.AppointmentID).ToList();
+
         var response = await _client
                                     .From<MedicalRecordModel>()
-                                    .Select("*, Appointment:Appointments(*)")
-                                    .Filter("Appointment.PatientID", Supabase.Postgrest.Constants.Operator.Equals, PatientID)
+                                    .Select("*")
+                                    .Filter("AppointmentID", Supabase.Postgrest.Constants.Operator.In, appointmentIds)
                                     .Order("VisitTime", Supabase.Postgrest.Constants.Ordering.Descending)
                                     .Limit(1)
                                     .Single();
 
-        return response ?? throw new Exception("No such medical record");
+        return response;
     }
 }
