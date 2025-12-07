@@ -1,16 +1,20 @@
 ﻿using PersonalizedHealthcareTrackingSystemFinal.Interfaces;
 using PersonalizedHealthcareTrackingSystemFinal.SupabaseModels;
-using Supabase.Postgrest;
-using Supabase.Postgrest.Interfaces;
+using System.Text.Json;
 using static Supabase.Postgrest.Constants;
 
 namespace PersonalizedHealthcareTrackingSystemFinal.Repositories;
 public class MedicationInteractionRepository : IMedicationInteractionRepository
 {
     public readonly Supabase.Client _client;
+    public JsonSerializerOptions options;
     public MedicationInteractionRepository(Supabase.Client client)
     {
         _client = client;
+        options = new()
+        {
+            PropertyNameCaseInsensitive = true
+        };
         InitializeSupabase();
     }
     private async void InitializeSupabase()
@@ -21,11 +25,16 @@ public class MedicationInteractionRepository : IMedicationInteractionRepository
     {
         var response = await _client
                                     .From<MedicationInteractionModel>()
-                                    .Select("*")
+                                    .Select("""
+                                        *,
+                                        Med1:Medications!FK_MedicationInteractions_Medications_Medication1ID(*),
+                                        Med2:Medications!FK_MedicationInteractions_Medications_Medication2ID(*)
+                                        """)
                                     .Filter("Medication1ID", Operator.In, MedicationIDs)
                                     .Filter("Medication2ID", Operator.In, MedicationIDs)
                                     .Get();
+        var medicationInteractions = JsonSerializer.Deserialize<List<MedicationInteractionModel>>(response.Content!, options);
 
-        return response.Models;
+        return medicationInteractions == null ? [] : medicationInteractions;
     }
 }
