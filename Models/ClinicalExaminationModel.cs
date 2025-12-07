@@ -2,6 +2,15 @@
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PersonalizedHealthcareTrackingSystemFinal.Models;
+public enum StatusBMI
+{
+    Underweight,
+    Normal,
+    Overweight,
+    Obese,
+    NotCalculate
+}
+
 public class ClinicalExaminationModel
 {
     [Key]
@@ -14,6 +23,8 @@ public class ClinicalExaminationModel
     public double Temperature { get; set; } 
     public double Height { get; set; }
     public double Weight { get; set; }
+    public double BMI { get; set; }
+    public StatusBMI StatusBMI { get; set; } = StatusBMI.NotCalculate;
     public double Pulse { get; set; }
     public string BloodPressure { get; set; } = "";
     public double RespiratoryRate { get; set; }
