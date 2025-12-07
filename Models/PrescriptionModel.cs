@@ -5,7 +5,7 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Models;
 public enum PrescriptionStatus
 {
     Pending,
-    Verified,
+    Completed,
     Dispensed,
     Cancelled
 }

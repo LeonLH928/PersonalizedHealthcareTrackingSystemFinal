@@ -40,6 +40,7 @@ public class AppointmentRepository : IAppointmentRepository
                                             """)
                                     .Filter("DoctorID", Supabase.Postgrest.Constants.Operator.Equals, DoctorID)
                                     .Get();
+        Debug.Write($"\n{response.Content}\n");
         var appointments = JsonSerializer.Deserialize<List<AppointmentModel>>(response.Content!, options);
 
         return appointments == null ? [] : appointments;
@@ -56,9 +57,9 @@ public class AppointmentRepository : IAppointmentRepository
                                     .Filter("Status", Supabase.Postgrest.Constants.Operator.Equals, (int)Models.StatusAppointment.Scheduled)
                                     .Order("AppointmentDateTime", Supabase.Postgrest.Constants.Ordering.Ascending)
                                     .Get();
-        var appointments = JsonSerializer.Deserialize<AppointmentModel>(response.Content!, options);
+        var appointments = JsonSerializer.Deserialize<List<AppointmentModel>>(response.Content!, options);
 
-        return appointments;
+        return appointments?.FirstOrDefault();
     }
     public async Task<AppointmentModel?> GetAppointmentByIDAsync(string AppointmentID)
     {

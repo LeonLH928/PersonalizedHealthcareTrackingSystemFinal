@@ -14,4 +14,8 @@ public class PrescriptionItemService : IPrescriptionItemService
     {
         await _prescriptionItemRepository.AddPrescriptionItemAsync(NewItem);
     }
+    public async Task<IEnumerable<PrescriptionItemModel>> GetAllPrescriptionItemsByPrescriptionID(string PrescriptionID)
+    {
+        return await _prescriptionItemRepository.GetAllPrescriptionItemsByPrescriptionID(PrescriptionID);
+    }
 }

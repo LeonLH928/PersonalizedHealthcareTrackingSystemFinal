@@ -1,4 +1,5 @@
-﻿using Supabase.Postgrest.Attributes;
+﻿using PersonalizedHealthcareTrackingSystemFinal.Models;
+using Supabase.Postgrest.Attributes;
 using Supabase.Postgrest.Models;
 
 namespace PersonalizedHealthcareTrackingSystemFinal.SupabaseModels;
@@ -33,6 +34,12 @@ public class ClinicalExaminationModel : BaseModel
 
     [Column("Weight")]
     public double Weight { get; set; }
+    
+    [Column("BMI")]
+    public double BMI { get; set; }
+    
+    [Column("StatusBMI")]
+    public StatusBMI StatusBMI { get; set; } = StatusBMI.Normal;
 
     [Column("Pulse")]
     public double Pulse { get; set; }

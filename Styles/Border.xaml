@@ -256,5 +256,10 @@
             </Setter.Value>
         </Setter>
     </Style>
-
+    
+    <!-- Pharmacist queue card Style -->
+    <Style x:Key="PharmacistQueueCardBorderStyle" TargetType="Border" BasedOn="{StaticResource BaseCustomBorderStyle}">
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="BorderBrush" Value="{StaticResource LightBorder}"/>
+    </Style>
 </ResourceDictionary>
