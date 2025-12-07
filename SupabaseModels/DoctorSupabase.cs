@@ -25,6 +25,5 @@ public class DoctorModel : BaseModel
     [Column("UserID")]
     public string UserID { get; set; } = "";
 
-    [Reference(typeof(UserModel))]
     public UserModel User { get; set; } = null!;
 }

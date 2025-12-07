@@ -32,9 +32,7 @@ public class PrescriptionModel : BaseModel
     [Column("PharmacistID")]
     public string PharmacistID { get; set; } = "";
 
-    [Reference(typeof(MedicationModel))]
     public MedicalRecordModel MedicalRecord { get; set; } = null!;
 
-    [Reference(typeof(PharmacistModel))]
     public PharmacistModel Pharmacist { get; set; } = null!;
 }

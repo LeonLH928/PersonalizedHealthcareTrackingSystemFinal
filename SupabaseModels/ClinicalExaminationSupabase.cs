@@ -49,6 +49,5 @@ public class ClinicalExaminationModel : BaseModel
     [Column("RecordID")]
     public string RecordID { get; set; } = "";
 
-    [Reference(typeof(MedicalRecordModel))]
     public MedicalRecordModel MedicalRecord { get; set; } = null!;
 }
