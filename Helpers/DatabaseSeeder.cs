@@ -2,6 +2,7 @@
 using PersonalizedHealthcareTrackingSystemFinal.Models;
 
 namespace PersonalizedHealthcareTrackingSystemFinal.Helpers;
+
 public static class DatabaseSeeder
 {
     public static void Seed(ModelBuilder modelBuilder)
@@ -283,7 +284,79 @@ public static class DatabaseSeeder
                 Email = "lisa.w@pharmacy.com",
                 PhoneNumber = "0904443332",
                 IsActive = true
-    }
+            },
+            new UserModel
+            {
+                UserID = "user-pat-05",
+                FirstName = "Robert",
+                LastName = "Taylor",
+                Username = "robert.t",
+                PasswordHash = "Password123!",
+                Role = UserRole.Patient,
+                Email = "robert.t@example.com",
+                PhoneNumber = "0903322110",
+                IsActive = true
+            },
+            new UserModel
+            {
+                UserID = "user-pat-06",
+                FirstName = "Jennifer",
+                LastName = "Martinez",
+                Username = "jennifer.m",
+                PasswordHash = "Password123!",
+                Role = UserRole.Patient,
+                Email = "jennifer.m@example.com",
+                PhoneNumber = "0902233445",
+                IsActive = true
+            },
+            new UserModel
+            {
+                UserID = "user-pat-07",
+                FirstName = "William",
+                LastName = "Anderson",
+                Username = "william.a",
+                PasswordHash = "Password123!",
+                Role = UserRole.Patient,
+                Email = "william.a@example.com",
+                PhoneNumber = "0901122558",
+                IsActive = true
+            },
+            new UserModel
+            {
+                UserID = "user-pat-08",
+                FirstName = "Sophia",
+                LastName = "Thomas",
+                Username = "sophia.t",
+                PasswordHash = "Password123!",
+                Role = UserRole.Patient,
+                Email = "sophia.t@example.com",
+                PhoneNumber = "0909988765",
+                IsActive = true
+            },
+            new UserModel
+            {
+                UserID = "user-pat-09",
+                FirstName = "Daniel",
+                LastName = "Jackson",
+                Username = "daniel.j",
+                PasswordHash = "Password123!",
+                Role = UserRole.Patient,
+                Email = "daniel.j@example.com",
+                PhoneNumber = "0908877654",
+                IsActive = true
+            },
+            new UserModel
+            {
+                UserID = "user-pat-10",
+                FirstName = "Olivia",
+                LastName = "White",
+                Username = "olivia.w",
+                PasswordHash = "Password123!",
+                Role = UserRole.Patient,
+                Email = "olivia.w@example.com",
+                PhoneNumber = "0907766543",
+                IsActive = true
+            }
         );
     }
 
@@ -325,6 +398,60 @@ public static class DatabaseSeeder
                 Gender = Gender.Female,
                 InsuranceNumber = "INS-CHILD-01",
                 BloodType = "B+"
+            },
+            new PatientModel
+            {
+                PatientID = "pat-05",
+                UserID = "user-pat-05",
+                DateOfBirth = new DateTime(1982, 11, 8, 0, 0, 0, DateTimeKind.Utc),
+                Gender = Gender.Male,
+                InsuranceNumber = "INS-777888",
+                BloodType = "O+"
+            },
+            new PatientModel
+            {
+                PatientID = "pat-06",
+                UserID = "user-pat-06",
+                DateOfBirth = new DateTime(1995, 3, 22, 0, 0, 0, DateTimeKind.Utc),
+                Gender = Gender.Female,
+                InsuranceNumber = "INS-666555",
+                BloodType = "A-"
+            },
+            new PatientModel
+            {
+                PatientID = "pat-07",
+                UserID = "user-pat-07",
+                DateOfBirth = new DateTime(1968, 7, 15, 0, 0, 0, DateTimeKind.Utc),
+                Gender = Gender.Male,
+                InsuranceNumber = "INS-444333",
+                BloodType = "AB+"
+            },
+            new PatientModel
+            {
+                PatientID = "pat-08",
+                UserID = "user-pat-08",
+                DateOfBirth = new DateTime(2001, 9, 30, 0, 0, 0, DateTimeKind.Utc),
+                Gender = Gender.Female,
+                InsuranceNumber = "INS-222111",
+                BloodType = "B-"
+            },
+            new PatientModel
+            {
+                PatientID = "pat-09",
+                UserID = "user-pat-09",
+                DateOfBirth = new DateTime(1978, 12, 5, 0, 0, 0, DateTimeKind.Utc),
+                Gender = Gender.Male,
+                InsuranceNumber = "INS-999000",
+                BloodType = "O-"
+            },
+            new PatientModel
+            {
+                PatientID = "pat-10",
+                UserID = "user-pat-10",
+                DateOfBirth = new DateTime(1988, 4, 18, 0, 0, 0, DateTimeKind.Utc),
+                Gender = Gender.Female,
+                InsuranceNumber = "INS-111222",
+                BloodType = "A+"
             }
         );
     }
@@ -463,6 +590,78 @@ public static class DatabaseSeeder
                     Status = StatusAppointment.Scheduled,
                     Priority = Priority.Routine,
                     VisitNumber = 2
+                },
+                new AppointmentModel
+                {
+                    AppointmentID = "appt-07",
+                    PatientID = "pat-05",
+                    DoctorID = "doc-01",
+                    AppointmentDateTime = DateTime.UtcNow.AddDays(-3).AddHours(11),
+                    ChiefComplaint = "Migraine headaches for the past week.",
+                    Location = "Room 103",
+                    Status = StatusAppointment.Completed,
+                    Priority = Priority.Routine,
+                    VisitNumber = 1
+                },
+                new AppointmentModel
+                {
+                    AppointmentID = "appt-08",
+                    PatientID = "pat-06",
+                    DoctorID = "doc-02",
+                    AppointmentDateTime = DateTime.UtcNow.AddDays(-7).AddHours(16),
+                    ChiefComplaint = "Shortness of breath and fatigue.",
+                    Location = "Room 206",
+                    Status = StatusAppointment.Completed,
+                    Priority = Priority.Urgent,
+                    VisitNumber = 1
+                },
+                new AppointmentModel
+                {
+                    AppointmentID = "appt-09",
+                    PatientID = "pat-07",
+                    DoctorID = "doc-03",
+                    AppointmentDateTime = DateTime.UtcNow.AddDays(-14).AddHours(13),
+                    ChiefComplaint = "Chronic back pain radiating to legs.",
+                    Location = "Room 304",
+                    Status = StatusAppointment.Completed,
+                    Priority = Priority.Routine,
+                    VisitNumber = 1
+                },
+                new AppointmentModel
+                {
+                    AppointmentID = "appt-10",
+                    PatientID = "pat-08",
+                    DoctorID = "doc-04",
+                    AppointmentDateTime = DateTime.UtcNow.AddDays(-4).AddHours(10),
+                    ChiefComplaint = "Skin rash and itching.",
+                    Location = "Room 402",
+                    Status = StatusAppointment.Completed,
+                    Priority = Priority.Routine,
+                    VisitNumber = 1
+                },
+                new AppointmentModel
+                {
+                    AppointmentID = "appt-11",
+                    PatientID = "pat-09",
+                    DoctorID = "doc-01",
+                    AppointmentDateTime = DateTime.UtcNow.AddDays(2).AddHours(14),
+                    ChiefComplaint = "Annual health checkup.",
+                    Location = "Room 104",
+                    Status = StatusAppointment.Scheduled,
+                    Priority = Priority.Routine,
+                    VisitNumber = 1
+                },
+                new AppointmentModel
+                {
+                    AppointmentID = "appt-12",
+                    PatientID = "pat-10",
+                    DoctorID = "doc-02",
+                    AppointmentDateTime = DateTime.UtcNow.AddDays(3).AddHours(9),
+                    ChiefComplaint = "Abdominal pain and bloating.",
+                    Location = "Room 207",
+                    Status = StatusAppointment.Scheduled,
+                    Priority = Priority.Routine,
+                    VisitNumber = 1
                 }
         );
     }
@@ -509,6 +708,46 @@ public static class DatabaseSeeder
                 TreatmentPlan = "Anticoagulant therapy immediately.",
                 DoctorNotes = "Confirmed via Ultrasound.",
                 NextVisitDate = DateTime.UtcNow.AddDays(3)
+            },
+            new MedicalRecordModel
+            {
+                RecordID = "rec-05",
+                AppointmentID = "appt-07",
+                VisitTime = DateTime.UtcNow.AddDays(-3).AddHours(11).AddMinutes(20),
+                Diagnosis = "Migraine with Aura",
+                TreatmentPlan = "Triptan medication and lifestyle modifications.",
+                DoctorNotes = "Patient advised to identify triggers.",
+                NextVisitDate = DateTime.UtcNow.AddDays(30)
+            },
+            new MedicalRecordModel
+            {
+                RecordID = "rec-06",
+                AppointmentID = "appt-08",
+                VisitTime = DateTime.UtcNow.AddDays(-7).AddHours(16).AddMinutes(25),
+                Diagnosis = "Anemia",
+                TreatmentPlan = "Iron supplements and dietary changes.",
+                DoctorNotes = "Blood test shows low hemoglobin.",
+                NextVisitDate = DateTime.UtcNow.AddDays(14)
+            },
+            new MedicalRecordModel
+            {
+                RecordID = "rec-07",
+                AppointmentID = "appt-09",
+                VisitTime = DateTime.UtcNow.AddDays(-14).AddHours(13).AddMinutes(30),
+                Diagnosis = "Lumbar Disc Herniation",
+                TreatmentPlan = "Physical therapy and pain management.",
+                DoctorNotes = "MRI recommended if symptoms persist.",
+                NextVisitDate = DateTime.UtcNow.AddDays(21)
+            },
+            new MedicalRecordModel
+            {
+                RecordID = "rec-08",
+                AppointmentID = "appt-10",
+                VisitTime = DateTime.UtcNow.AddDays(-4).AddHours(10).AddMinutes(15),
+                Diagnosis = "Contact Dermatitis",
+                TreatmentPlan = "Topical corticosteroids and antihistamines.",
+                DoctorNotes = "Avoid known irritants.",
+                NextVisitDate = DateTime.UtcNow.AddDays(7)
             }
         );
     }
@@ -521,15 +760,15 @@ public static class DatabaseSeeder
                 ClinicalID = "clin-01",
                 RecordID = "rec-01",
                 Symptoms = "Throat pain, difficulty swallowing, low-grade fever.",
-                MedicalHistory = "None relevant.",
+                MedicalHistory = "",
                 FamilyHistory = "Father has hypertension.",
                 LifestyleHabits = "Non-smoker.",
-                Allergies = "No known allergies.",
+                Allergies = "",
                 Temperature = 38.2,
                 Height = 175,
                 Weight = 70,
-                BMI=23,
-                StatusBMI=StatusBMI.Normal,
+                BMI = 23,
+                StatusBMI = StatusBMI.Normal,
                 Pulse = 85,
                 BloodPressure = "120/80",
                 RespiratoryRate = 16,
@@ -547,8 +786,8 @@ public static class DatabaseSeeder
                 Temperature = 36.8,
                 Height = 162,
                 Weight = 65,
-                BMI=24.8,
-                StatusBMI=StatusBMI.Normal,
+                BMI = 24.8,
+                StatusBMI = StatusBMI.Normal,
                 Pulse = 78,
                 BloodPressure = "145/95",
                 RespiratoryRate = 18,
@@ -562,12 +801,12 @@ public static class DatabaseSeeder
                 MedicalHistory = "High cholesterol.",
                 FamilyHistory = "Brother died of MI at 50.",
                 LifestyleHabits = "Social smoker.",
-                Allergies = "None.",
+                Allergies = "",
                 Temperature = 37.0,
                 Height = 198,
                 Weight = 100,
-                BMI=25.4,
-                StatusBMI=StatusBMI.Overweight,
+                BMI = 25.4,
+                StatusBMI = StatusBMI.Overweight,
                 Pulse = 92,
                 BloodPressure = "150/95",
                 RespiratoryRate = 20,
@@ -579,7 +818,7 @@ public static class DatabaseSeeder
                 RecordID = "rec-04",
                 Symptoms = "Swelling in right calf, warm to touch.",
                 MedicalHistory = "Recent long-haul flight.",
-                FamilyHistory = "Unknown.",
+                FamilyHistory = "",
                 LifestyleHabits = "Active.",
                 Allergies = "Latex.",
                 Temperature = 37.5,
@@ -591,6 +830,82 @@ public static class DatabaseSeeder
                 BloodPressure = "130/85",
                 RespiratoryRate = 18,
                 OxygenSaturation = 98
+            },
+            new ClinicalExaminationModel
+            {
+                ClinicalID = "clin-05",
+                RecordID = "rec-05",
+                Symptoms = "Severe headache with visual disturbances, nausea.",
+                MedicalHistory = "History of occasional headaches.",
+                FamilyHistory = "Mother has migraines.",
+                LifestyleHabits = "High stress job.",
+                Allergies = "",
+                Temperature = 36.9,
+                Height = 178,
+                Weight = 75,
+                BMI = 23.7,
+                StatusBMI = StatusBMI.Normal,
+                Pulse = 82,
+                BloodPressure = "125/82",
+                RespiratoryRate = 16,
+                OxygenSaturation = 99
+            },
+            new ClinicalExaminationModel
+            {
+                ClinicalID = "clin-06",
+                RecordID = "rec-06",
+                Symptoms = "Fatigue, pale skin, shortness of breath on exertion.",
+                MedicalHistory = "Heavy menstrual bleeding.",
+                FamilyHistory = "",
+                LifestyleHabits = "Vegetarian diet.",
+                Allergies = "Shellfish.",
+                Temperature = 36.5,
+                Height = 165,
+                Weight = 55,
+                BMI = 20.2,
+                StatusBMI = StatusBMI.Normal,
+                Pulse = 95,
+                BloodPressure = "110/70",
+                RespiratoryRate = 18,
+                OxygenSaturation = 98
+            },
+            new ClinicalExaminationModel
+            {
+                ClinicalID = "clin-07",
+                RecordID = "rec-07",
+                Symptoms = "Lower back pain, numbness in right leg.",
+                MedicalHistory = "Previous back injury 5 years ago.",
+                FamilyHistory = "Father has back problems.",
+                LifestyleHabits = "Sedentary work, occasional exercise.",
+                Allergies = "",
+                Temperature = 37.1,
+                Height = 172,
+                Weight = 85,
+                BMI = 28.7,
+                StatusBMI = StatusBMI.Overweight,
+                Pulse = 76,
+                BloodPressure = "135/88",
+                RespiratoryRate = 16,
+                OxygenSaturation = 99
+            },
+            new ClinicalExaminationModel
+            {
+                ClinicalID = "clin-08",
+                RecordID = "rec-08",
+                Symptoms = "Red rash on arms, itching, mild swelling.",
+                MedicalHistory = "History of sensitive skin.",
+                FamilyHistory = "",
+                LifestyleHabits = "",
+                Allergies = "Nickel, certain cosmetics.",
+                Temperature = 36.8,
+                Height = 170,
+                Weight = 60,
+                BMI = 20.8,
+                StatusBMI = StatusBMI.Normal,
+                Pulse = 78,
+                BloodPressure = "118/75",
+                RespiratoryRate = 16,
+                OxygenSaturation = 99
             }
         );
     }
@@ -598,6 +913,7 @@ public static class DatabaseSeeder
     private static void SeedPrescriptions(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<PrescriptionModel>().HasData(
+            // 1. PENDING (New)
             new PrescriptionModel
             {
                 PrescriptionID = "presc-01",
@@ -605,32 +921,41 @@ public static class DatabaseSeeder
                 PrescriptionDateTime = DateTime.UtcNow.AddDays(-1).AddHours(9).AddMinutes(30),
                 Status = PrescriptionStatus.Pending,
                 PharmacistID = null!,
-                VerifiedAt = DateTime.UtcNow,
+                VerifiedAt = null,
                 Priority = Priority.Routine,
-                DispensedAt = DateTime.UtcNow
+                DispensedAt = null,
+                Reason = null,
+                CancelledAt = null
             },
+            // 2. DISPENSED (Done)
             new PrescriptionModel
             {
                 PrescriptionID = "presc-02",
                 RecordID = "rec-02",
                 PrescriptionDateTime = DateTime.UtcNow.AddDays(-2).AddHours(15),
-                Status = PrescriptionStatus.Completed,
+                Status = PrescriptionStatus.Dispensed,
                 PharmacistID = "phar-01",
                 VerifiedAt = DateTime.UtcNow.AddDays(-2).AddHours(15).AddMinutes(30),
                 Priority = Priority.Routine,
-                DispensedAt = DateTime.UtcNow.AddDays(-2).AddHours(15).AddMinutes(45)
+                DispensedAt = DateTime.UtcNow.AddDays(-2).AddHours(15).AddMinutes(45),
+                Reason = null,
+                CancelledAt = null
             },
+            // 3. VERIFIED / COMPLETED (Ready for pickup)
             new PrescriptionModel
             {
                 PrescriptionID = "presc-03",
                 RecordID = "rec-03",
                 PrescriptionDateTime = DateTime.UtcNow.AddDays(-5).AddHours(11),
-                Status = PrescriptionStatus.Completed,
+                Status = PrescriptionStatus.Completed, // Or PrescriptionStatus.Completed
                 PharmacistID = "phar-02",
                 VerifiedAt = DateTime.UtcNow.AddDays(-5).AddHours(11).AddMinutes(15),
                 Priority = Priority.Urgent,
-                DispensedAt = DateTime.UtcNow.AddDays(-5).AddHours(11).AddMinutes(30)
+                DispensedAt = null,
+                Reason = null,
+                CancelledAt = null
             },
+            // 4. CANCELLED (By System/Doctor)
             new PrescriptionModel
             {
                 PrescriptionID = "presc-04",
@@ -638,13 +963,70 @@ public static class DatabaseSeeder
                 PrescriptionDateTime = DateTime.UtcNow.AddDays(-10).AddHours(15).AddMinutes(30),
                 Status = PrescriptionStatus.Cancelled,
                 PharmacistID = null!,
-                VerifiedAt = DateTime.UtcNow.AddDays(-10).AddHours(16),
+                VerifiedAt = null,
                 Priority = Priority.Stat,
-                DispensedAt = DateTime.UtcNow
+                DispensedAt = null,
+                Reason = "Duplicate prescription detected.",
+                CancelledAt = DateTime.UtcNow.AddDays(-10).AddHours(16)
+            },
+            // 5. DISPENSED (Done)
+            new PrescriptionModel
+            {
+                PrescriptionID = "presc-05",
+                RecordID = "rec-05",
+                PrescriptionDateTime = DateTime.UtcNow.AddDays(-3).AddHours(11).AddMinutes(45),
+                Status = PrescriptionStatus.Dispensed,
+                PharmacistID = "phar-01",
+                VerifiedAt = DateTime.UtcNow.AddDays(-3).AddHours(12),
+                Priority = Priority.Routine,
+                DispensedAt = DateTime.UtcNow.AddDays(-3).AddHours(12).AddMinutes(15),
+                Reason = null,
+                CancelledAt = null
+            },
+            // 6. PENDING (New)
+            new PrescriptionModel
+            {
+                PrescriptionID = "presc-06",
+                RecordID = "rec-06",
+                PrescriptionDateTime = DateTime.UtcNow.AddDays(-7).AddHours(16).AddMinutes(45),
+                Status = PrescriptionStatus.Pending,
+                PharmacistID = null!,
+                VerifiedAt = null,
+                Priority = Priority.Urgent,
+                DispensedAt = null,
+                Reason = null,
+                CancelledAt = null
+            },
+            // 7. VERIFIED / COMPLETED (Ready for pickup)
+            new PrescriptionModel
+            {
+                PrescriptionID = "presc-07",
+                RecordID = "rec-07",
+                PrescriptionDateTime = DateTime.UtcNow.AddDays(-14).AddHours(14),
+                Status = PrescriptionStatus.Completed, // Or PrescriptionStatus.Completed
+                PharmacistID = "phar-01",
+                VerifiedAt = DateTime.UtcNow.AddDays(-14).AddHours(14).AddMinutes(30),
+                Priority = Priority.Routine,
+                DispensedAt = null,
+                Reason = null,
+                CancelledAt = null
+            },
+            // 8. CANCELLED (By Patient)
+            new PrescriptionModel
+            {
+                PrescriptionID = "presc-08",
+                RecordID = "rec-08",
+                PrescriptionDateTime = DateTime.UtcNow.AddDays(-4).AddHours(10).AddMinutes(30),
+                Status = PrescriptionStatus.Cancelled,
+                PharmacistID = "phar-02",
+                VerifiedAt = DateTime.UtcNow.AddDays(-4).AddHours(11),
+                Priority = Priority.Routine,
+                DispensedAt = null,
+                Reason = "Patient refused medication due to cost.",
+                CancelledAt = DateTime.UtcNow.AddDays(-4).AddHours(11).AddMinutes(10)
             }
         );
     }
-
     private static void SeedPrescriptionItems(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<PrescriptionItemModel>().HasData(
@@ -659,7 +1041,7 @@ public static class DatabaseSeeder
                 DurationDays = 7,
                 Instruction = "Take after meals.",
                 Indication = "For bacterial infection.",
-                DoseScheduleJSON = "{\"morning\": 1, \"afternoon\": 1, \"evening\": 1}"
+                DoseScheduleJSON = "{&quot;morning&quot;: 1, &quot;afternoon&quot;: 1, &quot;evening&quot;: 1}"
             },
             new PrescriptionItemModel
             {
@@ -672,7 +1054,7 @@ public static class DatabaseSeeder
                 DurationDays = 5,
                 Instruction = "Do not take on an empty stomach.",
                 Indication = "For pain and fever management.",
-                DoseScheduleJSON = "{\"as_needed\": true}"
+                DoseScheduleJSON = "{&quot;as_needed&quot;: true}"
             },
             new PrescriptionItemModel
             {
@@ -685,7 +1067,7 @@ public static class DatabaseSeeder
                 DurationDays = 30,
                 Instruction = "Take with meals to reduce stomach upset.",
                 Indication = "Diabetes management.",
-                DoseScheduleJSON = "{\"morning\": 1, \"evening\": 1}"
+                DoseScheduleJSON = "{&quot;morning&quot;: 1, &quot;evening&quot;: 1}"
             },
             new PrescriptionItemModel
             {
@@ -698,7 +1080,7 @@ public static class DatabaseSeeder
                 DurationDays = 30,
                 Instruction = "Avoid grapefruit juice.",
                 Indication = "Cholesterol management.",
-                DoseScheduleJSON = "{\"night\": 1}"
+                DoseScheduleJSON = "{&quot;night&quot;: 1}"
             },
             new PrescriptionItemModel
             {
@@ -711,7 +1093,7 @@ public static class DatabaseSeeder
                 DurationDays = 14,
                 Instruction = "Take 30 mins before food.",
                 Indication = "Gastric protection.",
-                DoseScheduleJSON = "{\"morning\": 1}"
+                DoseScheduleJSON = "{&quot;morning&quot;: 1}"
             },
             new PrescriptionItemModel
             {
@@ -724,7 +1106,59 @@ public static class DatabaseSeeder
                 DurationDays = 5,
                 Instruction = "Take with food.",
                 Indication = "Pain relief.",
-                DoseScheduleJSON = "{\"morning\": 1, \"afternoon\": 1, \"evening\": 1, \"night\": 1}"
+                DoseScheduleJSON = "{&quot;morning&quot;: 1, &quot;afternoon&quot;: 1, &quot;evening&quot;: 1, &quot;night&quot;: 1}"
+            },
+            new PrescriptionItemModel
+            {
+                ItemID = "pi-07",
+                PrescriptionID = "presc-05",
+                MedicationID = "med-para-500",
+                Quantity = 15,
+                Dosage = "500mg",
+                Frequency = "Every 6 hours as needed",
+                DurationDays = 7,
+                Instruction = "Take at onset of headache.",
+                Indication = "Migraine pain relief.",
+                DoseScheduleJSON = "{&quot;as_needed&quot;: true}"
+            },
+            new PrescriptionItemModel
+            {
+                ItemID = "pi-08",
+                PrescriptionID = "presc-06",
+                MedicationID = "med-cet-10",
+                Quantity = 30,
+                Dosage = "10mg",
+                Frequency = "Once daily at night",
+                DurationDays = 30,
+                Instruction = "May cause drowsiness.",
+                Indication = "Allergy management.",
+                DoseScheduleJSON = "{&quot;night&quot;: 1}"
+            },
+            new PrescriptionItemModel
+            {
+                ItemID = "pi-09",
+                PrescriptionID = "presc-07",
+                MedicationID = "med-ibu-400",
+                Quantity = 40,
+                Dosage = "400mg",
+                Frequency = "Every 8 hours as needed",
+                DurationDays = 14,
+                Instruction = "Take with meals.",
+                Indication = "Back pain management.",
+                DoseScheduleJSON = "{&quot;as_needed&quot;: true}"
+            },
+            new PrescriptionItemModel
+            {
+                ItemID = "pi-10",
+                PrescriptionID = "presc-08",
+                MedicationID = "med-omep-20",
+                Quantity = 30,
+                Dosage = "20mg",
+                Frequency = "Once daily before breakfast",
+                DurationDays = 30,
+                Instruction = "Take 30 mins before food.",
+                Indication = "Gastric protection.",
+                DoseScheduleJSON = "{&quot;morning&quot;: 1}"
             }
         );
     }
@@ -760,6 +1194,76 @@ public static class DatabaseSeeder
                 Description = "Potential reduced antihypertensive effect.",
                 ClinicalEffects = "NSAIDs may reduce the cardiovascular protection of statins in high risk patients.",
                 Management = "Use lowest effective dose of NSAID."
+            },
+            new MedicationInteractionModel
+            {
+                InteractionID = "int-04",
+                Medication1ID = "med-amox-500",
+                Medication2ID = "med-omep-20",
+                Severity = Severity.Mild,
+                Description = "Reduced antibiotic absorption.",
+                ClinicalEffects = "Omeprazole may decrease the absorption of amoxicillin.",
+                Management = "Separate administration by 2 hours if possible."
+            },
+            new MedicationInteractionModel
+            {
+                InteractionID = "int-05",
+                Medication1ID = "med-para-500",
+                Medication2ID = "med-ibu-400",
+                Severity = Severity.Moderate,
+                Description = "Increased risk of kidney damage.",
+                ClinicalEffects = "Combined use may increase risk of renal toxicity.",
+                Management = "Monitor kidney function, avoid prolonged use."
+            },
+            new MedicationInteractionModel
+            {
+                InteractionID = "int-06",
+                Medication1ID = "med-cet-10",
+                Medication2ID = "med-omep-20",
+                Severity = Severity.Mild,
+                Description = "Altered drug metabolism.",
+                ClinicalEffects = "Omeprazole may increase cetirizine levels slightly.",
+                Management = "Monitor for increased drowsiness."
+            },
+            new MedicationInteractionModel
+            {
+                InteractionID = "int-07",
+                Medication1ID = "med-met-850",
+                Medication2ID = "med-ator-20",
+                Severity = Severity.Mild,
+                Description = "Potential muscle effects.",
+                ClinicalEffects = "Rare cases of increased muscle pain when combined.",
+                Management = "Monitor for muscle symptoms."
+            },
+            new MedicationInteractionModel
+            {
+                InteractionID = "int-08",
+                Medication1ID = "med-vit-c-500",
+                Medication2ID = "med-omep-20",
+                Severity = Severity.Mild,
+                Description = "Reduced vitamin C absorption.",
+                ClinicalEffects = "Omeprazole may decrease vitamin C absorption.",
+                Management = "Take vitamin C supplements separately."
+            },
+            new MedicationInteractionModel
+            {
+                InteractionID = "int-09",
+                Medication1ID = "med-amox-500",
+                Medication2ID = "med-cet-10",
+                Severity = Severity.Mild,
+                Description = "No significant interaction.",
+                ClinicalEffects = "Generally safe to use together.",
+                Management = "No special precautions needed."
+            },
+            new MedicationInteractionModel
+            {
+                InteractionID = "int-10",
+                Medication1ID = "med-met-850",
+                Medication2ID = "med-ibu-400",
+                Severity = Severity.Severe,
+                Description = "High risk of lactic acidosis.",
+                ClinicalEffects = "NSAIDs may significantly increase metformin levels.",
+                Management = "Avoid combination if possible, monitor closely."
             }
         );
     }
@@ -828,6 +1332,60 @@ public static class DatabaseSeeder
                 Reason = "Dispensed to Patient",
                 RelatedPrescriptionID = "presc-03",
                 CreatedAt = DateTime.UtcNow.AddDays(-5).AddHours(11).AddMinutes(30)
+            },
+            new MedicationStockLogModel
+            {
+                LogID = "log-08",
+                MedicationID = "med-para-500",
+                QuantityChange = 2000,
+                Reason = "Initial Stock Import",
+                RelatedPrescriptionID = null!,
+                CreatedAt = DateTime.UtcNow.AddMonths(-1)
+            },
+            new MedicationStockLogModel
+            {
+                LogID = "log-09",
+                MedicationID = "med-cet-10",
+                QuantityChange = 2000,
+                Reason = "Initial Stock Import",
+                RelatedPrescriptionID = null!,
+                CreatedAt = DateTime.UtcNow.AddMonths(-1)
+            },
+            new MedicationStockLogModel
+            {
+                LogID = "log-10",
+                MedicationID = "med-para-500",
+                QuantityChange = -15,
+                Reason = "Dispensed to Patient",
+                RelatedPrescriptionID = "presc-05",
+                CreatedAt = DateTime.UtcNow.AddDays(-3).AddHours(12).AddMinutes(15)
+            },
+            new MedicationStockLogModel
+            {
+                LogID = "log-11",
+                MedicationID = "med-cet-10",
+                QuantityChange = -30,
+                Reason = "Dispensed to Patient",
+                RelatedPrescriptionID = "presc-06",
+                CreatedAt = DateTime.UtcNow.AddDays(-7).AddHours(17).AddMinutes(20)
+            },
+            new MedicationStockLogModel
+            {
+                LogID = "log-12",
+                MedicationID = "med-ibu-400",
+                QuantityChange = -40,
+                Reason = "Dispensed to Patient",
+                RelatedPrescriptionID = "presc-07",
+                CreatedAt = DateTime.UtcNow
+            },
+            new MedicationStockLogModel
+            {
+                LogID = "log-13",
+                MedicationID = "med-omep-20",
+                QuantityChange = -30,
+                Reason = "Dispensed to Patient",
+                RelatedPrescriptionID = "presc-08",
+                CreatedAt = DateTime.UtcNow.AddDays(-4).AddHours(11).AddMinutes(25)
             }
         );
     }
@@ -890,6 +1448,20 @@ public static class DatabaseSeeder
                 DoctorID = "doc-04",
                 StartTime = DateTime.UtcNow.AddDays(3).Date.AddHours(8),
                 EndTime = DateTime.UtcNow.AddDays(3).Date.AddHours(16)
+            },
+            new DoctorScheduleModel
+            {
+                ScheduleID = "sch-09",
+                DoctorID = "doc-01",
+                StartTime = DateTime.UtcNow.AddDays(4).Date.AddHours(8),
+                EndTime = DateTime.UtcNow.AddDays(4).Date.AddHours(17)
+            },
+            new DoctorScheduleModel
+            {
+                ScheduleID = "sch-10",
+                DoctorID = "doc-02",
+                StartTime = DateTime.UtcNow.AddDays(5).Date.AddHours(13),
+                EndTime = DateTime.UtcNow.AddDays(5).Date.AddHours(21)
             }
         );
     }
