@@ -5,7 +5,8 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:PersonalizedHealthcareTrackingSystemFinal.Views.PharmacistView"
       mc:Ignorable="d" 
-        d:DesignHeight="2000" d:DesignWidth="2000">
+      xmlns:fa="http://schemas.fontawesome.io/icons/"
+      d:DesignHeight="1000" d:DesignWidth="2000">
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -39,6 +40,7 @@
                             Grid.Column="1"
                             Background="{StaticResource StatusPendingBackground}"
                             HorizontalAlignment="Right"
+                            Style="{StaticResource BaseCustomBorderStyle}"
                             VerticalAlignment="Center">
                             <TextBlock
                                 Text="{Binding NumberPending, StringFormat={}{0} pending}"
@@ -64,6 +66,7 @@
                         <Button
                             Grid.Column="1"
                             Content="&#128472;"
+                            Command="{Binding ReloadButtonCommand}"
                             Style="{StaticResource ReloadButtonStyle}"/>
                     </Grid>
                 </StackPanel>
@@ -95,14 +98,35 @@
                                         VerticalAlignment="Center"/>
                                 </StackPanel>
                                 <ListBox 
-                                        SelectedItem="{Binding SelectedPendingPrescription}"
-                                        ItemsSource="{Binding PrescriptionsPending}" 
-                                        AlternationCount="20"
-                                        Background="Transparent"
-                                        BorderBrush="Transparent">
+                                    SelectedItem="{Binding SelectedPendingPrescription}"
+                                    ItemsSource="{Binding PrescriptionsPending}" 
+                                    AlternationCount="20"
+                                    Background="Transparent"
+                                    BorderBrush="Transparent">
                                     <ListBox.ItemContainerStyle>
                                         <Style TargetType="ListBoxItem">
-                                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="ListBoxItem">
+                                                        <Border Name="bd"
+                                                                Background="{TemplateBinding Background}"
+                                                                BorderBrush="{TemplateBinding BorderBrush}"
+                                                                BorderThickness="{TemplateBinding BorderThickness}"
+                                                                Padding="{TemplateBinding Padding}"
+                                                                CornerRadius="8">
+                                                            <ContentPresenter/>
+                                                        </Border>
+                                                        <ControlTemplate.Triggers>
+                                                            <Trigger Property="IsMouseOver" Value="True">
+                                                                <Setter Property="Background" Value="{StaticResource LightBorder}" />
+                                                            </Trigger>
+                                                            <Trigger Property="IsSelected" Value="True">
+                                                                <Setter Property="Background" Value="#00AAFF" />
+                                                            </Trigger>
+                                                        </ControlTemplate.Triggers>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
                                         </Style>
                                     </ListBox.ItemContainerStyle>
                                     <ListBox.ItemTemplate>
@@ -156,9 +180,7 @@
 
                             </StackPanel>
                             <StackPanel
-                                Grid.Row="2"
-                                Orientation="Vertical"
-                                HorizontalAlignment="Left">
+                                Grid.Row="2">
 
                                 <StackPanel
                                     VerticalAlignment="Center"
@@ -177,11 +199,89 @@
                                         VerticalAlignment="Center"/>
 
                                 </StackPanel>
+                                <ListBox 
+                                    SelectedItem="{Binding SelectedDispensingPrescription}"
+                                    ItemsSource="{Binding PrescriptionsDispensing}" 
+                                    AlternationCount="20"
+                                    Background="Transparent"
+                                    BorderBrush="Transparent">
+                                    <ListBox.ItemContainerStyle>
+                                        <Style TargetType="ListBoxItem">
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="ListBoxItem">
+                                                        <Border Name="bd"
+                                                                Background="{TemplateBinding Background}"
+                                                                BorderBrush="{TemplateBinding BorderBrush}"
+                                                                BorderThickness="{TemplateBinding BorderThickness}"
+                                                                Padding="{TemplateBinding Padding}"
+                                                                CornerRadius="8">
+                                                            <ContentPresenter/>
+                                                        </Border>
+                                                        <ControlTemplate.Triggers>
+                                                            <Trigger Property="IsMouseOver" Value="True">
+                                                                <Setter Property="Background" Value="{StaticResource LightBorder}" />
+                                                            </Trigger>
+                                                            <Trigger Property="IsSelected" Value="True">
+                                                                <Setter Property="Background" Value="#00AAFF" />
+                                                            </Trigger>
+                                                        </ControlTemplate.Triggers>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Style>
+                                    </ListBox.ItemContainerStyle>
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <Border
+                                                    Style="{StaticResource PharmacistQueueCardBorderStyle}"
+                                                    Margin="0,10">
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="Auto" SharedSizeGroup="OverallInfo"/>
+                                                        <ColumnDefinition Width="*"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <StackPanel>
+                                                        <TextBlock
+                                                                Style="{StaticResource SecondaryTextTextBlockStyle}"
+                                                                Text="{Binding PrescriptionID, StringFormat={}#{0}}"
+                                                                Margin="0,0,0,10"/>
+                                                        <TextBlock
+                                                                Style="{StaticResource CustomBaseTextBlockStyle}"
+                                                                FontSize="18"
+                                                                FontWeight="Bold"
+                                                                Margin="0,0,0,5">
+                                                            <TextBlock.Text>
+                                                                <MultiBinding StringFormat="{}{0} {1}">
+                                                                    <Binding Path="MedicalRecord.Appointment.Patient.User.FirstName"/>
+                                                                    <Binding Path="MedicalRecord.Appointment.Patient.User.LastName"/>
+                                                                </MultiBinding>
+                                                            </TextBlock.Text>
+                                                        </TextBlock>
+                                                        <TextBlock
+                                                                Style="{StaticResource SecondaryTextTextBlockStyle}"
+                                                                FontSize="14">
+                                                            <TextBlock.Text>
+                                                                <MultiBinding StringFormat="{}👨‍⚕️ Dr. {0} {1}">
+                                                                    <Binding Path="MedicalRecord.Appointment.Doctor.User.FirstName"/>
+                                                                    <Binding Path="MedicalRecord.Appointment.Doctor.User.LastName"/>
+                                                                </MultiBinding>
+                                                            </TextBlock.Text>
+                                                        </TextBlock>
+                                                    </StackPanel>
+                                                    <TextBlock
+                                                            Grid.Column="1"
+                                                            Style="{StaticResource SecondaryTextTextBlockStyle}"
+                                                            HorizontalAlignment="Right"
+                                                            Text="{Binding PrescriptionDateTime, StringFormat={}{0:hh:mm tt}}"/>
+                                                </Grid>
+                                            </Border>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
                             </StackPanel>
                             <StackPanel
-                                Grid.Row="4"
-                                Orientation="Vertical"
-                                HorizontalAlignment="Left">
+                                Grid.Row="4">
 
                                 <StackPanel
                                     VerticalAlignment="Center"
@@ -200,11 +300,89 @@
                                         VerticalAlignment="Center"/>
 
                                 </StackPanel>
+                                <ListBox 
+                                    SelectedItem="{Binding SelectedCompletedPrescription}"
+                                    ItemsSource="{Binding PrescriptionsCompleted}" 
+                                    AlternationCount="20"
+                                    Background="Transparent"
+                                    BorderBrush="Transparent">
+                                    <ListBox.ItemContainerStyle>
+                                        <Style TargetType="ListBoxItem">
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="ListBoxItem">
+                                                        <Border Name="bd"
+                                                                Background="{TemplateBinding Background}"
+                                                                BorderBrush="{TemplateBinding BorderBrush}"
+                                                                BorderThickness="{TemplateBinding BorderThickness}"
+                                                                Padding="{TemplateBinding Padding}"
+                                                                CornerRadius="8">
+                                                            <ContentPresenter/>
+                                                        </Border>
+                                                        <ControlTemplate.Triggers>
+                                                            <Trigger Property="IsMouseOver" Value="True">
+                                                                <Setter Property="Background" Value="{StaticResource LightBorder}" />
+                                                            </Trigger>
+                                                            <Trigger Property="IsSelected" Value="True">
+                                                                <Setter Property="Background" Value="#00AAFF" />
+                                                            </Trigger>
+                                                        </ControlTemplate.Triggers>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Style>
+                                    </ListBox.ItemContainerStyle>
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <Border
+                                                    Style="{StaticResource PharmacistQueueCardBorderStyle}"
+                                                    Margin="0,10">
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="Auto" SharedSizeGroup="OverallInfo"/>
+                                                        <ColumnDefinition Width="*"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <StackPanel>
+                                                        <TextBlock
+                                                                Style="{StaticResource SecondaryTextTextBlockStyle}"
+                                                                Text="{Binding PrescriptionID, StringFormat={}#{0}}"
+                                                                Margin="0,0,0,10"/>
+                                                        <TextBlock
+                                                                Style="{StaticResource CustomBaseTextBlockStyle}"
+                                                                FontSize="18"
+                                                                FontWeight="Bold"
+                                                                Margin="0,0,0,5">
+                                                            <TextBlock.Text>
+                                                                <MultiBinding StringFormat="{}{0} {1}">
+                                                                    <Binding Path="MedicalRecord.Appointment.Patient.User.FirstName"/>
+                                                                    <Binding Path="MedicalRecord.Appointment.Patient.User.LastName"/>
+                                                                </MultiBinding>
+                                                            </TextBlock.Text>
+                                                        </TextBlock>
+                                                        <TextBlock
+                                                                Style="{StaticResource SecondaryTextTextBlockStyle}"
+                                                                FontSize="14">
+                                                            <TextBlock.Text>
+                                                                <MultiBinding StringFormat="{}👨‍⚕️ Dr. {0} {1}">
+                                                                    <Binding Path="MedicalRecord.Appointment.Doctor.User.FirstName"/>
+                                                                    <Binding Path="MedicalRecord.Appointment.Doctor.User.LastName"/>
+                                                                </MultiBinding>
+                                                            </TextBlock.Text>
+                                                        </TextBlock>
+                                                    </StackPanel>
+                                                    <TextBlock
+                                                            Grid.Column="1"
+                                                            Style="{StaticResource SecondaryTextTextBlockStyle}"
+                                                            HorizontalAlignment="Right"
+                                                            Text="{Binding PrescriptionDateTime, StringFormat={}{0:hh:mm tt}}"/>
+                                                </Grid>
+                                            </Border>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
                             </StackPanel>
                             <StackPanel
-                                Grid.Row="6"
-                                Orientation="Vertical"
-                                HorizontalAlignment="Left">
+                                Grid.Row="6">
 
                                 <StackPanel
                                     VerticalAlignment="Center"
@@ -222,6 +400,86 @@
                                         FontSize="20"
                                         VerticalAlignment="Center"/>
                                 </StackPanel>
+                                <ListBox 
+                                    SelectedItem="{Binding SelectedCancelledPrescription}"
+                                    ItemsSource="{Binding PrescriptionsCancelled}" 
+                                    AlternationCount="20"
+                                    Background="Transparent"
+                                    BorderBrush="Transparent">
+                                    <ListBox.ItemContainerStyle>
+                                        <Style TargetType="ListBoxItem">
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="ListBoxItem">
+                                                        <Border Name="bd"
+                                                                Background="{TemplateBinding Background}"
+                                                                BorderBrush="{TemplateBinding BorderBrush}"
+                                                                BorderThickness="{TemplateBinding BorderThickness}"
+                                                                Padding="{TemplateBinding Padding}"
+                                                                CornerRadius="8">
+                                                            <ContentPresenter/>
+                                                        </Border>
+                                                        <ControlTemplate.Triggers>
+                                                            <Trigger Property="IsMouseOver" Value="True">
+                                                                <Setter Property="Background" Value="{StaticResource LightBorder}" />
+                                                            </Trigger>
+                                                            <Trigger Property="IsSelected" Value="True">
+                                                                <Setter Property="Background" Value="#00AAFF" />
+                                                            </Trigger>
+                                                        </ControlTemplate.Triggers>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Style>
+                                    </ListBox.ItemContainerStyle>
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <Border
+                                                    Style="{StaticResource PharmacistQueueCardBorderStyle}"
+                                                    Margin="0,10">
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="Auto" SharedSizeGroup="OverallInfo"/>
+                                                        <ColumnDefinition Width="*"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <StackPanel>
+                                                        <TextBlock
+                                                                Style="{StaticResource SecondaryTextTextBlockStyle}"
+                                                                Text="{Binding PrescriptionID, StringFormat={}#{0}}"
+                                                                Margin="0,0,0,10"/>
+                                                        <TextBlock
+                                                                Style="{StaticResource CustomBaseTextBlockStyle}"
+                                                                FontSize="18"
+                                                                FontWeight="Bold"
+                                                                Margin="0,0,0,5">
+                                                            <TextBlock.Text>
+                                                                <MultiBinding StringFormat="{}{0} {1}">
+                                                                    <Binding Path="MedicalRecord.Appointment.Patient.User.FirstName"/>
+                                                                    <Binding Path="MedicalRecord.Appointment.Patient.User.LastName"/>
+                                                                </MultiBinding>
+                                                            </TextBlock.Text>
+                                                        </TextBlock>
+                                                        <TextBlock
+                                                                Style="{StaticResource SecondaryTextTextBlockStyle}"
+                                                                FontSize="14">
+                                                            <TextBlock.Text>
+                                                                <MultiBinding StringFormat="{}👨‍⚕️ Dr. {0} {1}">
+                                                                    <Binding Path="MedicalRecord.Appointment.Doctor.User.FirstName"/>
+                                                                    <Binding Path="MedicalRecord.Appointment.Doctor.User.LastName"/>
+                                                                </MultiBinding>
+                                                            </TextBlock.Text>
+                                                        </TextBlock>
+                                                    </StackPanel>
+                                                    <TextBlock
+                                                            Grid.Column="1"
+                                                            Style="{StaticResource SecondaryTextTextBlockStyle}"
+                                                            HorizontalAlignment="Right"
+                                                            Text="{Binding PrescriptionDateTime, StringFormat={}{0:hh:mm tt}}"/>
+                                                </Grid>
+                                            </Border>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
                             </StackPanel>
                         </StackPanel>
                     </Border>
@@ -694,7 +952,8 @@
                         Margin="0,0,20,0"/>
                     <Button
                         Style="{StaticResource PrimaryButtonStyle}"
-                        Margin="0,0,10,0">
+                        Margin="0,0,10,0"
+                        Command="{Binding VerifyButtonCommand}">
                         <StackPanel 
                             Orientation="Horizontal">
                             <TextBlock
@@ -711,6 +970,27 @@
                     </Button>
                 </StackPanel>
             </Border>
+        </Grid>
+        <Grid Visibility="{Binding IsLoadingBar, Converter={StaticResource BoolToVisibilityConverter}}"
+              Grid.RowSpan="2" 
+              Background="#80FFFFFF" 
+              d:IsHidden="False">
+            <fa:ImageAwesome 
+                Icon="Spinner" 
+                Spin="True" 
+                Height="48" 
+                Width="48" />
+        </Grid>
+        <Grid Visibility="{Binding IsLoadingContent, Converter={StaticResource BoolToVisibilityConverter}}"
+              Grid.RowSpan="3" 
+              Grid.Column="1"
+              Background="#80FFFFFF" 
+              d:IsHidden="False">
+            <fa:ImageAwesome 
+                Icon="Spinner" 
+                Spin="True" 
+                Height="48" 
+                Width="48" />
         </Grid>
     </Grid>
 </Page>

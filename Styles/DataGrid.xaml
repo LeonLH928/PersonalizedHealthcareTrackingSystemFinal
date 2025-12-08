@@ -56,7 +56,7 @@
         <Setter Property="Padding" Value="10,0" />
     </Style>
     
-    <!--  TextBlock Style for Columns  -->
+    <!--  Text Block Style for Columns  -->
     <Style x:Key="ColumnTextBlockStyle" TargetType="TextBlock">
         <Setter Property="FontFamily" Value="Open Sans" />
         <Setter Property="FontSize" Value="15" />
