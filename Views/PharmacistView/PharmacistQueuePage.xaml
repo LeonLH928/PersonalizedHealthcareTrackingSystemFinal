@@ -4,10 +4,16 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:PersonalizedHealthcareTrackingSystemFinal.Views.PharmacistView"
+      xmlns:converters="clr-namespace:PersonalizedHealthcareTrackingSystemFinal.Helpers"
       mc:Ignorable="d" 
       xmlns:fa="http://schemas.fontawesome.io/icons/"
       d:DesignHeight="1000" d:DesignWidth="2000">
 
+    <Page.Resources>
+        <converters:YearToAgeConverter x:Key="YearToAgeConverter"/>
+        <converters:AddOneConverter x:Key="AddOneConverter"/>
+    </Page.Resources>
+    
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
@@ -202,207 +208,6 @@
                                 <ListBox 
                                     SelectedItem="{Binding SelectedDispensingPrescription}"
                                     ItemsSource="{Binding PrescriptionsDispensing}" 
-                                    AlternationCount="20"
-                                    Background="Transparent"
-                                    BorderBrush="Transparent">
-                                    <ListBox.ItemContainerStyle>
-                                        <Style TargetType="ListBoxItem">
-                                            <Setter Property="Template">
-                                                <Setter.Value>
-                                                    <ControlTemplate TargetType="ListBoxItem">
-                                                        <Border Name="bd"
-                                                                Background="{TemplateBinding Background}"
-                                                                BorderBrush="{TemplateBinding BorderBrush}"
-                                                                BorderThickness="{TemplateBinding BorderThickness}"
-                                                                Padding="{TemplateBinding Padding}"
-                                                                CornerRadius="8">
-                                                            <ContentPresenter/>
-                                                        </Border>
-                                                        <ControlTemplate.Triggers>
-                                                            <Trigger Property="IsMouseOver" Value="True">
-                                                                <Setter Property="Background" Value="{StaticResource LightBorder}" />
-                                                            </Trigger>
-                                                            <Trigger Property="IsSelected" Value="True">
-                                                                <Setter Property="Background" Value="#00AAFF" />
-                                                            </Trigger>
-                                                        </ControlTemplate.Triggers>
-                                                    </ControlTemplate>
-                                                </Setter.Value>
-                                            </Setter>
-                                        </Style>
-                                    </ListBox.ItemContainerStyle>
-                                    <ListBox.ItemTemplate>
-                                        <DataTemplate>
-                                            <Border
-                                                    Style="{StaticResource PharmacistQueueCardBorderStyle}"
-                                                    Margin="0,10">
-                                                <Grid>
-                                                    <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="Auto" SharedSizeGroup="OverallInfo"/>
-                                                        <ColumnDefinition Width="*"/>
-                                                    </Grid.ColumnDefinitions>
-                                                    <StackPanel>
-                                                        <TextBlock
-                                                                Style="{StaticResource SecondaryTextTextBlockStyle}"
-                                                                Text="{Binding PrescriptionID, StringFormat={}#{0}}"
-                                                                Margin="0,0,0,10"/>
-                                                        <TextBlock
-                                                                Style="{StaticResource CustomBaseTextBlockStyle}"
-                                                                FontSize="18"
-                                                                FontWeight="Bold"
-                                                                Margin="0,0,0,5">
-                                                            <TextBlock.Text>
-                                                                <MultiBinding StringFormat="{}{0} {1}">
-                                                                    <Binding Path="MedicalRecord.Appointment.Patient.User.FirstName"/>
-                                                                    <Binding Path="MedicalRecord.Appointment.Patient.User.LastName"/>
-                                                                </MultiBinding>
-                                                            </TextBlock.Text>
-                                                        </TextBlock>
-                                                        <TextBlock
-                                                                Style="{StaticResource SecondaryTextTextBlockStyle}"
-                                                                FontSize="14">
-                                                            <TextBlock.Text>
-                                                                <MultiBinding StringFormat="{}👨‍⚕️ Dr. {0} {1}">
-                                                                    <Binding Path="MedicalRecord.Appointment.Doctor.User.FirstName"/>
-                                                                    <Binding Path="MedicalRecord.Appointment.Doctor.User.LastName"/>
-                                                                </MultiBinding>
-                                                            </TextBlock.Text>
-                                                        </TextBlock>
-                                                    </StackPanel>
-                                                    <TextBlock
-                                                            Grid.Column="1"
-                                                            Style="{StaticResource SecondaryTextTextBlockStyle}"
-                                                            HorizontalAlignment="Right"
-                                                            Text="{Binding PrescriptionDateTime, StringFormat={}{0:hh:mm tt}}"/>
-                                                </Grid>
-                                            </Border>
-                                        </DataTemplate>
-                                    </ListBox.ItemTemplate>
-                                </ListBox>
-                            </StackPanel>
-                            <StackPanel
-                                Grid.Row="4">
-
-                                <StackPanel
-                                    VerticalAlignment="Center"
-                                    Orientation="Horizontal">
-
-                                    <Border 
-                                        Background="{StaticResource MediumCompletedStatusBorder}"
-                                        Style="{StaticResource Dot}"
-                                        Margin="0,0,10,0"/>
-
-                                    <TextBlock
-                                        Text="Completed"
-                                        FontFamily="Segoe UI"
-                                        FontWeight="Bold"
-                                        FontSize="20"
-                                        VerticalAlignment="Center"/>
-
-                                </StackPanel>
-                                <ListBox 
-                                    SelectedItem="{Binding SelectedCompletedPrescription}"
-                                    ItemsSource="{Binding PrescriptionsCompleted}" 
-                                    AlternationCount="20"
-                                    Background="Transparent"
-                                    BorderBrush="Transparent">
-                                    <ListBox.ItemContainerStyle>
-                                        <Style TargetType="ListBoxItem">
-                                            <Setter Property="Template">
-                                                <Setter.Value>
-                                                    <ControlTemplate TargetType="ListBoxItem">
-                                                        <Border Name="bd"
-                                                                Background="{TemplateBinding Background}"
-                                                                BorderBrush="{TemplateBinding BorderBrush}"
-                                                                BorderThickness="{TemplateBinding BorderThickness}"
-                                                                Padding="{TemplateBinding Padding}"
-                                                                CornerRadius="8">
-                                                            <ContentPresenter/>
-                                                        </Border>
-                                                        <ControlTemplate.Triggers>
-                                                            <Trigger Property="IsMouseOver" Value="True">
-                                                                <Setter Property="Background" Value="{StaticResource LightBorder}" />
-                                                            </Trigger>
-                                                            <Trigger Property="IsSelected" Value="True">
-                                                                <Setter Property="Background" Value="#00AAFF" />
-                                                            </Trigger>
-                                                        </ControlTemplate.Triggers>
-                                                    </ControlTemplate>
-                                                </Setter.Value>
-                                            </Setter>
-                                        </Style>
-                                    </ListBox.ItemContainerStyle>
-                                    <ListBox.ItemTemplate>
-                                        <DataTemplate>
-                                            <Border
-                                                    Style="{StaticResource PharmacistQueueCardBorderStyle}"
-                                                    Margin="0,10">
-                                                <Grid>
-                                                    <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="Auto" SharedSizeGroup="OverallInfo"/>
-                                                        <ColumnDefinition Width="*"/>
-                                                    </Grid.ColumnDefinitions>
-                                                    <StackPanel>
-                                                        <TextBlock
-                                                                Style="{StaticResource SecondaryTextTextBlockStyle}"
-                                                                Text="{Binding PrescriptionID, StringFormat={}#{0}}"
-                                                                Margin="0,0,0,10"/>
-                                                        <TextBlock
-                                                                Style="{StaticResource CustomBaseTextBlockStyle}"
-                                                                FontSize="18"
-                                                                FontWeight="Bold"
-                                                                Margin="0,0,0,5">
-                                                            <TextBlock.Text>
-                                                                <MultiBinding StringFormat="{}{0} {1}">
-                                                                    <Binding Path="MedicalRecord.Appointment.Patient.User.FirstName"/>
-                                                                    <Binding Path="MedicalRecord.Appointment.Patient.User.LastName"/>
-                                                                </MultiBinding>
-                                                            </TextBlock.Text>
-                                                        </TextBlock>
-                                                        <TextBlock
-                                                                Style="{StaticResource SecondaryTextTextBlockStyle}"
-                                                                FontSize="14">
-                                                            <TextBlock.Text>
-                                                                <MultiBinding StringFormat="{}👨‍⚕️ Dr. {0} {1}">
-                                                                    <Binding Path="MedicalRecord.Appointment.Doctor.User.FirstName"/>
-                                                                    <Binding Path="MedicalRecord.Appointment.Doctor.User.LastName"/>
-                                                                </MultiBinding>
-                                                            </TextBlock.Text>
-                                                        </TextBlock>
-                                                    </StackPanel>
-                                                    <TextBlock
-                                                            Grid.Column="1"
-                                                            Style="{StaticResource SecondaryTextTextBlockStyle}"
-                                                            HorizontalAlignment="Right"
-                                                            Text="{Binding PrescriptionDateTime, StringFormat={}{0:hh:mm tt}}"/>
-                                                </Grid>
-                                            </Border>
-                                        </DataTemplate>
-                                    </ListBox.ItemTemplate>
-                                </ListBox>
-                            </StackPanel>
-                            <StackPanel
-                                Grid.Row="6">
-
-                                <StackPanel
-                                    VerticalAlignment="Center"
-                                    Orientation="Horizontal">
-
-                                    <Border 
-                                        Background="{StaticResource CancelledStatusBorder}"
-                                        Style="{StaticResource Dot}"
-                                        Margin="0,0,10,0"/>
-
-                                    <TextBlock
-                                        Text="Cancelled"
-                                        FontFamily="Segoe UI"
-                                        FontWeight="Bold"
-                                        FontSize="20"
-                                        VerticalAlignment="Center"/>
-                                </StackPanel>
-                                <ListBox 
-                                    SelectedItem="{Binding SelectedCancelledPrescription}"
-                                    ItemsSource="{Binding PrescriptionsCancelled}" 
                                     AlternationCount="20"
                                     Background="Transparent"
                                     BorderBrush="Transparent">
@@ -866,7 +671,7 @@
                                 </Border>
                             </Grid>
                         </Border>
-     
+
                         <TextBlock
                             Text="Drug Details &amp; Inventory Check"
                             Style="{StaticResource CustomBaseTextBlockStyle}"
@@ -879,22 +684,22 @@
                             Style="{StaticResource DefaultDataGridStyle}">
                             <DataGrid.Columns>
                                 <DataGridTextColumn
-                                    Binding="{Binding Medication.MedicationID}"
+                                    Binding="{Binding Item.Medication.MedicationID}"
                                     Width="*"
                                     Header="Medication ID"
                                     ElementStyle="{StaticResource ColumnTextBlockStyle}"/>
                                 <DataGridTextColumn
-                                    Binding="{Binding Medication.Name}"
+                                    Binding="{Binding Item.Medication.Name}"
                                     Width="*"
                                     Header="Drug name &amp; Dosage"
                                     ElementStyle="{StaticResource ColumnTextBlockStyle}"/>
                                 <DataGridTextColumn
-                                    Binding="{Binding Quantity}"
+                                    Binding="{Binding Item.Quantity}"
                                     Width="*"
                                     Header="Prescription's quantity"
                                     ElementStyle="{StaticResource ColumnTextBlockStyle}"/>
                                 <DataGridTextColumn
-                                    Binding="{Binding Instruction}"
+                                    Binding="{Binding Item.Instruction}"
                                     Width="*"
                                     Header="Instruction"
                                     ElementStyle="{StaticResource ColumnTextBlockStyle}"/>
@@ -963,6 +768,345 @@
                                 FontSize="20"/>
                             <TextBlock
                                 Text="Verify the prescription"
+                                FontSize="20"
+                                Foreground="White"
+                                FontWeight="SemiBold"/>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+            </Border>
+        </Grid>
+        <Grid Grid.Column="1" 
+              Visibility="{Binding IsDispensingSelected, Converter={StaticResource BoolToVisibilityConverter}}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Border Background="White"
+                    Padding="12,20"
+                    BorderBrush="{StaticResource LightBorder}"
+                    BorderThickness="0,0,0,1">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock
+                        Style="{StaticResource CustomBaseTextBlockStyle}"
+                        FontSize="30"
+                        FontWeight="SemiBold"
+                        Text="{Binding SelectedDispensingPrescription.PrescriptionID, StringFormat={}Dispensing #{0}}"/>
+                    <Border
+                        Style="{StaticResource BaseCustomBorderStyle}"
+                        Background="{StaticResource LightWaitingStatusBorder}"
+                        Grid.Column="1"
+                        HorizontalAlignment="Right"
+                        BorderBrush="{StaticResource AccentBlue}"
+                        BorderThickness="2">
+                        <TextBlock
+                            Text="✓ Ready to dispense"
+                            Style="{StaticResource CustomBaseTextBlockStyle}"
+                            VerticalAlignment="Center"
+                            Foreground="{StaticResource AccentBlue}"
+                            FontWeight="Bold"
+                            FontSize="20"/>
+                    </Border>
+                </Grid>
+            </Border>
+            <Border Style="{StaticResource PageContentBorderStyle}"
+                    Grid.Row="1">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="15"/>
+                        <ColumnDefinition Width="0.55*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Border
+                        Style="{StaticResource BaseCustomBorderStyle}"
+                        Padding="0"
+                        BorderBrush="{StaticResource LightBorder}"
+                        Background="White">
+
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <Border
+                                Style="{StaticResource BaseCustomBorderStyle}"
+                                Background="#f8fafc"
+                                BorderBrush="{StaticResource LightBorder}"
+                                CornerRadius="8,8,0,0"
+                                Padding="20,10">
+
+                                <TextBlock
+                                        Text="Pick list"
+                                        Style="{StaticResource CustomBaseTextBlockStyle}"
+                                        FontSize="24"
+                                        FontWeight="Bold"/>
+                            </Border>
+
+                            <ScrollViewer Grid.Row="1"
+                                          HorizontalScrollBarVisibility="Disabled"
+                                          VerticalScrollBarVisibility="Auto">
+                                <ItemsControl ItemsSource="{Binding SelectedAllPrescriptionItems}"
+                                              AlternationCount="9999">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Border BorderBrush="{StaticResource LightBorder}"
+                                                    BorderThickness="1"
+                                                    Background="White"
+                                                    Padding="16">
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                        <ColumnDefinition Width="15"/>
+                                                        <ColumnDefinition Width="*"/>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <CheckBox
+                                                        VerticalAlignment="Center"
+                                                        IsChecked="{Binding IsChecked}"/>
+                                                    <StackPanel Grid.Column="2"
+                                                                VerticalAlignment="Center">
+                                                        <TextBlock Style="{StaticResource CustomBaseTextBlockStyle}"
+                                                                   FontWeight="Bold"
+                                                                   FontSize="18">
+                                                            <TextBlock.Text>
+                                                                <MultiBinding StringFormat="{}{0}. {1} ({2})">
+                                                                    <Binding Path="(ItemsControl.AlternationIndex)" 
+                                                                             RelativeSource="{RelativeSource AncestorType=ContentPresenter}"
+                                                                             Converter="{StaticResource AddOneConverter}"/>
+                                                                    <Binding Path="Item.Medication.Name"/>
+                                                                    <Binding Path="Item.Medication.Form"/>
+                                                                </MultiBinding>
+                                                            </TextBlock.Text>
+                                                        </TextBlock>
+                                                        <TextBlock Style="{StaticResource SecondaryTextTextBlockStyle}"
+                                                                   Text="{Binding Item.Medication.PackingDescription, StringFormat={}Packing: {0}}"/>
+                                                    </StackPanel>
+                                                    <Border Grid.Column="3"
+                                                            Style="{StaticResource BaseCustomBorderStyle}"
+                                                            Background="#f8fafc"
+                                                            BorderBrush="{StaticResource LightBorder}">
+                                                        <StackPanel>
+                                                            <TextBlock
+                                                                HorizontalAlignment="Center"
+                                                                Style="{StaticResource CustomBaseTextBlockStyle}"
+                                                                FontWeight="Bold"
+                                                                FontSize="20"
+                                                                Text="{Binding Item.Quantity}"/>
+                                                            <TextBlock
+                                                                HorizontalAlignment="Center"
+                                                                Style="{StaticResource SecondaryTextTextBlockStyle}"
+                                                                Text="{Binding Item.Medication.Form, StringFormat={}{0}s}"/>
+                                                        </StackPanel>
+                                                    </Border>
+                                                </Grid>
+                                            </Border>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </ScrollViewer>
+                        </Grid>
+                        
+                    </Border>
+                    
+                    <Grid Grid.Column="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        
+                        <Border
+                            Background="#fff7ed"
+                            BorderBrush="#fdba74"
+                            BorderThickness="2"
+                            Style="{StaticResource BaseCustomBorderStyle}"
+                            Padding="20,10"
+                            Margin="0,0,0,20">
+                            <StackPanel>
+                                <TextBlock
+                                    VerticalAlignment="Center"
+                                    Text="⚠️ Patient verification required"
+                                    Style="{StaticResource CustomBaseTextBlockStyle}"
+                                    Foreground="#c2410c"
+                                    FontWeight="Bold"
+                                    FontSize="18"
+                                    Margin="0,0,0,15"/>
+
+                                <TextBlock
+                                    Text="Please verify the patient before dispensing"
+                                    Style="{StaticResource CustomBaseTextBlockStyle}"
+                                    Foreground="#9a3412"
+                                    Margin="0,0,0,15"/>
+
+                                <TextBlock
+                                    Style="{StaticResource CustomBaseTextBlockStyle}"
+                                    FontSize="20"
+                                    FontWeight="SemiBold"
+                                    Margin="0,0,0,10">
+                                    <TextBlock.Text>
+                                        <MultiBinding StringFormat="{}{0} {1}">
+                                            <Binding Path="SelectedDispensingPrescription.MedicalRecord.Appointment.Patient.User.FirstName"/>
+                                            <Binding Path="SelectedDispensingPrescription.MedicalRecord.Appointment.Patient.User.LastName"/>
+                                        </MultiBinding>
+                                    </TextBlock.Text>
+                                </TextBlock>
+
+                                <Grid Margin="0,0,0,15">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock
+                                        Text="Year born:"
+                                        Style="{StaticResource CustomBaseTextBlockStyle}"
+                                        Foreground="#9a3412"
+                                        FontWeight="SemiBold"/>
+                                    <StackPanel Grid.Column="1"
+                                                HorizontalAlignment="Right"
+                                                Orientation="Horizontal">
+                                        <TextBlock
+                                            Style="{StaticResource CustomBaseTextBlockStyle}"
+                                            Text="{Binding SelectedDispensingPrescription.MedicalRecord.Appointment.Patient.DateOfBirth,
+                                                           StringFormat={}{0:yyyy }}"/>
+                                        <TextBlock
+                                            Style="{StaticResource CustomBaseTextBlockStyle}"
+                                            Text="{Binding SelectedDispensingPrescription.MedicalRecord.Appointment.Patient.DateOfBirth,
+                                                           Converter={StaticResource YearToAgeConverter},
+                                                           StringFormat={}({0} years old)}"/>
+                                    </StackPanel>
+                                </Grid>
+                                <Rectangle
+                                    Style="{StaticResource DottedLine}"
+                                    Margin="0,0,0,15"
+                                    Stroke="#fdba74"/>
+                                <Grid Margin="0,0,0,15">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock
+                                        Text="Gender:"
+                                        Style="{StaticResource CustomBaseTextBlockStyle}"
+                                        Foreground="#9a3412"
+                                        FontWeight="SemiBold"/>
+                                    <StackPanel Grid.Column="1"
+                                                HorizontalAlignment="Right"
+                                                Orientation="Horizontal">
+                                        <TextBlock
+                                            Style="{StaticResource CustomBaseTextBlockStyle}"
+                                            Text="{Binding SelectedDispensingPrescription.MedicalRecord.Appointment.Patient.Gender}"/>
+                                    </StackPanel>
+                                </Grid>
+                                <Rectangle
+                                    Style="{StaticResource DottedLine}"
+                                    Margin="0,0,0,15"
+                                    Stroke="#fdba74"/>
+                                <Grid Margin="0,0,0,15">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock
+                                        Text="Insurance number:"
+                                        Style="{StaticResource CustomBaseTextBlockStyle}"
+                                        Foreground="#9a3412"
+                                        FontWeight="SemiBold"/>
+                                    <StackPanel Grid.Column="1"
+                                                HorizontalAlignment="Right"
+                                                Orientation="Horizontal">
+                                        <TextBlock
+                                            Style="{StaticResource CustomBaseTextBlockStyle}"
+                                            Text="{Binding SelectedDispensingPrescription.MedicalRecord.Appointment.Patient.InsuranceNumber}"/>
+                                    </StackPanel>
+                                </Grid>
+                                <Rectangle
+                                    Style="{StaticResource DottedLine}"
+                                    Margin="0,0,0,15"
+                                    Stroke="#fdba74"/>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Grid.Row="1"
+                                Style="{StaticResource BaseCustomBorderStyle}"
+                                BorderBrush="{StaticResource LightBorder}"
+                                Background="White"
+                                Padding="20,16">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <TextBlock
+                                    Text="Doctor's notes"
+                                    Style="{StaticResource CustomBaseTextBlockStyle}"
+                                    FontWeight="Bold"
+                                    FontSize="18"
+                                    Margin="0,0,0,10"/>
+                                <Grid
+                                    Grid.Row="1">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock
+                                        Style="{StaticResource SecondaryTextTextBlockStyle}"
+                                        FontWeight="SemiBold">
+                                        <TextBlock.Text>
+                                            <MultiBinding StringFormat="{}Dr. {0} {1}:">
+                                                <Binding Path="SelectedDispensingPrescription.MedicalRecord.Appointment.Doctor.User.FirstName"/>
+                                                <Binding Path="SelectedDispensingPrescription.MedicalRecord.Appointment.Doctor.User.LastName"/>
+                                            </MultiBinding>
+                                        </TextBlock.Text>
+                                    </TextBlock>
+                                    <TextBlock
+                                        Grid.Column="1"
+                                        TextWrapping="Wrap"
+                                        Style="{StaticResource SecondaryTextTextBlockStyle}"
+                                        Text="{Binding SelectedDispensingPrescription.MedicalRecord.DoctorNotes, StringFormat={} {0}}"/>
+                                </Grid>
+                            </Grid>
+                        </Border>
+                    </Grid>
+                </Grid>
+            </Border>
+            <Border Background="White"
+                    Padding="12,20"
+                    BorderBrush="{StaticResource LightBorder}"
+                    BorderThickness="0,0,0,1"
+                    Grid.Row="2">
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center">
+                    <TextBlock
+                        Style="{StaticResource SecondaryTextTextBlockStyle}"
+                        Text="Responsible Pharmacist: "
+                        VerticalAlignment="Center"/>
+                    <TextBlock
+                        Style="{StaticResource SecondaryTextTextBlockStyle}"
+                        FontSize="18"
+                        FontWeight="Bold"
+                        Text="Me"
+                        VerticalAlignment="Center"
+                        Margin="0,0,20,0"/>
+                    <Button
+                        Style="{StaticResource PrimaryButtonStyle}"
+                        Margin="0,0,10,0"
+                        Command="{Binding DoneDispensingButtonCommand}">
+                        <StackPanel 
+                            Orientation="Horizontal">
+                            <TextBlock
+                                Text="✓ "
+                                FontWeight="Bold"
+                                Foreground="White"
+                                FontSize="20"/>
+                            <TextBlock
+                                Text="Done dispensing"
                                 FontSize="20"
                                 Foreground="White"
                                 FontWeight="SemiBold"/>
