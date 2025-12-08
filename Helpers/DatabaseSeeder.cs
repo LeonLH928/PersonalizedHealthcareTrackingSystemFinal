@@ -21,120 +21,146 @@ public static class DatabaseSeeder
         SeedMedicationStockLogs(modelBuilder);
     }
 
-    private static void SeedMedications(ModelBuilder modelBuilder)
+    public static void SeedMedications(this ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<MedicationModel>().HasData(
             new MedicationModel
             {
                 MedicationID = "med-amox-500",
                 Name = "Amoxicillin 500mg",
+                ActiveIngredient = "Amoxicillin",
                 Form = Form.Tablet,
-                Unit = "mg",
-                SideEffect = "Nausea, rash",
-                StorageInstruction = "Store at room temperature",
-                StockQuantity = 1000,
-                StockQuantityUnit = "box",
+                BaseUnit = "mg",
+                StockTotalQuantity = 1000,
+                PackingUnit = "box",
+                UnitsPerPack = 20, // Assuming 20 tablets per box
+                PackingDescription = "Box of 20 tablets",
+                SideEffect = "Nausea, rash, diarrhea",
+                StorageInstruction = "Store at room temperature, away from moisture",
                 Price = 150000
             },
             new MedicationModel
             {
                 MedicationID = "med-ibu-400",
                 Name = "Ibuprofen 400mg",
+                ActiveIngredient = "Ibuprofen",
                 Form = Form.Tablet,
-                Unit = "mg",
-                SideEffect = "Stomach upset",
-                StorageInstruction = "Keep dry",
-                StockQuantity = 500,
-                StockQuantityUnit = "bottle",
+                BaseUnit = "mg",
+                StockTotalQuantity = 500,
+                PackingUnit = "bottle",
+                UnitsPerPack = 50, // Assuming 50 tablets per bottle
+                PackingDescription = "Bottle of 50 tablets",
+                SideEffect = "Stomach upset, heartburn, dizziness",
+                StorageInstruction = "Keep dry, store below 30°C",
                 Price = 80000
             },
             new MedicationModel
             {
                 MedicationID = "med-para-500",
                 Name = "Paracetamol 500mg",
+                ActiveIngredient = "Paracetamol",
                 Form = Form.Tablet,
-                Unit = "mg",
-                SideEffect = "Liver toxicity (high dose)",
-                StorageInstruction = "Store in cool place",
-                StockQuantity = 2000,
-                StockQuantityUnit = "box",
+                BaseUnit = "mg",
+                StockTotalQuantity = 2000,
+                PackingUnit = "box",
+                UnitsPerPack = 100, // Assuming 100 tablets per box
+                PackingDescription = "Box of 10 blisters x 10 tablets",
+                SideEffect = "Liver toxicity (high dose or long-term use)",
+                StorageInstruction = "Store in a cool, dry place",
                 Price = 50000
             },
             new MedicationModel
             {
                 MedicationID = "med-met-850",
                 Name = "Metformin 850mg",
+                ActiveIngredient = "Metformin Hydrochloride",
                 Form = Form.Tablet,
-                Unit = "mg",
-                SideEffect = "Nausea, gastrointestinal disturbance",
+                BaseUnit = "mg",
+                StockTotalQuantity = 800,
+                PackingUnit = "box",
+                UnitsPerPack = 60, // Assuming 60 tablets per box
+                PackingDescription = "Box of 60 tablets",
+                SideEffect = "Nausea, gastrointestinal disturbance, metallic taste",
                 StorageInstruction = "Store at room temperature",
-                StockQuantity = 800,
-                StockQuantityUnit = "box",
                 Price = 120000
             },
             new MedicationModel
             {
                 MedicationID = "med-cet-10",
                 Name = "Cetirizine 10mg",
+                ActiveIngredient = "Cetirizine Dihydrochloride",
                 Form = Form.Tablet,
-                Unit = "mg",
-                SideEffect = "Drowsiness, dry mouth",
-                StorageInstruction = "Store in dry place",
-                StockQuantity = 2000,
-                StockQuantityUnit = "blister",
+                BaseUnit = "mg",
+                StockTotalQuantity = 2000,
+                PackingUnit = "blister",
+                UnitsPerPack = 10, // Assuming 10 tablets per blister
+                PackingDescription = "Blister pack of 10 tablets",
+                SideEffect = "Drowsiness, dry mouth, fatigue",
+                StorageInstruction = "Store in a dry place, protected from light",
                 Price = 45000
             },
             new MedicationModel
             {
                 MedicationID = "med-ator-20",
                 Name = "Atorvastatin 20mg",
+                ActiveIngredient = "Atorvastatin Calcium",
                 Form = Form.Tablet,
-                Unit = "mg",
-                SideEffect = "Muscle pain, digestive issues",
+                BaseUnit = "mg",
+                StockTotalQuantity = 800,
+                PackingUnit = "box",
+                UnitsPerPack = 30, // Assuming 30 tablets per box
+                PackingDescription = "Box of 30 tablets",
+                SideEffect = "Muscle pain, digestive issues, liver enzyme changes",
                 StorageInstruction = "Store at room temperature",
-                StockQuantity = 800,
-                StockQuantityUnit = "box",
                 Price = 180000
             },
             new MedicationModel
             {
                 MedicationID = "med-omep-20",
                 Name = "Omeprazole 20mg",
+                ActiveIngredient = "Omeprazole",
                 Form = Form.Capsule,
-                Unit = "mg",
-                SideEffect = "Headache, nausea",
-                StorageInstruction = "Keep away from light",
-                StockQuantity = 1200,
-                StockQuantityUnit = "bottle",
+                BaseUnit = "mg",
+                StockTotalQuantity = 1200,
+                PackingUnit = "bottle",
+                UnitsPerPack = 28, // Assuming 28 capsules per bottle
+                PackingDescription = "Bottle of 28 capsules",
+                SideEffect = "Headache, nausea, diarrhea, stomach pain",
+                StorageInstruction = "Keep away from light and moisture",
                 Price = 95000
             },
             new MedicationModel
             {
                 MedicationID = "med-salb-inhaler",
                 Name = "Salbutamol Inhaler",
+                ActiveIngredient = "Salbutamol Sulfate",
                 Form = Form.Inhaler,
-                Unit = "mcg",
-                SideEffect = "Tremors, nervousness",
-                StorageInstruction = "Store below 30°C",
-                StockQuantity = 300,
-                StockQuantityUnit = "canister",
+                BaseUnit = "mcg", // Micrograms per actuation
+                StockTotalQuantity = 300,
+                PackingUnit = "canister",
+                UnitsPerPack = 200, // Assuming 200 actuations (doses) per canister
+                PackingDescription = "Canister with 200 metered doses",
+                SideEffect = "Tremors, nervousness, increased heart rate",
+                StorageInstruction = "Store below 30°C, away from direct sunlight and heat",
                 Price = 110000
             },
             new MedicationModel
             {
                 MedicationID = "med-vit-c-500",
                 Name = "Vitamin C 500mg",
+                ActiveIngredient = "Ascorbic Acid",
                 Form = Form.Tablet,
-                Unit = "mg",
-                SideEffect = "Stomach cramps (high dose)",
-                StorageInstruction = "Keep tightly closed",
-                StockQuantity = 5000,
-                StockQuantityUnit = "bottle",
+                BaseUnit = "mg",
+                StockTotalQuantity = 5000,
+                PackingUnit = "bottle",
+                UnitsPerPack = 100, // Assuming 100 tablets per bottle
+                PackingDescription = "Bottle of 100 chewable tablets",
+                SideEffect = "Stomach cramps, nausea (high dose)",
+                StorageInstruction = "Keep tightly closed in a cool, dry place",
                 Price = 60000
             }
         );
     }
-
     private static void SeedUsers(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<UserModel>().HasData(
