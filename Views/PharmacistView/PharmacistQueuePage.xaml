@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:PersonalizedHealthcareTrackingSystemFinal.Views.PharmacistView"
       mc:Ignorable="d" 
-        d:DesignHeight="2000" d:DesignWidth="1500">
+        d:DesignHeight="2000" d:DesignWidth="2000">
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -37,13 +37,11 @@
                             Style="{StaticResource PageHeaderTextBlockStyle}"/>
                         <Border 
                             Grid.Column="1"
-                            Style="{StaticResource BaseCustomBorderStyle}"
                             Background="{StaticResource StatusPendingBackground}"
                             HorizontalAlignment="Right"
                             VerticalAlignment="Center">
                             <TextBlock
                                 Text="{Binding NumberPending, StringFormat={}{0} pending}"
-                                FontSize="14"
                                 Foreground="{StaticResource StatusPendingText}"
                                 HorizontalAlignment="Right"
                                 VerticalAlignment="Center"
@@ -620,60 +618,58 @@
 
                         <DataGrid
                             ItemsSource="{Binding SelectedAllPrescriptionItems}"
-                            AutoGenerateColumns="False">
+                            Style="{StaticResource DefaultDataGridStyle}">
                             <DataGrid.Columns>
                                 <DataGridTextColumn
-                                    Width="Auto"
-                                    Header="STT"
-                                    IsReadOnly="True">
-                                </DataGridTextColumn>
-
-                                <DataGridTemplateColumn
+                                    Binding="{Binding Medication.MedicationID}"
+                                    Width="*"
+                                    Header="Medication ID"
+                                    ElementStyle="{StaticResource ColumnTextBlockStyle}"/>
+                                <DataGridTextColumn
+                                    Binding="{Binding Medication.Name}"
                                     Width="*"
                                     Header="Drug name &amp; Dosage"
-                                    IsReadOnly="True">
-                                    <DataGridTemplateColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <TextBlock
-                                                Text="{Binding Medication.Name}"/>
-                                        </DataTemplate>
-                                    </DataGridTemplateColumn.CellTemplate>
-                                </DataGridTemplateColumn>
-                                <DataGridTemplateColumn
+                                    ElementStyle="{StaticResource ColumnTextBlockStyle}"/>
+                                <DataGridTextColumn
+                                    Binding="{Binding Quantity}"
                                     Width="*"
                                     Header="Prescription's quantity"
-                                    IsReadOnly="True">
-                                    <DataGridTemplateColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <TextBlock
-                                                Text="{Binding Quantity}"/>
-                                        </DataTemplate>
-                                    </DataGridTemplateColumn.CellTemplate>
-                                </DataGridTemplateColumn>
-                                <DataGridTemplateColumn
+                                    ElementStyle="{StaticResource ColumnTextBlockStyle}"/>
+                                <DataGridTextColumn
+                                    Binding="{Binding Instruction}"
                                     Width="*"
                                     Header="Instruction"
-                                    IsReadOnly="True">
+                                    ElementStyle="{StaticResource ColumnTextBlockStyle}"/>
+                                <DataGridTemplateColumn Header="Check inventory" 
+                                                        Width="*">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <TextBlock
-                                                Text="{Binding Instruction}"/>
-                                        </DataTemplate>
-                                    </DataGridTemplateColumn.CellTemplate>
-                                </DataGridTemplateColumn>
-                                <DataGridTemplateColumn
-                                    Width="*"
-                                    Header="Check Inventory"
-                                    IsReadOnly="True">
-                                    <DataGridTemplateColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <TextBlock
-                                                Text="{Binding Medication.StockQuantity}"/>
+                                            <TextBlock Style="{StaticResource StockQuantityColumnTextBlockStyle}"/>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
                             </DataGrid.Columns>
                         </DataGrid>
+                        <Border 
+                            Margin="0,20,0,0"
+                            Background="#f8fafc"
+                            Padding="12,20"
+                            BorderBrush="{StaticResource LightBorder}"
+                            BorderThickness="0,0,0,1"
+                            Grid.Row="2"
+                            CornerRadius="8">
+                            <StackPanel>
+                                <TextBlock
+                                    Text="Doctor's notes"
+                                    Style="{StaticResource SecondaryTextTextBlockStyle}"
+                                    FontSize="20"
+                                    Margin="0,0,0,10"/>
+                                <TextBlock
+                                    Text="{Binding SelectedPendingPrescription.MedicalRecord.DoctorNotes}"
+                                    Style="{StaticResource CustomBaseTextBlockStyle}"/>
+                            </StackPanel>
+                        </Border>
+
                     </StackPanel>
                 </ScrollViewer>
             </Border>

@@ -156,3 +156,31 @@ public class RespiratoryRateToSafetyConverter : IValueConverter
         throw new NotImplementedException();
     }
 }
+
+public enum Availability
+{
+    Available,
+    RunningLow,
+    Unavailable
+}
+
+public class IntToAvailabilityConverter : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        if (value is not int temp)
+            return value;
+        return temp switch
+        {
+            >= 100 => Availability.Available,
+            < 100 and > 0 => Availability.RunningLow,
+            _ => Availability.Unavailable
+        };
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}
+

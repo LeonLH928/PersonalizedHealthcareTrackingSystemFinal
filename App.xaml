@@ -16,6 +16,7 @@
                 <ResourceDictionary Source="/Styles/DatePicker.xaml"/>
                 <ResourceDictionary Source="/Styles/DoctorCard.xaml"/>
                 <ResourceDictionary Source="/Styles/TabItem.xaml"/>
+                <ResourceDictionary Source="/Styles/DataGrid.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <local:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
         </ResourceDictionary>
