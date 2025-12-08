@@ -18,7 +18,7 @@ public class PatientRepository : IPatientRepository
     public async Task<PatientModel?> GetPatientByIDAsync(string PatientID)
     {
         var response = await _client.From<PatientModel>()
-                                    .Select("*")
+                                    .Select("*, User:Users(*)")
                                     .Filter("PatientID", Supabase.Postgrest.Constants.Operator.Equals, PatientID)
                                     .Get();
         return response.Model;

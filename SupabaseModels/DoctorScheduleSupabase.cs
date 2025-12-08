@@ -19,7 +19,6 @@ namespace PersonalizedHealthcareTrackingSystemFinal.SupabaseModels
         [Column("DoctorID")]
         public string DoctorID { get; set; } = "";
 
-        [Reference(typeof(DoctorModel))]
         public DoctorModel Doctor { get; set; } = null!;
     }
 }

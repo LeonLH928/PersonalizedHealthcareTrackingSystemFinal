@@ -1,6 +1,7 @@
 ﻿using Supabase.Postgrest.Attributes;
 using Supabase.Postgrest.Models;
 using PersonalizedHealthcareTrackingSystemFinal.Models;
+using System.Text.Json.Serialization;
 
 namespace PersonalizedHealthcareTrackingSystemFinal.SupabaseModels;
 
@@ -32,9 +33,9 @@ public class PrescriptionModel : BaseModel
     [Column("PharmacistID")]
     public string PharmacistID { get; set; } = "";
 
-    [Reference(typeof(MedicationModel))]
+    [Reference(typeof(MedicalRecordModel))]
     public MedicalRecordModel MedicalRecord { get; set; } = null!;
 
-    [Reference(typeof(PharmacistModel))]
+    [Reference(typeof(PharmacistModel), useInnerJoin: false)]
     public PharmacistModel Pharmacist { get; set; } = null!;
 }

@@ -78,9 +78,12 @@ public static class AppModule
         services.AddTransient<IntroductionWindowViewModel>();
         services.AddTransient<LoginWindowViewModel>();
         services.AddTransient<SignUpWindowViewModel>();
+
         services.AddTransient<ViewModels.DoctorViewModel.DoctorDashboardPageViewModel>();
         services.AddTransient<ViewModels.DoctorViewModel.DoctorConsultationWindowViewModel>();
         services.AddTransient<ViewModels.DoctorViewModel.AddDrugWindowViewModel>();
+     
+        services.AddTransient<ViewModels.PharmacistViewModel.PharmacistQueuePageViewModel>();
 
         // Register Repositories
         services.AddScoped<IAppointmentRepository, AppointmentRepository>();

@@ -103,6 +103,7 @@ public partial class DoctorDashboardPageViewModel : ObservableObject
         }
         catch (Exception e)
         {
+            Debug.Write($"\n{e.Message}\n");
             IsLoading = false;
             MessageBox.Show($"An error occured: {e.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
         }

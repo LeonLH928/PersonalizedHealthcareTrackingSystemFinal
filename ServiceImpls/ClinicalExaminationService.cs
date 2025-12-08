@@ -31,4 +31,8 @@ public class ClinicalExaminationService : IClinicalExaminationService
         var RecordsList = Records.Select(r => r.RecordID).ToList();
         return await _clinicalExaminationRepository.GetAllClinicalExaminationsByMedicalRecordIDsAsync(RecordsList);
     }
+    public async Task<ClinicalExaminationModel?> GetClinicalExaminationByMedicalRecordIDAsync(string RecordID)
+    {
+        return await _clinicalExaminationRepository.GetClinicalExaminationByMedicalRecordIDAsync(RecordID);
+    }
 }

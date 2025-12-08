@@ -154,7 +154,94 @@
             </Setter.Value>
         </Setter>
     </Style>
-
+    
+    <!-- Current Exam BMI Text Box Style -->
+    <Style x:Key="CurrentExamBMITextBoxStyle" TargetType="TextBox">
+        <Setter Property="IsReadOnly" Value="True"/>
+        <Setter Property="Background" Value="#FFF0F0F0"/>
+        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="FontFamily" Value="Segoe UI"/>
+        <Setter Property="Padding" Value="8,10"/>
+        <Setter Property="TextWrapping" Value="NoWrap"/>
+        <Setter Property="BorderBrush" Value="{StaticResource LightBorder}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TextBox">
+                    <Border 
+                        x:Name="Border"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="8">
+                        <ScrollViewer x:Name="PART_ContentHost" 
+                                          HorizontalScrollBarVisibility="Auto"
+                                          VerticalScrollBarVisibility="Disabled"
+                                          VerticalAlignment="Top"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="Text" Value="NotCalculate">
+                <Setter Property="Background" Value="#FFF0F0F0"/>
+                <Setter Property="Foreground" Value="Transparent"/>
+            </Trigger>
+            <Trigger Property="Text" Value="Underweight">
+                <Setter Property="Background" Value="{StaticResource HappeningStatusBorder}"/>
+                <Setter Property="Foreground" Value="{StaticResource AccentBlue}"/>
+            </Trigger>
+            <Trigger Property="Text" Value="Overweight">
+                <Setter Property="Background" Value="{StaticResource UrgentTagBorder}"/>
+                <Setter Property="Foreground" Value="{StaticResource UrgentTagTextBlock}"/>
+            </Trigger>
+            <Trigger Property="Text" Value="Obese">
+                <Setter Property="Background" Value="{StaticResource StatTagBorder}"/>
+                <Setter Property="Foreground" Value="{StaticResource StatTagTextBlock}"/>
+            </Trigger>
+            <Trigger Property="Text" Value="Normal">
+                <Setter Property="Background" Value="{StaticResource LightCompletedStatusBorder}"/>
+                <Setter Property="Foreground" Value="{StaticResource MediumCompletedStatusBorder}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    
+    <!-- Lock Text Box Style -->
+    <Style x:Key="LockTextBoxStyle" TargetType="TextBox">
+        <Setter Property="IsReadOnly" Value="True"/>
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="FontFamily" Value="Segoe UI"/>
+        <Setter Property="Padding" Value="8,10"/>
+        <Setter Property="TextWrapping" Value="NoWrap"/>
+        <Setter Property="BorderBrush" Value="{StaticResource LightBorder}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TextBox">
+                    <Border 
+                        x:Name="Border"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="8">
+                        <ScrollViewer x:Name="PART_ContentHost" 
+                                          HorizontalScrollBarVisibility="Auto"
+                                          VerticalScrollBarVisibility="Disabled"
+                                          VerticalAlignment="Top"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="Text" Value="">
+                <Setter Property="Background" Value="#FFF0F0F0"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    
     <!-- Current Exam Text Text Box Style -->
     <Style x:Key="CurrentExamTextTextBoxStyle" TargetType="TextBox">
         <Setter Property="Background" Value="Transparent"/>

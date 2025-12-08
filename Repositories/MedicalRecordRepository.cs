@@ -3,14 +3,20 @@ using PersonalizedHealthcareTrackingSystemFinal.SupabaseModels;
 using Supabase;
 using System.Diagnostics;
 using System.Numerics;
+using System.Text.Json;
 
 namespace PersonalizedHealthcareTrackingSystemFinal.Repositories;
 public class MedicalRecordRepository : IMedicalRecordRepository
 {
     private readonly Client _client;
+    public JsonSerializerOptions options;
     public MedicalRecordRepository(Client client)
     {
         _client = client;
+        options = new()
+        {
+            PropertyNameCaseInsensitive = true
+        };
         InitializeSupabase();
     }
     private async void InitializeSupabase()
@@ -34,12 +40,28 @@ public class MedicalRecordRepository : IMedicalRecordRepository
 
         var recordsResponse = await _client
                                     .From<MedicalRecordModel>()
-                                    .Select("*")
+                                    .Select("""
+                                           *,
+                                           Appointment:Appointments(
+                                               *,
+                                               Patient:Patients(
+                                                   *,
+                                                   User:Users(*)
+                                               ),
+                                               Doctor:Doctors(
+                                                   *,
+                                                   User:Users(*)
+                                               )
+                                           )
+            
+                                    """)
                                     .Filter("AppointmentID", Supabase.Postgrest.Constants.Operator.In, appointmentIds)
                                     .Order("VisitTime", Supabase.Postgrest.Constants.Ordering.Descending)
                                     .Get();
+        
+        var records = JsonSerializer.Deserialize<List<MedicalRecordModel>>(recordsResponse.Content!, options);
 
-        return recordsResponse.Models;
+        return records == null ? [] : records;
     }
     public async Task<MedicalRecordModel?> GetLatestMedicalRecordByPatientIDAsync(string PatientID)
     {
@@ -53,7 +75,21 @@ public class MedicalRecordRepository : IMedicalRecordRepository
 
         var response = await _client
                                     .From<MedicalRecordModel>()
-                                    .Select("*")
+                                    .Select("""
+                                           *,
+                                           Appointment:Appointments(
+                                               *,
+                                               Patient:Patients(
+                                                   *,
+                                                   User:Users(*)
+                                               ),
+                                               Doctor:Doctors(
+                                                   *,
+                                                   User:Users(*)
+                                               )
+                                           )
+            
+                                    """)
                                     .Filter("AppointmentID", Supabase.Postgrest.Constants.Operator.In, appointmentIds)
                                     .Order("VisitTime", Supabase.Postgrest.Constants.Ordering.Descending)
                                     .Limit(1)

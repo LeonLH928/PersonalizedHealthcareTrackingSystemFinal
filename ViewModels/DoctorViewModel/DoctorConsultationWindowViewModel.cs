@@ -86,6 +86,10 @@ public partial class DoctorConsultationWindowViewModel : ObservableObject,
     [ObservableProperty]
     private double weight;
     [ObservableProperty]
+    private double bMI;
+    [ObservableProperty]
+    private Models.StatusBMI statusBMI = Models.StatusBMI.NotCalculate;
+    [ObservableProperty]
     private double pulse;
     [ObservableProperty]
     private string bloodPressure = "";
@@ -165,6 +169,41 @@ public partial class DoctorConsultationWindowViewModel : ObservableObject,
     {
         Application.Current.Windows.OfType<DoctorConsultationWindow>().FirstOrDefault()?.Close();
     }
+    partial void OnHeightChanged(double value)
+    {
+        UpdateBMI();
+    }
+    partial void OnWeightChanged(double value)
+    {
+        UpdateBMI();
+    }
+    private void UpdateBMI()
+    {
+        if (Height > 0 && Weight > 0)
+        {
+            BMI = Weight / Math.Pow(Height / 100, 2);
+            switch (BMI)
+            {
+                case < 18.5:
+                    StatusBMI = Models.StatusBMI.Underweight;
+                    break;
+                case >= 18.5 and <= 24.9:
+                    StatusBMI = Models.StatusBMI.Normal;
+                    break;
+                case >= 25 and <= 29.9:
+                    StatusBMI = Models.StatusBMI.Overweight;
+                    break;
+                case >= 30:
+                    StatusBMI = Models.StatusBMI.Obese;
+                    break;
+            }
+        }
+        else
+        {
+            BMI = 0;
+            StatusBMI = Models.StatusBMI.NotCalculate;
+        }
+    }
     public void Receive(SelectedAppointmentIDMessage Message)
     {
         SelectedAppointmentIDMessage = Message.Value;
@@ -214,6 +253,7 @@ public partial class DoctorConsultationWindowViewModel : ObservableObject,
         }
         catch (Exception e)
         {
+            Debug.Write($"\n{e.Message}\n");
             MessageBox.Show($"An error occured: {e.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
