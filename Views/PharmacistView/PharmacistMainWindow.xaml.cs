@@ -26,24 +26,29 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Views.PharmacistView
         {
             InitializeComponent();
             _serviceProvider = serviceProvider;
-            //Loaded += (s, e) =>
-            //{
-            //    Sidebar.SelectedItem = Sidebar.Items[0];
-            //    var DashboardPage = _serviceProvider.GetRequiredService<PharmacistDashboardPage>();
-            //    DoctorMainContent.Navigate(DashboardPage);
-            //};
+            Loaded += (s, e) =>
+            {
+                Sidebar.SelectedItem = Sidebar.Items[0];
+                var DashboardPage = _serviceProvider.GetRequiredService<PharmacistDashboard>();
+                PharmacistMainContent.Navigate(DashboardPage);
+            };
         }
         private void NavigateToPage(string NamePage)
         {
             switch (NamePage)
             {
                 case "Dashboard":
-                    //var DashboardPage = _serviceProvider.GetRequiredService<PharmacistDashboardPage>();
-                    //DoctorMainContent.Navigate(DashboardPage);
+                    var DashboardPage = _serviceProvider.GetRequiredService<PharmacistDashboard>();
+                    PharmacistMainContent.Navigate(DashboardPage);
                     break;
                 case "VerifyingQueue":
                     var PatientQueuePage = _serviceProvider.GetRequiredService<PharmacistQueuePage>();
-                    DoctorMainContent.Navigate(PatientQueuePage);
+                    PharmacistMainContent.Navigate(PatientQueuePage);
+                    break;
+
+                case "Inventory Management":
+                    var InventoryManagementPage = _serviceProvider.GetRequiredKeyedService<InventoryManagementPage>();
+                    PharmacistMainContent.Navigate(InventoryManagementPage);
                     break;
             }
         }

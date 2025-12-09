@@ -38,4 +38,14 @@
     <SolidColorBrush x:Key="DarkText" Color="#0f172a"/>
     <SolidColorBrush x:Key="PrimaryDarkColor" Color="#0369a1"/>
     <SolidColorBrush x:Key="DangerBg" Color="#fef2f2"/>
+    <SolidColorBrush x:Key="TextDark" Color="#1E293B"/>
+    <SolidColorBrush x:Key="TextSecondary" Color="#64748B"/>
+    <SolidColorBrush x:Key="SidebarActive" Color="#0d9488"/>
+    <SolidColorBrush x:Key="PanelBg" Color="#ffffff"/>
+    <SolidColorBrush x:Key="StockOkBg" Color="#dcfce7"/>
+    <SolidColorBrush x:Key="StockOkText" Color="#15803d"/>
+    <SolidColorBrush x:Key="StockLowBg" Color="#fff7ed"/>
+    <SolidColorBrush x:Key="StockLowText" Color="#c2410c"/>
+    <SolidColorBrush x:Key="StockOutBg" Color="#fef2f2"/>
+    <SolidColorBrush x:Key="StockOutText" Color="#b91c1c"/>
 </ResourceDictionary>
