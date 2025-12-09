@@ -298,408 +298,424 @@
                     </StackPanel>
                 </Grid>
             </Border>
-            <Border Style="{StaticResource PageContentBorderStyle}"
-                    Grid.Row="1">
-                <ScrollViewer HorizontalScrollBarVisibility="Disabled"
-                                VerticalScrollBarVisibility="Auto">
-                    <StackPanel>
-                        <Border Background="White"
-                                CornerRadius="8"
-                                BorderBrush="{StaticResource LightBorder}"
-                                BorderThickness="1"
-                                Margin="0,0,0,20">
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="*"/>
-                                </Grid.RowDefinitions>
-                                <Border
-                                    Style="{StaticResource BaseCustomBorderStyle}"
-                                    Background="#f8fafc"
+            <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                          VerticalScrollBarVisibility="Auto"
+                          Grid.Row="1">
+                <Border Style="{StaticResource PageContentBorderStyle}">
+                        <StackPanel>
+                            <Border Background="White"
+                                    CornerRadius="8"
                                     BorderBrush="{StaticResource LightBorder}"
-                                    CornerRadius="8,8,0,0"
-                                    Padding="20,10">
+                                    BorderThickness="1"
+                                    Margin="0,0,0,20">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <Border
+                                        Style="{StaticResource BaseCustomBorderStyle}"
+                                        Background="#f8fafc"
+                                        BorderBrush="{StaticResource LightBorder}"
+                                        CornerRadius="8,8,0,0"
+                                        Padding="20,10">
 
-                                    <TextBlock
-                                        Text="📋 Clinical &amp; Vital summaries"
-                                        Style="{StaticResource CustomBaseTextBlockStyle}"
-                                        FontSize="24"
-                                        FontWeight="Bold"/>
-                                </Border>
-                                <Border
-                                    Grid.Row="1"
-                                    Style="{StaticResource BaseCustomBorderStyle}"
-                                    Background="White"
-                                    BorderBrush="{StaticResource LightBorder}"
-                                    CornerRadius="0,0,8,8"
-                                    Padding="20,10">
-                                    <StackPanel>
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="*"/>
-                                            </Grid.ColumnDefinitions>
-                                            <StackPanel>
-                                                <TextBlock
-                                                    Text="Height"
-                                                    Style="{StaticResource SecondaryTextTextBlockStyle}"
-                                                    FontWeight="Bold"
-                                                    Margin="0,0,0,10"/>
-
-                                                <TextBlock
-                                                    Style="{StaticResource CustomBaseTextBlockStyle}"
-                                                    FontSize="20"
-                                                    FontWeight="SemiBold"
-                                                    Text="{Binding SelectedClinicalExamination.Height, StringFormat={}{0} cm}"/>
-                                            </StackPanel>
-                                            <StackPanel Grid.Column="1">
-                                                <TextBlock
-                                                    Text="Weight"
-                                                    Style="{StaticResource SecondaryTextTextBlockStyle}"
-                                                    FontWeight="Bold"
-                                                    Margin="0,0,0,10"/>
-
-                                                <TextBlock
-                                                    Style="{StaticResource CustomBaseTextBlockStyle}"
-                                                    FontSize="20"
-                                                    FontWeight="SemiBold"
-                                                    Text="{Binding SelectedClinicalExamination.Weight, StringFormat={}{0} kg}"/>
-                                            </StackPanel>
-                                            <StackPanel Grid.Column="2">
-                                                <TextBlock
-                                                    Text="BMI"
-                                                    Style="{StaticResource SecondaryTextTextBlockStyle}"
-                                                    FontWeight="Bold"
-                                                    Margin="0,0,0,10"/>
-
-                                                <TextBlock
-                                                    Style="{StaticResource BMIStatusPrescriptionItemViewModelTextBlockStyle}"
-                                                    FontSize="20"
-                                                    FontWeight="SemiBold">
-                                                    <TextBlock.Text>
-                                                        <MultiBinding StringFormat="{}{0} ({1})">
-                                                            <Binding Path="SelectedClinicalExamination.BMI"/>
-                                                            <Binding Path="SelectedClinicalExamination.StatusBMI"/>
-                                                        </MultiBinding>
-                                                    </TextBlock.Text>
-                                                </TextBlock>
-                                            </StackPanel>
-
-                                            <Border
-                                                Grid.Column="4"
-                                                Style="{StaticResource BaseCustomBorderStyle}"
-                                                Background="{StaticResource StatTagBorder}"
-                                                BorderBrush="{StaticResource StatTagBorderBrush}"
-                                                Margin="0,0,0,10">
+                                        <TextBlock
+                                            Text="📋 Clinical &amp; Vital summaries"
+                                            Style="{StaticResource CustomBaseTextBlockStyle}"
+                                            FontSize="24"
+                                            FontWeight="Bold"/>
+                                    </Border>
+                                    <Border
+                                        Grid.Row="1"
+                                        Style="{StaticResource BaseCustomBorderStyle}"
+                                        Background="White"
+                                        BorderBrush="{StaticResource LightBorder}"
+                                        CornerRadius="0,0,8,8"
+                                        Padding="20,10">
+                                        <StackPanel>
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
                                                 <StackPanel>
                                                     <TextBlock
-                                                            FontFamily="Segoe UI"
-                                                            FontSize="16"
-                                                            FontWeight="Bold"
-                                                            HorizontalAlignment="Center"
-                                                            Foreground="{StaticResource StatTagTextBlock}"
-                                                            Text="⚠ ALLERGIES ⚠"
-                                                            Margin="0,0,0,5"/>
+                                                        Text="Height"
+                                                        Style="{StaticResource SecondaryTextTextBlockStyle}"
+                                                        FontWeight="Bold"
+                                                        Margin="0,0,0,10"/>
+
+                                                    <TextBlock
+                                                        Style="{StaticResource CustomBaseTextBlockStyle}"
+                                                        FontSize="20"
+                                                        FontWeight="SemiBold"
+                                                        Text="{Binding SelectedClinicalExamination.Height, StringFormat={}{0} cm}"/>
+                                                </StackPanel>
+                                                <StackPanel Grid.Column="1">
+                                                    <TextBlock
+                                                        Text="Weight"
+                                                        Style="{StaticResource SecondaryTextTextBlockStyle}"
+                                                        FontWeight="Bold"
+                                                        Margin="0,0,0,10"/>
+
+                                                    <TextBlock
+                                                        Style="{StaticResource CustomBaseTextBlockStyle}"
+                                                        FontSize="20"
+                                                        FontWeight="SemiBold"
+                                                        Text="{Binding SelectedClinicalExamination.Weight, StringFormat={}{0} kg}"/>
+                                                </StackPanel>
+                                                <StackPanel Grid.Column="2">
+                                                    <TextBlock
+                                                        Text="BMI"
+                                                        Style="{StaticResource SecondaryTextTextBlockStyle}"
+                                                        FontWeight="Bold"
+                                                        Margin="0,0,0,10"/>
+
+                                                    <TextBlock
+                                                        Style="{StaticResource BMIStatusPrescriptionItemViewModelTextBlockStyle}"
+                                                        FontSize="20"
+                                                        FontWeight="SemiBold">
+                                                        <TextBlock.Text>
+                                                            <MultiBinding StringFormat="{}{0} ({1})">
+                                                                <Binding Path="SelectedClinicalExamination.BMI"/>
+                                                                <Binding Path="SelectedClinicalExamination.StatusBMI"/>
+                                                            </MultiBinding>
+                                                        </TextBlock.Text>
+                                                    </TextBlock>
+                                                </StackPanel>
+
+                                                <Border
+                                                    Grid.Column="4"
+                                                    Style="{StaticResource BaseCustomBorderStyle}"
+                                                    Background="{StaticResource StatTagBorder}"
+                                                    BorderBrush="{StaticResource StatTagBorderBrush}"
+                                                    Margin="0,0,0,10">
+                                                    <StackPanel>
+                                                        <TextBlock
+                                                                FontFamily="Segoe UI"
+                                                                FontSize="16"
+                                                                FontWeight="Bold"
+                                                                HorizontalAlignment="Center"
+                                                                Foreground="{StaticResource StatTagTextBlock}"
+                                                                Text="⚠ ALLERGIES ⚠"
+                                                                Margin="0,0,0,5"/>
+                                                        <ItemsControl ItemsSource="{Binding SelectedAllClinicalExaminations}"
+                                                                      HorizontalContentAlignment="Left">
+                                                            <ItemsControl.ItemTemplate>
+                                                                <DataTemplate>
+                                                                    <TextBlock
+                                                                        Style="{StaticResource CustomBaseTextBlockStyle}"
+                                                                        FontSize="20"
+                                                                        Foreground="{StaticResource StatTagTextBlock}"
+                                                                        Text="{Binding Allergies, StringFormat={}• {0}}"
+                                                                        Visibility="{Binding Allergies,
+                                                                                             Converter={StaticResource StringToVisibility}}"/>
+                                                                </DataTemplate>
+                                                            </ItemsControl.ItemTemplate>
+                                                        </ItemsControl>
+                                                    </StackPanel>
+                                                </Border>
+                                            </Grid>
+
+                                            <TextBlock
+                                                Text="Vital Snapshots"
+                                                Style="{StaticResource SecondaryTextTextBlockStyle}"
+                                                FontWeight="SemiBold"
+                                                Margin="0,0,0,10"/>
+
+                                            <Border
+                                                Style="{StaticResource BaseCustomBorderStyle}"
+                                                Background="White"
+                                                BorderBrush="{StaticResource LightBorder}"
+                                                Padding="0"
+                                                Margin="0,0,0,20">
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="*"/>
+                                                        <ColumnDefinition Width="10"/>
+                                                        <ColumnDefinition Width="*"/>
+                                                        <ColumnDefinition Width="10"/>
+                                                        <ColumnDefinition Width="*"/>
+                                                        <ColumnDefinition Width="10"/>
+                                                        <ColumnDefinition Width="*"/>
+                                                        <ColumnDefinition Width="10"/>
+                                                        <ColumnDefinition Width="*"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <Border Padding="10">
+                                                        <StackPanel
+                                                            HorizontalAlignment="Center">
+                                                            <TextBlock
+                                                                Text="BLOOD PRESSURE"
+                                                                Style="{StaticResource SecondaryTextTextBlockStyle}"
+                                                                Margin="0,0,0,5"/>
+
+                                                            <StackPanel Orientation="Horizontal"
+                                                                        HorizontalAlignment="Center">
+                                                                <TextBlock
+                                                                    Text="{Binding SelectedClinicalExamination.BloodPressure}"
+                                                                    Style="{StaticResource BloodPressureSafetyTextBlockStyle}"
+                                                                    FontWeight="SemiBold"/>
+
+                                                                <TextBlock
+                                                                    Text=" mmHg"
+                                                                    VerticalAlignment="Bottom"
+                                                                    Style="{StaticResource SecondaryTextTextBlockStyle}"/>
+                                                            </StackPanel>
+                                                        </StackPanel>
+                                                    </Border>
+
+                                                    <Border
+                                                        Grid.Column="1"
+                                                        Style="{StaticResource Line}"
+                                                        Width="1"
+                                                        BorderThickness="2"/>
+
+                                                    <Border Padding="10"
+                                                            Grid.Column="2">
+                                                        <StackPanel
+                                                            HorizontalAlignment="Center">
+                                                            <TextBlock
+                                                                Text="PULSE"
+                                                                Style="{StaticResource SecondaryTextTextBlockStyle}"
+                                                                Margin="0,0,0,5"/>
+
+                                                            <StackPanel Orientation="Horizontal"
+                                                                        HorizontalAlignment="Center">
+                                                                <TextBlock
+                                                                    Text="{Binding SelectedClinicalExamination.Pulse}"
+                                                                    Style="{StaticResource BloodPressureSafetyTextBlockStyle}"
+                                                                    FontWeight="SemiBold"/>
+
+                                                                <TextBlock
+                                                                    Text=" bpm"
+                                                                    VerticalAlignment="Bottom"
+                                                                    Style="{StaticResource SecondaryTextTextBlockStyle}"/>
+                                                            </StackPanel>
+                                                        </StackPanel>
+                                                    </Border>
+
+                                                    <Border
+                                                        Grid.Column="3"
+                                                        Style="{StaticResource Line}"
+                                                        Width="1"
+                                                        BorderThickness="2"/>
+                                                    <Border Padding="10"
+                                                            Grid.Column="4">
+                                                        <StackPanel
+                                                            HorizontalAlignment="Center">
+                                                            <TextBlock
+                                                                Text="SPO2"
+                                                                Style="{StaticResource SecondaryTextTextBlockStyle}"
+                                                                Margin="0,0,0,5"/>
+
+                                                            <StackPanel Orientation="Horizontal"
+                                                                        HorizontalAlignment="Center">
+                                                                <TextBlock
+                                                                    Text="{Binding SelectedClinicalExamination.OxygenSaturation}"
+                                                                    Style="{StaticResource BloodPressureSafetyTextBlockStyle}"
+                                                                    FontWeight="SemiBold"/>
+
+                                                                <TextBlock
+                                                                    Text=" %"
+                                                                    VerticalAlignment="Bottom"
+                                                                    Style="{StaticResource SecondaryTextTextBlockStyle}"/>
+                                                            </StackPanel>
+                                                        </StackPanel>
+                                                    </Border>
+
+                                                    <Border
+                                                        Grid.Column="5"
+                                                        Style="{StaticResource Line}"
+                                                        Width="1"
+                                                        BorderThickness="2"/>
+                                                    <Border Padding="10"
+                                                            Grid.Column="6">
+                                                        <StackPanel
+                                                            HorizontalAlignment="Center">
+                                                            <TextBlock
+                                                                Text="TEMPERATURE"
+                                                                Style="{StaticResource SecondaryTextTextBlockStyle}"
+                                                                Margin="0,0,0,5"/>
+
+                                                            <StackPanel Orientation="Horizontal"
+                                                                        HorizontalAlignment="Center">
+                                                                <TextBlock
+                                                                    Text="{Binding SelectedClinicalExamination.Temperature}"
+                                                                    Style="{StaticResource BloodPressureSafetyTextBlockStyle}"
+                                                                    FontWeight="SemiBold"/>
+
+                                                                <TextBlock
+                                                                    Text=" ℃"
+                                                                    VerticalAlignment="Bottom"
+                                                                    Style="{StaticResource SecondaryTextTextBlockStyle}"/>
+                                                            </StackPanel>
+                                                        </StackPanel>
+                                                    </Border>
+
+                                                    <Border
+                                                        Grid.Column="7"
+                                                        Style="{StaticResource Line}"
+                                                        Width="1"
+                                                        BorderThickness="2"/>
+
+                                                    <Border Padding="10"
+                                                            Grid.Column="8">
+                                                        <StackPanel
+                                                            HorizontalAlignment="Center">
+                                                            <TextBlock
+                                                                Text="RESPIRATORY RATE"
+                                                                Style="{StaticResource SecondaryTextTextBlockStyle}"
+                                                                Margin="0,0,0,5"/>
+
+                                                            <StackPanel Orientation="Horizontal"
+                                                                        HorizontalAlignment="Center">
+                                                                <TextBlock
+                                                                    Text="{Binding SelectedClinicalExamination.RespiratoryRate}"
+                                                                    Style="{StaticResource BloodPressureSafetyTextBlockStyle}"
+                                                                    FontWeight="SemiBold"/>
+
+                                                                <TextBlock
+                                                                    Text=" bpm"
+                                                                    VerticalAlignment="Bottom"
+                                                                    Style="{StaticResource SecondaryTextTextBlockStyle}"/>
+                                                            </StackPanel>
+                                                        </StackPanel>
+                                                    </Border>
+                                                </Grid>
+                                            </Border>
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <StackPanel>
+                                                    <TextBlock
+                                                        Text="Symptoms"
+                                                        Style="{StaticResource CustomBaseTextBlockStyle}"
+                                                        FontSize="20"
+                                                        FontWeight="SemiBold"
+                                                        Margin="0,0,0,5"/>
+
+                                                    <TextBlock
+                                                        Style="{StaticResource SecondaryTextTextBlockStyle}"
+                                                        Text="{Binding SelectedClinicalExamination.Symptoms}"/>
+                                                </StackPanel>
+                                                <StackPanel Grid.Column="1">
+                                                    <TextBlock
+                                                        Text="History"
+                                                        Style="{StaticResource CustomBaseTextBlockStyle}"
+                                                        FontSize="20"
+                                                        FontWeight="SemiBold"
+                                                        Margin="0,0,0,5"/>
+
                                                     <ItemsControl ItemsSource="{Binding SelectedAllClinicalExaminations}"
-                                                                  HorizontalContentAlignment="Left">
+                                                                  Margin="0,0,0,20">
                                                         <ItemsControl.ItemTemplate>
                                                             <DataTemplate>
                                                                 <TextBlock
-                                                                    Style="{StaticResource CustomBaseTextBlockStyle}"
-                                                                    FontSize="20"
-                                                                    Foreground="{StaticResource StatTagTextBlock}"
-                                                                    Text="{Binding Allergies, StringFormat={}• {0}}"
-                                                                    Visibility="{Binding Allergies,
-                                                                                         Converter={StaticResource StringToVisibility}}"/>
+                                                                    Style="{StaticResource SecondaryTextTextBlockStyle}"
+                                                                    FontSize="16"
+                                                                    Visibility="{Binding MedicalHistory,    
+                                                                                         Converter={StaticResource StringToVisibility}}">
+                                                                    <TextBlock.Text>
+                                                                        <MultiBinding StringFormat="{}• {0:dd/MM/yyyy}: {1}">
+                                                                            <Binding Path="MedicalRecord.VisitTime"/>
+                                                                            <Binding Path="MedicalHistory"/>
+                                                                        </MultiBinding>
+                                                                    </TextBlock.Text>
+                                                                </TextBlock>
                                                             </DataTemplate>
                                                         </ItemsControl.ItemTemplate>
                                                     </ItemsControl>
                                                 </StackPanel>
-                                            </Border>
-                                        </Grid>
-
-                                        <TextBlock
-                                            Text="Vital Snapshots"
-                                            Style="{StaticResource SecondaryTextTextBlockStyle}"
-                                            FontWeight="SemiBold"
-                                            Margin="0,0,0,10"/>
-
-                                        <Border
-                                            Style="{StaticResource BaseCustomBorderStyle}"
-                                            Background="White"
-                                            BorderBrush="{StaticResource LightBorder}"
-                                            Padding="0"
-                                            Margin="0,0,0,20">
-                                            <Grid>
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="*"/>
-                                                    <ColumnDefinition Width="10"/>
-                                                    <ColumnDefinition Width="*"/>
-                                                    <ColumnDefinition Width="10"/>
-                                                    <ColumnDefinition Width="*"/>
-                                                    <ColumnDefinition Width="10"/>
-                                                    <ColumnDefinition Width="*"/>
-                                                    <ColumnDefinition Width="10"/>
-                                                    <ColumnDefinition Width="*"/>
-                                                </Grid.ColumnDefinitions>
-                                                <Border Padding="10">
-                                                    <StackPanel
-                                                        HorizontalAlignment="Center">
-                                                        <TextBlock
-                                                            Text="BLOOD PRESSURE"
-                                                            Style="{StaticResource SecondaryTextTextBlockStyle}"
-                                                            Margin="0,0,0,5"/>
-
-                                                        <StackPanel Orientation="Horizontal"
-                                                                    HorizontalAlignment="Center">
-                                                            <TextBlock
-                                                                Text="{Binding SelectedClinicalExamination.BloodPressure}"
-                                                                Style="{StaticResource BloodPressureSafetyTextBlockStyle}"
-                                                                FontWeight="SemiBold"/>
-
-                                                            <TextBlock
-                                                                Text=" mmHg"
-                                                                VerticalAlignment="Bottom"
-                                                                Style="{StaticResource SecondaryTextTextBlockStyle}"/>
-                                                        </StackPanel>
-                                                    </StackPanel>
-                                                </Border>
-
-                                                <Border
-                                                    Grid.Column="1"
-                                                    Style="{StaticResource Line}"
-                                                    Width="1"
-                                                    BorderThickness="2"/>
-
-                                                <Border Padding="10"
-                                                        Grid.Column="2">
-                                                    <StackPanel
-                                                        HorizontalAlignment="Center">
-                                                        <TextBlock
-                                                            Text="PULSE"
-                                                            Style="{StaticResource SecondaryTextTextBlockStyle}"
-                                                            Margin="0,0,0,5"/>
-
-                                                        <StackPanel Orientation="Horizontal"
-                                                                    HorizontalAlignment="Center">
-                                                            <TextBlock
-                                                                Text="{Binding SelectedClinicalExamination.Pulse}"
-                                                                Style="{StaticResource BloodPressureSafetyTextBlockStyle}"
-                                                                FontWeight="SemiBold"/>
-
-                                                            <TextBlock
-                                                                Text=" bpm"
-                                                                VerticalAlignment="Bottom"
-                                                                Style="{StaticResource SecondaryTextTextBlockStyle}"/>
-                                                        </StackPanel>
-                                                    </StackPanel>
-                                                </Border>
-
-                                                <Border
-                                                    Grid.Column="3"
-                                                    Style="{StaticResource Line}"
-                                                    Width="1"
-                                                    BorderThickness="2"/>
-                                                <Border Padding="10"
-                                                        Grid.Column="4">
-                                                    <StackPanel
-                                                        HorizontalAlignment="Center">
-                                                        <TextBlock
-                                                            Text="SPO2"
-                                                            Style="{StaticResource SecondaryTextTextBlockStyle}"
-                                                            Margin="0,0,0,5"/>
-
-                                                        <StackPanel Orientation="Horizontal"
-                                                                    HorizontalAlignment="Center">
-                                                            <TextBlock
-                                                                Text="{Binding SelectedClinicalExamination.OxygenSaturation}"
-                                                                Style="{StaticResource BloodPressureSafetyTextBlockStyle}"
-                                                                FontWeight="SemiBold"/>
-
-                                                            <TextBlock
-                                                                Text=" %"
-                                                                VerticalAlignment="Bottom"
-                                                                Style="{StaticResource SecondaryTextTextBlockStyle}"/>
-                                                        </StackPanel>
-                                                    </StackPanel>
-                                                </Border>
-
-                                                <Border
-                                                    Grid.Column="5"
-                                                    Style="{StaticResource Line}"
-                                                    Width="1"
-                                                    BorderThickness="2"/>
-                                                <Border Padding="10"
-                                                        Grid.Column="6">
-                                                    <StackPanel
-                                                        HorizontalAlignment="Center">
-                                                        <TextBlock
-                                                            Text="TEMPERATURE"
-                                                            Style="{StaticResource SecondaryTextTextBlockStyle}"
-                                                            Margin="0,0,0,5"/>
-
-                                                        <StackPanel Orientation="Horizontal"
-                                                                    HorizontalAlignment="Center">
-                                                            <TextBlock
-                                                                Text="{Binding SelectedClinicalExamination.Temperature}"
-                                                                Style="{StaticResource BloodPressureSafetyTextBlockStyle}"
-                                                                FontWeight="SemiBold"/>
-
-                                                            <TextBlock
-                                                                Text=" ℃"
-                                                                VerticalAlignment="Bottom"
-                                                                Style="{StaticResource SecondaryTextTextBlockStyle}"/>
-                                                        </StackPanel>
-                                                    </StackPanel>
-                                                </Border>
-
-                                                <Border
-                                                    Grid.Column="7"
-                                                    Style="{StaticResource Line}"
-                                                    Width="1"
-                                                    BorderThickness="2"/>
-
-                                                <Border Padding="10"
-                                                        Grid.Column="8">
-                                                    <StackPanel
-                                                        HorizontalAlignment="Center">
-                                                        <TextBlock
-                                                            Text="RESPIRATORY RATE"
-                                                            Style="{StaticResource SecondaryTextTextBlockStyle}"
-                                                            Margin="0,0,0,5"/>
-
-                                                        <StackPanel Orientation="Horizontal"
-                                                                    HorizontalAlignment="Center">
-                                                            <TextBlock
-                                                                Text="{Binding SelectedClinicalExamination.RespiratoryRate}"
-                                                                Style="{StaticResource BloodPressureSafetyTextBlockStyle}"
-                                                                FontWeight="SemiBold"/>
-
-                                                            <TextBlock
-                                                                Text=" bpm"
-                                                                VerticalAlignment="Bottom"
-                                                                Style="{StaticResource SecondaryTextTextBlockStyle}"/>
-                                                        </StackPanel>
-                                                    </StackPanel>
-                                                </Border>
                                             </Grid>
-                                        </Border>
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="*"/>
-                                            </Grid.ColumnDefinitions>
-                                            <StackPanel>
-                                                <TextBlock
-                                                    Text="Symptoms"
-                                                    Style="{StaticResource CustomBaseTextBlockStyle}"
-                                                    FontSize="20"
-                                                    FontWeight="SemiBold"
-                                                    Margin="0,0,0,5"/>
+                                        </StackPanel>
+                                    </Border>
+                                </Grid>
+                            </Border>
 
-                                                <TextBlock
-                                                    Style="{StaticResource SecondaryTextTextBlockStyle}"
-                                                    Text="{Binding SelectedClinicalExamination.Symptoms}"/>
-                                            </StackPanel>
-                                            <StackPanel Grid.Column="1">
-                                                <TextBlock
-                                                    Text="History"
-                                                    Style="{StaticResource CustomBaseTextBlockStyle}"
-                                                    FontSize="20"
-                                                    FontWeight="SemiBold"
-                                                    Margin="0,0,0,5"/>
+                            <TextBlock
+                                Text="Drug Details &amp; Inventory Check"
+                                Style="{StaticResource CustomBaseTextBlockStyle}"
+                                FontSize="24"
+                                FontWeight="Bold"
+                                Margin="0,0,0,10"/>
 
-                                                <ItemsControl ItemsSource="{Binding SelectedAllClinicalExaminations}"
-                                                              Margin="0,0,0,20">
-                                                    <ItemsControl.ItemTemplate>
-                                                        <DataTemplate>
-                                                            <TextBlock
-                                                                Style="{StaticResource SecondaryTextTextBlockStyle}"
-                                                                FontSize="16"
-                                                                Visibility="{Binding MedicalHistory,    
-                                                                                     Converter={StaticResource StringToVisibility}}">
-                                                                <TextBlock.Text>
-                                                                    <MultiBinding StringFormat="{}• {0:dd/MM/yyyy}: {1}">
-                                                                        <Binding Path="MedicalRecord.VisitTime"/>
-                                                                        <Binding Path="MedicalHistory"/>
-                                                                    </MultiBinding>
-                                                                </TextBlock.Text>
-                                                            </TextBlock>
-                                                        </DataTemplate>
-                                                    </ItemsControl.ItemTemplate>
-                                                </ItemsControl>
-                                            </StackPanel>
-                                        </Grid>
-                                    </StackPanel>
-                                </Border>
-                            </Grid>
-                        </Border>
+                            <DataGrid
+                                ItemsSource="{Binding SelectedAllPrescriptionItems}"
+                                Style="{StaticResource DefaultDataGridStyle}">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn
+                                        Binding="{Binding Item.Medication.MedicationID}"
+                                        Width="*"
+                                        Header="Medication ID"
+                                        ElementStyle="{StaticResource ColumnTextBlockStyle}"/>
+                                    <DataGridTextColumn
+                                        Binding="{Binding Item.Medication.Name}"
+                                        Width="*"
+                                        Header="Drug name &amp; Dosage"
+                                        ElementStyle="{StaticResource ColumnTextBlockStyle}"/>
+                                    <DataGridTextColumn
+                                        Binding="{Binding Item.Medication.ActiveIngredient}"
+                                        Width="*"
+                                        Header="Active Ingredients"
+                                        ElementStyle="{StaticResource ColumnTextBlockStyle}"/>
+                                    <DataGridTemplateColumn Header="Prescription's quantity"
+                                                            Width="*">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Style="{StaticResource ColumnTextBlockStyle}">
+                                                    <TextBlock.Text>
+                                                        <MultiBinding StringFormat="{}{0} {1}s">
+                                                            <Binding Path="Item.Quantity"/>
+                                                            <Binding Path="Item.Medication.Form"/>
+                                                        </MultiBinding>
+                                                    </TextBlock.Text>
+                                                </TextBlock>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTextColumn
+                                        Binding="{Binding Item.Instruction}"
+                                        Width="*"
+                                        Header="Instruction"
+                                        ElementStyle="{StaticResource ColumnTextBlockStyle}"/>
+                                    <DataGridTemplateColumn Header="Check inventory"
+                                                            Width="*">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Style="{StaticResource StockQuantityColumnTextBlockStyle}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                            <Border 
+                                Margin="0,20,0,0"
+                                Background="#f8fafc"
+                                Padding="12,20"
+                                BorderBrush="{StaticResource LightBorder}"
+                                BorderThickness="0,0,0,1"
+                                Grid.Row="2"
+                                CornerRadius="8">
+                                <StackPanel>
+                                    <TextBlock
+                                        Text="Doctor's notes"
+                                        Style="{StaticResource SecondaryTextTextBlockStyle}"
+                                        FontSize="20"
+                                        Margin="0,0,0,10"/>
+                                    <TextBlock
+                                        Text="{Binding SelectedPendingPrescription.MedicalRecord.DoctorNotes}"
+                                        Style="{StaticResource CustomBaseTextBlockStyle}"/>
+                                </StackPanel>
+                            </Border>
 
-                        <TextBlock
-                            Text="Drug Details &amp; Inventory Check"
-                            Style="{StaticResource CustomBaseTextBlockStyle}"
-                            FontSize="24"
-                            FontWeight="Bold"
-                            Margin="0,0,0,10"/>
-
-                        <DataGrid
-                            ItemsSource="{Binding SelectedAllPrescriptionItems}"
-                            Style="{StaticResource DefaultDataGridStyle}">
-                            <DataGrid.Columns>
-                                <DataGridTextColumn
-                                    Binding="{Binding Item.Medication.MedicationID}"
-                                    Width="*"
-                                    Header="Medication ID"
-                                    ElementStyle="{StaticResource ColumnTextBlockStyle}"/>
-                                <DataGridTextColumn
-                                    Binding="{Binding Item.Medication.Name}"
-                                    Width="*"
-                                    Header="Drug name &amp; Dosage"
-                                    ElementStyle="{StaticResource ColumnTextBlockStyle}"/>
-                                <DataGridTextColumn
-                                    Binding="{Binding Item.Quantity}"
-                                    Width="*"
-                                    Header="Prescription's quantity"
-                                    ElementStyle="{StaticResource ColumnTextBlockStyle}"/>
-                                <DataGridTextColumn
-                                    Binding="{Binding Item.Instruction}"
-                                    Width="*"
-                                    Header="Instruction"
-                                    ElementStyle="{StaticResource ColumnTextBlockStyle}"/>
-                                <DataGridTemplateColumn Header="Check inventory">
-                                    <DataGridTemplateColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <TextBlock Style="{StaticResource StockQuantityColumnTextBlockStyle}"/>
-                                        </DataTemplate>
-                                    </DataGridTemplateColumn.CellTemplate>
-                                </DataGridTemplateColumn>
-                            </DataGrid.Columns>
-                        </DataGrid>
-                        <Border 
-                            Margin="0,20,0,0"
-                            Background="#f8fafc"
-                            Padding="12,20"
-                            BorderBrush="{StaticResource LightBorder}"
-                            BorderThickness="0,0,0,1"
-                            Grid.Row="2"
-                            CornerRadius="8">
-                            <StackPanel>
-                                <TextBlock
-                                    Text="Doctor's notes"
-                                    Style="{StaticResource SecondaryTextTextBlockStyle}"
-                                    FontSize="20"
-                                    Margin="0,0,0,10"/>
-                                <TextBlock
-                                    Text="{Binding SelectedPendingPrescription.MedicalRecord.DoctorNotes}"
-                                    Style="{StaticResource CustomBaseTextBlockStyle}"/>
-                            </StackPanel>
-                        </Border>
-
-                    </StackPanel>
-                </ScrollViewer>
-            </Border>
+                        </StackPanel>
+                </Border>
+            </ScrollViewer>
             <Border Background="White"
                     Padding="12,20"
                     BorderBrush="{StaticResource LightBorder}"

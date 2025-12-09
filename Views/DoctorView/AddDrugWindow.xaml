@@ -154,8 +154,14 @@
                                                     HorizontalAlignment="Right"
                                                     Style="{StaticResource CustomBaseTextBlockStyle}"
                                                     FontSize="16"
-                                                    Foreground="{StaticResource TextGray}"
-                                                    Text="{Binding StockTotalQuantity, StringFormat={}Stock: {0}}"/>
+                                                    Foreground="{StaticResource TextGray}">
+                                                    <TextBlock.Text>
+                                                        <MultiBinding StringFormat="{}Stock: {0} {1}s">
+                                                            <Binding Path="StockTotalQuantity"/>
+                                                            <Binding Path="PackingUnit"/>
+                                                        </MultiBinding>
+                                                    </TextBlock.Text>
+                                                </TextBlock>
                                             </Grid>
                                         </Grid>
                                     </Border>
@@ -267,9 +273,9 @@
                                     FontSize="16"
                                     Foreground="{StaticResource TextGray}">
                                     <TextBlock.Text>
-                                        <MultiBinding StringFormat="{}{0} {1}s">
+                                        <MultiBinding StringFormat="{}{0} {1}">
                                             <Binding Path="SelectedMedication.StockTotalQuantity"/>
-                                            <Binding Path="SelectedMedication.PackingUnit"/>
+                                            <Binding Path="SelectedMedication.PackingDescription"/>
                                         </MultiBinding>
                                     </TextBlock.Text>
                                 </TextBlock>
@@ -407,29 +413,22 @@
         </Border>
         <Border Grid.Row="2"
                 Background="White"
-                Style="{StaticResource BaseCustomBorderStyle}">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock
-                    Text="Page 1 of 2"
-                    Style="{StaticResource CustomBaseTextBlockStyle}"/>
-                <StackPanel
-                    Grid.Column="1"
-                    Orientation="Horizontal"
-                    HorizontalAlignment="Right">
-                    <Button
-                        Content="Prev"/>
-                    <Button
-                        Content="1"/>
-                    <Button
-                        Content="2"/>
-                    <Button
-                        Content="Next"/>
-                </StackPanel>
-            </Grid>
+                Style="{StaticResource BaseCustomBorderStyle}"
+                Padding="12">
+            <StackPanel
+                HorizontalAlignment="Right"
+                Orientation="Horizontal">
+                <Button
+                    Style="{StaticResource CancelOutlineButtonStyle}"
+                    Content="✕ Cancel"
+                    Command="{Binding CloseWindowButtonCommand}"
+                    Margin="0,0,20,0"/>
+                <Button
+                    Style="{StaticResource OutlineButtonStyle}"
+                    BorderThickness="2"
+                    Content="＋ Add drugs"
+                    Command="{Binding AddDrugButtonCommand}"/>
+            </StackPanel>
         </Border>
     </Grid>
 </Window>

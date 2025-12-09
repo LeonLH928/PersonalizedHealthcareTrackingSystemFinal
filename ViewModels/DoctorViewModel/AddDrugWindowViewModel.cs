@@ -54,7 +54,6 @@ public partial class AddDrugWindowViewModel : ObservableObject
     public void CloseWindowButton()
     {
         Application.Current.Windows.OfType<AddDrugWindow>().FirstOrDefault()?.Close();
-        WeakReferenceMessenger.Default.Send(new SelectedMedicationIDsMessage(SelectedMedications.Select(m => m.MedicationID).ToList()));
     }
     [RelayCommand]
     public async Task Search()
@@ -96,5 +95,11 @@ public partial class AddDrugWindowViewModel : ObservableObject
         }
         SelectedMedications.Add(SelectedMedication);
         MessageBox.Show("Add medication successfully!", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+    }
+    [RelayCommand]
+    public void AddDrugButton()
+    {
+        WeakReferenceMessenger.Default.Send(new SelectedMedicationIDsMessage(SelectedMedications.Select(m => m.MedicationID).ToList()));
+        CloseWindowButton();
     }
 }
