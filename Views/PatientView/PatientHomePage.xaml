@@ -42,8 +42,16 @@
                     </Grid.ColumnDefinitions>
 
                     <StackPanel Grid.Column="0" VerticalAlignment="Center">
-                        <TextBlock Text="" FontSize="28" FontWeight="Bold" Foreground="#0f172a" Margin="0,0,0,4"/>
-                        <TextBlock Text="Chúc bạn một ngày tốt lành. Đây là tổng quan sức khỏe của bạn hôm nay." FontSize="14" Foreground="{StaticResource SecondaryText}"/>
+                    <TextBlock 
+                        Style="{StaticResource PageHeaderTextBlockStyle}">
+                        <TextBlock.Text>
+                            <MultiBinding StringFormat="{}Good morning, {0} {1}!">
+                                <Binding Path="CurrentUser.FirstName"/>
+                                <Binding Path="CurrentUser.LastName"/>
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
+                    <TextBlock Text="Have a good day! Here's your overall health today." Style="{StaticResource SecondaryTextTextBlockStyle}"/>
                     </StackPanel>
 
                     <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
@@ -84,9 +92,14 @@
                             </Border.Background>
                             <StackPanel>
                                 <Grid Margin="0,0,0,20">
-                                    <TextBlock Text="🗓️ Lịch hẹn sắp tới của bạn" Foreground="White" FontSize="18" FontWeight="SemiBold" VerticalAlignment="Center"/>
+                                    <TextBlock 
+                                        Text="🗓️ Your next appointment" 
+                                        Foreground="White" 
+                                        FontSize="18" 
+                                        FontWeight="SemiBold" 
+                                        VerticalAlignment="Center"/>
                                     <Border Background="#33FFFFFF" CornerRadius="20" HorizontalAlignment="Right" Padding="12,4">
-                                        <TextBlock Text="Ngày mai" Foreground="White" FontSize="12"/>
+                                        <TextBlock Text="" Foreground="White" FontSize="12"/>
                                     </Border>
                                 </Grid>
 

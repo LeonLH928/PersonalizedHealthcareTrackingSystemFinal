@@ -184,3 +184,21 @@ public class IntToAvailabilityConverter : IValueConverter
     }
 }
 
+public class AppointmentDateToDay : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        if (value is not DateTime appointmentDateTime)
+            return value;
+        var diff = (DateTime.Now - appointmentDateTime);
+        if (diff.Days == 1)
+            return "Tomorrow";
+        return $"{diff.TotalDays} days";
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}
+

@@ -79,7 +79,7 @@ public partial class DoctorDashboardPageViewModel : ObservableObject
         IsLoading = true;
         try
         {
-            var CurrentUser = _currentUserStoreService.GetCurrentUserAsync();
+            var CurrentUser = _currentUserStoreService.GetCurrentUser();
             var Doctor = await  _doctorService.GetDoctorByUserIDAsync(CurrentUser!.UserID);
             var Appointments = await _appointmentService.GetAllAppointmentsByDoctorIDAsync(Doctor!.DoctorID);
             NearestUpcoming = await _appointmentService.GetNearestAppointmentByDoctorIDAsync(Doctor.DoctorID);

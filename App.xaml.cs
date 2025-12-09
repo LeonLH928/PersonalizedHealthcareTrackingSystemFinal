@@ -29,10 +29,10 @@ namespace PersonalizedHealthcareTrackingSystemFinal
             services.RegisterDependency();
             ServiceProvider = services.BuildServiceProvider();
 
-            //var IntroductionWindow = ServiceProvider.GetRequiredService<IntroductionWindow>();
-            //IntroductionWindow.Show(); 
-            var PharmacistQueueWindow = ServiceProvider.GetRequiredService<PatientMainWindow>();
-            PharmacistQueueWindow.Show();
+            var IntroductionWindow = ServiceProvider.GetRequiredService<IntroductionWindow>();
+            IntroductionWindow.Show(); 
+            //var PharmacistQueueWindow = ServiceProvider.GetRequiredService<PatientMainWindow>();
+            //PharmacistQueueWindow.Show();
             //var PharmacistQueueWindow = ServiceProvider.GetRequiredService<DoctorConsultationWindow>();
             //PharmacistQueueWindow.Show();
             //WeakReferenceMessenger.Default.Send(new SelectedAppointmentIDMessage("appt-06"));

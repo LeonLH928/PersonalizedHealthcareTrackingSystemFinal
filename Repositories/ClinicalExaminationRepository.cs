@@ -50,6 +50,7 @@ public class ClinicalExaminationRepository : IClinicalExaminationRepository
                                     .Filter("RecordID", Supabase.Postgrest.Constants.Operator.Equals, RecordID)
                                     .Get();
 
+
         return response.Model;
     }
     public async Task<IEnumerable<ClinicalExaminationModel>> GetAllClinicalExaminationsByMedicalRecordIDsAsync(List<string> MedicalRecordIDs)
