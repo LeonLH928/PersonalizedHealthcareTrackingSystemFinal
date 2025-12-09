@@ -83,37 +83,10 @@
                         VerticalScrollBarVisibility="Auto"
                         HorizontalScrollBarVisibility="Disabled">
                         <ListBox 
-                                SelectedItem="{Binding SelectedMedication}"
-                                ItemsSource="{Binding Medications}" 
-                                AlternationCount="20"
-                                Background="Transparent"
-                                BorderBrush="Transparent">
-                            <ListBox.ItemContainerStyle>
-                                <Style TargetType="ListBoxItem">
-                                    <Setter Property="Template">
-                                        <Setter.Value>
-                                            <ControlTemplate TargetType="ListBoxItem">
-                                                <Border Name="bd"
-                                                                Background="{TemplateBinding Background}"
-                                                                BorderBrush="{TemplateBinding BorderBrush}"
-                                                                BorderThickness="{TemplateBinding BorderThickness}"
-                                                                Padding="{TemplateBinding Padding}"
-                                                                CornerRadius="8">
-                                                    <ContentPresenter/>
-                                                </Border>
-                                                <ControlTemplate.Triggers>
-                                                    <Trigger Property="IsMouseOver" Value="True">
-                                                        <Setter Property="Background" Value="{StaticResource LightBorder}" />
-                                                    </Trigger>
-                                                    <Trigger Property="IsSelected" Value="True">
-                                                        <Setter Property="Background" Value="#00AAFF" />
-                                                    </Trigger>
-                                                </ControlTemplate.Triggers>
-                                            </ControlTemplate>
-                                        </Setter.Value>
-                                    </Setter>
-                                </Style>
-                            </ListBox.ItemContainerStyle>
+                            SelectedItem="{Binding SelectedMedication}"
+                            ItemsSource="{Binding Medications}" 
+                            AlternationCount="20"
+                            Style="{StaticResource ListBoxStyle}">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
                                     <Border
@@ -168,11 +141,11 @@
                                                     FontSize="16"
                                                     Foreground="{StaticResource TextGray}">
                                                     <TextBlock.Text>
-                                                        <MultiBinding StringFormat="{}{0} • {1} • {2} {3}">
+                                                        <MultiBinding StringFormat="{}{0} • {1} • {2} {3}s">
                                                             <Binding Path="MedicationID"/>
-                                                            <Binding Path="Unit"/>
-                                                            <Binding Path="StockQuantity"/>
-                                                            <Binding Path="StockQuantityUnit"/>
+                                                            <Binding Path="BaseUnit"/>
+                                                            <Binding Path="StockTotalQuantity"/>
+                                                            <Binding Path="PackingUnit"/>
                                                         </MultiBinding>
                                                     </TextBlock.Text>
                                                 </TextBlock>
@@ -182,7 +155,7 @@
                                                     Style="{StaticResource CustomBaseTextBlockStyle}"
                                                     FontSize="16"
                                                     Foreground="{StaticResource TextGray}"
-                                                    Text="{Binding StockQuantity, StringFormat={}Stock: {0}}"/>
+                                                    Text="{Binding StockTotalQuantity, StringFormat={}Stock: {0}}"/>
                                             </Grid>
                                         </Grid>
                                     </Border>
@@ -216,6 +189,26 @@
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
                                 <TextBlock
+                                    Text="Active Ingredients"
+                                    Style="{StaticResource CustomBaseTextBlockStyle}"
+                                    FontSize="16"
+                                    Foreground="{StaticResource TextGray}"
+                                    FontWeight="SemiBold"/>
+                                <TextBlock
+                                    HorizontalAlignment="Right"
+                                    Grid.Column="1"
+                                    Text="{Binding SelectedMedication.ActiveIngredient}"
+                                    Style="{StaticResource CustomBaseTextBlockStyle}"
+                                    FontSize="16"
+                                    Foreground="{StaticResource TextGray}"/>
+                            </Grid>
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock
                                     Text="Form"
                                     Style="{StaticResource CustomBaseTextBlockStyle}"
                                     FontSize="16"
@@ -229,7 +222,7 @@
                                     FontSize="16"
                                     Foreground="{StaticResource TextGray}"/>
                             </Grid>
-                        
+                            
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"/>
@@ -249,7 +242,7 @@
                                     Foreground="{StaticResource TextGray}">
                                     <TextBlock.Text>
                                         <MultiBinding StringFormat="{}{0} • {1} ₫">
-                                            <Binding Path="SelectedMedication.Unit"/>
+                                            <Binding Path="SelectedMedication.BaseUnit"/>
                                             <Binding Path="SelectedMedication.Price"/>
                                         </MultiBinding>
                                     </TextBlock.Text>
@@ -275,8 +268,8 @@
                                     Foreground="{StaticResource TextGray}">
                                     <TextBlock.Text>
                                         <MultiBinding StringFormat="{}{0} {1}s">
-                                            <Binding Path="SelectedMedication.StockQuantity"/>
-                                            <Binding Path="SelectedMedication.StockQuantityUnit"/>
+                                            <Binding Path="SelectedMedication.StockTotalQuantity"/>
+                                            <Binding Path="SelectedMedication.PackingUnit"/>
                                         </MultiBinding>
                                     </TextBlock.Text>
                                 </TextBlock>
