@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using PersonalizedHealthcareTrackingSystemFinal.Data;
@@ -11,9 +12,11 @@ using PersonalizedHealthcareTrackingSystemFinal.Data;
 namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20251208131209_AddFieldsAndFix")]
+    partial class AddFieldsAndFix
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -71,7 +74,7 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                         new
                         {
                             AppointmentID = "appt-01",
-                            AppointmentDateTime = new DateTime(2025, 12, 8, 0, 48, 39, 328, DateTimeKind.Utc).AddTicks(702),
+                            AppointmentDateTime = new DateTime(2025, 12, 7, 22, 12, 9, 224, DateTimeKind.Utc).AddTicks(1675),
                             ChiefComplaint = "Sore throat and mild fever lasting 2 days.",
                             DoctorID = "doc-01",
                             Location = "Room 101",
@@ -84,7 +87,7 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                         new
                         {
                             AppointmentID = "appt-02",
-                            AppointmentDateTime = new DateTime(2025, 12, 7, 5, 48, 39, 328, DateTimeKind.Utc).AddTicks(722),
+                            AppointmentDateTime = new DateTime(2025, 12, 7, 3, 12, 9, 224, DateTimeKind.Utc).AddTicks(1686),
                             ChiefComplaint = "Regular checkup for hypertension.",
                             DoctorID = "doc-02",
                             Location = "Room 205",
@@ -97,7 +100,7 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                         new
                         {
                             AppointmentID = "appt-03",
-                            AppointmentDateTime = new DateTime(2025, 12, 4, 1, 48, 39, 328, DateTimeKind.Utc).AddTicks(728),
+                            AppointmentDateTime = new DateTime(2025, 12, 3, 23, 12, 9, 224, DateTimeKind.Utc).AddTicks(1689),
                             ChiefComplaint = "Chest pain after exercise.",
                             DoctorID = "doc-02",
                             Location = "Room 205",
@@ -110,7 +113,7 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                         new
                         {
                             AppointmentID = "appt-04",
-                            AppointmentDateTime = new DateTime(2025, 12, 10, 0, 48, 39, 328, DateTimeKind.Utc).AddTicks(734),
+                            AppointmentDateTime = new DateTime(2025, 12, 9, 22, 12, 9, 224, DateTimeKind.Utc).AddTicks(1692),
                             ChiefComplaint = "Vaccination schedule.",
                             DoctorID = "doc-01",
                             Location = "Room 102",
@@ -123,7 +126,7 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                         new
                         {
                             AppointmentID = "appt-05",
-                            AppointmentDateTime = new DateTime(2025, 11, 29, 5, 48, 39, 328, DateTimeKind.Utc).AddTicks(740),
+                            AppointmentDateTime = new DateTime(2025, 11, 29, 3, 12, 9, 224, DateTimeKind.Utc).AddTicks(1694),
                             ChiefComplaint = "Unexplained leg pain.",
                             DoctorID = "doc-03",
                             Location = "Room 303",
@@ -136,7 +139,7 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                         new
                         {
                             AppointmentID = "appt-06",
-                            AppointmentDateTime = new DateTime(2025, 12, 8, 17, 48, 39, 328, DateTimeKind.Utc).AddTicks(745),
+                            AppointmentDateTime = new DateTime(2025, 12, 8, 15, 12, 9, 224, DateTimeKind.Utc).AddTicks(1697),
                             ChiefComplaint = "Follow up on surgical scar.",
                             DoctorID = "doc-04",
                             Location = "Room 401",
@@ -145,84 +148,6 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                             Priority = 0,
                             Status = 0,
                             VisitNumber = 2
-                        },
-                        new
-                        {
-                            AppointmentID = "appt-07",
-                            AppointmentDateTime = new DateTime(2025, 12, 6, 2, 48, 39, 328, DateTimeKind.Utc).AddTicks(751),
-                            ChiefComplaint = "Migraine headaches for the past week.",
-                            DoctorID = "doc-01",
-                            Location = "Room 103",
-                            Note = "",
-                            PatientID = "pat-05",
-                            Priority = 0,
-                            Status = 2,
-                            VisitNumber = 1
-                        },
-                        new
-                        {
-                            AppointmentID = "appt-08",
-                            AppointmentDateTime = new DateTime(2025, 12, 2, 7, 48, 39, 328, DateTimeKind.Utc).AddTicks(757),
-                            ChiefComplaint = "Shortness of breath and fatigue.",
-                            DoctorID = "doc-02",
-                            Location = "Room 206",
-                            Note = "",
-                            PatientID = "pat-06",
-                            Priority = 1,
-                            Status = 2,
-                            VisitNumber = 1
-                        },
-                        new
-                        {
-                            AppointmentID = "appt-09",
-                            AppointmentDateTime = new DateTime(2025, 11, 25, 4, 48, 39, 328, DateTimeKind.Utc).AddTicks(762),
-                            ChiefComplaint = "Chronic back pain radiating to legs.",
-                            DoctorID = "doc-03",
-                            Location = "Room 304",
-                            Note = "",
-                            PatientID = "pat-07",
-                            Priority = 0,
-                            Status = 2,
-                            VisitNumber = 1
-                        },
-                        new
-                        {
-                            AppointmentID = "appt-10",
-                            AppointmentDateTime = new DateTime(2025, 12, 5, 1, 48, 39, 328, DateTimeKind.Utc).AddTicks(768),
-                            ChiefComplaint = "Skin rash and itching.",
-                            DoctorID = "doc-04",
-                            Location = "Room 402",
-                            Note = "",
-                            PatientID = "pat-08",
-                            Priority = 0,
-                            Status = 2,
-                            VisitNumber = 1
-                        },
-                        new
-                        {
-                            AppointmentID = "appt-11",
-                            AppointmentDateTime = new DateTime(2025, 12, 11, 5, 48, 39, 328, DateTimeKind.Utc).AddTicks(773),
-                            ChiefComplaint = "Annual health checkup.",
-                            DoctorID = "doc-01",
-                            Location = "Room 104",
-                            Note = "",
-                            PatientID = "pat-09",
-                            Priority = 0,
-                            Status = 0,
-                            VisitNumber = 1
-                        },
-                        new
-                        {
-                            AppointmentID = "appt-12",
-                            AppointmentDateTime = new DateTime(2025, 12, 12, 0, 48, 39, 328, DateTimeKind.Utc).AddTicks(779),
-                            ChiefComplaint = "Abdominal pain and bloating.",
-                            DoctorID = "doc-02",
-                            Location = "Room 207",
-                            Note = "",
-                            PatientID = "pat-10",
-                            Priority = 0,
-                            Status = 0,
-                            VisitNumber = 1
                         });
                 });
 
@@ -294,13 +219,13 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                         new
                         {
                             ClinicalID = "clin-01",
-                            Allergies = "",
+                            Allergies = "No known allergies.",
                             BMI = 23.0,
                             BloodPressure = "120/80",
                             FamilyHistory = "Father has hypertension.",
                             Height = 175.0,
                             LifestyleHabits = "Non-smoker.",
-                            MedicalHistory = "",
+                            MedicalHistory = "None relevant.",
                             OxygenSaturation = 98.0,
                             Pulse = 85.0,
                             RecordID = "rec-01",
@@ -332,7 +257,7 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                         new
                         {
                             ClinicalID = "clin-03",
-                            Allergies = "",
+                            Allergies = "None.",
                             BMI = 25.399999999999999,
                             BloodPressure = "150/95",
                             FamilyHistory = "Brother died of MI at 50.",
@@ -354,7 +279,7 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                             Allergies = "Latex.",
                             BMI = 24.699999999999999,
                             BloodPressure = "130/85",
-                            FamilyHistory = "",
+                            FamilyHistory = "Unknown.",
                             Height = 180.0,
                             LifestyleHabits = "Active.",
                             MedicalHistory = "Recent long-haul flight.",
@@ -366,82 +291,6 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                             Symptoms = "Swelling in right calf, warm to touch.",
                             Temperature = 37.5,
                             Weight = 80.0
-                        },
-                        new
-                        {
-                            ClinicalID = "clin-05",
-                            Allergies = "",
-                            BMI = 23.699999999999999,
-                            BloodPressure = "125/82",
-                            FamilyHistory = "Mother has migraines.",
-                            Height = 178.0,
-                            LifestyleHabits = "High stress job.",
-                            MedicalHistory = "History of occasional headaches.",
-                            OxygenSaturation = 99.0,
-                            Pulse = 82.0,
-                            RecordID = "rec-05",
-                            RespiratoryRate = 16.0,
-                            StatusBMI = 1,
-                            Symptoms = "Severe headache with visual disturbances, nausea.",
-                            Temperature = 36.899999999999999,
-                            Weight = 75.0
-                        },
-                        new
-                        {
-                            ClinicalID = "clin-06",
-                            Allergies = "Shellfish.",
-                            BMI = 20.199999999999999,
-                            BloodPressure = "110/70",
-                            FamilyHistory = "",
-                            Height = 165.0,
-                            LifestyleHabits = "Vegetarian diet.",
-                            MedicalHistory = "Heavy menstrual bleeding.",
-                            OxygenSaturation = 98.0,
-                            Pulse = 95.0,
-                            RecordID = "rec-06",
-                            RespiratoryRate = 18.0,
-                            StatusBMI = 1,
-                            Symptoms = "Fatigue, pale skin, shortness of breath on exertion.",
-                            Temperature = 36.5,
-                            Weight = 55.0
-                        },
-                        new
-                        {
-                            ClinicalID = "clin-07",
-                            Allergies = "",
-                            BMI = 28.699999999999999,
-                            BloodPressure = "135/88",
-                            FamilyHistory = "Father has back problems.",
-                            Height = 172.0,
-                            LifestyleHabits = "Sedentary work, occasional exercise.",
-                            MedicalHistory = "Previous back injury 5 years ago.",
-                            OxygenSaturation = 99.0,
-                            Pulse = 76.0,
-                            RecordID = "rec-07",
-                            RespiratoryRate = 16.0,
-                            StatusBMI = 2,
-                            Symptoms = "Lower back pain, numbness in right leg.",
-                            Temperature = 37.100000000000001,
-                            Weight = 85.0
-                        },
-                        new
-                        {
-                            ClinicalID = "clin-08",
-                            Allergies = "Nickel, certain cosmetics.",
-                            BMI = 20.800000000000001,
-                            BloodPressure = "118/75",
-                            FamilyHistory = "",
-                            Height = 170.0,
-                            LifestyleHabits = "",
-                            MedicalHistory = "History of sensitive skin.",
-                            OxygenSaturation = 99.0,
-                            Pulse = 78.0,
-                            RecordID = "rec-08",
-                            RespiratoryRate = 16.0,
-                            StatusBMI = 1,
-                            Symptoms = "Red rash on arms, itching, mild swelling.",
-                            Temperature = 36.799999999999997,
-                            Weight = 60.0
                         });
                 });
 
@@ -590,20 +439,6 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                             DoctorID = "doc-04",
                             EndTime = new DateTime(2025, 12, 11, 16, 0, 0, 0, DateTimeKind.Utc),
                             StartTime = new DateTime(2025, 12, 11, 8, 0, 0, 0, DateTimeKind.Utc)
-                        },
-                        new
-                        {
-                            ScheduleID = "sch-09",
-                            DoctorID = "doc-01",
-                            EndTime = new DateTime(2025, 12, 12, 17, 0, 0, 0, DateTimeKind.Utc),
-                            StartTime = new DateTime(2025, 12, 12, 8, 0, 0, 0, DateTimeKind.Utc)
-                        },
-                        new
-                        {
-                            ScheduleID = "sch-10",
-                            DoctorID = "doc-02",
-                            EndTime = new DateTime(2025, 12, 13, 21, 0, 0, 0, DateTimeKind.Utc),
-                            StartTime = new DateTime(2025, 12, 13, 13, 0, 0, 0, DateTimeKind.Utc)
                         });
                 });
 
@@ -648,9 +483,9 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                             AppointmentID = "appt-01",
                             Diagnosis = "Acute Pharyngitis (Strep Throat)",
                             DoctorNotes = "Patient advised to finish full course of medication.",
-                            NextVisitDate = new DateTime(2025, 12, 15, 15, 48, 39, 328, DateTimeKind.Utc).AddTicks(850),
+                            NextVisitDate = new DateTime(2025, 12, 15, 13, 12, 9, 224, DateTimeKind.Utc).AddTicks(1740),
                             TreatmentPlan = "Antibiotics course and rest.",
-                            VisitTime = new DateTime(2025, 12, 8, 1, 3, 39, 328, DateTimeKind.Utc).AddTicks(844)
+                            VisitTime = new DateTime(2025, 12, 7, 22, 27, 9, 224, DateTimeKind.Utc).AddTicks(1737)
                         },
                         new
                         {
@@ -658,9 +493,9 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                             AppointmentID = "appt-02",
                             Diagnosis = "Essential Hypertension",
                             DoctorNotes = "BP slightly elevated. Monitoring required.",
-                            NextVisitDate = new DateTime(2026, 1, 8, 15, 48, 39, 328, DateTimeKind.Utc).AddTicks(857),
+                            NextVisitDate = new DateTime(2026, 1, 8, 13, 12, 9, 224, DateTimeKind.Utc).AddTicks(1744),
                             TreatmentPlan = "Lifestyle modification and daily medication.",
-                            VisitTime = new DateTime(2025, 12, 7, 6, 18, 39, 328, DateTimeKind.Utc).AddTicks(854)
+                            VisitTime = new DateTime(2025, 12, 7, 3, 42, 9, 224, DateTimeKind.Utc).AddTicks(1742)
                         },
                         new
                         {
@@ -668,9 +503,9 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                             AppointmentID = "appt-03",
                             Diagnosis = "Stable Angina",
                             DoctorNotes = "Patient needs to monitor heart rate.",
-                            NextVisitDate = new DateTime(2025, 12, 22, 15, 48, 39, 328, DateTimeKind.Utc).AddTicks(868),
+                            NextVisitDate = new DateTime(2025, 12, 22, 13, 12, 9, 224, DateTimeKind.Utc).AddTicks(1750),
                             TreatmentPlan = "Prescribed statins and nitroglycerin. Cardiac stress test ordered.",
-                            VisitTime = new DateTime(2025, 12, 4, 2, 18, 39, 328, DateTimeKind.Utc).AddTicks(866)
+                            VisitTime = new DateTime(2025, 12, 3, 23, 42, 9, 224, DateTimeKind.Utc).AddTicks(1749)
                         },
                         new
                         {
@@ -678,49 +513,9 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                             AppointmentID = "appt-05",
                             Diagnosis = "Deep Vein Thrombosis (DVT)",
                             DoctorNotes = "Confirmed via Ultrasound.",
-                            NextVisitDate = new DateTime(2025, 12, 11, 15, 48, 39, 328, DateTimeKind.Utc).AddTicks(874),
+                            NextVisitDate = new DateTime(2025, 12, 11, 13, 12, 9, 224, DateTimeKind.Utc).AddTicks(1753),
                             TreatmentPlan = "Anticoagulant therapy immediately.",
-                            VisitTime = new DateTime(2025, 11, 29, 6, 48, 39, 328, DateTimeKind.Utc).AddTicks(872)
-                        },
-                        new
-                        {
-                            RecordID = "rec-05",
-                            AppointmentID = "appt-07",
-                            Diagnosis = "Migraine with Aura",
-                            DoctorNotes = "Patient advised to identify triggers.",
-                            NextVisitDate = new DateTime(2026, 1, 7, 15, 48, 39, 328, DateTimeKind.Utc).AddTicks(881),
-                            TreatmentPlan = "Triptan medication and lifestyle modifications.",
-                            VisitTime = new DateTime(2025, 12, 6, 3, 8, 39, 328, DateTimeKind.Utc).AddTicks(878)
-                        },
-                        new
-                        {
-                            RecordID = "rec-06",
-                            AppointmentID = "appt-08",
-                            Diagnosis = "Anemia",
-                            DoctorNotes = "Blood test shows low hemoglobin.",
-                            NextVisitDate = new DateTime(2025, 12, 22, 15, 48, 39, 328, DateTimeKind.Utc).AddTicks(886),
-                            TreatmentPlan = "Iron supplements and dietary changes.",
-                            VisitTime = new DateTime(2025, 12, 2, 8, 13, 39, 328, DateTimeKind.Utc).AddTicks(884)
-                        },
-                        new
-                        {
-                            RecordID = "rec-07",
-                            AppointmentID = "appt-09",
-                            Diagnosis = "Lumbar Disc Herniation",
-                            DoctorNotes = "MRI recommended if symptoms persist.",
-                            NextVisitDate = new DateTime(2025, 12, 29, 15, 48, 39, 328, DateTimeKind.Utc).AddTicks(893),
-                            TreatmentPlan = "Physical therapy and pain management.",
-                            VisitTime = new DateTime(2025, 11, 25, 5, 18, 39, 328, DateTimeKind.Utc).AddTicks(890)
-                        },
-                        new
-                        {
-                            RecordID = "rec-08",
-                            AppointmentID = "appt-10",
-                            Diagnosis = "Contact Dermatitis",
-                            DoctorNotes = "Avoid known irritants.",
-                            NextVisitDate = new DateTime(2025, 12, 15, 15, 48, 39, 328, DateTimeKind.Utc).AddTicks(899),
-                            TreatmentPlan = "Topical corticosteroids and antihistamines.",
-                            VisitTime = new DateTime(2025, 12, 5, 2, 3, 39, 328, DateTimeKind.Utc).AddTicks(896)
+                            VisitTime = new DateTime(2025, 11, 29, 4, 12, 9, 224, DateTimeKind.Utc).AddTicks(1752)
                         });
                 });
 
@@ -790,76 +585,6 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                             Medication1ID = "med-ibu-400",
                             Medication2ID = "med-ator-20",
                             Severity = 0
-                        },
-                        new
-                        {
-                            InteractionID = "int-04",
-                            ClinicalEffects = "Omeprazole may decrease the absorption of amoxicillin.",
-                            Description = "Reduced antibiotic absorption.",
-                            Management = "Separate administration by 2 hours if possible.",
-                            Medication1ID = "med-amox-500",
-                            Medication2ID = "med-omep-20",
-                            Severity = 0
-                        },
-                        new
-                        {
-                            InteractionID = "int-05",
-                            ClinicalEffects = "Combined use may increase risk of renal toxicity.",
-                            Description = "Increased risk of kidney damage.",
-                            Management = "Monitor kidney function, avoid prolonged use.",
-                            Medication1ID = "med-para-500",
-                            Medication2ID = "med-ibu-400",
-                            Severity = 1
-                        },
-                        new
-                        {
-                            InteractionID = "int-06",
-                            ClinicalEffects = "Omeprazole may increase cetirizine levels slightly.",
-                            Description = "Altered drug metabolism.",
-                            Management = "Monitor for increased drowsiness.",
-                            Medication1ID = "med-cet-10",
-                            Medication2ID = "med-omep-20",
-                            Severity = 0
-                        },
-                        new
-                        {
-                            InteractionID = "int-07",
-                            ClinicalEffects = "Rare cases of increased muscle pain when combined.",
-                            Description = "Potential muscle effects.",
-                            Management = "Monitor for muscle symptoms.",
-                            Medication1ID = "med-met-850",
-                            Medication2ID = "med-ator-20",
-                            Severity = 0
-                        },
-                        new
-                        {
-                            InteractionID = "int-08",
-                            ClinicalEffects = "Omeprazole may decrease vitamin C absorption.",
-                            Description = "Reduced vitamin C absorption.",
-                            Management = "Take vitamin C supplements separately.",
-                            Medication1ID = "med-vit-c-500",
-                            Medication2ID = "med-omep-20",
-                            Severity = 0
-                        },
-                        new
-                        {
-                            InteractionID = "int-09",
-                            ClinicalEffects = "Generally safe to use together.",
-                            Description = "No significant interaction.",
-                            Management = "No special precautions needed.",
-                            Medication1ID = "med-amox-500",
-                            Medication2ID = "med-cet-10",
-                            Severity = 0
-                        },
-                        new
-                        {
-                            InteractionID = "int-10",
-                            ClinicalEffects = "NSAIDs may significantly increase metformin levels.",
-                            Description = "High risk of lactic acidosis.",
-                            Management = "Avoid combination if possible, monitor closely.",
-                            Medication1ID = "med-met-850",
-                            Medication2ID = "med-ibu-400",
-                            Severity = 2
                         });
                 });
 
@@ -1084,7 +809,7 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                         new
                         {
                             LogID = "log-01",
-                            CreatedAt = new DateTime(2025, 11, 8, 15, 48, 39, 328, DateTimeKind.Utc).AddTicks(1538),
+                            CreatedAt = new DateTime(2025, 11, 8, 13, 12, 9, 224, DateTimeKind.Utc).AddTicks(2037),
                             MedicationID = "med-amox-500",
                             QuantityChange = 1000,
                             Reason = "Initial Stock Import"
@@ -1092,7 +817,7 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                         new
                         {
                             LogID = "log-02",
-                            CreatedAt = new DateTime(2025, 11, 8, 15, 48, 39, 328, DateTimeKind.Utc).AddTicks(1545),
+                            CreatedAt = new DateTime(2025, 11, 8, 13, 12, 9, 224, DateTimeKind.Utc).AddTicks(2041),
                             MedicationID = "med-ibu-400",
                             QuantityChange = 500,
                             Reason = "Initial Stock Import"
@@ -1100,7 +825,7 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                         new
                         {
                             LogID = "log-03",
-                            CreatedAt = new DateTime(2025, 12, 8, 1, 33, 39, 328, DateTimeKind.Utc).AddTicks(1549),
+                            CreatedAt = new DateTime(2025, 12, 7, 22, 57, 9, 224, DateTimeKind.Utc).AddTicks(2043),
                             MedicationID = "med-amox-500",
                             QuantityChange = -21,
                             Reason = "Dispensed to Patient",
@@ -1109,7 +834,7 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                         new
                         {
                             LogID = "log-04",
-                            CreatedAt = new DateTime(2025, 12, 8, 1, 33, 39, 328, DateTimeKind.Utc).AddTicks(1554),
+                            CreatedAt = new DateTime(2025, 12, 7, 22, 57, 9, 224, DateTimeKind.Utc).AddTicks(2046),
                             MedicationID = "med-ibu-400",
                             QuantityChange = -10,
                             Reason = "Dispensed to Patient",
@@ -1118,7 +843,7 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                         new
                         {
                             LogID = "log-05",
-                            CreatedAt = new DateTime(2025, 12, 7, 7, 33, 39, 328, DateTimeKind.Utc).AddTicks(1558),
+                            CreatedAt = new DateTime(2025, 12, 7, 4, 57, 9, 224, DateTimeKind.Utc).AddTicks(2048),
                             MedicationID = "med-met-850",
                             QuantityChange = -60,
                             Reason = "Dispensed to Patient",
@@ -1127,7 +852,7 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                         new
                         {
                             LogID = "log-06",
-                            CreatedAt = new DateTime(2025, 12, 4, 3, 18, 39, 328, DateTimeKind.Utc).AddTicks(1562),
+                            CreatedAt = new DateTime(2025, 12, 4, 0, 42, 9, 224, DateTimeKind.Utc).AddTicks(2050),
                             MedicationID = "med-ator-20",
                             QuantityChange = -30,
                             Reason = "Dispensed to Patient",
@@ -1136,63 +861,11 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                         new
                         {
                             LogID = "log-07",
-                            CreatedAt = new DateTime(2025, 12, 4, 3, 18, 39, 328, DateTimeKind.Utc).AddTicks(1566),
+                            CreatedAt = new DateTime(2025, 12, 4, 0, 42, 9, 224, DateTimeKind.Utc).AddTicks(2052),
                             MedicationID = "med-omep-20",
                             QuantityChange = -14,
                             Reason = "Dispensed to Patient",
                             RelatedPrescriptionID = "presc-03"
-                        },
-                        new
-                        {
-                            LogID = "log-08",
-                            CreatedAt = new DateTime(2025, 11, 8, 15, 48, 39, 328, DateTimeKind.Utc).AddTicks(1571),
-                            MedicationID = "med-para-500",
-                            QuantityChange = 2000,
-                            Reason = "Initial Stock Import"
-                        },
-                        new
-                        {
-                            LogID = "log-09",
-                            CreatedAt = new DateTime(2025, 11, 8, 15, 48, 39, 328, DateTimeKind.Utc).AddTicks(1575),
-                            MedicationID = "med-cet-10",
-                            QuantityChange = 2000,
-                            Reason = "Initial Stock Import"
-                        },
-                        new
-                        {
-                            LogID = "log-10",
-                            CreatedAt = new DateTime(2025, 12, 6, 4, 3, 39, 328, DateTimeKind.Utc).AddTicks(1578),
-                            MedicationID = "med-para-500",
-                            QuantityChange = -15,
-                            Reason = "Dispensed to Patient",
-                            RelatedPrescriptionID = "presc-05"
-                        },
-                        new
-                        {
-                            LogID = "log-11",
-                            CreatedAt = new DateTime(2025, 12, 2, 9, 8, 39, 328, DateTimeKind.Utc).AddTicks(1583),
-                            MedicationID = "med-cet-10",
-                            QuantityChange = -30,
-                            Reason = "Dispensed to Patient",
-                            RelatedPrescriptionID = "presc-06"
-                        },
-                        new
-                        {
-                            LogID = "log-12",
-                            CreatedAt = new DateTime(2025, 12, 8, 15, 48, 39, 328, DateTimeKind.Utc).AddTicks(1587),
-                            MedicationID = "med-ibu-400",
-                            QuantityChange = -40,
-                            Reason = "Dispensed to Patient",
-                            RelatedPrescriptionID = "presc-07"
-                        },
-                        new
-                        {
-                            LogID = "log-13",
-                            CreatedAt = new DateTime(2025, 12, 5, 3, 13, 39, 328, DateTimeKind.Utc).AddTicks(1590),
-                            MedicationID = "med-omep-20",
-                            QuantityChange = -30,
-                            Reason = "Dispensed to Patient",
-                            RelatedPrescriptionID = "presc-08"
                         });
                 });
 
@@ -1262,60 +935,6 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                             Gender = 1,
                             InsuranceNumber = "INS-CHILD-01",
                             UserID = "user-pat-04"
-                        },
-                        new
-                        {
-                            PatientID = "pat-05",
-                            BloodType = "O+",
-                            DateOfBirth = new DateTime(1982, 11, 8, 0, 0, 0, 0, DateTimeKind.Utc),
-                            Gender = 0,
-                            InsuranceNumber = "INS-777888",
-                            UserID = "user-pat-05"
-                        },
-                        new
-                        {
-                            PatientID = "pat-06",
-                            BloodType = "A-",
-                            DateOfBirth = new DateTime(1995, 3, 22, 0, 0, 0, 0, DateTimeKind.Utc),
-                            Gender = 1,
-                            InsuranceNumber = "INS-666555",
-                            UserID = "user-pat-06"
-                        },
-                        new
-                        {
-                            PatientID = "pat-07",
-                            BloodType = "AB+",
-                            DateOfBirth = new DateTime(1968, 7, 15, 0, 0, 0, 0, DateTimeKind.Utc),
-                            Gender = 0,
-                            InsuranceNumber = "INS-444333",
-                            UserID = "user-pat-07"
-                        },
-                        new
-                        {
-                            PatientID = "pat-08",
-                            BloodType = "B-",
-                            DateOfBirth = new DateTime(2001, 9, 30, 0, 0, 0, 0, DateTimeKind.Utc),
-                            Gender = 1,
-                            InsuranceNumber = "INS-222111",
-                            UserID = "user-pat-08"
-                        },
-                        new
-                        {
-                            PatientID = "pat-09",
-                            BloodType = "O-",
-                            DateOfBirth = new DateTime(1978, 12, 5, 0, 0, 0, 0, DateTimeKind.Utc),
-                            Gender = 0,
-                            InsuranceNumber = "INS-999000",
-                            UserID = "user-pat-09"
-                        },
-                        new
-                        {
-                            PatientID = "pat-10",
-                            BloodType = "A+",
-                            DateOfBirth = new DateTime(1988, 4, 18, 0, 0, 0, 0, DateTimeKind.Utc),
-                            Gender = 1,
-                            InsuranceNumber = "INS-111222",
-                            UserID = "user-pat-10"
                         });
                 });
 
@@ -1406,7 +1025,7 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                         {
                             ItemID = "pi-01",
                             Dosage = "500mg",
-                            DoseScheduleJSON = "{&quot;morning&quot;: 1, &quot;afternoon&quot;: 1, &quot;evening&quot;: 1}",
+                            DoseScheduleJSON = "{\"morning\": 1, \"afternoon\": 1, \"evening\": 1}",
                             DurationDays = 7,
                             Frequency = "3 times a day (every 8 hours)",
                             Indication = "For bacterial infection.",
@@ -1419,7 +1038,7 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                         {
                             ItemID = "pi-02",
                             Dosage = "400mg",
-                            DoseScheduleJSON = "{&quot;as_needed&quot;: true}",
+                            DoseScheduleJSON = "{\"as_needed\": true}",
                             DurationDays = 5,
                             Frequency = "As needed for pain/fever, max 3 times daily",
                             Indication = "For pain and fever management.",
@@ -1432,7 +1051,7 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                         {
                             ItemID = "pi-03",
                             Dosage = "850mg",
-                            DoseScheduleJSON = "{&quot;morning&quot;: 1, &quot;evening&quot;: 1}",
+                            DoseScheduleJSON = "{\"morning\": 1, \"evening\": 1}",
                             DurationDays = 30,
                             Frequency = "Twice a day",
                             Indication = "Diabetes management.",
@@ -1445,7 +1064,7 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                         {
                             ItemID = "pi-04",
                             Dosage = "20mg",
-                            DoseScheduleJSON = "{&quot;night&quot;: 1}",
+                            DoseScheduleJSON = "{\"night\": 1}",
                             DurationDays = 30,
                             Frequency = "Once daily at night",
                             Indication = "Cholesterol management.",
@@ -1458,7 +1077,7 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                         {
                             ItemID = "pi-05",
                             Dosage = "20mg",
-                            DoseScheduleJSON = "{&quot;morning&quot;: 1}",
+                            DoseScheduleJSON = "{\"morning\": 1}",
                             DurationDays = 14,
                             Frequency = "Once daily before breakfast",
                             Indication = "Gastric protection.",
@@ -1471,7 +1090,7 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                         {
                             ItemID = "pi-06",
                             Dosage = "400mg",
-                            DoseScheduleJSON = "{&quot;morning&quot;: 1, &quot;afternoon&quot;: 1, &quot;evening&quot;: 1, &quot;night&quot;: 1}",
+                            DoseScheduleJSON = "{\"morning\": 1, \"afternoon\": 1, \"evening\": 1, \"night\": 1}",
                             DurationDays = 5,
                             Frequency = "Every 6 hours",
                             Indication = "Pain relief.",
@@ -1479,58 +1098,6 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                             MedicationID = "med-ibu-400",
                             PrescriptionID = "presc-04",
                             Quantity = 20
-                        },
-                        new
-                        {
-                            ItemID = "pi-07",
-                            Dosage = "500mg",
-                            DoseScheduleJSON = "{&quot;as_needed&quot;: true}",
-                            DurationDays = 7,
-                            Frequency = "Every 6 hours as needed",
-                            Indication = "Migraine pain relief.",
-                            Instruction = "Take at onset of headache.",
-                            MedicationID = "med-para-500",
-                            PrescriptionID = "presc-05",
-                            Quantity = 15
-                        },
-                        new
-                        {
-                            ItemID = "pi-08",
-                            Dosage = "10mg",
-                            DoseScheduleJSON = "{&quot;night&quot;: 1}",
-                            DurationDays = 30,
-                            Frequency = "Once daily at night",
-                            Indication = "Allergy management.",
-                            Instruction = "May cause drowsiness.",
-                            MedicationID = "med-cet-10",
-                            PrescriptionID = "presc-06",
-                            Quantity = 30
-                        },
-                        new
-                        {
-                            ItemID = "pi-09",
-                            Dosage = "400mg",
-                            DoseScheduleJSON = "{&quot;as_needed&quot;: true}",
-                            DurationDays = 14,
-                            Frequency = "Every 8 hours as needed",
-                            Indication = "Back pain management.",
-                            Instruction = "Take with meals.",
-                            MedicationID = "med-ibu-400",
-                            PrescriptionID = "presc-07",
-                            Quantity = 40
-                        },
-                        new
-                        {
-                            ItemID = "pi-10",
-                            Dosage = "20mg",
-                            DoseScheduleJSON = "{&quot;morning&quot;: 1}",
-                            DurationDays = 30,
-                            Frequency = "Once daily before breakfast",
-                            Indication = "Gastric protection.",
-                            Instruction = "Take 30 mins before food.",
-                            MedicationID = "med-omep-20",
-                            PrescriptionID = "presc-08",
-                            Quantity = 30
                         });
                 });
 
@@ -1538,9 +1105,6 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                 {
                     b.Property<string>("PrescriptionID")
                         .HasColumnType("text");
-
-                    b.Property<DateTime?>("CancelledAt")
-                        .HasColumnType("timestamp with time zone");
 
                     b.Property<DateTime?>("DispensedAt")
                         .HasColumnType("timestamp with time zone");
@@ -1553,9 +1117,6 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
 
                     b.Property<int>("Priority")
                         .HasColumnType("integer");
-
-                    b.Property<string>("Reason")
-                        .HasColumnType("text");
 
                     b.Property<string>("RecordID")
                         .IsRequired()
@@ -1580,82 +1141,44 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                         new
                         {
                             PrescriptionID = "presc-01",
-                            PrescriptionDateTime = new DateTime(2025, 12, 8, 1, 18, 39, 328, DateTimeKind.Utc).AddTicks(1060),
+                            DispensedAt = new DateTime(2025, 12, 8, 13, 12, 9, 224, DateTimeKind.Utc).AddTicks(1840),
+                            PrescriptionDateTime = new DateTime(2025, 12, 7, 22, 42, 9, 224, DateTimeKind.Utc).AddTicks(1831),
                             Priority = 0,
                             RecordID = "rec-01",
-                            Status = 0
+                            Status = 0,
+                            VerifiedAt = new DateTime(2025, 12, 8, 13, 12, 9, 224, DateTimeKind.Utc).AddTicks(1833)
                         },
                         new
                         {
                             PrescriptionID = "presc-02",
-                            DispensedAt = new DateTime(2025, 12, 7, 7, 33, 39, 328, DateTimeKind.Utc).AddTicks(1080),
+                            DispensedAt = new DateTime(2025, 12, 7, 4, 57, 9, 224, DateTimeKind.Utc).AddTicks(1845),
                             PharmacistID = "phar-01",
-                            PrescriptionDateTime = new DateTime(2025, 12, 7, 6, 48, 39, 328, DateTimeKind.Utc).AddTicks(1070),
+                            PrescriptionDateTime = new DateTime(2025, 12, 7, 4, 12, 9, 224, DateTimeKind.Utc).AddTicks(1843),
                             Priority = 0,
                             RecordID = "rec-02",
-                            Status = 2,
-                            VerifiedAt = new DateTime(2025, 12, 7, 7, 18, 39, 328, DateTimeKind.Utc).AddTicks(1072)
+                            Status = 1,
+                            VerifiedAt = new DateTime(2025, 12, 7, 4, 42, 9, 224, DateTimeKind.Utc).AddTicks(1844)
                         },
                         new
                         {
                             PrescriptionID = "presc-03",
+                            DispensedAt = new DateTime(2025, 12, 4, 0, 42, 9, 224, DateTimeKind.Utc).AddTicks(1849),
                             PharmacistID = "phar-02",
-                            PrescriptionDateTime = new DateTime(2025, 12, 4, 2, 48, 39, 328, DateTimeKind.Utc).AddTicks(1085),
+                            PrescriptionDateTime = new DateTime(2025, 12, 4, 0, 12, 9, 224, DateTimeKind.Utc).AddTicks(1847),
                             Priority = 1,
                             RecordID = "rec-03",
                             Status = 1,
-                            VerifiedAt = new DateTime(2025, 12, 4, 3, 3, 39, 328, DateTimeKind.Utc).AddTicks(1087)
+                            VerifiedAt = new DateTime(2025, 12, 4, 0, 27, 9, 224, DateTimeKind.Utc).AddTicks(1848)
                         },
                         new
                         {
                             PrescriptionID = "presc-04",
-                            CancelledAt = new DateTime(2025, 11, 29, 7, 48, 39, 328, DateTimeKind.Utc).AddTicks(1096),
-                            PrescriptionDateTime = new DateTime(2025, 11, 29, 7, 18, 39, 328, DateTimeKind.Utc).AddTicks(1092),
+                            DispensedAt = new DateTime(2025, 12, 8, 13, 12, 9, 224, DateTimeKind.Utc).AddTicks(1853),
+                            PrescriptionDateTime = new DateTime(2025, 11, 29, 4, 42, 9, 224, DateTimeKind.Utc).AddTicks(1851),
                             Priority = 2,
-                            Reason = "Duplicate prescription detected.",
                             RecordID = "rec-04",
-                            Status = 3
-                        },
-                        new
-                        {
-                            PrescriptionID = "presc-05",
-                            DispensedAt = new DateTime(2025, 12, 6, 4, 3, 39, 328, DateTimeKind.Utc).AddTicks(1104),
-                            PharmacistID = "phar-01",
-                            PrescriptionDateTime = new DateTime(2025, 12, 6, 3, 33, 39, 328, DateTimeKind.Utc).AddTicks(1100),
-                            Priority = 0,
-                            RecordID = "rec-05",
-                            Status = 2,
-                            VerifiedAt = new DateTime(2025, 12, 6, 3, 48, 39, 328, DateTimeKind.Utc).AddTicks(1102)
-                        },
-                        new
-                        {
-                            PrescriptionID = "presc-06",
-                            PrescriptionDateTime = new DateTime(2025, 12, 2, 8, 33, 39, 328, DateTimeKind.Utc).AddTicks(1109),
-                            Priority = 1,
-                            RecordID = "rec-06",
-                            Status = 0
-                        },
-                        new
-                        {
-                            PrescriptionID = "presc-07",
-                            PharmacistID = "phar-01",
-                            PrescriptionDateTime = new DateTime(2025, 11, 25, 5, 48, 39, 328, DateTimeKind.Utc).AddTicks(1116),
-                            Priority = 0,
-                            RecordID = "rec-07",
-                            Status = 1,
-                            VerifiedAt = new DateTime(2025, 11, 25, 6, 18, 39, 328, DateTimeKind.Utc).AddTicks(1117)
-                        },
-                        new
-                        {
-                            PrescriptionID = "presc-08",
-                            CancelledAt = new DateTime(2025, 12, 5, 2, 58, 39, 328, DateTimeKind.Utc).AddTicks(1183),
-                            PharmacistID = "phar-02",
-                            PrescriptionDateTime = new DateTime(2025, 12, 5, 2, 18, 39, 328, DateTimeKind.Utc).AddTicks(1178),
-                            Priority = 0,
-                            Reason = "Patient refused medication due to cost.",
-                            RecordID = "rec-08",
                             Status = 3,
-                            VerifiedAt = new DateTime(2025, 12, 5, 2, 48, 39, 328, DateTimeKind.Utc).AddTicks(1180)
+                            VerifiedAt = new DateTime(2025, 11, 29, 5, 12, 9, 224, DateTimeKind.Utc).AddTicks(1852)
                         });
                 });
 
@@ -1824,78 +1347,6 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                             PhoneNumber = "0904443332",
                             Role = 2,
                             Username = "phar.lisa"
-                        },
-                        new
-                        {
-                            UserID = "user-pat-05",
-                            Email = "robert.t@example.com",
-                            FirstName = "Robert",
-                            IsActive = true,
-                            LastName = "Taylor",
-                            PasswordHash = "Password123!",
-                            PhoneNumber = "0903322110",
-                            Role = 0,
-                            Username = "robert.t"
-                        },
-                        new
-                        {
-                            UserID = "user-pat-06",
-                            Email = "jennifer.m@example.com",
-                            FirstName = "Jennifer",
-                            IsActive = true,
-                            LastName = "Martinez",
-                            PasswordHash = "Password123!",
-                            PhoneNumber = "0902233445",
-                            Role = 0,
-                            Username = "jennifer.m"
-                        },
-                        new
-                        {
-                            UserID = "user-pat-07",
-                            Email = "william.a@example.com",
-                            FirstName = "William",
-                            IsActive = true,
-                            LastName = "Anderson",
-                            PasswordHash = "Password123!",
-                            PhoneNumber = "0901122558",
-                            Role = 0,
-                            Username = "william.a"
-                        },
-                        new
-                        {
-                            UserID = "user-pat-08",
-                            Email = "sophia.t@example.com",
-                            FirstName = "Sophia",
-                            IsActive = true,
-                            LastName = "Thomas",
-                            PasswordHash = "Password123!",
-                            PhoneNumber = "0909988765",
-                            Role = 0,
-                            Username = "sophia.t"
-                        },
-                        new
-                        {
-                            UserID = "user-pat-09",
-                            Email = "daniel.j@example.com",
-                            FirstName = "Daniel",
-                            IsActive = true,
-                            LastName = "Jackson",
-                            PasswordHash = "Password123!",
-                            PhoneNumber = "0908877654",
-                            Role = 0,
-                            Username = "daniel.j"
-                        },
-                        new
-                        {
-                            UserID = "user-pat-10",
-                            Email = "olivia.w@example.com",
-                            FirstName = "Olivia",
-                            IsActive = true,
-                            LastName = "White",
-                            PasswordHash = "Password123!",
-                            PhoneNumber = "0907766543",
-                            Role = 0,
-                            Username = "olivia.w"
                         });
                 });
 

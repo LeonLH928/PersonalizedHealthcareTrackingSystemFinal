@@ -24,6 +24,12 @@ public class PrescriptionModel : BaseModel
     [Column("DispensedAt")]
     public DateTime? DispensedAt { get; set; } = null!;
 
+    [Column("CancelledAt")]
+    public DateTime? CancelledAt { get; set; } = null!;
+
+    [Column("Reason")]
+    public string? Reason { get; set; } = "";
+
     [Column("Priority")]
     public Priority Priority { get; set; } = Priority.Routine;
 

@@ -37,8 +37,10 @@ namespace PersonalizedHealthcareTrackingSystemFinal.SupabaseModels
         [Column("MedicationID")]
         public string MedicationID { get; set; } = "";
 
+        [Reference(typeof(PrescriptionModel))]
         public PrescriptionModel Prescription { get; set; } = null!;
 
+        [Reference(typeof(MedicationModel))]
         public MedicationModel Medication { get; set; } = null!;
     }
 }

@@ -1,8 +1,15 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.Collections;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
+using Microsoft.IdentityModel.Tokens;
+using PersonalizedHealthcareTrackingSystemFinal.ServiceImpls;
 using PersonalizedHealthcareTrackingSystemFinal.Services;
 using PersonalizedHealthcareTrackingSystemFinal.SupabaseModels;
+using PersonalizedHealthcareTrackingSystemFinal.ViewModels.PharmacistViewModel.Wrappers;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Windows;
 
 namespace PersonalizedHealthcareTrackingSystemFinal.ViewModels.PharmacistViewModel;
@@ -26,43 +33,35 @@ public partial class PharmacistQueuePageViewModel : ObservableObject
     [ObservableProperty]
     private bool isDispensingSelected = false;
     [ObservableProperty]
-    private bool isCompletedSelected = false;
-    [ObservableProperty]
-    private bool isCancelledSelected = false;
-    [ObservableProperty]
     private bool isLoadingBar = false;
     [ObservableProperty]
-    private bool isLoadingContent = false;
+    private bool isLoadingContent = false; 
+    [ObservableProperty]
+    private bool isBusy = false;
     [ObservableProperty]
     private int numberPending;
+    [ObservableProperty]
+    private int numberDispensing;
     [ObservableProperty]
     private ObservableCollection<PrescriptionModel> prescriptionsPending = [];
     [ObservableProperty]
     private ObservableCollection<PrescriptionModel> prescriptionsDispensing = [];
     [ObservableProperty]
-    private ObservableCollection<PrescriptionModel> prescriptionsCompleted = [];
-    [ObservableProperty]
-    private ObservableCollection<PrescriptionModel> prescriptionsCancelled = [];
-    [ObservableProperty]
     private PrescriptionModel selectedPendingPrescription = null!;
     [ObservableProperty]
     private PrescriptionModel selectedDispensingPrescription = null!;
-    [ObservableProperty]
-    private PrescriptionModel selectedCompletedPrescription = null!;
-    [ObservableProperty]
-    private PrescriptionModel selectedCancelledPrescription = null!;
     [ObservableProperty]
     private ClinicalExaminationModel selectedClinicalExamination = null!;
     [ObservableProperty]
     private ObservableCollection<ClinicalExaminationModel> selectedAllClinicalExaminations = [];
     [ObservableProperty]
-    private ObservableCollection<PrescriptionItemModel> selectedAllPrescriptionItems = [];
+    private ObservableCollection<PrescriptionItemViewModel> selectedAllPrescriptionItems = [];
+    [ObservableProperty]
+    private string searchText = "";
     public async Task LoadDataAsync()
     {
-        SelectedPendingPrescription = SelectedDispensingPrescription = SelectedCancelledPrescription = SelectedCompletedPrescription = null!;
-        PrescriptionsCancelled.Clear();
+        SelectedPendingPrescription = SelectedDispensingPrescription = null!;
         PrescriptionsDispensing.Clear();
-        PrescriptionsCompleted.Clear();
         PrescriptionsPending.Clear();
         IsLoadingBar = true;
         try
@@ -70,8 +69,7 @@ public partial class PharmacistQueuePageViewModel : ObservableObject
             PrescriptionsPending = [.. await _prescriptionService.GetAllPendingPrescriptionsAsync()];
             NumberPending = PrescriptionsPending.Count();
             PrescriptionsDispensing = [.. await _prescriptionService.GetAllDispensingPrescriptionsAsync()];
-            PrescriptionsCompleted = [.. await _prescriptionService.GetAllCompletedPrescriptionsAsync()];
-            PrescriptionsCancelled = [.. await _prescriptionService.GetAllCancelledPrescriptionsAsync()];
+            NumberDispensing = PrescriptionsDispensing.Count();
         }
         catch (Exception e)
         {
@@ -87,7 +85,7 @@ public partial class PharmacistQueuePageViewModel : ObservableObject
         IsPendingSelected = SelectedPendingPrescription != null;
         if (IsPendingSelected)
         {
-            SelectedDispensingPrescription = SelectedCompletedPrescription = SelectedCancelledPrescription = null!;
+            SelectedDispensingPrescription = null!;
         }
         try
         {
@@ -106,51 +104,13 @@ public partial class PharmacistQueuePageViewModel : ObservableObject
         IsDispensingSelected = SelectedDispensingPrescription != null;
         if (IsDispensingSelected)
         {
-            SelectedPendingPrescription = SelectedCompletedPrescription = SelectedCancelledPrescription = null!;
+            SelectedPendingPrescription = null!;
         }
         try
         {
             if (SelectedDispensingPrescription != null)
             {
                 _ = UpdateData(SelectedDispensingPrescription.RecordID, SelectedDispensingPrescription.PrescriptionID);
-            }
-        }
-        catch (Exception e)
-        {
-            MessageBox.Show($"Unable to load the prescription: {e.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-        }
-    }
-    partial void OnSelectedCompletedPrescriptionChanged(PrescriptionModel value)
-    {
-        IsCompletedSelected = SelectedCompletedPrescription != null;
-        if (IsCompletedSelected)
-        {
-            SelectedPendingPrescription = SelectedDispensingPrescription = SelectedCancelledPrescription = null!;
-        }
-        try
-        {
-            if (SelectedCompletedPrescription != null)
-            {
-                _ = UpdateData(SelectedCompletedPrescription.RecordID, SelectedCompletedPrescription.PrescriptionID);
-            }
-        }
-        catch (Exception e)
-        {
-            MessageBox.Show($"Unable to load the prescription: {e.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-        }
-    }
-    partial void OnSelectedCancelledPrescriptionChanged(PrescriptionModel value)
-    {
-        IsCancelledSelected = SelectedCancelledPrescription != null;
-        if (IsCancelledSelected)
-        {
-            SelectedDispensingPrescription = SelectedCompletedPrescription = SelectedPendingPrescription = null!;
-        }
-        try
-        {
-            if (SelectedCancelledPrescription != null)
-            {
-                _ = UpdateData(SelectedCancelledPrescription.RecordID, SelectedCancelledPrescription.PrescriptionID);
             }
         }
         catch (Exception e)
@@ -168,6 +128,10 @@ public partial class PharmacistQueuePageViewModel : ObservableObject
 
             await Task.WhenAll(task1, task2);
         }
+        catch (Exception e)
+        {
+            MessageBox.Show($"Unable to load the prescription: {e.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
         finally
         {
             IsLoadingContent = false;
@@ -181,12 +145,15 @@ public partial class PharmacistQueuePageViewModel : ObservableObject
     }
     public async Task UpdateSelectedItems(string PrescriptionID)
     {
-        SelectedAllPrescriptionItems = [.. await _prescriptionItemService.GetAllPrescriptionItemsByPrescriptionID(PrescriptionID)];
+        var models = await _prescriptionItemService.GetAllPrescriptionItemsByPrescriptionID(PrescriptionID);
+        SelectedAllPrescriptionItems = [.. 
+            models.Select(item => new PrescriptionItemViewModel(item))];
     }
     [RelayCommand]
     public async Task ReloadButton()
     {
         SelectedPendingPrescription = null!;
+        SearchText = "";
         await LoadDataAsync();
     }
     [RelayCommand]
@@ -204,4 +171,50 @@ public partial class PharmacistQueuePageViewModel : ObservableObject
             MessageBox.Show($"Unable to verify: {e.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
+    [RelayCommand]
+    public async Task DoneDispensingButton()
+    {
+        try
+        {
+            foreach (var item in SelectedAllPrescriptionItems)
+                if (!item.IsChecked)
+                {
+                    MessageBox.Show($"Dispense unsuccesfully: All drugs are not dispensed yet", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
+            SelectedDispensingPrescription.Status = Models.PrescriptionStatus.Completed;
+            await _prescriptionService.AddPrescriptionAsync(SelectedDispensingPrescription);
+            MessageBox.Show($"Dispense successfully", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+        catch (Exception e)
+        {
+            MessageBox.Show($"Unable to dispense: {e.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+    }
+    [RelayCommand]
+    public async Task Search()
+    {
+        if (SearchText.IsNullOrEmpty())
+            MessageBox.Show("Please enter text!", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+
+        IsBusy = true;
+        try
+        {
+            var prescriptions = await _prescriptionService.SearchByText(SearchText);
+            PrescriptionsPending.Clear();
+            PrescriptionsDispensing.Clear();
+            foreach (var p in prescriptions)
+            {
+                if (p.Status == Models.PrescriptionStatus.Pending)
+                    PrescriptionsPending.Add(p);
+                else if (p.Status == Models.PrescriptionStatus.Dispensed)
+                    PrescriptionsDispensing.Add(p);
+            }
+        }
+        finally
+        {
+            IsBusy = false;
+        }
+    }
+
 }
