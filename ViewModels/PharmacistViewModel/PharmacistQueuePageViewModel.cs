@@ -3,6 +3,8 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
+using Microsoft.IdentityModel.Tokens;
+using PersonalizedHealthcareTrackingSystemFinal.ServiceImpls;
 using PersonalizedHealthcareTrackingSystemFinal.Services;
 using PersonalizedHealthcareTrackingSystemFinal.SupabaseModels;
 using PersonalizedHealthcareTrackingSystemFinal.ViewModels.PharmacistViewModel.Wrappers;
@@ -33,7 +35,9 @@ public partial class PharmacistQueuePageViewModel : ObservableObject
     [ObservableProperty]
     private bool isLoadingBar = false;
     [ObservableProperty]
-    private bool isLoadingContent = false;
+    private bool isLoadingContent = false; 
+    [ObservableProperty]
+    private bool isBusy = false;
     [ObservableProperty]
     private int numberPending;
     [ObservableProperty]
@@ -124,6 +128,10 @@ public partial class PharmacistQueuePageViewModel : ObservableObject
 
             await Task.WhenAll(task1, task2);
         }
+        catch (Exception e)
+        {
+            MessageBox.Show($"Unable to load the prescription: {e.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
         finally
         {
             IsLoadingContent = false;
@@ -145,6 +153,7 @@ public partial class PharmacistQueuePageViewModel : ObservableObject
     public async Task ReloadButton()
     {
         SelectedPendingPrescription = null!;
+        SearchText = "";
         await LoadDataAsync();
     }
     [RelayCommand]
@@ -182,4 +191,30 @@ public partial class PharmacistQueuePageViewModel : ObservableObject
             MessageBox.Show($"Unable to dispense: {e.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
+    [RelayCommand]
+    public async Task Search()
+    {
+        if (SearchText.IsNullOrEmpty())
+            MessageBox.Show("Please enter text!", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+
+        IsBusy = true;
+        try
+        {
+            var prescriptions = await _prescriptionService.SearchByText(SearchText);
+            PrescriptionsPending.Clear();
+            PrescriptionsDispensing.Clear();
+            foreach (var p in prescriptions)
+            {
+                if (p.Status == Models.PrescriptionStatus.Pending)
+                    PrescriptionsPending.Add(p);
+                else if (p.Status == Models.PrescriptionStatus.Dispensed)
+                    PrescriptionsDispensing.Add(p);
+            }
+        }
+        finally
+        {
+            IsBusy = false;
+        }
+    }
+
 }

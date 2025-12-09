@@ -1,6 +1,7 @@
 ﻿using PersonalizedHealthcareTrackingSystemFinal.Interfaces;
 using PersonalizedHealthcareTrackingSystemFinal.SupabaseModels;
 using Supabase;
+using System.Diagnostics;
 using System.Text.Json;
 
 namespace PersonalizedHealthcareTrackingSystemFinal.Repositories;
@@ -32,7 +33,7 @@ public class ClinicalExaminationRepository : IClinicalExaminationRepository
         var response = await _client.From<ClinicalExaminationModel>()
                                     .Select("""
                                         *,
-                                        MedicalRecord:MedicalRecords(
+                                        MR:MedicalRecords(
                                             *,
                                             Appointment:Appointments(
                                                 *,
@@ -50,7 +51,15 @@ public class ClinicalExaminationRepository : IClinicalExaminationRepository
                                     .Filter("RecordID", Supabase.Postgrest.Constants.Operator.Equals, RecordID)
                                     .Get();
 
-        return response.Model;
+        var content = response.Content!;
+        
+        content = content.Replace("\"MedicalRecords\"", "\"tempMR\"")
+                         .Replace("\"MR\"", "\"MedicalRecord\"");
+
+        var list = JsonSerializer.Deserialize<List<ClinicalExaminationModel>>(content, options);
+        var examination = list?.FirstOrDefault();
+
+        return examination;
     }
     public async Task<IEnumerable<ClinicalExaminationModel>> GetAllClinicalExaminationsByMedicalRecordIDsAsync(List<string> MedicalRecordIDs)
     {
@@ -74,7 +83,12 @@ public class ClinicalExaminationRepository : IClinicalExaminationRepository
                                      """)
                                     .Filter("RecordID", Supabase.Postgrest.Constants.Operator.In, MedicalRecordIDs)
                                     .Get();
-        var examinations = JsonSerializer.Deserialize<List<ClinicalExaminationModel>>(response.Content!, options);
+        var content = response.Content!;
+
+        content = content.Replace("\"MedicalRecords\"", "\"tempMR\"")
+                         .Replace("\"MR\"", "\"MedicalRecord\"");
+
+        var examinations = JsonSerializer.Deserialize<List<ClinicalExaminationModel>>(content, options);
 
         return examinations == null ? [] : examinations;
     }
