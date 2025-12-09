@@ -16,6 +16,7 @@
     <Window.Resources>
         <converters:AddOneConverter x:Key="AddOneConverter"/>
         <converters:ZeroToEmptyStringConverter x:Key="ZeroToEmptyStringConverter"/>
+        <converters:StringToVisibility x:Key="StringToVisibility"/>
     </Window.Resources>
     
     <Grid>
@@ -172,7 +173,9 @@
                                             <DataTemplate>
                                                 <TextBlock
                                                     Style="{StaticResource CustomBaseTextBlockStyle}"
-                                                    FontSize="16">
+                                                    FontSize="16"
+                                                    Visibility="{Binding FamilyHistory,
+                                                                         Converter={StaticResource StringToVisibility}}">
                                                     <TextBlock.Text>
                                                         <MultiBinding StringFormat="{}• {0:dd/MM/yyyy}: {1}">
                                                             <Binding Path="MedicalRecord.VisitTime"/>
@@ -196,7 +199,9 @@
                                             <DataTemplate>
                                                 <TextBlock
                                                     Style="{StaticResource CustomBaseTextBlockStyle}"
-                                                    FontSize="16">
+                                                    FontSize="16"
+                                                    Visibility="{Binding LifestyleHabits,
+                                                                         Converter={StaticResource StringToVisibility}}">
                                                     <TextBlock.Text>
                                                         <MultiBinding StringFormat="{}• {0:dd/MM/yyyy}: {1}">
                                                             <Binding Path="MedicalRecord.VisitTime"/>
@@ -225,7 +230,9 @@
                                                     Style="{StaticResource BaseCustomBorderStyle}"
                                                     Background="{StaticResource StatTagBorder}"
                                                     BorderBrush="{StaticResource StatTagBorderBrush}"
-                                                    Margin="0,0,0,10">
+                                                    Margin="0,0,0,10"
+                                                    Visibility="{Binding Allergies,
+                                                                         Converter={StaticResource StringToVisibility}}">
                                                     <TextBlock
                                                         FontFamily="Segoe UI"
                                                         FontSize="16"
@@ -1262,7 +1269,6 @@
             </Grid>
         </Border>
         
-        <!--
         <Grid Visibility="{Binding IsLoading, Converter={StaticResource BoolToVisibilityConverter}}"
               Grid.RowSpan="2" 
               Background="#80FFFFFF" 
@@ -1273,6 +1279,5 @@
                 Height="48" 
                 Width="48" />
         </Grid>
-        -->
     </Grid>
 </Window>
