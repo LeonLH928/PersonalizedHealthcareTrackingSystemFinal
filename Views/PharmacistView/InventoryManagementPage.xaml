@@ -1,0 +1,519 @@
+﻿<Page x:Class="PersonalizedHealthcareTrackingSystemFinal.Views.PharmacistView.InventoryManagementPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:PersonalizedHealthcareTrackingSystemFinal.Views.PharmacistView"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="InventoryManagementPage">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <Border Grid.Row="0" 
+                Background="{StaticResource PanelBg}"
+                BorderBrush="{StaticResource BorderColor}"
+                BorderThickness="0,0,0,1"
+                Padding="32,24">
+            <Grid>
+                <StackPanel>
+                    <TextBlock Text="Inventory Management" 
+                             FontSize="24" 
+                             FontWeight="SemiBold"
+                             Foreground="{StaticResource TextDark}"
+                             Margin="0,0,0,4"/>
+                    <TextBlock Text="Track stock, restock items, and adjust quantities."
+                             Foreground="{StaticResource TextSecondary}"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" 
+                          HorizontalAlignment="Right"
+                          VerticalAlignment="Center">
+                    <Button Style="{StaticResource SecondaryButton}" Margin="0,0,16,0">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="📄 " VerticalAlignment="Center"/>
+                            <TextBlock Text="Export Report" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
+                    <Button Style="{StaticResource PrimaryButton}">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="+ " VerticalAlignment="Center"/>
+                            <TextBlock Text="Stock New Batch" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- Toolbar -->
+        <Border Grid.Row="1"
+                Background="{StaticResource PanelBg}"
+                BorderBrush="{StaticResource BorderColor}"
+                BorderThickness="0,0,0,1"
+                Padding="32,16">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Search Box -->
+                <Border Grid.Column="0" 
+                      BorderBrush="{StaticResource BorderColor}"
+                      BorderThickness="1"
+                      CornerRadius="8"
+                      Background="White"
+                      Margin="0,0,16,0">
+                    <Grid>
+                        <TextBlock Text="🔍" 
+                                 Foreground="{StaticResource TextSecondary}"
+                                 VerticalAlignment="Center"
+                                 Margin="12,0,0,0"/>
+                        <TextBox BorderThickness="0"
+                               Background="Transparent"
+                               Padding="40,10,12,10"
+                               VerticalContentAlignment="Center"
+                               Text="Search medications...">
+                            <TextBox.Style>
+                                <Style TargetType="TextBox">
+                                    <Style.Triggers>
+                                        <Trigger Property="Text" Value="">
+                                            <Setter Property="Background" Value="Transparent"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBox.Style>
+                        </TextBox>
+                    </Grid>
+                </Border>
+
+                <!-- Status Filter -->
+                <ComboBox Grid.Column="1"
+                        MinWidth="150"
+                        Padding="16,10"
+                        BorderBrush="{StaticResource BorderColor}"
+                        Margin="0,0,16,0">
+                    <ComboBoxItem Content="All Statuses" IsSelected="True"/>
+                    <ComboBoxItem Content="⚠️ Low Stock"/>
+                    <ComboBoxItem Content="🚫 Out of Stock"/>
+                </ComboBox>
+
+                <!-- Group Filter -->
+                <ComboBox Grid.Column="2"
+                        MinWidth="150"
+                        Padding="16,10"
+                        BorderBrush="{StaticResource BorderColor}">
+                    <ComboBoxItem Content="Group: All" IsSelected="True"/>
+                    <ComboBoxItem Content="Antibiotics"/>
+                    <ComboBoxItem Content="Cardiovascular"/>
+                </ComboBox>
+            </Grid>
+        </Border>
+
+        <!-- Table Content -->
+        <ScrollViewer Grid.Row="2" 
+                     VerticalScrollBarVisibility="Auto"
+                     Padding="32">
+            <Border Background="{StaticResource PanelBg}"
+                  CornerRadius="12"
+                  BorderBrush="{StaticResource BorderColor}"
+                  BorderThickness="1">
+                <Border.Effect>
+                    <DropShadowEffect Color="Black" Opacity="0.02" 
+                                    BlurRadius="4" ShadowDepth="2"/>
+                </Border.Effect>
+
+                <DataGrid Style="{StaticResource InventoryDataGrid}"
+                        x:Name="InventoryDataGrid">
+                    <DataGrid.Columns>
+                        <!-- ID Column -->
+                        <DataGridTextColumn Header="ID" 
+                                          Binding="{Binding Id}"
+                                          Width="100">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="FontWeight" Value="Bold"/>
+                                    <Setter Property="Foreground" Value="{StaticResource TextDark}"/>
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+
+                        <!-- Medication Info Column -->
+                        <DataGridTemplateColumn Header="Medication Info" Width="300">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Border Width="40" Height="40"
+                                              Background="#f0fdfa"
+                                              CornerRadius="8"
+                                              Margin="0,0,12,0">
+                                            <TextBlock Text="💊" 
+                                                     FontSize="18"
+                                                     HorizontalAlignment="Center"
+                                                     VerticalAlignment="Center"/>
+                                        </Border>
+                                        <StackPanel VerticalAlignment="Center">
+                                            <TextBlock Text="{Binding Name}" 
+                                                     FontWeight="SemiBold"
+                                                     FontSize="15"
+                                                     Foreground="{StaticResource TextDark}"/>
+                                            <TextBlock Text="{Binding GenericName}"
+                                                     FontSize="13"
+                                                     Foreground="{StaticResource TextSecondary}"
+                                                     Margin="0,2,0,0"/>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <!-- Form/Unit Column -->
+                        <DataGridTextColumn Header="Form / Unit" 
+                                          Binding="{Binding FormUnit}"
+                                          Width="200">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="Foreground" Value="{StaticResource TextDark}"/>
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+
+                        <!-- Import Price Column -->
+                        <DataGridTextColumn Header="Import Price" 
+                                          Binding="{Binding ImportPrice, StringFormat={}{0:N0}đ}"
+                                          Width="120">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="Foreground" Value="{StaticResource TextDark}"/>
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+
+                        <!-- Current Stock Column -->
+                        <DataGridTemplateColumn Header="Current Stock" Width="180">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Border CornerRadius="20" 
+                                          Padding="12,6"
+                                          MinWidth="110"
+                                          HorizontalAlignment="Center">
+                                        <Border.Style>
+                                            <Style TargetType="Border">
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding StockStatus}" Value="OK">
+                                                        <Setter Property="Background" Value="{StaticResource StockOkBg}"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding StockStatus}" Value="Low">
+                                                        <Setter Property="Background" Value="{StaticResource StockLowBg}"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding StockStatus}" Value="Out">
+                                                        <Setter Property="Background" Value="{StaticResource StockOutBg}"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Border.Style>
+
+                                        <TextBlock HorizontalAlignment="Center"
+                                                 FontWeight="Bold"
+                                                 FontSize="13">
+                                            <TextBlock.Style>
+                                                <Style TargetType="TextBlock">
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding StockStatus}" Value="OK">
+                                                            <Setter Property="Foreground" Value="{StaticResource StockOkText}"/>
+                                                            <Setter Property="Text" Value="{Binding StockDisplay, StringFormat=✅ {0}}"/>
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding StockStatus}" Value="Low">
+                                                            <Setter Property="Foreground" Value="{StaticResource StockLowText}"/>
+                                                            <Setter Property="Text" Value="{Binding StockDisplay, StringFormat=⚠️ {0}}"/>
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding StockStatus}" Value="Out">
+                                                            <Setter Property="Foreground" Value="{StaticResource StockOutText}"/>
+                                                            <Setter Property="Text" Value="{Binding StockDisplay, StringFormat=🚫 {0}}"/>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </TextBlock.Style>
+                                        </TextBlock>
+                                    </Border>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <!-- Actions Column -->
+                        <DataGridTemplateColumn Header="Actions" Width="120">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="Adjust" 
+                                          Style="{StaticResource AdjustButton}"
+                                          Click="AdjustButton_Click"
+                                          Tag="{Binding}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Border>
+        </ScrollViewer>
+
+        <!-- Slide-Over Panel -->
+        <Border x:Name="SlideOverPanel"
+                Grid.Row="0" Grid.RowSpan="3"
+                Width="400"
+                Background="{StaticResource PanelBg}"
+                BorderBrush="{StaticResource BorderColor}"
+                BorderThickness="1,0,0,0"
+                HorizontalAlignment="Right"
+                Visibility="Collapsed">
+            <Border.RenderTransform>
+                <TranslateTransform x:Name="SlideTransform" X="400"/>
+            </Border.RenderTransform>
+            <Border.Effect>
+                <DropShadowEffect Color="Black" Opacity="0.1" 
+                                BlurRadius="25" ShadowDepth="-5" Direction="180"/>
+            </Border.Effect>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <!-- Panel Header -->
+                <Border Grid.Row="0" 
+                      Background="#f8fafc"
+                      BorderBrush="{StaticResource BorderColor}"
+                      BorderThickness="0,0,0,1"
+                      Padding="24">
+                    <Grid>
+                        <StackPanel>
+                            <TextBlock Text="Adjusting stock for:" 
+                                     FontSize="13"
+                                     Foreground="{StaticResource TextSecondary}"/>
+                            <TextBlock x:Name="PanelMedicationName"
+                                     Text="Simvastatin 20mg (MED-045)" 
+                                     FontSize="18"
+                                     FontWeight="SemiBold"
+                                     Foreground="{StaticResource TextDark}"
+                                     Margin="0,4,0,0"/>
+                        </StackPanel>
+
+                        <Button Content="×" 
+                              FontSize="24"
+                              Background="Transparent"
+                              BorderThickness="0"
+                              Foreground="{StaticResource TextSecondary}"
+                              HorizontalAlignment="Right"
+                              VerticalAlignment="Top"
+                              Cursor="Hand"
+                              Click="ClosePanel_Click"/>
+                    </Grid>
+                </Border>
+
+                <!-- Panel Body -->
+                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Padding="24">
+                    <StackPanel>
+                        <!-- Current Stock Display -->
+                        <Border Background="#f0fdfa"
+                              BorderBrush="#ccfbf1"
+                              BorderThickness="1"
+                              CornerRadius="12"
+                              Padding="20"
+                              Margin="0,0,0,24">
+                            <StackPanel HorizontalAlignment="Center">
+                                <TextBlock Text="Current Stock" 
+                                         FontWeight="SemiBold"
+                                         Foreground="{StaticResource TextSecondary}"
+                                         HorizontalAlignment="Center"/>
+                                <TextBlock x:Name="CurrentStockValue"
+                                         Text="35" 
+                                         FontSize="40"
+                                         FontWeight="Bold"
+                                         Foreground="{StaticResource SidebarActive}"
+                                         HorizontalAlignment="Center"
+                                         Margin="0,8"/>
+                                <TextBlock x:Name="CurrentStockUnit"
+                                         Text="Tablets" 
+                                         FontWeight="SemiBold"
+                                         Foreground="{StaticResource TextSecondary}"
+                                         HorizontalAlignment="Center"/>
+                            </StackPanel>
+                        </Border>
+
+                        <!-- Adjustment Type -->
+                        <StackPanel Margin="0,0,0,20">
+                            <TextBlock Text="Adjustment Type" 
+                                     FontWeight="SemiBold"
+                                     Foreground="{StaticResource TextDark}"
+                                     Margin="0,0,0,8"/>
+
+                            <Grid Background="#f1f5f9" Height="48">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <RadioButton x:Name="RadioAdd"
+                                           Grid.Column="0"
+                                           Content="+ Add Stock"
+                                           GroupName="AdjType"
+                                           IsChecked="True"
+                                           HorizontalAlignment="Stretch"
+                                           VerticalAlignment="Stretch"
+                                           HorizontalContentAlignment="Center"
+                                           VerticalContentAlignment="Center"
+                                           FontWeight="SemiBold"
+                                           Cursor="Hand">
+                                    <RadioButton.Template>
+                                        <ControlTemplate TargetType="RadioButton">
+                                            <Border x:Name="Border"
+                                                  Background="Transparent"
+                                                  BorderBrush="Transparent"
+                                                  BorderThickness="1"
+                                                  CornerRadius="6"
+                                                  Margin="4">
+                                                <ContentPresenter HorizontalAlignment="Center"
+                                                                VerticalAlignment="Center"/>
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsChecked" Value="True">
+                                                    <Setter TargetName="Border" Property="Background" Value="White"/>
+                                                    <Setter TargetName="Border" Property="BorderBrush" Value="{StaticResource SidebarActive}"/>
+                                                    <Setter Property="Foreground" Value="{StaticResource SidebarActive}"/>
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </RadioButton.Template>
+                                </RadioButton>
+
+                                <RadioButton x:Name="RadioRemove"
+                                           Grid.Column="1"
+                                           Content="- Remove/Discard"
+                                           GroupName="AdjType"
+                                           HorizontalAlignment="Stretch"
+                                           VerticalAlignment="Stretch"
+                                           HorizontalContentAlignment="Center"
+                                           VerticalContentAlignment="Center"
+                                           FontWeight="SemiBold"
+                                           Cursor="Hand">
+                                    <RadioButton.Template>
+                                        <ControlTemplate TargetType="RadioButton">
+                                            <Border x:Name="Border"
+                                                  Background="Transparent"
+                                                  BorderBrush="Transparent"
+                                                  BorderThickness="1"
+                                                  CornerRadius="6"
+                                                  Margin="4">
+                                                <ContentPresenter HorizontalAlignment="Center"
+                                                                VerticalAlignment="Center"/>
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsChecked" Value="True">
+                                                    <Setter TargetName="Border" Property="Background" Value="White"/>
+                                                    <Setter TargetName="Border" Property="BorderBrush" Value="{StaticResource SidebarActive}"/>
+                                                    <Setter Property="Foreground" Value="{StaticResource SidebarActive}"/>
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </RadioButton.Template>
+                                </RadioButton>
+                            </Grid>
+                        </StackPanel>
+
+                        <!-- Quantity Input -->
+                        <StackPanel Margin="0,0,0,20">
+                            <TextBlock Text="Change Quantity (Tablets)" 
+                                     FontWeight="SemiBold"
+                                     Foreground="{StaticResource TextDark}"
+                                     Margin="0,0,0,8"/>
+                            <TextBox x:Name="QuantityInput"
+                                   Padding="12"
+                                   BorderBrush="{StaticResource BorderColor}"
+                                   BorderThickness="1"
+                                   FontWeight="Bold"
+                                   FontSize="17"
+                                   Foreground="{StaticResource SidebarActive}">
+                                <TextBox.Resources>
+                                    <Style TargetType="Border">
+                                        <Setter Property="CornerRadius" Value="8"/>
+                                    </Style>
+                                </TextBox.Resources>
+                            </TextBox>
+                        </StackPanel>
+
+                        <!-- Reason Notes -->
+                        <StackPanel Margin="0,0,0,20">
+                            <TextBlock Text="Reason / Notes (Saved to Log)" 
+                                     FontWeight="SemiBold"
+                                     Foreground="{StaticResource TextDark}"
+                                     Margin="0,0,0,8"/>
+                            <TextBox x:Name="ReasonInput"
+                                   Height="80"
+                                   Padding="12"
+                                   BorderBrush="{StaticResource BorderColor}"
+                                   BorderThickness="1"
+                                   TextWrapping="Wrap"
+                                   AcceptsReturn="True"
+                                   VerticalScrollBarVisibility="Auto">
+                                <TextBox.Resources>
+                                    <Style TargetType="Border">
+                                        <Setter Property="CornerRadius" Value="8"/>
+                                    </Style>
+                                </TextBox.Resources>
+                            </TextBox>
+                        </StackPanel>
+
+                        <!-- Document Input -->
+                        <StackPanel>
+                            <TextBlock Text="Related Document (Optional)" 
+                                     FontWeight="SemiBold"
+                                     Foreground="{StaticResource TextDark}"
+                                     Margin="0,0,0,8"/>
+                            <TextBox x:Name="DocumentInput"
+                                   Padding="12"
+                                   BorderBrush="{StaticResource BorderColor}"
+                                   BorderThickness="1">
+                                <TextBox.Resources>
+                                    <Style TargetType="Border">
+                                        <Setter Property="CornerRadius" Value="8"/>
+                                    </Style>
+                                </TextBox.Resources>
+                            </TextBox>
+                        </StackPanel>
+                        <!-- Panel Footer -->
+                        <Border Grid.Row="2"
+                  Background="#f8fafc"
+                  BorderBrush="{StaticResource BorderColor}"
+                  BorderThickness="0,1,0,0"
+                  Padding="24">
+                            <StackPanel Orientation="Horizontal" 
+                          HorizontalAlignment="Right">
+                                <Button Content="Cancel" 
+                          Style="{StaticResource AdjustButton}"
+                          Padding="24,12"
+                          Margin="0,0,16,0"
+                          Click="ClosePanel_Click"/>
+                                <Button Style="{StaticResource PrimaryButton}"
+                          Padding="24,12"
+                          Click="SaveAdjustment_Click">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="💾 " VerticalAlignment="Center"/>
+                                        <TextBlock Text="Save Adjustment" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                </Button>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </ScrollViewer>
+            </Grid>
+        </Border>
+    </Grid>
+</Page>

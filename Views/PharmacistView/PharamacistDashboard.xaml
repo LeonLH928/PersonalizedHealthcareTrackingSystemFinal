@@ -6,51 +6,28 @@
              mc:Ignorable="d" 
              d:DesignHeight="900" d:DesignWidth="1200"
              Background="#F1F5F9" FontFamily="Segoe UI">
-
-    <Page.Resources>
-        <SolidColorBrush x:Key="TextDark" Color="#1E293B"/>
-        <SolidColorBrush x:Key="TextSecondary" Color="#64748B"/>
-        <SolidColorBrush x:Key="BgWhite" Color="#FFFFFF"/>
-        <SolidColorBrush x:Key="BorderColor" Color="#E2E8F0"/>
-
-        <Style x:Key="KpiCardStyle" TargetType="Border">
-            <Setter Property="Background" Value="{StaticResource BgWhite}"/>
-            <Setter Property="CornerRadius" Value="16"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="Padding" Value="20"/>
-            <Setter Property="Effect">
-                <Setter.Value>
-                    <DropShadowEffect Color="Black" Opacity="0.02" BlurRadius="4" ShadowDepth="2"/>
-                </Setter.Value>
-            </Setter>
-        </Style>
-    </Page.Resources>
-
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-
         <Border Grid.Row="0" Background="{StaticResource BgWhite}" BorderBrush="{StaticResource BorderColor}" BorderThickness="0,0,0,1" Padding="32,24">
             <Grid>
                 <StackPanel>
-                    <TextBlock Text="Tổng quan Quầy thuốc" FontSize="26" FontWeight="Bold" Foreground="{StaticResource TextDark}"/>
-                    <TextBlock Text="Chào buổi sáng, Dược sĩ Thu Hà. Đây là tình hình hoạt động hôm nay." Foreground="{StaticResource TextSecondary}" Margin="0,4,0,0"/>
+                    <TextBlock Text="Pharmacy Overview" FontSize="26" FontWeight="Bold" Foreground="{StaticResource TextDark}"/>
+                    <TextBlock Text="Good morning, Pharmacist Thu Ha. Here's today's activity status." Foreground="{StaticResource TextSecondary}" Margin="0,4,0,0"/>
                 </StackPanel>
                 <Border HorizontalAlignment="Right" VerticalAlignment="Center" Background="#F1F5F9" CornerRadius="20" Padding="12,6">
-                    <TextBlock Text="📅 Thứ Sáu, 27/10/2023" FontWeight="SemiBold" Foreground="{StaticResource TextSecondary}"/>
+                    <TextBlock Text="📅 Friday, October 27, 2023" FontWeight="SemiBold" Foreground="{StaticResource TextSecondary}"/>
                 </Border>
             </Grid>
         </Border>
-
         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
             <Grid Margin="32">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-
                 <Grid Grid.Row="0" Margin="0,0,0,24">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -61,7 +38,6 @@
                         <ColumnDefinition Width="24"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-
                     <Border Grid.Column="0" Style="{StaticResource KpiCardStyle}" Background="#FFF7ED" BorderBrush="#FDBA74">
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -73,11 +49,10 @@
                             </Border>
                             <StackPanel Grid.Column="1" VerticalAlignment="Center">
                                 <TextBlock Text="5" FontSize="32" FontWeight="Bold" Foreground="#EA580C"/>
-                                <TextBlock Text="Đơn chờ duyệt" FontSize="14" FontWeight="SemiBold" Foreground="{StaticResource TextSecondary}"/>
+                                <TextBlock Text="Pending Approval" FontSize="14" FontWeight="SemiBold" Foreground="{StaticResource TextSecondary}"/>
                             </StackPanel>
                         </Grid>
                     </Border>
-
                     <Border Grid.Column="2" Style="{StaticResource KpiCardStyle}">
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -89,11 +64,10 @@
                             </Border>
                             <StackPanel Grid.Column="1" VerticalAlignment="Center">
                                 <TextBlock Text="2" FontSize="32" FontWeight="Bold" Foreground="#1E293B"/>
-                                <TextBlock Text="Chờ cấp phát" FontSize="14" FontWeight="SemiBold" Foreground="{StaticResource TextSecondary}"/>
+                                <TextBlock Text="Ready to Dispense" FontSize="14" FontWeight="SemiBold" Foreground="{StaticResource TextSecondary}"/>
                             </StackPanel>
                         </Grid>
                     </Border>
-
                     <Border Grid.Column="4" Style="{StaticResource KpiCardStyle}">
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -105,11 +79,10 @@
                             </Border>
                             <StackPanel Grid.Column="1" VerticalAlignment="Center">
                                 <TextBlock Text="45" FontSize="32" FontWeight="Bold" Foreground="#1E293B"/>
-                                <TextBlock Text="Đã cấp phát" FontSize="14" FontWeight="SemiBold" Foreground="{StaticResource TextSecondary}"/>
+                                <TextBlock Text="Dispensed" FontSize="14" FontWeight="SemiBold" Foreground="{StaticResource TextSecondary}"/>
                             </StackPanel>
                         </Grid>
                     </Border>
-
                     <Border Grid.Column="6" Style="{StaticResource KpiCardStyle}" BorderBrush="#FCA5A5">
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -121,83 +94,74 @@
                             </Border>
                             <StackPanel Grid.Column="1" VerticalAlignment="Center">
                                 <TextBlock Text="3" FontSize="32" FontWeight="Bold" Foreground="#DC2626"/>
-                                <TextBlock Text="Sắp hết hàng" FontSize="14" FontWeight="SemiBold" Foreground="{StaticResource TextSecondary}"/>
+                                <TextBlock Text="Low Stock" FontSize="14" FontWeight="SemiBold" Foreground="{StaticResource TextSecondary}"/>
                             </StackPanel>
                         </Grid>
                     </Border>
                 </Grid>
-
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="3*"/>
                         <ColumnDefinition Width="24"/>
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
-
                     <Border Grid.Column="0" Background="{StaticResource BgWhite}" CornerRadius="16" BorderBrush="{StaticResource BorderColor}" BorderThickness="1">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
-
                             <Border Grid.Row="0" Background="#F8FAFC" BorderBrush="{StaticResource BorderColor}" BorderThickness="0,0,0,1" Padding="24,16" CornerRadius="16,16,0,0">
                                 <Grid>
                                     <StackPanel Orientation="Horizontal">
                                         <TextBlock Text="🔄" Margin="0,0,8,0"/>
-                                        <TextBlock Text="Đơn thuốc mới nhất (Hàng đợi)" FontWeight="Bold" Foreground="{StaticResource TextDark}" FontSize="16"/>
+                                        <TextBlock Text="Latest Prescriptions (Queue)" FontWeight="Bold" Foreground="{StaticResource TextDark}" FontSize="16"/>
                                     </StackPanel>
-                                    <TextBlock Text="Xem tất cả →" HorizontalAlignment="Right" Foreground="#0d9488" FontWeight="SemiBold" Cursor="Hand"/>
+                                    <TextBlock Text="View all →" HorizontalAlignment="Right" Foreground="#0d9488" FontWeight="SemiBold" Cursor="Hand"/>
                                 </Grid>
                             </Border>
-
                             <StackPanel Grid.Row="1">
-
                                 <Border Background="#FEF2F2" BorderBrush="#EF4444" BorderThickness="4,1,1,1" CornerRadius="4,8,8,4" Padding="16,12" Margin="0,0,0,8">
                                     <Grid>
                                         <StackPanel>
                                             <StackPanel Orientation="Horizontal">
                                                 <TextBlock Text="09:15 AM" FontWeight="SemiBold" Foreground="{StaticResource TextDark}"/>
                                                 <Border Background="#FEE2E2" CornerRadius="4" Margin="8,0,0,0" Padding="6,2">
-                                                    <TextBlock Text="🔥 GẤP" FontSize="11" FontWeight="Bold" Foreground="#DC2626"/>
+                                                    <TextBlock Text="🔥 URGENT" FontSize="11" FontWeight="Bold" Foreground="#DC2626"/>
                                                 </Border>
                                             </StackPanel>
-                                            <TextBlock Text="BN: Nguyễn Văn A (BS. Tuấn)" FontSize="13" Foreground="{StaticResource TextSecondary}" Margin="0,4,0,0"/>
+                                            <TextBlock Text="Patient: Nguyen Van A (Dr. Tuan)" FontSize="13" Foreground="{StaticResource TextSecondary}" Margin="0,4,0,0"/>
                                         </StackPanel>
                                         <Border HorizontalAlignment="Right" Background="#FFF7ED" CornerRadius="20" Padding="10,4" VerticalAlignment="Center">
-                                            <TextBlock Text="Chờ duyệt" FontSize="12" FontWeight="SemiBold" Foreground="#C2410C"/>
+                                            <TextBlock Text="Pending" FontSize="12" FontWeight="SemiBold" Foreground="#C2410C"/>
                                         </Border>
                                     </Grid>
                                 </Border>
-
                                 <Border Background="White" BorderBrush="{StaticResource BorderColor}" BorderThickness="1" CornerRadius="8" Padding="16,12" Margin="0,0,0,8">
                                     <Grid>
                                         <StackPanel>
                                             <TextBlock Text="09:10 AM" FontWeight="SemiBold" Foreground="{StaticResource TextDark}"/>
-                                            <TextBlock Text="BN: Lê Thị B (BS. Lan)" FontSize="13" Foreground="{StaticResource TextSecondary}" Margin="0,4,0,0"/>
+                                            <TextBlock Text="Patient: Le Thi B (Dr. Lan)" FontSize="13" Foreground="{StaticResource TextSecondary}" Margin="0,4,0,0"/>
                                         </StackPanel>
                                         <Border HorizontalAlignment="Right" Background="#FFF7ED" CornerRadius="20" Padding="10,4" VerticalAlignment="Center">
-                                            <TextBlock Text="Chờ duyệt" FontSize="12" FontWeight="SemiBold" Foreground="#C2410C"/>
+                                            <TextBlock Text="Pending" FontSize="12" FontWeight="SemiBold" Foreground="#C2410C"/>
                                         </Border>
                                     </Grid>
                                 </Border>
-
                                 <Border Background="#F0F9FF" BorderBrush="{StaticResource BorderColor}" BorderThickness="1" CornerRadius="8" Padding="16,12">
                                     <Grid>
                                         <StackPanel>
                                             <TextBlock Text="09:05 AM" FontWeight="SemiBold" Foreground="{StaticResource TextDark}"/>
-                                            <TextBlock Text="BN: Trần Văn C (BS. Hoàng)" FontSize="13" Foreground="{StaticResource TextSecondary}" Margin="0,4,0,0"/>
+                                            <TextBlock Text="Patient: Tran Van C (Dr. Hoang)" FontSize="13" Foreground="{StaticResource TextSecondary}" Margin="0,4,0,0"/>
                                         </StackPanel>
                                         <Border HorizontalAlignment="Right" Background="#EFF6FF" CornerRadius="20" Padding="10,4" VerticalAlignment="Center">
-                                            <TextBlock Text="Đã duyệt" FontSize="12" FontWeight="SemiBold" Foreground="#1D4ED8"/>
+                                            <TextBlock Text="Approved" FontSize="12" FontWeight="SemiBold" Foreground="#1D4ED8"/>
                                         </Border>
                                     </Grid>
                                 </Border>
-
                             </StackPanel>
                         </Grid>
                     </Border>
-
                     <Border Grid.Column="2" Background="{StaticResource BgWhite}" CornerRadius="16" BorderBrush="#FCA5A5" BorderThickness="1">
                         <Grid>
                             <Grid.RowDefinitions>
@@ -205,14 +169,12 @@
                                 <RowDefinition Height="*"/>
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
-
                             <Border Grid.Row="0" Background="#FEF2F2" BorderBrush="{StaticResource BorderColor}" BorderThickness="0,0,0,1" Padding="24,16" CornerRadius="16,16,0,0">
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="⚠️" Margin="0,0,8,0"/>
-                                    <TextBlock Text="Cảnh báo Tồn kho" FontWeight="Bold" Foreground="#DC2626" FontSize="16"/>
+                                    <TextBlock Text="Inventory Alerts" FontWeight="Bold" Foreground="#DC2626" FontSize="16"/>
                                 </StackPanel>
                             </Border>
-
                             <StackPanel Grid.Row="1">
                                 <Grid Margin="20,16">
                                     <Grid.ColumnDefinitions>
@@ -221,14 +183,13 @@
                                     </Grid.ColumnDefinitions>
                                     <TextBlock Text="📉" FontSize="18" Foreground="#DC2626" Margin="0,0,12,0"/>
                                     <StackPanel Grid.Column="1">
-                                        <TextBlock Text="Siro Augmentin 250mg" FontWeight="SemiBold" FontSize="14"/>
+                                        <TextBlock Text="Augmentin Syrup 250mg" FontWeight="SemiBold" FontSize="14"/>
                                         <TextBlock Margin="0,4,0,0" FontSize="13" Foreground="{StaticResource TextSecondary}">
-                                            Chỉ còn: <Run Text="5 chai" FontWeight="Bold" Foreground="#DC2626"/>
+                                            Only: <Run Text="5 bottles" FontWeight="Bold" Foreground="#DC2626"/>
                                         </TextBlock>
                                     </StackPanel>
                                 </Grid>
                                 <Separator Background="{StaticResource BorderColor}"/>
-
                                 <Grid Margin="20,16">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto"/>
@@ -238,12 +199,11 @@
                                     <StackPanel Grid.Column="1">
                                         <TextBlock Text="Ventolin Inhaler" FontWeight="SemiBold" FontSize="14"/>
                                         <TextBlock Margin="0,4,0,0" FontSize="13" Foreground="{StaticResource TextSecondary}">
-                                            Chỉ còn: <Run Text="2 bình" FontWeight="Bold" Foreground="#DC2626"/>
+                                            Only: <Run Text="2 inhalers" FontWeight="Bold" Foreground="#DC2626"/>
                                         </TextBlock>
                                     </StackPanel>
                                 </Grid>
                                 <Separator Background="{StaticResource BorderColor}"/>
-
                                 <Grid Background="#FFF1F2" Margin="0">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto"/>
@@ -252,13 +212,12 @@
                                     <TextBlock Text="🚫" FontSize="18" Foreground="#DC2626" Margin="20,16,12,16"/>
                                     <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="0,16,20,16">
                                         <TextBlock Text="Adrenaline Injection" FontWeight="SemiBold" FontSize="14"/>
-                                        <TextBlock Margin="0,4,0,0" FontSize="13" Foreground="#DC2626" FontWeight="Bold" Text="HẾT HÀNG (0)"/>
+                                        <TextBlock Margin="0,4,0,0" FontSize="13" Foreground="#DC2626" FontWeight="Bold" Text="OUT OF STOCK (0)"/>
                                     </StackPanel>
                                 </Grid>
                             </StackPanel>
-
                             <Border Grid.Row="2" BorderBrush="{StaticResource BorderColor}" BorderThickness="0,1,0,0" Padding="16">
-                                <TextBlock Text="Đi tới Quản lý Kho →" HorizontalAlignment="Center" Foreground="#0d9488" FontWeight="SemiBold" Cursor="Hand"/>
+                                <TextBlock Text="Go to Inventory Management →" HorizontalAlignment="Center" Foreground="#0d9488" FontWeight="SemiBold" Cursor="Hand"/>
                             </Border>
                         </Grid>
                     </Border>
