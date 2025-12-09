@@ -52,6 +52,8 @@ public partial class PharmacistQueuePageViewModel : ObservableObject
     private ObservableCollection<ClinicalExaminationModel> selectedAllClinicalExaminations = [];
     [ObservableProperty]
     private ObservableCollection<PrescriptionItemViewModel> selectedAllPrescriptionItems = [];
+    [ObservableProperty]
+    private string searchText = "";
     public async Task LoadDataAsync()
     {
         SelectedPendingPrescription = SelectedDispensingPrescription = null!;

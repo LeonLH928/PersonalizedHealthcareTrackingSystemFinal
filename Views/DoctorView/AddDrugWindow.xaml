@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:converters="clr-namespace:PersonalizedHealthcareTrackingSystemFinal.Helpers"
+        xmlns:fa="http://schemas.fontawesome.io/icons/"
         xmlns:local="clr-namespace:PersonalizedHealthcareTrackingSystemFinal.Views.DoctorView"
         mc:Ignorable="d"
         Style="{StaticResource WindowPopup}"
@@ -69,15 +70,40 @@
                         <RowDefinition Height="15"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <TextBox  
-                        Background="White"
-                        Tag="Search drugs, descriptions, etc."
-                        Style="{StaticResource SearchInputTextBoxStyle}"
-                        Text="{Binding SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                        <TextBox.InputBindings>
-                            <KeyBinding Key="Enter" Command="{Binding SearchCommand}"/>
-                        </TextBox.InputBindings>
-                    </TextBox>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="15"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBox  
+                            Background="White"
+                            Tag="Search drugs, descriptions, etc."
+                            Style="{StaticResource SearchInputTextBoxStyle}"
+                            Text="{Binding SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                            <TextBox.InputBindings>
+                                <KeyBinding Key="Enter" Command="{Binding SearchCommand}"/>
+                            </TextBox.InputBindings>
+                        </TextBox>
+                        <Button
+                            Background="White"
+                            Grid.Column="2"
+                            Style="{StaticResource OutlineButtonStyle}"
+                            BorderThickness="2"
+                            Content="&#128472; Reload"
+                            Command="{Binding ReloadButtonCommand}"/>
+                    </Grid>
+                    <Grid Visibility="{Binding IsBusy, Converter={StaticResource BoolToVisibilityConverter}}"
+                          Grid.Row="2" 
+                          Background="#80FFFFFF" 
+                          d:IsHidden="False"
+                          Panel.ZIndex="9999">
+                        <fa:ImageAwesome 
+                            Icon="Spinner" 
+                            Spin="True" 
+                            Height="48"  
+                            Width="48"/>
+                    </Grid>
                     <ScrollViewer
                         Grid.Row="2"
                         VerticalScrollBarVisibility="Auto"
@@ -430,5 +456,15 @@
                     Command="{Binding AddDrugButtonCommand}"/>
             </StackPanel>
         </Border>
+        <Grid Visibility="{Binding IsLoading, Converter={StaticResource BoolToVisibilityConverter}}"
+              Grid.RowSpan="3" 
+              Background="#80FFFFFF" 
+              d:IsHidden="False">
+            <fa:ImageAwesome 
+                Icon="Spinner" 
+                Spin="True" 
+                Height="48" 
+                Width="48" />
+        </Grid>
     </Grid>
 </Window>
