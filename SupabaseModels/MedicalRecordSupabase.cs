@@ -27,5 +27,7 @@ public class MedicalRecordModel : BaseModel
 
     [Column("AppointmentID")]
     public string AppointmentID { get; set; } = "";
+
+    [Reference(typeof(AppointmentModel))]
     public AppointmentModel Appointment { get; set; } = null!;
 }

@@ -1,6 +1,9 @@
 ﻿using PersonalizedHealthcareTrackingSystemFinal.Interfaces;
 using PersonalizedHealthcareTrackingSystemFinal.Services;
 using PersonalizedHealthcareTrackingSystemFinal.SupabaseModels;
+using Supabase.Postgrest;
+using Supabase.Postgrest.Interfaces;
+using static Supabase.Postgrest.Constants;
 
 namespace PersonalizedHealthcareTrackingSystemFinal.ServiceImpls;
 public class PrescriptionService : IPrescriptionService
@@ -29,5 +32,9 @@ public class PrescriptionService : IPrescriptionService
     public async Task<IEnumerable<PrescriptionModel>> GetAllCancelledPrescriptionsAsync()
     {
         return await _prescriptionRepository.GetAllCancelledPrescriptionsAsync();
+    }
+    public async Task<IEnumerable<PrescriptionModel>> SearchByText(string SearchText)
+    {
+        return await _prescriptionRepository.SearchByText(SearchText);
     }
 }

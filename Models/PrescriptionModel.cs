@@ -18,6 +18,8 @@ public class PrescriptionModel
     public PrescriptionStatus Status { get; set; } = PrescriptionStatus.Pending;
     public DateTime? VerifiedAt { get; set; } = null!;
     public DateTime? DispensedAt { get; set; } = null!;
+    public DateTime? CancelledAt { get; set; } = null!;
+    public string? Reason { get; set; } = "";
     [Required]
     public Priority Priority { get; set; } = Priority.Routine;
     [ForeignKey(nameof(MedicalRecordModel))]

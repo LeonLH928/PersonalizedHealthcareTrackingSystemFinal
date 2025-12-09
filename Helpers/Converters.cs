@@ -1,4 +1,6 @@
-﻿using System.Globalization;
+﻿using Microsoft.IdentityModel.Tokens;
+using System.Globalization;
+using System.Windows;
 using System.Windows.Data;
 
 namespace PersonalizedHealthcareTrackingSystemFinal.Helpers;
@@ -184,6 +186,21 @@ public class IntToAvailabilityConverter : IValueConverter
     }
 }
 
+public class YearToAgeConverter : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        if (value is not DateTime dob)
+            return value;
+        return DateTime.Now.Year - dob.Year;
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}
+
 public class AppointmentDateToDay : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -202,3 +219,18 @@ public class AppointmentDateToDay : IValueConverter
     }
 }
 
+public class StringToVisibility : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        if (value is string s && !string.IsNullOrWhiteSpace(s))
+            return Visibility.Visible;
+
+        return Visibility.Collapsed;
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}

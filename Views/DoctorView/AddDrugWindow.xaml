@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:converters="clr-namespace:PersonalizedHealthcareTrackingSystemFinal.Helpers"
+        xmlns:fa="http://schemas.fontawesome.io/icons/"
         xmlns:local="clr-namespace:PersonalizedHealthcareTrackingSystemFinal.Views.DoctorView"
         mc:Ignorable="d"
         Style="{StaticResource WindowPopup}"
@@ -69,51 +70,49 @@
                         <RowDefinition Height="15"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <TextBox  
-                        Background="White"
-                        Tag="Search drugs, descriptions, etc."
-                        Style="{StaticResource SearchInputTextBoxStyle}"
-                        Text="{Binding SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                        <TextBox.InputBindings>
-                            <KeyBinding Key="Enter" Command="{Binding SearchCommand}"/>
-                        </TextBox.InputBindings>
-                    </TextBox>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="15"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBox  
+                            Background="White"
+                            Tag="Search drugs, descriptions, etc."
+                            Style="{StaticResource SearchInputTextBoxStyle}"
+                            Text="{Binding SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                            <TextBox.InputBindings>
+                                <KeyBinding Key="Enter" Command="{Binding SearchCommand}"/>
+                            </TextBox.InputBindings>
+                        </TextBox>
+                        <Button
+                            Background="White"
+                            Grid.Column="2"
+                            Style="{StaticResource OutlineButtonStyle}"
+                            BorderThickness="2"
+                            Content="&#128472; Reload"
+                            Command="{Binding ReloadButtonCommand}"/>
+                    </Grid>
+                    <Grid Visibility="{Binding IsBusy, Converter={StaticResource BoolToVisibilityConverter}}"
+                          Grid.Row="2" 
+                          Background="#80FFFFFF" 
+                          d:IsHidden="False"
+                          Panel.ZIndex="9999">
+                        <fa:ImageAwesome 
+                            Icon="Spinner" 
+                            Spin="True" 
+                            Height="48"  
+                            Width="48"/>
+                    </Grid>
                     <ScrollViewer
                         Grid.Row="2"
                         VerticalScrollBarVisibility="Auto"
                         HorizontalScrollBarVisibility="Disabled">
                         <ListBox 
-                                SelectedItem="{Binding SelectedMedication}"
-                                ItemsSource="{Binding Medications}" 
-                                AlternationCount="20"
-                                Background="Transparent"
-                                BorderBrush="Transparent">
-                            <ListBox.ItemContainerStyle>
-                                <Style TargetType="ListBoxItem">
-                                    <Setter Property="Template">
-                                        <Setter.Value>
-                                            <ControlTemplate TargetType="ListBoxItem">
-                                                <Border Name="bd"
-                                                                Background="{TemplateBinding Background}"
-                                                                BorderBrush="{TemplateBinding BorderBrush}"
-                                                                BorderThickness="{TemplateBinding BorderThickness}"
-                                                                Padding="{TemplateBinding Padding}"
-                                                                CornerRadius="8">
-                                                    <ContentPresenter/>
-                                                </Border>
-                                                <ControlTemplate.Triggers>
-                                                    <Trigger Property="IsMouseOver" Value="True">
-                                                        <Setter Property="Background" Value="{StaticResource LightBorder}" />
-                                                    </Trigger>
-                                                    <Trigger Property="IsSelected" Value="True">
-                                                        <Setter Property="Background" Value="#00AAFF" />
-                                                    </Trigger>
-                                                </ControlTemplate.Triggers>
-                                            </ControlTemplate>
-                                        </Setter.Value>
-                                    </Setter>
-                                </Style>
-                            </ListBox.ItemContainerStyle>
+                            SelectedItem="{Binding SelectedMedication}"
+                            ItemsSource="{Binding Medications}" 
+                            AlternationCount="20"
+                            Style="{StaticResource ListBoxStyle}">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
                                     <Border
@@ -168,11 +167,11 @@
                                                     FontSize="16"
                                                     Foreground="{StaticResource TextGray}">
                                                     <TextBlock.Text>
-                                                        <MultiBinding StringFormat="{}{0} • {1} • {2} {3}">
+                                                        <MultiBinding StringFormat="{}{0} • {1} • {2} {3}s">
                                                             <Binding Path="MedicationID"/>
-                                                            <Binding Path="Unit"/>
-                                                            <Binding Path="StockQuantity"/>
-                                                            <Binding Path="StockQuantityUnit"/>
+                                                            <Binding Path="BaseUnit"/>
+                                                            <Binding Path="StockTotalQuantity"/>
+                                                            <Binding Path="PackingUnit"/>
                                                         </MultiBinding>
                                                     </TextBlock.Text>
                                                 </TextBlock>
@@ -181,8 +180,14 @@
                                                     HorizontalAlignment="Right"
                                                     Style="{StaticResource CustomBaseTextBlockStyle}"
                                                     FontSize="16"
-                                                    Foreground="{StaticResource TextGray}"
-                                                    Text="{Binding StockQuantity, StringFormat={}Stock: {0}}"/>
+                                                    Foreground="{StaticResource TextGray}">
+                                                    <TextBlock.Text>
+                                                        <MultiBinding StringFormat="{}Stock: {0} {1}s">
+                                                            <Binding Path="StockTotalQuantity"/>
+                                                            <Binding Path="PackingUnit"/>
+                                                        </MultiBinding>
+                                                    </TextBlock.Text>
+                                                </TextBlock>
                                             </Grid>
                                         </Grid>
                                     </Border>
@@ -216,6 +221,26 @@
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
                                 <TextBlock
+                                    Text="Active Ingredients"
+                                    Style="{StaticResource CustomBaseTextBlockStyle}"
+                                    FontSize="16"
+                                    Foreground="{StaticResource TextGray}"
+                                    FontWeight="SemiBold"/>
+                                <TextBlock
+                                    HorizontalAlignment="Right"
+                                    Grid.Column="1"
+                                    Text="{Binding SelectedMedication.ActiveIngredient}"
+                                    Style="{StaticResource CustomBaseTextBlockStyle}"
+                                    FontSize="16"
+                                    Foreground="{StaticResource TextGray}"/>
+                            </Grid>
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock
                                     Text="Form"
                                     Style="{StaticResource CustomBaseTextBlockStyle}"
                                     FontSize="16"
@@ -229,7 +254,7 @@
                                     FontSize="16"
                                     Foreground="{StaticResource TextGray}"/>
                             </Grid>
-                        
+                            
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"/>
@@ -249,7 +274,7 @@
                                     Foreground="{StaticResource TextGray}">
                                     <TextBlock.Text>
                                         <MultiBinding StringFormat="{}{0} • {1} ₫">
-                                            <Binding Path="SelectedMedication.Unit"/>
+                                            <Binding Path="SelectedMedication.BaseUnit"/>
                                             <Binding Path="SelectedMedication.Price"/>
                                         </MultiBinding>
                                     </TextBlock.Text>
@@ -274,9 +299,9 @@
                                     FontSize="16"
                                     Foreground="{StaticResource TextGray}">
                                     <TextBlock.Text>
-                                        <MultiBinding StringFormat="{}{0} {1}s">
-                                            <Binding Path="SelectedMedication.StockQuantity"/>
-                                            <Binding Path="SelectedMedication.StockQuantityUnit"/>
+                                        <MultiBinding StringFormat="{}{0} {1}">
+                                            <Binding Path="SelectedMedication.StockTotalQuantity"/>
+                                            <Binding Path="SelectedMedication.PackingDescription"/>
                                         </MultiBinding>
                                     </TextBlock.Text>
                                 </TextBlock>
@@ -414,29 +439,32 @@
         </Border>
         <Border Grid.Row="2"
                 Background="White"
-                Style="{StaticResource BaseCustomBorderStyle}">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock
-                    Text="Page 1 of 2"
-                    Style="{StaticResource CustomBaseTextBlockStyle}"/>
-                <StackPanel
-                    Grid.Column="1"
-                    Orientation="Horizontal"
-                    HorizontalAlignment="Right">
-                    <Button
-                        Content="Prev"/>
-                    <Button
-                        Content="1"/>
-                    <Button
-                        Content="2"/>
-                    <Button
-                        Content="Next"/>
-                </StackPanel>
-            </Grid>
+                Style="{StaticResource BaseCustomBorderStyle}"
+                Padding="12">
+            <StackPanel
+                HorizontalAlignment="Right"
+                Orientation="Horizontal">
+                <Button
+                    Style="{StaticResource CancelOutlineButtonStyle}"
+                    Content="✕ Cancel"
+                    Command="{Binding CloseWindowButtonCommand}"
+                    Margin="0,0,20,0"/>
+                <Button
+                    Style="{StaticResource OutlineButtonStyle}"
+                    BorderThickness="2"
+                    Content="＋ Add drugs"
+                    Command="{Binding AddDrugButtonCommand}"/>
+            </StackPanel>
         </Border>
+        <Grid Visibility="{Binding IsLoading, Converter={StaticResource BoolToVisibilityConverter}}"
+              Grid.RowSpan="3" 
+              Background="#80FFFFFF" 
+              d:IsHidden="False">
+            <fa:ImageAwesome 
+                Icon="Spinner" 
+                Spin="True" 
+                Height="48" 
+                Width="48" />
+        </Grid>
     </Grid>
 </Window>

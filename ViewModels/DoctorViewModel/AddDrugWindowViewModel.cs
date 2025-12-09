@@ -28,13 +28,15 @@ public partial class AddDrugWindowViewModel : ObservableObject
         _ = LoadDataAsync();
     }
     [ObservableProperty]
-    public bool isSelected;
+    public bool isSelected = false;
+    [ObservableProperty]
+    public bool isLoading = false;
+    [ObservableProperty]
+    public bool isBusy = false;
     [ObservableProperty]
     public bool hasMedications;
     [ObservableProperty]
     private ObservableCollection<MedicationModel> selectedMedications = [];
-    [ObservableProperty]
-    private bool isBusy = true;
     [ObservableProperty]
     private ObservableCollection<MedicationModel> medications = [];
     [ObservableProperty]
@@ -43,8 +45,20 @@ public partial class AddDrugWindowViewModel : ObservableObject
     private MedicationModel selectedMedication = null!;
     public async Task LoadDataAsync()
     {
-        var medications = await _medicationService.GetAllMedications();
-        Medications = [.. medications];
+        IsLoading = true;
+        try
+        {
+            var medications = await _medicationService.GetAllMedications();
+            Medications = [.. medications];
+        }
+        catch (Exception e)
+        {
+            MessageBox.Show($"Cannot load drugs: {e.Message}!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+        finally
+        {
+            IsLoading = false;
+        }
     }
     partial void OnSelectedMedicationChanged(MedicationModel value)
     {
@@ -54,7 +68,6 @@ public partial class AddDrugWindowViewModel : ObservableObject
     public void CloseWindowButton()
     {
         Application.Current.Windows.OfType<AddDrugWindow>().FirstOrDefault()?.Close();
-        WeakReferenceMessenger.Default.Send(new SelectedMedicationIDsMessage(SelectedMedications.Select(m => m.MedicationID).ToList()));
     }
     [RelayCommand]
     public async Task Search()
@@ -96,5 +109,30 @@ public partial class AddDrugWindowViewModel : ObservableObject
         }
         SelectedMedications.Add(SelectedMedication);
         MessageBox.Show("Add medication successfully!", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+    }
+    [RelayCommand]
+    public void AddDrugButton()
+    {
+        WeakReferenceMessenger.Default.Send(new SelectedMedicationIDsMessage(SelectedMedications.Select(m => m.MedicationID).ToList()));
+        CloseWindowButton();
+    }
+    [RelayCommand]
+    public async Task ReloadButton()
+    {
+        IsBusy = true;
+        try
+        {
+            SearchText = "";
+            var medications = await _medicationService.GetAllMedications();
+            Medications = [.. medications];
+        }
+        catch (Exception e)
+        {
+            MessageBox.Show($"Cannot load drugs: {e.Message}!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+        finally
+        {
+            IsBusy = false;
+        }
     }
 }
