@@ -42,7 +42,7 @@
                     </Grid.ColumnDefinitions>
 
                     <StackPanel Grid.Column="0" VerticalAlignment="Center">
-                        <TextBlock Text="Chào buổi sáng, Nguyễn Văn A!" FontSize="28" FontWeight="Bold" Foreground="#0f172a" Margin="0,0,0,4"/>
+                        <TextBlock Text="" FontSize="28" FontWeight="Bold" Foreground="#0f172a" Margin="0,0,0,4"/>
                         <TextBlock Text="Chúc bạn một ngày tốt lành. Đây là tổng quan sức khỏe của bạn hôm nay." FontSize="14" Foreground="{StaticResource SecondaryText}"/>
                     </StackPanel>
 

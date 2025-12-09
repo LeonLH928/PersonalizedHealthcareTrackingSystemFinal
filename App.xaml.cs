@@ -5,6 +5,7 @@ using PersonalizedHealthcareTrackingSystemFinal.DI;
 using PersonalizedHealthcareTrackingSystemFinal.Messages;
 using PersonalizedHealthcareTrackingSystemFinal.Views;
 using PersonalizedHealthcareTrackingSystemFinal.Views.DoctorView;
+using PersonalizedHealthcareTrackingSystemFinal.Views.PatientView;
 using PersonalizedHealthcareTrackingSystemFinal.Views.PharmacistView;
 using Supabase;
 using System.Configuration;
@@ -30,7 +31,7 @@ namespace PersonalizedHealthcareTrackingSystemFinal
 
             //var IntroductionWindow = ServiceProvider.GetRequiredService<IntroductionWindow>();
             //IntroductionWindow.Show(); 
-            var PharmacistQueueWindow = ServiceProvider.GetRequiredService<PharmacistMainWindow>();
+            var PharmacistQueueWindow = ServiceProvider.GetRequiredService<PatientMainWindow>();
             PharmacistQueueWindow.Show();
             //var PharmacistQueueWindow = ServiceProvider.GetRequiredService<DoctorConsultationWindow>();
             //PharmacistQueueWindow.Show();
