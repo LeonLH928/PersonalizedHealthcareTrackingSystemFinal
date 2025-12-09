@@ -12,6 +12,7 @@
     <Page.Resources>
         <converters:YearToAgeConverter x:Key="YearToAgeConverter"/>
         <converters:AddOneConverter x:Key="AddOneConverter"/>
+        <converters:StringToVisibility x:Key="StringToVisibility"/>
     </Page.Resources>
     
     <Grid>
@@ -39,22 +40,35 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock
-                            VerticalAlignment="Center"
+                            VerticalAlignment="Top"
                             Text="Waiting to verify"
                             Style="{StaticResource PageHeaderTextBlockStyle}"/>
-                        <Border 
-                            Grid.Column="1"
-                            Background="{StaticResource StatusPendingBackground}"
-                            HorizontalAlignment="Right"
-                            Style="{StaticResource BaseCustomBorderStyle}"
-                            VerticalAlignment="Center">
-                            <TextBlock
-                                Text="{Binding NumberPending, StringFormat={}{0} pending}"
-                                Foreground="{StaticResource StatusPendingText}"
+                        <StackPanel Grid.Column="1">
+                            <Border 
+                                Background="{StaticResource StatusPendingBackground}"
                                 HorizontalAlignment="Right"
-                                VerticalAlignment="Center"
-                                Style="{StaticResource CustomBaseTextBlockStyle}"/>
-                        </Border>
+                                Style="{StaticResource BaseCustomBorderStyle}"
+                                VerticalAlignment="Center">
+                                <TextBlock
+                                    Text="{Binding NumberPending, StringFormat={}{0} pending}"
+                                    Foreground="{StaticResource StatusPendingText}"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center"
+                                    Style="{StaticResource CustomBaseTextBlockStyle}"/>
+                            </Border>
+                            <Border 
+                                Background="{StaticResource AccentBlue}"
+                                HorizontalAlignment="Right"
+                                Style="{StaticResource BaseCustomBorderStyle}"
+                                VerticalAlignment="Center">
+                                <TextBlock
+                                    Text="{Binding NumberPending, StringFormat={}{0} waiting}"
+                                    Foreground="{StaticResource StatusPendingText}"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center"
+                                    Style="{StaticResource CustomBaseTextBlockStyle}"/>
+                            </Border>
+                        </StackPanel>
                     </Grid>
                     <Grid Margin="10">
                         <Grid.ColumnDefinitions>
@@ -414,7 +428,7 @@
                                                     Margin="0,0,0,10"/>
 
                                                 <TextBlock
-                                                    Style="{StaticResource BMIStatusTextBlockStyle}"
+                                                    Style="{StaticResource BMIStatusPrescriptionItemViewModelTextBlockStyle}"
                                                     FontSize="20"
                                                     FontWeight="SemiBold">
                                                     <TextBlock.Text>
@@ -449,7 +463,9 @@
                                                                     Style="{StaticResource CustomBaseTextBlockStyle}"
                                                                     FontSize="20"
                                                                     Foreground="{StaticResource StatTagTextBlock}"
-                                                                    Text="{Binding Allergies, StringFormat={}• {0}}"/>
+                                                                    Text="{Binding Allergies, StringFormat={}• {0}}"
+                                                                    Visibility="{Binding Allergies,
+                                                                                         Converter={StaticResource StringToVisibility}}"/>
                                                             </DataTemplate>
                                                         </ItemsControl.ItemTemplate>
                                                     </ItemsControl>
@@ -654,11 +670,13 @@
                                                         <DataTemplate>
                                                             <TextBlock
                                                                 Style="{StaticResource SecondaryTextTextBlockStyle}"
-                                                                FontSize="16">
+                                                                FontSize="16"
+                                                                Visibility="{Binding MedicalHistory,    
+                                                                                     Converter={StaticResource StringToVisibility}}">
                                                                 <TextBlock.Text>
                                                                     <MultiBinding StringFormat="{}• {0:dd/MM/yyyy}: {1}">
                                                                         <Binding Path="MedicalRecord.VisitTime"/>
-                                                                        <Binding Path="FamilyHistory"/>
+                                                                        <Binding Path="MedicalHistory"/>
                                                                     </MultiBinding>
                                                                 </TextBlock.Text>
                                                             </TextBlock>
@@ -703,8 +721,7 @@
                                     Width="*"
                                     Header="Instruction"
                                     ElementStyle="{StaticResource ColumnTextBlockStyle}"/>
-                                <DataGridTemplateColumn Header="Check inventory" 
-                                                        Width="*">
+                                <DataGridTemplateColumn Header="Check inventory">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <TextBlock Style="{StaticResource StockQuantityColumnTextBlockStyle}"/>
@@ -1058,7 +1075,7 @@
                                         Style="{StaticResource SecondaryTextTextBlockStyle}"
                                         FontWeight="SemiBold">
                                         <TextBlock.Text>
-                                            <MultiBinding StringFormat="{}Dr. {0} {1}:">
+                                            <MultiBinding StringFormat="{}Dr. {0} {1}: ">
                                                 <Binding Path="SelectedDispensingPrescription.MedicalRecord.Appointment.Doctor.User.FirstName"/>
                                                 <Binding Path="SelectedDispensingPrescription.MedicalRecord.Appointment.Doctor.User.LastName"/>
                                             </MultiBinding>
@@ -1068,7 +1085,7 @@
                                         Grid.Column="1"
                                         TextWrapping="Wrap"
                                         Style="{StaticResource SecondaryTextTextBlockStyle}"
-                                        Text="{Binding SelectedDispensingPrescription.MedicalRecord.DoctorNotes, StringFormat={} {0}}"/>
+                                        Text="{Binding SelectedDispensingPrescription.MedicalRecord.DoctorNotes, StringFormat={}{0}}"/>
                                 </Grid>
                             </Grid>
                         </Border>

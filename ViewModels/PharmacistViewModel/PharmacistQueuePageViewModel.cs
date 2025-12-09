@@ -37,6 +37,8 @@ public partial class PharmacistQueuePageViewModel : ObservableObject
     [ObservableProperty]
     private int numberPending;
     [ObservableProperty]
+    private int numberDispensing;
+    [ObservableProperty]
     private ObservableCollection<PrescriptionModel> prescriptionsPending = [];
     [ObservableProperty]
     private ObservableCollection<PrescriptionModel> prescriptionsDispensing = [];
@@ -61,6 +63,7 @@ public partial class PharmacistQueuePageViewModel : ObservableObject
             PrescriptionsPending = [.. await _prescriptionService.GetAllPendingPrescriptionsAsync()];
             NumberPending = PrescriptionsPending.Count();
             PrescriptionsDispensing = [.. await _prescriptionService.GetAllDispensingPrescriptionsAsync()];
+            NumberDispensing = PrescriptionsDispensing.Count();
         }
         catch (Exception e)
         {
@@ -168,6 +171,8 @@ public partial class PharmacistQueuePageViewModel : ObservableObject
                     MessageBox.Show($"Dispense unsuccesfully: All drugs are not dispensed yet", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
                     return;
                 }
+            SelectedDispensingPrescription.Status = Models.PrescriptionStatus.Completed;
+            await _prescriptionService.AddPrescriptionAsync(SelectedDispensingPrescription);
             MessageBox.Show($"Dispense successfully", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
         }
         catch (Exception e)

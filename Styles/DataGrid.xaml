@@ -95,22 +95,22 @@
     <!-- Stock Quantity Column Text BlockStyle -->
     <Style x:Key="StockQuantityColumnTextBlockStyle" TargetType="TextBlock" BasedOn="{StaticResource ColumnTextBlockStyle}">
         <Style.Triggers>
-            <DataTrigger Binding="{Binding Medication.StockQuantity,
+            <DataTrigger Binding="{Binding Item.Medication.StockTotalQuantity,
                                            Converter={StaticResource IntToAvailabilityConverter}}" 
                          Value="{x:Static converters:Availability.Available}">
-                <Setter Property="Text" Value="{Binding Medication.StockQuantity, StringFormat={}Available (Stock: {0})}"/>
+                <Setter Property="Text" Value="{Binding Item.Medication.StockTotalQuantity, StringFormat={}Available (Stock: {0})}"/>
                 <Setter Property="Foreground" Value="{StaticResource MediumCompletedStatusBorder}"/>
             </DataTrigger>
-            <DataTrigger Binding="{Binding Medication.StockQuantity,
+            <DataTrigger Binding="{Binding Item.Medication.StockTotalQuantity,
                                            Converter={StaticResource IntToAvailabilityConverter}}" 
                          Value="{x:Static converters:Availability.RunningLow}">
-                <Setter Property="Text" Value="{Binding Medication.StockQuantity, StringFormat={}Running low (Stock: {0})}"/>
+                <Setter Property="Text" Value="{Binding Item.Medication.StockTotalQuantity, StringFormat={}Running low (Stock: {0})}"/>
                 <Setter Property="Foreground" Value="{StaticResource UrgentTagTextBlock}"/>
             </DataTrigger>
-            <DataTrigger Binding="{Binding Medication.StockQuantity,
+            <DataTrigger Binding="{Binding Item.Medication.StockTotalQuantity,
                                            Converter={StaticResource IntToAvailabilityConverter}}" 
                          Value="{x:Static converters:Availability.Unavailable}">
-                <Setter Property="Text" Value="{Binding Medication.StockQuantity, StringFormat={}Unavailable (Stock: {0})}"/>
+                <Setter Property="Text" Value="{Binding Item.Medication.StockTotalQuantity, StringFormat={}Unavailable (Stock: {0})}"/>
                 <Setter Property="Foreground" Value="{StaticResource StatTagTextBlock}"/>
             </DataTrigger>
         </Style.Triggers>
