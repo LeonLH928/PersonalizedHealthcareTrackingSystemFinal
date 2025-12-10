@@ -47,7 +47,7 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Views.PharmacistView
                     break;
 
                 case "Inventory Management":
-                    var InventoryManagementPage = _serviceProvider.GetRequiredKeyedService<InventoryManagementPage>();
+                    var InventoryManagementPage = _serviceProvider.GetRequiredService<InventoryManagementPage>();
                     PharmacistMainContent.Navigate(InventoryManagementPage);
                     break;
             }
