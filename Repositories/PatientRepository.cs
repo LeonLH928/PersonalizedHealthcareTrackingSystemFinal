@@ -33,16 +33,25 @@ public class PatientRepository : IPatientRepository
         content = content.Replace("\"Users\"", "\"tempU\"")
                          .Replace("\"U\"", "\"User\"");
 
-        
+        var list = JsonSerializer.Deserialize<List<PatientModel>>(content, options);
+        var patient = list?.FirstOrDefault();
 
-        return response.Model;
+        return patient;
     }
-    public async Task<PatientModel?> GetPatientByIDAsync(string UserID)
+    public async Task<PatientModel?> GetPatientByUserIDAsync(string UserID)
     {
         var response = await _client.From<PatientModel>()
-                                    .Select("*, User:Users(*)")
+                                    .Select("*, U:Users(*)")
                                     .Filter("UserID", Supabase.Postgrest.Constants.Operator.Equals, UserID)
                                     .Get();
-        return response.Model;
+
+        var content = response.Content!;
+        content = content.Replace("\"Users\"", "\"tempU\"")
+                         .Replace("\"U\"", "\"User\"");
+
+        var list = JsonSerializer.Deserialize<List<PatientModel>>(content, options);
+        var patient = list?.FirstOrDefault();
+
+        return patient;
     }
 }

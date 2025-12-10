@@ -208,9 +208,11 @@ public class AppointmentDateToDay : IValueConverter
         if (value is not DateTime appointmentDateTime)
             return value;
         var diff = (DateTime.Now - appointmentDateTime);
+        if (diff.Days < 1)
+            return "Today"; 
         if (diff.Days == 1)
             return "Tomorrow";
-        return $"{diff.TotalDays} days";
+        return $"{diff.Days} days";
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -227,6 +229,25 @@ public class StringToVisibility : IValueConverter
             return Visibility.Visible;
 
         return Visibility.Collapsed;
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}
+
+public class TimeRangeConverter : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        if (value is DateTime start)
+        {
+            DateTime end = start.AddMinutes(30);
+            return $"{start:HH:mm} - {end:HH:mm}";
+        }
+
+        return "";
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

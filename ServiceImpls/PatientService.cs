@@ -14,4 +14,8 @@ public class PatientService : IPatientService
     {
         return await _patientRepository.GetPatientByIDAsync(PatientID);
     }
+    public async Task<PatientModel?> GetPatientByUserIDAsync(string UserID)
+    {
+        return await _patientRepository.GetPatientByUserIDAsync(UserID);
+    }
 }

@@ -42,10 +42,10 @@ public class AppointmentRepository : IAppointmentRepository
                                     .Get();
         
         var content = response.Content!;
-        content = content.Replace("\"Patients\"", "tempP")
-                         .Replace("\"Doctors\"", "tempD")
-                         .Replace("\"P\"", "Patient")
-                         .Replace("\"D\"", "Doctor");
+        content = content.Replace("\"Patients\"", "\"tempP\"")
+                         .Replace("\"Doctors\"", "\"tempD\"")
+                         .Replace("\"P\"", "\"Patient\"")
+                         .Replace("\"D\"", "\"Doctor\"");
 
         var appointments = JsonSerializer.Deserialize<List<AppointmentModel>>(content, options);
 
@@ -65,10 +65,10 @@ public class AppointmentRepository : IAppointmentRepository
                                     .Get();
 
         var content = response.Content!;
-        content = content.Replace("\"Patients\"", "tempP")
-                         .Replace("\"Doctors\"", "tempD")
-                         .Replace("\"P\"", "Patient")
-                         .Replace("\"D\"", "Doctor");
+        content = content.Replace("\"Patients\"", "\"tempP\"")
+                         .Replace("\"Doctors\"", "\"tempD\"")
+                         .Replace("\"P\"", "\"Patient\"")
+                         .Replace("\"D\"", "\"Doctor\"");
 
         var appointments = JsonSerializer.Deserialize<List<AppointmentModel>>(content, options);
 
@@ -88,10 +88,10 @@ public class AppointmentRepository : IAppointmentRepository
                                     .Get();
 
         var content = response.Content!;
-        content = content.Replace("\"Patients\"", "tempP")
-                         .Replace("\"Doctors\"", "tempD")
-                         .Replace("\"P\"", "Patient")
-                         .Replace("\"D\"", "Doctor");
+        content = content.Replace("\"Patients\"", "\"tempP\"")
+                         .Replace("\"Doctors\"", "\"tempD\"")
+                         .Replace("\"P\"", "\"Patient\"")
+                         .Replace("\"D\"", "\"Doctor\"");
 
         var list = JsonSerializer.Deserialize<List<AppointmentModel>>(content, options);
 
@@ -111,10 +111,10 @@ public class AppointmentRepository : IAppointmentRepository
                                     .Get();
 
         var content = response.Content!;
-        content = content.Replace("\"Patients\"", "tempP")
-                         .Replace("\"Doctors\"", "tempD")
-                         .Replace("\"P\"", "Patient")
-                         .Replace("\"D\"", "Doctor");
+        content = content.Replace("\"Patients\"", "\"tempP\"")
+                         .Replace("\"Doctors\"", "\"tempD\"")
+                         .Replace("\"P\"", "\"Patient\"")
+                         .Replace("\"D\"", "\"Doctor\"");
 
         var list = JsonSerializer.Deserialize<List<AppointmentModel>>(content, options);
 

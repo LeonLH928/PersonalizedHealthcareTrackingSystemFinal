@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 using PersonalizedHealthcareTrackingSystemFinal.Services;
 using PersonalizedHealthcareTrackingSystemFinal.SupabaseModels;
 using System.Diagnostics;
+using System.Windows;
 
 namespace PersonalizedHealthcareTrackingSystemFinal.ViewModels.PatientViewModel;
 public partial class PatientHomePageViewModel : ObservableObject
@@ -33,11 +34,26 @@ public partial class PatientHomePageViewModel : ObservableObject
     private UserModel currentUser = null!;
     [ObservableProperty]
     private AppointmentModel mostUpcomingAppointment = null!;
+    [ObservableProperty]
+    private DoctorModel doctor = null!;
     [RelayCommand]
     public async Task LoadDataAsync()
     {
-        CurrentUser = _currentUserStoreService.GetCurrentUser()!;
-        var Patient = await _patientService.GetPatientByIDAsync();
-        MostUpcomingAppointment = _appointmentService.GetNearestAppointmentByPatientIDAsync();
+        try
+        {
+            CurrentUser = _currentUserStoreService.GetCurrentUser()!;
+            var Patient = await _patientService.GetPatientByUserIDAsync(CurrentUser.UserID);
+            if (Patient == null)
+            {
+                MessageBox.Show("This is not allowed, you know that?", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+            MostUpcomingAppointment = (await _appointmentService.GetNearestAppointmentByPatientIDAsync(Patient.PatientID))!;
+            Doctor = (await _doctorService.GetDoctorByUserIDAsync(MostUpcomingAppointment.Doctor.UserID))!;
+        }
+        catch (Exception e)
+        {
+            MessageBox.Show($"Cannot load data: {e.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
     }
 }
