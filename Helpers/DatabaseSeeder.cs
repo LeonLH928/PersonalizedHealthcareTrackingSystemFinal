@@ -175,7 +175,7 @@ public static class DatabaseSeeder
                 Role = UserRole.Patient,
                 Email = "john@example.com",
                 PhoneNumber = "0901234567",
-                IsActive = true
+                IsActive = false
             },
             new UserModel
             {
@@ -187,7 +187,7 @@ public static class DatabaseSeeder
                 Role = UserRole.Doctor,
                 Email = "sarah.smith@clinic.com",
                 PhoneNumber = "0909998887",
-                IsActive = true
+                IsActive = false
             },
             new UserModel
             {
@@ -199,7 +199,7 @@ public static class DatabaseSeeder
                 Role = UserRole.Pharmacist,
                 Email = "david.chen@pharmacy.com",
                 PhoneNumber = "0905554443",
-                IsActive = true
+                IsActive = false
             },
             new UserModel
             {
@@ -211,7 +211,7 @@ public static class DatabaseSeeder
                 Role = UserRole.Patient,
                 Email = "alice.b@example.com",
                 PhoneNumber = "0908887776",
-                IsActive = true
+                IsActive = false
             },
             new UserModel
             {
@@ -223,7 +223,7 @@ public static class DatabaseSeeder
                 Role = UserRole.Doctor,
                 Email = "james.wilson@clinic.com",
                 PhoneNumber = "0901112223",
-                IsActive = true
+                IsActive = false
             },
             new UserModel
             {
@@ -235,7 +235,7 @@ public static class DatabaseSeeder
                 Role = UserRole.Patient,
                 Email = "mike.j@example.com",
                 PhoneNumber = "0901122334",
-                IsActive = true
+                IsActive = false
             },
             new UserModel
             {
@@ -247,7 +247,7 @@ public static class DatabaseSeeder
                 Role = UserRole.Patient,
                 Email = "emily.c@example.com",
                 PhoneNumber = "0909988776",
-                IsActive = true
+                IsActive = false
             },
             new UserModel
             {
@@ -259,7 +259,7 @@ public static class DatabaseSeeder
                 Role = UserRole.Doctor,
                 Email = "house@clinic.com",
                 PhoneNumber = "0906666666",
-                IsActive = true
+                IsActive = false
             },
             new UserModel
             {
@@ -271,7 +271,7 @@ public static class DatabaseSeeder
                 Role = UserRole.Doctor,
                 Email = "grey@clinic.com",
                 PhoneNumber = "0907777777",
-                IsActive = true
+                IsActive = false
             },
             new UserModel
             {
@@ -283,7 +283,7 @@ public static class DatabaseSeeder
                 Role = UserRole.Pharmacist,
                 Email = "lisa.w@pharmacy.com",
                 PhoneNumber = "0904443332",
-                IsActive = true
+                IsActive = false
             },
             new UserModel
             {
@@ -295,7 +295,7 @@ public static class DatabaseSeeder
                 Role = UserRole.Patient,
                 Email = "robert.t@example.com",
                 PhoneNumber = "0903322110",
-                IsActive = true
+                IsActive = false
             },
             new UserModel
             {
@@ -307,7 +307,7 @@ public static class DatabaseSeeder
                 Role = UserRole.Patient,
                 Email = "jennifer.m@example.com",
                 PhoneNumber = "0902233445",
-                IsActive = true
+                IsActive = false
             },
             new UserModel
             {
@@ -319,7 +319,7 @@ public static class DatabaseSeeder
                 Role = UserRole.Patient,
                 Email = "william.a@example.com",
                 PhoneNumber = "0901122558",
-                IsActive = true
+                IsActive = false
             },
             new UserModel
             {
@@ -331,7 +331,7 @@ public static class DatabaseSeeder
                 Role = UserRole.Patient,
                 Email = "sophia.t@example.com",
                 PhoneNumber = "0909988765",
-                IsActive = true
+                IsActive = false
             },
             new UserModel
             {
@@ -343,7 +343,7 @@ public static class DatabaseSeeder
                 Role = UserRole.Patient,
                 Email = "daniel.j@example.com",
                 PhoneNumber = "0908877654",
-                IsActive = true
+                IsActive = false
             },
             new UserModel
             {
@@ -355,7 +355,7 @@ public static class DatabaseSeeder
                 Role = UserRole.Patient,
                 Email = "olivia.w@example.com",
                 PhoneNumber = "0907766543",
-                IsActive = true
+                IsActive = false
             }
         );
     }
@@ -1398,70 +1398,90 @@ public static class DatabaseSeeder
                 ScheduleID = "sch-01",
                 DoctorID = "doc-01",
                 StartTime = DateTime.UtcNow.AddDays(-1).Date.AddHours(8),
-                EndTime = DateTime.UtcNow.AddDays(-1).Date.AddHours(17)
+                EndTime = DateTime.UtcNow.AddDays(-1).Date.AddHours(17),
+                CreatedDatetime = DateTime.UtcNow.AddDays(-10),
+                UpdatedDatetime = DateTime.UtcNow.AddDays(-10)
             },
             new DoctorScheduleModel
             {
                 ScheduleID = "sch-02",
                 DoctorID = "doc-01",
                 StartTime = DateTime.UtcNow.AddDays(1).Date.AddHours(8),
-                EndTime = DateTime.UtcNow.AddDays(1).Date.AddHours(17)
+                EndTime = DateTime.UtcNow.AddDays(1).Date.AddHours(17),
+                CreatedDatetime = DateTime.UtcNow.AddDays(-9),
+                UpdatedDatetime = DateTime.UtcNow.AddDays(-9)
             },
             new DoctorScheduleModel
             {
                 ScheduleID = "sch-03",
                 DoctorID = "doc-02",
                 StartTime = DateTime.UtcNow.AddDays(-2).Date.AddHours(13),
-                EndTime = DateTime.UtcNow.AddDays(-2).Date.AddHours(21)
+                EndTime = DateTime.UtcNow.AddDays(-2).Date.AddHours(21),
+                CreatedDatetime = DateTime.UtcNow.AddDays(-8),
+                UpdatedDatetime = DateTime.UtcNow.AddDays(-8)
             },
             new DoctorScheduleModel
             {
                 ScheduleID = "sch-04",
                 DoctorID = "doc-02",
                 StartTime = DateTime.UtcNow.AddDays(-5).Date.AddHours(8),
-                EndTime = DateTime.UtcNow.AddDays(-5).Date.AddHours(16)
+                EndTime = DateTime.UtcNow.AddDays(-5).Date.AddHours(16),
+                CreatedDatetime = DateTime.UtcNow.AddDays(-7),
+                UpdatedDatetime = DateTime.UtcNow.AddDays(-7)
             },
             new DoctorScheduleModel
             {
                 ScheduleID = "sch-05",
                 DoctorID = "doc-03",
                 StartTime = DateTime.UtcNow.AddDays(-10).Date.AddHours(9),
-                EndTime = DateTime.UtcNow.AddDays(-10).Date.AddHours(18)
+                EndTime = DateTime.UtcNow.AddDays(-10).Date.AddHours(18),
+                CreatedDatetime = DateTime.UtcNow.AddDays(-6),
+                UpdatedDatetime = DateTime.UtcNow.AddDays(-6)
             },
             new DoctorScheduleModel
             {
                 ScheduleID = "sch-06",
                 DoctorID = "doc-04",
                 StartTime = DateTime.UtcNow.Date.AddHours(7),
-                EndTime = DateTime.UtcNow.Date.AddHours(19)
+                EndTime = DateTime.UtcNow.Date.AddHours(19),
+                CreatedDatetime = DateTime.UtcNow.AddDays(-5),
+                UpdatedDatetime = DateTime.UtcNow.AddDays(-5)
             },
             new DoctorScheduleModel
             {
                 ScheduleID = "sch-07",
                 DoctorID = "doc-03",
                 StartTime = DateTime.UtcNow.AddDays(2).Date.AddHours(9),
-                EndTime = DateTime.UtcNow.AddDays(2).Date.AddHours(17)
+                EndTime = DateTime.UtcNow.AddDays(2).Date.AddHours(17),
+                CreatedDatetime = DateTime.UtcNow.AddDays(-4),
+                UpdatedDatetime = DateTime.UtcNow.AddDays(-4)
             },
             new DoctorScheduleModel
             {
                 ScheduleID = "sch-08",
                 DoctorID = "doc-04",
                 StartTime = DateTime.UtcNow.AddDays(3).Date.AddHours(8),
-                EndTime = DateTime.UtcNow.AddDays(3).Date.AddHours(16)
+                EndTime = DateTime.UtcNow.AddDays(3).Date.AddHours(16),
+                CreatedDatetime = DateTime.UtcNow.AddDays(-3),
+                UpdatedDatetime = DateTime.UtcNow.AddDays(-3)
             },
             new DoctorScheduleModel
             {
                 ScheduleID = "sch-09",
                 DoctorID = "doc-01",
                 StartTime = DateTime.UtcNow.AddDays(4).Date.AddHours(8),
-                EndTime = DateTime.UtcNow.AddDays(4).Date.AddHours(17)
+                EndTime = DateTime.UtcNow.AddDays(4).Date.AddHours(17),
+                CreatedDatetime = DateTime.UtcNow.AddDays(-2),
+                UpdatedDatetime = DateTime.UtcNow.AddDays(-2)
             },
             new DoctorScheduleModel
             {
                 ScheduleID = "sch-10",
                 DoctorID = "doc-02",
                 StartTime = DateTime.UtcNow.AddDays(5).Date.AddHours(13),
-                EndTime = DateTime.UtcNow.AddDays(5).Date.AddHours(21)
+                EndTime = DateTime.UtcNow.AddDays(5).Date.AddHours(21),
+                CreatedDatetime = DateTime.UtcNow.AddDays(-1),
+                UpdatedDatetime = DateTime.UtcNow.AddDays(-1)
             }
         );
     }

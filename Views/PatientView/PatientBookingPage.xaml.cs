@@ -1,5 +1,7 @@
-﻿using System;
+﻿using PersonalizedHealthcareTrackingSystemFinal.ViewModels.PatientViewModel;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,35 +22,10 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Views.PatientView
     /// </summary>
     public partial class PatientBookingPage : Page
     {
-        public PatientBookingPage()
+        public PatientBookingPage(PatientBookingPageViewModel vm)
         {
             InitializeComponent();
-        }
-
-        private void TimeSlot_Click(object sender, RoutedEventArgs e)
-        {
-            if (sender is Button button && button.Tag is string timeSlot)
-            {
-                SelectedTimeSlot.Text = timeSlot;
-                ModalOverlay.Visibility = Visibility.Visible;
-            }
-        }
-
-        private void CancelBooking_Click(object sender, RoutedEventArgs e)
-        {
-            ModalOverlay.Visibility = Visibility.Collapsed;
-        }
-
-        private void ConfirmBooking_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show(
-                $"Đặt lịch thành công!\nThời gian: {SelectedTimeSlot.Text}",
-                "Thành công",
-                MessageBoxButton.OK,
-                MessageBoxImage.Information
-            );
-
-            ModalOverlay.Visibility = Visibility.Collapsed;
+            DataContext = vm;
         }
     }
 }

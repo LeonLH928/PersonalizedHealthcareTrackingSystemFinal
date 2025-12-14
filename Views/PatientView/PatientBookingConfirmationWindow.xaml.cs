@@ -11,17 +11,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace PersonalizedHealthcareTrackingSystemFinal.Views.PatientView
 {
     /// <summary>
-    /// Interaction logic for PatientHomePage.xaml
+    /// Interaction logic for PatientBookingConfirmationWindow.xaml
     /// </summary>
-    public partial class PatientHomePage : Page
+    public partial class PatientBookingConfirmationWindow : Window
     {
-        public PatientHomePage(PatientHomePageViewModel vm)
+        public PatientBookingConfirmationWindow(PatientBookingConfirmationWindowViewModel vm)
         {
             InitializeComponent();
             DataContext = vm;

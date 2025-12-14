@@ -13,6 +13,7 @@
         <converters:YearToAgeConverter x:Key="YearToAgeConverter"/>
         <converters:AddOneConverter x:Key="AddOneConverter"/>
         <converters:StringToVisibility x:Key="StringToVisibility"/>
+        <converters:LocalToUtcDisplayConverter x:Key="LocalToUtcDisplayConverter"/>
     </Page.Resources>
     
     <Grid>
@@ -181,7 +182,9 @@
                                                             Grid.Column="1"
                                                             Style="{StaticResource SecondaryTextTextBlockStyle}"
                                                             HorizontalAlignment="Right"
-                                                            Text="{Binding PrescriptionDateTime, StringFormat={}{0:hh:mm tt}}"/>
+                                                            Text="{Binding PrescriptionDateTime, 
+                                                                           StringFormat={}{0:hh:mm tt},
+                                                                           Converter={StaticResource LocalToUtcDisplayConverter}}"/>
                                                 </Grid>
                                             </Border>
                                         </DataTemplate>
@@ -257,7 +260,8 @@
                                                             Grid.Column="1"
                                                             Style="{StaticResource SecondaryTextTextBlockStyle}"
                                                             HorizontalAlignment="Right"
-                                                            Text="{Binding PrescriptionDateTime, StringFormat={}{0:hh:mm tt}}"/>
+                                                            Text="{Binding PrescriptionDateTime, StringFormat={}{0:hh:mm tt},
+                                                                           Converter={StaticResource LocalToUtcDisplayConverter}}"/>
                                                 </Grid>
                                             </Border>
                                         </DataTemplate>

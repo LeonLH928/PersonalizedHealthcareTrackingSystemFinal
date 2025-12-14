@@ -10,8 +10,8 @@ public class CurrentUserStoreService : ICurrentUserStoreService
     {
         _currentUserStoreRepository = currentUserStoreRepository;
     }
-    public UserModel? GetCurrentUserAsync()
+    public UserModel? GetCurrentUser()
     {
-        return _currentUserStoreRepository.GetCurrentUserAsync();
+        return _currentUserStoreRepository.GetCurrentUser();
     }
 }

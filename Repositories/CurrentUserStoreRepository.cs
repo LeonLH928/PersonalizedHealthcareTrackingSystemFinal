@@ -34,7 +34,7 @@ public class CurrentUserStoreRepository : ICurrentUserStoreRepository
                 .Update();
         CurrentUser = null!;
     }
-    public UserModel? GetCurrentUserAsync()
+    public UserModel? GetCurrentUser()
     {
         return CurrentUser;
     }

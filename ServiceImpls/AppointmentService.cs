@@ -22,6 +22,10 @@ public class AppointmentService : IAppointmentService
     {
         return await _appointmentRepository.GetNearestAppointmentByDoctorIDAsync(DoctorID);
     }
+    public async Task<AppointmentModel?> GetNearestAppointmentByPatientIDAsync(string PatientID)
+    {
+        return await _appointmentRepository.GetNearestAppointmentByPatientIDAsync(PatientID);
+    }
     public async Task<AppointmentModel?> GetAppointmentByIDAsync(string AppointmentID)
     {
         return await _appointmentRepository.GetAppointmentByIDAsync(AppointmentID);

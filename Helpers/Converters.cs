@@ -1,4 +1,5 @@
 ﻿using Microsoft.IdentityModel.Tokens;
+using System.Diagnostics;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
@@ -201,6 +202,26 @@ public class YearToAgeConverter : IValueConverter
     }
 }
 
+public class AppointmentDateToDay : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        if (value is not DateTime appointmentDateTime)
+            return value;
+        var diff = (DateTime.Now - appointmentDateTime);
+        if (diff.Days < 1)
+            return "Today"; 
+        if (diff.Days == 1)
+            return "Tomorrow";
+        return $"{diff.Days} days";
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}
+
 public class StringToVisibility : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -208,6 +229,141 @@ public class StringToVisibility : IValueConverter
         if (value is string s && !string.IsNullOrWhiteSpace(s))
             return Visibility.Visible;
 
+        return Visibility.Collapsed;
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}
+
+public class TimeRangeConverter : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        if (value is DateTime start)
+        {
+            DateTime end = start.AddMinutes(30);
+            start = start.AddHours(-7);
+            end = end.AddHours(-7);
+            return $"{start:HH:mm} - {end:HH:mm}";
+        }
+
+        return "";
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}
+public class LocalToUtcDisplayConverter : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        if (value is DateTime dt)
+        {
+            // If your data is 20:00 (Saigon), subtracting 7 hours brings it back to 13:00 (UTC)
+            return dt.AddHours(-7);
+        }
+        return value;
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}
+
+public class NullDateTimeToCurrentDate : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        var dt = value as DateTime?;
+        return dt switch
+        {
+            null => DateTime.Now,
+            _ => dt
+        }; 
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}
+
+public class IsCurrentNullToVisibility : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        var dt = value as DateTime?;
+        if (dt == null)
+            return Visibility.Visible;
+        return Visibility.Collapsed;
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}
+public class IsCurrentNotNullToVisibility : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        var dt = value as DateTime?;
+        if (dt != null)
+            return Visibility.Visible;
+        return Visibility.Collapsed;
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}
+public class IsCurrentSmallerThanCurrentToVisibility : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        var dt = value as DateTime?;
+        if (dt != null && dt.Value < DateTime.Now)
+            return Visibility.Visible;
+        return Visibility.Collapsed;
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}
+public class IsCurrentSundayToVisibility : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        var dt = value as DateTime?;
+        if (dt == null && DateTime.Now.DayOfWeek == DayOfWeek.Sunday
+         || dt != null && dt.Value.DayOfWeek == DayOfWeek.Sunday)
+            return Visibility.Visible;
+        return Visibility.Collapsed;
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}
+
+public class IsCurrentNotSundayAndSmallerThanCurrentToVisibility : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        var dt = value as DateTime?;
+        if (dt == null && DateTime.Now.DayOfWeek != DayOfWeek.Sunday
+         || dt != null && dt.Value.DayOfWeek != DayOfWeek.Sunday && dt.Value >= DateTime.Now)
+            return Visibility.Visible;
         return Visibility.Collapsed;
     }
 

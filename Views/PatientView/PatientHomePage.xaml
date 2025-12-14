@@ -3,11 +3,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:converters="clr-namespace:PersonalizedHealthcareTrackingSystemFinal.Helpers" 
              mc:Ignorable="d" 
              d:DesignHeight="800" d:DesignWidth="1000"
              Background="#F1F5F9" FontFamily="Segoe UI">
 
     <Page.Resources>
+        <converters:AppointmentDateToDay x:Key="AppointmentDateToDay"/>
+        <converters:TimeRangeConverter x:Key="TimeRangeConverter"/>
+        <converters:LocalToUtcDisplayConverter x:Key="LocalToUtcDisplayConverter"/>
         <SolidColorBrush x:Key="PrimaryColor" Color="#0284c7"/>
         <SolidColorBrush x:Key="SecondaryText" Color="#64748b"/>
         <SolidColorBrush x:Key="BgWhite" Color="#FFFFFF"/>
@@ -42,8 +46,16 @@
                     </Grid.ColumnDefinitions>
 
                     <StackPanel Grid.Column="0" VerticalAlignment="Center">
-                        <TextBlock Text="Chào buổi sáng, Nguyễn Văn A!" FontSize="28" FontWeight="Bold" Foreground="#0f172a" Margin="0,0,0,4"/>
-                        <TextBlock Text="Chúc bạn một ngày tốt lành. Đây là tổng quan sức khỏe của bạn hôm nay." FontSize="14" Foreground="{StaticResource SecondaryText}"/>
+                    <TextBlock 
+                        Style="{StaticResource PageHeaderTextBlockStyle}">
+                        <TextBlock.Text>
+                            <MultiBinding StringFormat="{}Good morning, {0} {1}!">
+                                <Binding Path="CurrentUser.FirstName"/>
+                                <Binding Path="CurrentUser.LastName"/>
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
+                    <TextBlock Text="Have a good day! Here's your overall health today." Style="{StaticResource SecondaryTextTextBlockStyle}"/>
                     </StackPanel>
 
                     <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
@@ -73,8 +85,11 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <StackPanel Grid.Column="0">
-
+                    <Grid Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
                         <Border Style="{StaticResource CardStyle}" BorderThickness="0">
                             <Border.Background>
                                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
@@ -84,9 +99,15 @@
                             </Border.Background>
                             <StackPanel>
                                 <Grid Margin="0,0,0,20">
-                                    <TextBlock Text="🗓️ Lịch hẹn sắp tới của bạn" Foreground="White" FontSize="18" FontWeight="SemiBold" VerticalAlignment="Center"/>
+                                    <TextBlock 
+                                        Text="🗓️ Your next appointment" 
+                                        Foreground="White" 
+                                        FontSize="18" 
+                                        FontWeight="SemiBold" 
+                                        VerticalAlignment="Center"/>
                                     <Border Background="#33FFFFFF" CornerRadius="20" HorizontalAlignment="Right" Padding="12,4">
-                                        <TextBlock Text="Ngày mai" Foreground="White" FontSize="12"/>
+                                        <TextBlock Text="{Binding MostUpcomingAppointment.AppointmentDateTime,
+                                                                  Converter={StaticResource AppointmentDateToDay}}" Foreground="White" FontSize="12"/>
                                     </Border>
                                 </Grid>
 
@@ -98,17 +119,25 @@
                                     </Grid.ColumnDefinitions>
 
                                     <StackPanel Grid.Column="0">
-                                        <TextBlock Text="Thời gian" Foreground="White" Opacity="0.8" FontSize="14"/>
-                                        <TextBlock Text="09:00 - 09:30" Foreground="White" FontWeight="Bold" FontSize="18" Margin="0,4"/>
-                                        <TextBlock Text="27 Tháng 10, 2023" Foreground="White" Opacity="0.8" FontSize="14"/>
+                                        <TextBlock Text="Time" Foreground="White" Opacity="0.8" Style="{StaticResource CustomBaseTextBlockStyle}"/>
+                                        <TextBlock Text="{Binding MostUpcomingAppointment.AppointmentDateTime, 
+                                                                  Converter={StaticResource TimeRangeConverter}}" 
+                                                   Foreground="White" FontWeight="Bold" FontSize="18" Margin="0,4"/>
+                                    <TextBlock Foreground="White" Opacity="0.8" Style="{StaticResource CustomBaseTextBlockStyle}">
+                                        <TextBlock.Text>
+                                            <MultiBinding StringFormat="{}{0:dd, MMM yyyy}">
+                                                <Binding Path="MostUpcomingAppointment.AppointmentDateTime"/>
+                                            </MultiBinding>
+                                        </TextBlock.Text>
+                                    </TextBlock>
                                     </StackPanel>
 
                                     <Border Grid.Column="1" Width="1" Background="White" Opacity="0.3" Margin="32,0"/>
 
                                     <StackPanel Grid.Column="2">
-                                        <TextBlock Text="Phòng khám" Foreground="White" Opacity="0.8" FontSize="14"/>
-                                        <TextBlock Text="Phòng 302, Tầng 3" Foreground="White" FontWeight="Bold" FontSize="18" Margin="0,4"/>
-                                        <TextBlock Text="Khu A, Bệnh viện Đa khoa" Foreground="White" Opacity="0.8" FontSize="14"/>
+                                    <TextBlock Text="Clinical room" Foreground="White" Opacity="0.8" Style="{StaticResource CustomBaseTextBlockStyle}"/>
+                                        <TextBlock Text="{Binding MostUpcomingAppointment.Location}" Foreground="White" FontWeight="Bold" FontSize="18" Margin="0,4"/>
+                                    <TextBlock Text="Medicare Hospital" Foreground="White" Opacity="0.8" Style="{StaticResource CustomBaseTextBlockStyle}"/>
                                     </StackPanel>
                                 </Grid>
 
@@ -116,30 +145,40 @@
                                     <StackPanel Orientation="Horizontal">
                                         <Border Width="40" Height="40" CornerRadius="20" Background="#33FFFFFF"/>
                                         <StackPanel Margin="12,0,0,0" VerticalAlignment="Center">
-                                            <TextBlock Text="BS. Trần Minh Tuấn" Foreground="White" FontWeight="SemiBold"/>
-                                            <TextBlock Text="Chuyên khoa Tim mạch • Tái khám định kỳ" Foreground="White" Opacity="0.8" FontSize="13"/>
+                                        <TextBlock Foreground="White" FontWeight="SemiBold" Style="{StaticResource CustomBaseTextBlockStyle}" FontSize="18">
+                                            <TextBlock.Text>
+                                                <MultiBinding StringFormat="{}Dr. {0} {1}">
+                                                    <Binding Path="Doctor.User.FirstName"/>
+                                                    <Binding Path="Doctor.User.LastName"/>
+                                                </MultiBinding>
+                                            </TextBlock.Text>
+                                        </TextBlock>
+                                            <TextBlock Text="Chuyên khoa Tim mạch • Tái khám định kỳ" Style="{StaticResource CustomBaseTextBlockStyle}" Foreground="White" Opacity="0.8"/>
                                         </StackPanel>
                                     </StackPanel>
                                 </Border>
                             </StackPanel>
                         </Border>
 
-                        <Border Style="{StaticResource CardStyle}">
+                        <Border Style="{StaticResource CardStyle}"
+                                Grid.Row="1">
                             <StackPanel>
                                 <Grid Margin="0,0,0,20">
-                                    <TextBlock Text="💊 Lịch uống thuốc hôm nay" FontSize="18" FontWeight="SemiBold" Foreground="#0f172a"/>
-                                    <Button Content="Xem tất cả" Background="Transparent" BorderBrush="{StaticResource BorderColor}" BorderThickness="1" Foreground="{StaticResource SecondaryText}" HorizontalAlignment="Right" Padding="12,6">
-                                        <Button.Resources>
-                                            <Style TargetType="Border">
-                                                <Setter Property="CornerRadius" Value="8"/>
-                                            </Style>
-                                        </Button.Resources>
-                                    </Button>
-                                </Grid>
-
-                                <StackPanel Margin="0,0,0,24">
-                                    <TextBlock Text="🌅 Buổi sáng (07:00 - 09:00)" Foreground="{StaticResource PrimaryColor}" FontWeight="SemiBold" Margin="0,0,0,12"/>
-                                    <Border Background="#F1F5F9" CornerRadius="10" Padding="16,12" Opacity="0.6">
+                                    <TextBlock Text="💊 Today's medication takes" FontSize="22" FontWeight="SemiBold" Foreground="#0f172a"/>
+                                    <Button Content="See all" Style="{StaticResource OutlineButtonStyle}"
+                                            HorizontalAlignment="Right"/>
+                                 </Grid>
+                                
+                                
+                                <Grid Margin="0,0,0,24">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <TextBlock Text="🌅 Buổi sáng (07:00 - 09:00)" Foreground="{StaticResource PrimaryColor}" FontWeight="SemiBold" Margin="0,0,0,12"
+                                               FontSize="18"/>
+                                    <Border Background="#F1F5F9" CornerRadius="10" Padding="16,12" Opacity="0.6"
+                                            Grid.Row="1">
                                         <Grid>
                                             <StackPanel>
                                                 <TextBlock Text="Amlodipine 5mg" FontWeight="SemiBold" FontSize="15"/>
@@ -150,10 +189,11 @@
                                             </Border>
                                         </Grid>
                                     </Border>
-                                </StackPanel>
+                                </Grid>
 
                                 <StackPanel>
-                                    <TextBlock Text="☀️ Buổi trưa (11:00 - 13:00)" Foreground="#f59e0b" FontWeight="SemiBold" Margin="0,0,0,12"/>
+                                    <TextBlock Text="☀️ Buổi trưa (11:00 - 13:00)" Foreground="#f59e0b" FontWeight="SemiBold" Margin="0,0,0,12"
+                                               FontSize="18"/>
                                     <Border Background="#F1F5F9" CornerRadius="10" Padding="16,12">
                                         <Grid>
                                             <StackPanel>
@@ -167,7 +207,7 @@
 
                             </StackPanel>
                         </Border>
-                    </StackPanel>
+                    </Grid>
 
                     <StackPanel Grid.Column="2">
 
@@ -181,14 +221,18 @@
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
                                     <StackPanel Grid.Column="0">
-                                        <TextBlock Text="Huyết áp" FontSize="14" Foreground="{StaticResource SecondaryText}"/>
-                                        <TextBlock Text="135/85" FontSize="22" FontWeight="Bold" Foreground="{StaticResource PrimaryColor}"/>
+                                        <TextBlock Text="Weight" FontSize="14" Foreground="{StaticResource SecondaryText}"/>
+                                        <TextBlock>
+                                                <Run Text="{Binding RecentExam.Weight}" 
+                                                     FontSize="22" FontWeight="Bold" Foreground="{StaticResource PrimaryColor}"/>
+                                                <Run Text=" kg" FontSize="14" Foreground="{StaticResource PrimaryColor}"/>
+                                        </TextBlock>
                                     </StackPanel>
                                     <StackPanel Grid.Column="1">
-                                        <TextBlock Text="Nhịp tim" FontSize="14" Foreground="{StaticResource SecondaryText}"/>
+                                        <TextBlock Text="Height" FontSize="14" Foreground="{StaticResource SecondaryText}"/>
                                         <TextBlock>
-                                        <Run Text="82" FontSize="22" FontWeight="Bold" Foreground="{StaticResource PrimaryColor}"/>
-                                        <Run Text="l/p" FontSize="14" Foreground="{StaticResource PrimaryColor}"/>
+                                            <Run Text="{Binding RecentExam.Height}" FontSize="22" FontWeight="Bold" Foreground="{StaticResource PrimaryColor}"/>
+                                            <Run Text=" cm" FontSize="14" Foreground="{StaticResource PrimaryColor}"/>
                                         </TextBlock>
                                     </StackPanel>
                                 </Grid>

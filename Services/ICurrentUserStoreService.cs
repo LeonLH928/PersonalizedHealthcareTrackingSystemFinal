@@ -3,5 +3,5 @@
 namespace PersonalizedHealthcareTrackingSystemFinal.Services;
 public interface ICurrentUserStoreService
 {
-    UserModel? GetCurrentUserAsync();
+    UserModel? GetCurrentUser();
 }

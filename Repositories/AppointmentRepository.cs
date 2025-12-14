@@ -35,13 +35,40 @@ public class AppointmentRepository : IAppointmentRepository
         var response = await _client.From<AppointmentModel>()
                                     .Select("""
                                             *,
-                                            Patient:Patients(*, User:Users(*)),
-                                            Doctor:Doctors(*, User:Users(*))
+                                            P:Patients(*, User:Users(*)),
+                                            D:Doctors(*, User:Users(*))
                                             """)
                                     .Filter("DoctorID", Supabase.Postgrest.Constants.Operator.Equals, DoctorID)
                                     .Get();
-        Debug.Write($"\n{response.Content}\n");
-        var appointments = JsonSerializer.Deserialize<List<AppointmentModel>>(response.Content!, options);
+        
+        var content = response.Content!;
+        content = content.Replace("\"Patients\"", "\"tempP\"")
+                         .Replace("\"Doctors\"", "\"tempD\"")
+                         .Replace("\"P\"", "\"Patient\"")
+                         .Replace("\"D\"", "\"Doctor\"");
+
+        var appointments = JsonSerializer.Deserialize<List<AppointmentModel>>(content, options);
+
+        return appointments == null ? [] : appointments;
+    }
+    public async Task<IEnumerable<AppointmentModel>> GetAllAppointmentsByDatetimeAndDoctorIDAsync(DateTime datetime, string DoctorID)
+    {
+        var response = await _client.From<AppointmentModel>()
+                                    .Select("""
+                                            *,
+                                            P:Patients(*, User:Users(*)),
+                                            D:Doctors(*, User:Users(*))
+                                            """)
+                                    .Where(a => a.AppointmentDateTime == datetime && a.DoctorID == DoctorID)
+                                    .Get();
+
+        var content = response.Content!;
+        content = content.Replace("\"Patients\"", "\"tempP\"")
+                         .Replace("\"Doctors\"", "\"tempD\"")
+                         .Replace("\"P\"", "\"Patient\"")
+                         .Replace("\"D\"", "\"Doctor\"");
+
+        var appointments = JsonSerializer.Deserialize<List<AppointmentModel>>(content, options);
 
         return appointments == null ? [] : appointments;
     }
@@ -57,9 +84,41 @@ public class AppointmentRepository : IAppointmentRepository
                                     .Filter("Status", Supabase.Postgrest.Constants.Operator.Equals, (int)Models.StatusAppointment.Scheduled)
                                     .Order("AppointmentDateTime", Supabase.Postgrest.Constants.Ordering.Ascending)
                                     .Get();
-        var appointments = JsonSerializer.Deserialize<List<AppointmentModel>>(response.Content!, options);
+
+        var content = response.Content!;
+        content = content.Replace("\"Patients\"", "\"tempP\"")
+                         .Replace("\"Doctors\"", "\"tempD\"")
+                         .Replace("\"P\"", "\"Patient\"")
+                         .Replace("\"D\"", "\"Doctor\"");
+
+        var appointments = JsonSerializer.Deserialize<List<AppointmentModel>>(content, options);
 
         return appointments?.FirstOrDefault();
+    }
+    public async Task<AppointmentModel?> GetNearestAppointmentByPatientIDAsync(string PatientID)
+    {
+        var response = await _client.From<AppointmentModel>()
+                                    .Select("""
+                                            *,
+                                            Patient:Patients(*, User:Users(*)),
+                                            Doctor:Doctors(*, User:Users(*))
+                                            """)
+                                    .Filter("PatientID", Supabase.Postgrest.Constants.Operator.Equals, PatientID)
+                                    .Filter("Status", Supabase.Postgrest.Constants.Operator.Equals, (int)Models.StatusAppointment.Scheduled)
+                                    .Order("AppointmentDateTime", Supabase.Postgrest.Constants.Ordering.Ascending)
+                                    .Get();
+
+        var content = response.Content!;
+        content = content.Replace("\"Patients\"", "\"tempP\"")
+                         .Replace("\"Doctors\"", "\"tempD\"")
+                         .Replace("\"P\"", "\"Patient\"")
+                         .Replace("\"D\"", "\"Doctor\"");
+
+        var list = JsonSerializer.Deserialize<List<AppointmentModel>>(content, options);
+
+        var appointment = list?.FirstOrDefault();
+
+        return appointment;
     }
     public async Task<AppointmentModel?> GetAppointmentByIDAsync(string AppointmentID)
     {
@@ -70,8 +129,18 @@ public class AppointmentRepository : IAppointmentRepository
                                             Doctor:Doctors(*, User:Users(*))
                                             """)
                                     .Where(a => a.AppointmentID == AppointmentID)
-                                    .Single();
+                                    .Get();
 
-        return response;
+        var content = response.Content!;
+        content = content.Replace("\"Patients\"", "\"tempP\"")
+                         .Replace("\"Doctors\"", "\"tempD\"")
+                         .Replace("\"P\"", "\"Patient\"")
+                         .Replace("\"D\"", "\"Doctor\"");
+
+        var list = JsonSerializer.Deserialize<List<AppointmentModel>>(content, options);
+
+        var appointment = list?.FirstOrDefault();
+
+        return appointment;
     }
 }

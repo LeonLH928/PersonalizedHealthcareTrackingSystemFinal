@@ -39,10 +39,16 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Views.PatientView
             switch (NamePage)
             {
                 case "Home":
+                    var HomePage = _serviceProvider.GetRequiredService<PatientHomePage>();
+                    MainContent.Navigate(HomePage);
                     break;
                 case "Booking":
                     var BookingPage = _serviceProvider.GetRequiredService<PatientBookingPage>();
                     MainContent.Navigate(BookingPage);
+                    break;
+                case "Settings":
+                    var SettingPage = _serviceProvider.GetRequiredService<PatientSetting>();
+                    MainContent.Navigate(SettingPage);
                     break;
             }
         }
