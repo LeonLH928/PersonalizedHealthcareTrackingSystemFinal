@@ -82,15 +82,15 @@
                         </StackPanel>
                     </ListBoxItem>
 
-                    <ListBoxItem Tag="Settings">
+                    <ListBoxItem Tag="Inventory Management">
                         <StackPanel Orientation="Horizontal">
-                            <fa:ImageAwesome Icon="Cog" 
+                            <fa:ImageAwesome Icon="Inbox" 
                                              Width="20" 
                                              Height="20" 
                                              Margin="0,0,20,0" 
                                              VerticalAlignment="Center" 
                                              Foreground="White"/>
-                            <TextBlock Text="Settings"/>
+                            <TextBlock Text="Inventory Management"/>
                         </StackPanel>
                     </ListBoxItem>
 
@@ -131,7 +131,7 @@
             </Grid>
         </Border>
 
-        <Frame x:Name="DoctorMainContent"
+        <Frame x:Name="PharmacistMainContent"
                Grid.Column="1"
                NavigationUIVisibility="Hidden"
                Background="#ECF0F1"/>
