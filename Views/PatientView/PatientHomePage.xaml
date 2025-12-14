@@ -11,7 +11,7 @@
     <Page.Resources>
         <converters:AppointmentDateToDay x:Key="AppointmentDateToDay"/>
         <converters:TimeRangeConverter x:Key="TimeRangeConverter"/>
-
+        <converters:LocalToUtcDisplayConverter x:Key="LocalToUtcDisplayConverter"/>
         <SolidColorBrush x:Key="PrimaryColor" Color="#0284c7"/>
         <SolidColorBrush x:Key="SecondaryText" Color="#64748b"/>
         <SolidColorBrush x:Key="BgWhite" Color="#FFFFFF"/>
@@ -221,14 +221,18 @@
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
                                     <StackPanel Grid.Column="0">
-                                        <TextBlock Text="Huyết áp" FontSize="14" Foreground="{StaticResource SecondaryText}"/>
-                                        <TextBlock Text="135/85" FontSize="22" FontWeight="Bold" Foreground="{StaticResource PrimaryColor}"/>
+                                        <TextBlock Text="Weight" FontSize="14" Foreground="{StaticResource SecondaryText}"/>
+                                        <TextBlock>
+                                                <Run Text="{Binding RecentExam.Weight}" 
+                                                     FontSize="22" FontWeight="Bold" Foreground="{StaticResource PrimaryColor}"/>
+                                                <Run Text=" kg" FontSize="14" Foreground="{StaticResource PrimaryColor}"/>
+                                        </TextBlock>
                                     </StackPanel>
                                     <StackPanel Grid.Column="1">
-                                        <TextBlock Text="Nhịp tim" FontSize="14" Foreground="{StaticResource SecondaryText}"/>
+                                        <TextBlock Text="Height" FontSize="14" Foreground="{StaticResource SecondaryText}"/>
                                         <TextBlock>
-                                        <Run Text="82" FontSize="22" FontWeight="Bold" Foreground="{StaticResource PrimaryColor}"/>
-                                        <Run Text="l/p" FontSize="14" Foreground="{StaticResource PrimaryColor}"/>
+                                            <Run Text="{Binding RecentExam.Height}" FontSize="22" FontWeight="Bold" Foreground="{StaticResource PrimaryColor}"/>
+                                            <Run Text=" cm" FontSize="14" Foreground="{StaticResource PrimaryColor}"/>
                                         </TextBlock>
                                     </StackPanel>
                                 </Grid>

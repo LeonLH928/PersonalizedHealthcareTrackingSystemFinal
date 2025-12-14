@@ -10,6 +10,7 @@ using PersonalizedHealthcareTrackingSystemFinal.ServiceImpls;
 using PersonalizedHealthcareTrackingSystemFinal.Services;
 using PersonalizedHealthcareTrackingSystemFinal.ViewModels;
 using PersonalizedHealthcareTrackingSystemFinal.Views;
+using PersonalizedHealthcareTrackingSystemFinal.Views.PatientView;
 using Supabase;
 using System.Security.Policy;
 
@@ -65,6 +66,7 @@ public static class AppModule
         services.AddTransient<Views.PatientView.PatientHomePage>();
         services.AddTransient<Views.PatientView.PatientBookingPage>();
         services.AddTransient<Views.PatientView.PatientSetting>();
+        services.AddTransient<Views.PatientView.PatientBookingConfirmationWindow>();
 
         services.AddTransient<Views.DoctorView.DoctorMainWindow>();
         services.AddTransient<Views.DoctorView.DoctorDashboardPage>();
@@ -80,9 +82,11 @@ public static class AppModule
         services.AddTransient<IntroductionWindowViewModel>();
         services.AddTransient<LoginWindowViewModel>();
         services.AddTransient<SignUpWindowViewModel>();
-        
+
         services.AddTransient<ViewModels.PatientViewModel.PatientHomePageViewModel>();
-        
+        services.AddTransient<ViewModels.PatientViewModel.PatientBookingPageViewModel>();
+        services.AddTransient<ViewModels.PatientViewModel.PatientBookingConfirmationWindowViewModel>();
+
         services.AddTransient<ViewModels.DoctorViewModel.DoctorDashboardPageViewModel>();
         services.AddTransient<ViewModels.DoctorViewModel.DoctorConsultationWindowViewModel>();
         services.AddTransient<ViewModels.DoctorViewModel.AddDrugWindowViewModel>();
@@ -105,6 +109,7 @@ public static class AppModule
         services.AddScoped<IPrescriptionItemRepository, PrescriptionItemRepository>();
         services.AddScoped<IPrescriptionRepository, PrescriptionRepository>();
         services.AddScoped<IDoctorRepository, DoctorRepository>();
+        services.AddScoped<IDoctorScheduleRepository, DoctorScheduleRepository>();
 
         // Register Services
         services.AddScoped<IAppointmentService, AppointmentService>();
@@ -119,6 +124,7 @@ public static class AppModule
         services.AddScoped<IPrescriptionService, PrescriptionService>();
         services.AddScoped<IDoctorService, DoctorService>();
         services.AddScoped<ICurrentUserStoreService, CurrentUserStoreService>();
+        services.AddScoped<IDoctorScheduleService, DoctorScheduleService>();
 
         return services;
     }

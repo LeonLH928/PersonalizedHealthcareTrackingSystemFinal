@@ -14,4 +14,12 @@ public class DoctorService : IDoctorService
     {
         return await _doctorRepository.GetDoctorByUserIDAsync(UserID);
     }
+    public async Task<IEnumerable<DoctorModel>> GetAllDoctorsAsync()
+    {
+        return await _doctorRepository.GetAllDoctorsAsync();
+    }
+    public async Task<IEnumerable<DoctorModel>> SearchByText(string SearchText)
+    {
+        return await _doctorRepository.SearchByText(SearchText);
+    }
 }

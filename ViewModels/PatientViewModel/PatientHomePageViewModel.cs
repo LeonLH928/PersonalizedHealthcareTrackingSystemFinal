@@ -14,12 +14,14 @@ public partial class PatientHomePageViewModel : ObservableObject
     private readonly ICurrentUserStoreService _currentUserStoreService;
     private readonly IDoctorService _doctorService;
     private readonly IPatientService _patientService;
+    private readonly IClinicalExaminationService _clinicalExamination;
     public PatientHomePageViewModel(IServiceProvider serviceProvider,
                                         IAppointmentService appointmentService,
                                         IUserService userService,
                                         ICurrentUserStoreService currentUserStoreService,
                                         IDoctorService doctorService,
-                                        IPatientService patientService)
+                                        IPatientService patientService,
+                                        IClinicalExaminationService clinicalExamination)
     {
         _serviceProvider = serviceProvider;
         _appointmentService = appointmentService;
@@ -27,6 +29,7 @@ public partial class PatientHomePageViewModel : ObservableObject
         _currentUserStoreService = currentUserStoreService;
         _doctorService = doctorService;
         _patientService = patientService;
+        _clinicalExamination = clinicalExamination;
 
         _ = LoadDataAsync();
     }
@@ -34,6 +37,8 @@ public partial class PatientHomePageViewModel : ObservableObject
     private UserModel currentUser = null!;
     [ObservableProperty]
     private AppointmentModel mostUpcomingAppointment = null!;
+    [ObservableProperty]
+    private ClinicalExaminationModel recentExam = null!;
     [ObservableProperty]
     private DoctorModel doctor = null!;
     [RelayCommand]
@@ -50,6 +55,7 @@ public partial class PatientHomePageViewModel : ObservableObject
             }
             MostUpcomingAppointment = (await _appointmentService.GetNearestAppointmentByPatientIDAsync(Patient.PatientID))!;
             Doctor = (await _doctorService.GetDoctorByUserIDAsync(MostUpcomingAppointment.Doctor.UserID))!;
+            RecentExam = (await _clinicalExamination.GetLatestClinicalExaminationByPatientID(Patient.PatientID))!;
         }
         catch (Exception e)
         {

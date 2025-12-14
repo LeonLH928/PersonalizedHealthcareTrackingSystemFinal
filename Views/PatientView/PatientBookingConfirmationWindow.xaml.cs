@@ -1,7 +1,6 @@
 ﻿using PersonalizedHealthcareTrackingSystemFinal.ViewModels.PatientViewModel;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,17 +11,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace PersonalizedHealthcareTrackingSystemFinal.Views.PatientView
 {
     /// <summary>
-    /// Interaction logic for PatientBookingPage.xaml
+    /// Interaction logic for PatientBookingConfirmationWindow.xaml
     /// </summary>
-    public partial class PatientBookingPage : Page
+    public partial class PatientBookingConfirmationWindow : Window
     {
-        public PatientBookingPage(PatientBookingPageViewModel vm)
+        public PatientBookingConfirmationWindow(PatientBookingConfirmationWindowViewModel vm)
         {
             InitializeComponent();
             DataContext = vm;

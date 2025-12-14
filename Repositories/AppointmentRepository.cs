@@ -51,6 +51,27 @@ public class AppointmentRepository : IAppointmentRepository
 
         return appointments == null ? [] : appointments;
     }
+    public async Task<IEnumerable<AppointmentModel>> GetAllAppointmentsByDatetimeAndDoctorIDAsync(DateTime datetime, string DoctorID)
+    {
+        var response = await _client.From<AppointmentModel>()
+                                    .Select("""
+                                            *,
+                                            P:Patients(*, User:Users(*)),
+                                            D:Doctors(*, User:Users(*))
+                                            """)
+                                    .Where(a => a.AppointmentDateTime == datetime && a.DoctorID == DoctorID)
+                                    .Get();
+
+        var content = response.Content!;
+        content = content.Replace("\"Patients\"", "\"tempP\"")
+                         .Replace("\"Doctors\"", "\"tempD\"")
+                         .Replace("\"P\"", "\"Patient\"")
+                         .Replace("\"D\"", "\"Doctor\"");
+
+        var appointments = JsonSerializer.Deserialize<List<AppointmentModel>>(content, options);
+
+        return appointments == null ? [] : appointments;
+    }
     public async Task<AppointmentModel?> GetNearestAppointmentByDoctorIDAsync(string DoctorID)
     {
         var response = await _client.From<AppointmentModel>()

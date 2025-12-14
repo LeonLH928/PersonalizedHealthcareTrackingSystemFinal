@@ -43,9 +43,6 @@ public class AuthService : IAuthService
         if (user.PasswordHash != password) 
             throw new Exception("Invalid password");
 
-        if (!user.IsActive) 
-            throw new Exception("Account is deactivated");
-
         await _currentUserStore.SetUser(user);
 
         return user;

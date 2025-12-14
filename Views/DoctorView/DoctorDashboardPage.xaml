@@ -4,11 +4,15 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:PersonalizedHealthcareTrackingSystemFinal.Views.DoctorView"
+      xmlns:converters="clr-namespace:PersonalizedHealthcareTrackingSystemFinal.Helpers"
       xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.WPF;assembly=LiveChartsCore.SkiaSharpView.WPF"
       xmlns:fa="http://schemas.fontawesome.io/icons/"
       mc:Ignorable="d" 
       d:DesignWidth="1000">
 
+    <Page.Resources>
+        <converters:LocalToUtcDisplayConverter x:Key="LocalToUtcDisplayConverter"/>
+    </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -280,7 +284,10 @@
                                                 FontWeight="Medium"/>
                                             <TextBlock 
                                                 Grid.Column="1" 
-                                                Text="{Binding AppointmentDateTime, StringFormat={}At {0:hh:mm tt}}"                                                Foreground="{StaticResource TextSecondaryTextBlock}" 
+                                                Text="{Binding AppointmentDateTime, 
+                                                               StringFormat={}At {0:hh:mm tt},
+                                                               Converter={StaticResource LocalToUtcDisplayConverter}}" 
+                                                Foreground="{StaticResource TextSecondaryTextBlock}" 
                                                 FontSize="14"/>
                                         </Grid>
 
