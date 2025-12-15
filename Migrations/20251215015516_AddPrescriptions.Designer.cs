@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using PersonalizedHealthcareTrackingSystemFinal.Data;
@@ -11,9 +12,11 @@ using PersonalizedHealthcareTrackingSystemFinal.Data;
 namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20251215015516_AddPrescriptions")]
+    partial class AddPrescriptions
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -71,7 +74,7 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                         new
                         {
                             AppointmentID = "appt-01",
-                            AppointmentDateTime = new DateTime(2025, 12, 14, 10, 56, 34, 644, DateTimeKind.Utc).AddTicks(2115),
+                            AppointmentDateTime = new DateTime(2025, 12, 14, 10, 55, 16, 311, DateTimeKind.Utc).AddTicks(6173),
                             ChiefComplaint = "Sore throat and mild fever lasting 2 days.",
                             DoctorID = "doc-01",
                             Location = "Room 101",
@@ -84,7 +87,7 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                         new
                         {
                             AppointmentID = "appt-02",
-                            AppointmentDateTime = new DateTime(2025, 12, 13, 15, 56, 34, 644, DateTimeKind.Utc).AddTicks(2127),
+                            AppointmentDateTime = new DateTime(2025, 12, 13, 15, 55, 16, 311, DateTimeKind.Utc).AddTicks(6183),
                             ChiefComplaint = "Regular checkup for hypertension.",
                             DoctorID = "doc-02",
                             Location = "Room 205",
@@ -97,7 +100,7 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                         new
                         {
                             AppointmentID = "appt-03",
-                            AppointmentDateTime = new DateTime(2025, 12, 10, 11, 56, 34, 644, DateTimeKind.Utc).AddTicks(2130),
+                            AppointmentDateTime = new DateTime(2025, 12, 10, 11, 55, 16, 311, DateTimeKind.Utc).AddTicks(6186),
                             ChiefComplaint = "Chest pain after exercise.",
                             DoctorID = "doc-02",
                             Location = "Room 205",
@@ -110,7 +113,7 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                         new
                         {
                             AppointmentID = "appt-04",
-                            AppointmentDateTime = new DateTime(2025, 12, 16, 10, 56, 34, 644, DateTimeKind.Utc).AddTicks(2160),
+                            AppointmentDateTime = new DateTime(2025, 12, 16, 10, 55, 16, 311, DateTimeKind.Utc).AddTicks(6188),
                             ChiefComplaint = "Vaccination schedule.",
                             DoctorID = "doc-01",
                             Location = "Room 102",
@@ -123,7 +126,7 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                         new
                         {
                             AppointmentID = "appt-05",
-                            AppointmentDateTime = new DateTime(2025, 12, 5, 15, 56, 34, 644, DateTimeKind.Utc).AddTicks(2162),
+                            AppointmentDateTime = new DateTime(2025, 12, 5, 15, 55, 16, 311, DateTimeKind.Utc).AddTicks(6190),
                             ChiefComplaint = "Unexplained leg pain.",
                             DoctorID = "doc-03",
                             Location = "Room 303",
@@ -136,7 +139,7 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                         new
                         {
                             AppointmentID = "appt-06",
-                            AppointmentDateTime = new DateTime(2025, 12, 15, 3, 56, 34, 644, DateTimeKind.Utc).AddTicks(2164),
+                            AppointmentDateTime = new DateTime(2025, 12, 15, 3, 55, 16, 311, DateTimeKind.Utc).AddTicks(6192),
                             ChiefComplaint = "Follow up on surgical scar.",
                             DoctorID = "doc-04",
                             Location = "Room 401",
@@ -149,7 +152,7 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                         new
                         {
                             AppointmentID = "appt-07",
-                            AppointmentDateTime = new DateTime(2025, 12, 12, 12, 56, 34, 644, DateTimeKind.Utc).AddTicks(2166),
+                            AppointmentDateTime = new DateTime(2025, 12, 12, 12, 55, 16, 311, DateTimeKind.Utc).AddTicks(6194),
                             ChiefComplaint = "Migraine headaches for the past week.",
                             DoctorID = "doc-01",
                             Location = "Room 103",
@@ -162,7 +165,7 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                         new
                         {
                             AppointmentID = "appt-08",
-                            AppointmentDateTime = new DateTime(2025, 12, 8, 17, 56, 34, 644, DateTimeKind.Utc).AddTicks(2169),
+                            AppointmentDateTime = new DateTime(2025, 12, 8, 17, 55, 16, 311, DateTimeKind.Utc).AddTicks(6197),
                             ChiefComplaint = "Shortness of breath and fatigue.",
                             DoctorID = "doc-02",
                             Location = "Room 206",
@@ -175,7 +178,7 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                         new
                         {
                             AppointmentID = "appt-09",
-                            AppointmentDateTime = new DateTime(2025, 12, 1, 14, 56, 34, 644, DateTimeKind.Utc).AddTicks(2172),
+                            AppointmentDateTime = new DateTime(2025, 12, 1, 14, 55, 16, 311, DateTimeKind.Utc).AddTicks(6200),
                             ChiefComplaint = "Chronic back pain radiating to legs.",
                             DoctorID = "doc-03",
                             Location = "Room 304",
@@ -188,7 +191,7 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                         new
                         {
                             AppointmentID = "appt-10",
-                            AppointmentDateTime = new DateTime(2025, 12, 11, 11, 56, 34, 644, DateTimeKind.Utc).AddTicks(2174),
+                            AppointmentDateTime = new DateTime(2025, 12, 11, 11, 55, 16, 311, DateTimeKind.Utc).AddTicks(6202),
                             ChiefComplaint = "Skin rash and itching.",
                             DoctorID = "doc-04",
                             Location = "Room 402",
@@ -201,7 +204,7 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                         new
                         {
                             AppointmentID = "appt-11",
-                            AppointmentDateTime = new DateTime(2025, 12, 17, 15, 56, 34, 644, DateTimeKind.Utc).AddTicks(2178),
+                            AppointmentDateTime = new DateTime(2025, 12, 17, 15, 55, 16, 311, DateTimeKind.Utc).AddTicks(6206),
                             ChiefComplaint = "Annual health checkup.",
                             DoctorID = "doc-01",
                             Location = "Room 104",
@@ -214,7 +217,7 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                         new
                         {
                             AppointmentID = "appt-12",
-                            AppointmentDateTime = new DateTime(2025, 12, 18, 10, 56, 34, 644, DateTimeKind.Utc).AddTicks(2180),
+                            AppointmentDateTime = new DateTime(2025, 12, 18, 10, 55, 16, 311, DateTimeKind.Utc).AddTicks(6209),
                             ChiefComplaint = "Abdominal pain and bloating.",
                             DoctorID = "doc-02",
                             Location = "Room 207",
@@ -227,7 +230,7 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                         new
                         {
                             AppointmentID = "appt-13",
-                            AppointmentDateTime = new DateTime(2025, 12, 7, 16, 56, 34, 644, DateTimeKind.Utc).AddTicks(2182),
+                            AppointmentDateTime = new DateTime(2025, 12, 7, 16, 55, 16, 311, DateTimeKind.Utc).AddTicks(6211),
                             ChiefComplaint = "Persistent cough and fatigue.",
                             DoctorID = "doc-01",
                             Location = "Room 105",
@@ -240,7 +243,7 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                         new
                         {
                             AppointmentID = "appt-14",
-                            AppointmentDateTime = new DateTime(2025, 12, 9, 12, 56, 34, 644, DateTimeKind.Utc).AddTicks(2184),
+                            AppointmentDateTime = new DateTime(2025, 12, 9, 12, 55, 16, 311, DateTimeKind.Utc).AddTicks(6213),
                             ChiefComplaint = "Fever and ear pain.",
                             DoctorID = "doc-02",
                             Location = "Room 208",
@@ -253,7 +256,7 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                         new
                         {
                             AppointmentID = "appt-15",
-                            AppointmentDateTime = new DateTime(2025, 12, 3, 10, 56, 34, 644, DateTimeKind.Utc).AddTicks(2186),
+                            AppointmentDateTime = new DateTime(2025, 12, 3, 10, 55, 16, 311, DateTimeKind.Utc).AddTicks(6215),
                             ChiefComplaint = "Dizziness and occasional fainting.",
                             DoctorID = "doc-03",
                             Location = "Room 305",
@@ -266,7 +269,7 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                         new
                         {
                             AppointmentID = "appt-16",
-                            AppointmentDateTime = new DateTime(2025, 12, 6, 15, 56, 34, 644, DateTimeKind.Utc).AddTicks(2188),
+                            AppointmentDateTime = new DateTime(2025, 12, 6, 15, 55, 16, 311, DateTimeKind.Utc).AddTicks(6217),
                             ChiefComplaint = "Joint pain and swelling.",
                             DoctorID = "doc-04",
                             Location = "Room 403",
@@ -279,7 +282,7 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                         new
                         {
                             AppointmentID = "appt-17",
-                            AppointmentDateTime = new DateTime(2025, 12, 4, 17, 56, 34, 644, DateTimeKind.Utc).AddTicks(2191),
+                            AppointmentDateTime = new DateTime(2025, 12, 4, 17, 55, 16, 311, DateTimeKind.Utc).AddTicks(6251),
                             ChiefComplaint = "Severe abdominal pain.",
                             DoctorID = "doc-01",
                             Location = "Room 106",
@@ -292,7 +295,7 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                         new
                         {
                             AppointmentID = "appt-18",
-                            AppointmentDateTime = new DateTime(2025, 11, 30, 11, 56, 34, 644, DateTimeKind.Utc).AddTicks(2193),
+                            AppointmentDateTime = new DateTime(2025, 11, 30, 11, 55, 16, 311, DateTimeKind.Utc).AddTicks(6253),
                             ChiefComplaint = "Eye irritation and redness.",
                             DoctorID = "doc-02",
                             Location = "Room 209",
@@ -305,7 +308,7 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                         new
                         {
                             AppointmentID = "appt-19",
-                            AppointmentDateTime = new DateTime(2025, 12, 2, 14, 56, 34, 644, DateTimeKind.Utc).AddTicks(2195),
+                            AppointmentDateTime = new DateTime(2025, 12, 2, 14, 55, 16, 311, DateTimeKind.Utc).AddTicks(6256),
                             ChiefComplaint = "Memory problems and confusion.",
                             DoctorID = "doc-03",
                             Location = "Room 306",
@@ -318,7 +321,7 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                         new
                         {
                             AppointmentID = "appt-20",
-                            AppointmentDateTime = new DateTime(2025, 12, 8, 9, 56, 34, 644, DateTimeKind.Utc).AddTicks(2198),
+                            AppointmentDateTime = new DateTime(2025, 12, 8, 9, 55, 16, 311, DateTimeKind.Utc).AddTicks(6259),
                             ChiefComplaint = "Thyroid medication follow-up.",
                             DoctorID = "doc-04",
                             Location = "Room 404",
@@ -331,7 +334,7 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                         new
                         {
                             AppointmentID = "appt-21",
-                            AppointmentDateTime = new DateTime(2025, 12, 19, 12, 56, 34, 644, DateTimeKind.Utc).AddTicks(2200),
+                            AppointmentDateTime = new DateTime(2025, 12, 19, 12, 55, 16, 311, DateTimeKind.Utc).AddTicks(6261),
                             ChiefComplaint = "Cardiac evaluation clearance.",
                             DoctorID = "doc-02",
                             Location = "Room 210",
@@ -344,7 +347,7 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                         new
                         {
                             AppointmentID = "appt-22",
-                            AppointmentDateTime = new DateTime(2025, 12, 20, 16, 56, 34, 644, DateTimeKind.Utc).AddTicks(2202),
+                            AppointmentDateTime = new DateTime(2025, 12, 20, 16, 55, 16, 311, DateTimeKind.Utc).AddTicks(6264),
                             ChiefComplaint = "Diabetes management review.",
                             DoctorID = "doc-01",
                             Location = "Room 107",
@@ -357,7 +360,7 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                         new
                         {
                             AppointmentID = "appt-23",
-                            AppointmentDateTime = new DateTime(2025, 11, 29, 10, 56, 34, 644, DateTimeKind.Utc).AddTicks(2205),
+                            AppointmentDateTime = new DateTime(2025, 11, 29, 10, 55, 16, 311, DateTimeKind.Utc).AddTicks(6266),
                             ChiefComplaint = "Pre-operative assessment.",
                             DoctorID = "doc-04",
                             Location = "Room 405",
@@ -370,7 +373,7 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                         new
                         {
                             AppointmentID = "appt-24",
-                            AppointmentDateTime = new DateTime(2025, 11, 28, 15, 56, 34, 644, DateTimeKind.Utc).AddTicks(2207),
+                            AppointmentDateTime = new DateTime(2025, 11, 28, 15, 55, 16, 311, DateTimeKind.Utc).AddTicks(6268),
                             ChiefComplaint = "Behavioral issues evaluation.",
                             DoctorID = "doc-03",
                             Location = "Room 307",
@@ -383,7 +386,7 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                         new
                         {
                             AppointmentID = "appt-25",
-                            AppointmentDateTime = new DateTime(2025, 11, 27, 11, 56, 34, 644, DateTimeKind.Utc).AddTicks(2209),
+                            AppointmentDateTime = new DateTime(2025, 11, 27, 11, 55, 16, 311, DateTimeKind.Utc).AddTicks(6270),
                             ChiefComplaint = "Neurological symptoms assessment.",
                             DoctorID = "doc-02",
                             Location = "Room 211",
@@ -396,7 +399,7 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                         new
                         {
                             AppointmentID = "appt-26",
-                            AppointmentDateTime = new DateTime(2025, 11, 26, 17, 56, 34, 644, DateTimeKind.Utc).AddTicks(2211),
+                            AppointmentDateTime = new DateTime(2025, 11, 26, 17, 55, 16, 311, DateTimeKind.Utc).AddTicks(6272),
                             ChiefComplaint = "Blood disorder investigation.",
                             DoctorID = "doc-01",
                             Location = "Room 108",
@@ -409,7 +412,7 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                         new
                         {
                             AppointmentID = "appt-27",
-                            AppointmentDateTime = new DateTime(2025, 11, 25, 9, 56, 34, 644, DateTimeKind.Utc).AddTicks(2213),
+                            AppointmentDateTime = new DateTime(2025, 11, 25, 9, 55, 16, 311, DateTimeKind.Utc).AddTicks(6275),
                             ChiefComplaint = "Post-operative follow-up.",
                             DoctorID = "doc-04",
                             Location = "Room 406",
@@ -422,7 +425,7 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                         new
                         {
                             AppointmentID = "appt-28",
-                            AppointmentDateTime = new DateTime(2025, 11, 24, 14, 56, 34, 644, DateTimeKind.Utc).AddTicks(2215),
+                            AppointmentDateTime = new DateTime(2025, 11, 24, 14, 55, 16, 311, DateTimeKind.Utc).AddTicks(6277),
                             ChiefComplaint = "Autoimmune disease consultation.",
                             DoctorID = "doc-03",
                             Location = "Room 308",
@@ -435,7 +438,7 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                         new
                         {
                             AppointmentID = "appt-29",
-                            AppointmentDateTime = new DateTime(2025, 11, 23, 12, 56, 34, 644, DateTimeKind.Utc).AddTicks(2217),
+                            AppointmentDateTime = new DateTime(2025, 11, 23, 12, 55, 16, 311, DateTimeKind.Utc).AddTicks(6279),
                             ChiefComplaint = "Kidney function evaluation.",
                             DoctorID = "doc-02",
                             Location = "Room 212",
@@ -448,7 +451,7 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                         new
                         {
                             AppointmentID = "appt-30",
-                            AppointmentDateTime = new DateTime(2025, 11, 22, 16, 56, 34, 644, DateTimeKind.Utc).AddTicks(2219),
+                            AppointmentDateTime = new DateTime(2025, 11, 22, 16, 55, 16, 311, DateTimeKind.Utc).AddTicks(6281),
                             ChiefComplaint = "Endocrine system assessment.",
                             DoctorID = "doc-01",
                             Location = "Room 109",
@@ -461,7 +464,7 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                         new
                         {
                             AppointmentID = "appt-31",
-                            AppointmentDateTime = new DateTime(2025, 12, 21, 10, 56, 34, 644, DateTimeKind.Utc).AddTicks(2221),
+                            AppointmentDateTime = new DateTime(2025, 12, 21, 10, 55, 16, 311, DateTimeKind.Utc).AddTicks(6283),
                             ChiefComplaint = "Surgical consultation second opinion.",
                             DoctorID = "doc-04",
                             Location = "Room 407",
@@ -474,7 +477,7 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                         new
                         {
                             AppointmentID = "appt-32",
-                            AppointmentDateTime = new DateTime(2025, 12, 22, 15, 56, 34, 644, DateTimeKind.Utc).AddTicks(2223),
+                            AppointmentDateTime = new DateTime(2025, 12, 22, 15, 55, 16, 311, DateTimeKind.Utc).AddTicks(6287),
                             ChiefComplaint = "Complex case review.",
                             DoctorID = "doc-03",
                             Location = "Room 309",
@@ -1184,272 +1187,272 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                         new
                         {
                             ScheduleID = "sch-01",
-                            CreatedDatetime = new DateTime(2025, 12, 5, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(2859),
+                            CreatedDatetime = new DateTime(2025, 12, 5, 1, 55, 16, 311, DateTimeKind.Utc).AddTicks(6894),
                             DoctorID = "doc-01",
                             EndTime = new DateTime(2025, 12, 14, 17, 0, 0, 0, DateTimeKind.Utc),
                             StartTime = new DateTime(2025, 12, 14, 8, 0, 0, 0, DateTimeKind.Utc),
-                            UpdatedDatetime = new DateTime(2025, 12, 5, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(2859)
+                            UpdatedDatetime = new DateTime(2025, 12, 5, 1, 55, 16, 311, DateTimeKind.Utc).AddTicks(6894)
                         },
                         new
                         {
                             ScheduleID = "sch-02",
-                            CreatedDatetime = new DateTime(2025, 12, 6, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(2863),
+                            CreatedDatetime = new DateTime(2025, 12, 6, 1, 55, 16, 311, DateTimeKind.Utc).AddTicks(6898),
                             DoctorID = "doc-01",
                             EndTime = new DateTime(2025, 12, 16, 17, 0, 0, 0, DateTimeKind.Utc),
                             StartTime = new DateTime(2025, 12, 16, 8, 0, 0, 0, DateTimeKind.Utc),
-                            UpdatedDatetime = new DateTime(2025, 12, 6, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(2863)
+                            UpdatedDatetime = new DateTime(2025, 12, 6, 1, 55, 16, 311, DateTimeKind.Utc).AddTicks(6898)
                         },
                         new
                         {
                             ScheduleID = "sch-03",
-                            CreatedDatetime = new DateTime(2025, 12, 7, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(2867),
+                            CreatedDatetime = new DateTime(2025, 12, 7, 1, 55, 16, 311, DateTimeKind.Utc).AddTicks(6902),
                             DoctorID = "doc-02",
                             EndTime = new DateTime(2025, 12, 13, 21, 0, 0, 0, DateTimeKind.Utc),
                             StartTime = new DateTime(2025, 12, 13, 13, 0, 0, 0, DateTimeKind.Utc),
-                            UpdatedDatetime = new DateTime(2025, 12, 7, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(2867)
+                            UpdatedDatetime = new DateTime(2025, 12, 7, 1, 55, 16, 311, DateTimeKind.Utc).AddTicks(6902)
                         },
                         new
                         {
                             ScheduleID = "sch-04",
-                            CreatedDatetime = new DateTime(2025, 12, 8, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(2870),
+                            CreatedDatetime = new DateTime(2025, 12, 8, 1, 55, 16, 311, DateTimeKind.Utc).AddTicks(6905),
                             DoctorID = "doc-02",
                             EndTime = new DateTime(2025, 12, 10, 16, 0, 0, 0, DateTimeKind.Utc),
                             StartTime = new DateTime(2025, 12, 10, 8, 0, 0, 0, DateTimeKind.Utc),
-                            UpdatedDatetime = new DateTime(2025, 12, 8, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(2871)
+                            UpdatedDatetime = new DateTime(2025, 12, 8, 1, 55, 16, 311, DateTimeKind.Utc).AddTicks(6906)
                         },
                         new
                         {
                             ScheduleID = "sch-05",
-                            CreatedDatetime = new DateTime(2025, 12, 9, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(2874),
+                            CreatedDatetime = new DateTime(2025, 12, 9, 1, 55, 16, 311, DateTimeKind.Utc).AddTicks(6909),
                             DoctorID = "doc-03",
                             EndTime = new DateTime(2025, 12, 5, 18, 0, 0, 0, DateTimeKind.Utc),
                             StartTime = new DateTime(2025, 12, 5, 9, 0, 0, 0, DateTimeKind.Utc),
-                            UpdatedDatetime = new DateTime(2025, 12, 9, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(2875)
+                            UpdatedDatetime = new DateTime(2025, 12, 9, 1, 55, 16, 311, DateTimeKind.Utc).AddTicks(6910)
                         },
                         new
                         {
                             ScheduleID = "sch-06",
-                            CreatedDatetime = new DateTime(2025, 12, 10, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(2878),
+                            CreatedDatetime = new DateTime(2025, 12, 10, 1, 55, 16, 311, DateTimeKind.Utc).AddTicks(6913),
                             DoctorID = "doc-04",
                             EndTime = new DateTime(2025, 12, 15, 19, 0, 0, 0, DateTimeKind.Utc),
                             StartTime = new DateTime(2025, 12, 15, 7, 0, 0, 0, DateTimeKind.Utc),
-                            UpdatedDatetime = new DateTime(2025, 12, 10, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(2880)
+                            UpdatedDatetime = new DateTime(2025, 12, 10, 1, 55, 16, 311, DateTimeKind.Utc).AddTicks(6917)
                         },
                         new
                         {
                             ScheduleID = "sch-07",
-                            CreatedDatetime = new DateTime(2025, 12, 11, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(2883),
+                            CreatedDatetime = new DateTime(2025, 12, 11, 1, 55, 16, 311, DateTimeKind.Utc).AddTicks(6920),
                             DoctorID = "doc-03",
                             EndTime = new DateTime(2025, 12, 17, 17, 0, 0, 0, DateTimeKind.Utc),
                             StartTime = new DateTime(2025, 12, 17, 9, 0, 0, 0, DateTimeKind.Utc),
-                            UpdatedDatetime = new DateTime(2025, 12, 11, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(2883)
+                            UpdatedDatetime = new DateTime(2025, 12, 11, 1, 55, 16, 311, DateTimeKind.Utc).AddTicks(6921)
                         },
                         new
                         {
                             ScheduleID = "sch-08",
-                            CreatedDatetime = new DateTime(2025, 12, 12, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(2887),
+                            CreatedDatetime = new DateTime(2025, 12, 12, 1, 55, 16, 311, DateTimeKind.Utc).AddTicks(6924),
                             DoctorID = "doc-04",
                             EndTime = new DateTime(2025, 12, 18, 16, 0, 0, 0, DateTimeKind.Utc),
                             StartTime = new DateTime(2025, 12, 18, 8, 0, 0, 0, DateTimeKind.Utc),
-                            UpdatedDatetime = new DateTime(2025, 12, 12, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(2887)
+                            UpdatedDatetime = new DateTime(2025, 12, 12, 1, 55, 16, 311, DateTimeKind.Utc).AddTicks(6925)
                         },
                         new
                         {
                             ScheduleID = "sch-09",
-                            CreatedDatetime = new DateTime(2025, 12, 13, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(2891),
+                            CreatedDatetime = new DateTime(2025, 12, 13, 1, 55, 16, 311, DateTimeKind.Utc).AddTicks(6958),
                             DoctorID = "doc-01",
                             EndTime = new DateTime(2025, 12, 19, 17, 0, 0, 0, DateTimeKind.Utc),
                             StartTime = new DateTime(2025, 12, 19, 8, 0, 0, 0, DateTimeKind.Utc),
-                            UpdatedDatetime = new DateTime(2025, 12, 13, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(2891)
+                            UpdatedDatetime = new DateTime(2025, 12, 13, 1, 55, 16, 311, DateTimeKind.Utc).AddTicks(6958)
                         },
                         new
                         {
                             ScheduleID = "sch-10",
-                            CreatedDatetime = new DateTime(2025, 12, 14, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(2894),
+                            CreatedDatetime = new DateTime(2025, 12, 14, 1, 55, 16, 311, DateTimeKind.Utc).AddTicks(6962),
                             DoctorID = "doc-02",
                             EndTime = new DateTime(2025, 12, 20, 21, 0, 0, 0, DateTimeKind.Utc),
                             StartTime = new DateTime(2025, 12, 20, 13, 0, 0, 0, DateTimeKind.Utc),
-                            UpdatedDatetime = new DateTime(2025, 12, 14, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(2895)
+                            UpdatedDatetime = new DateTime(2025, 12, 14, 1, 55, 16, 311, DateTimeKind.Utc).AddTicks(6962)
                         },
                         new
                         {
                             ScheduleID = "sch-11",
-                            CreatedDatetime = new DateTime(2025, 11, 30, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(2898),
+                            CreatedDatetime = new DateTime(2025, 11, 30, 1, 55, 16, 311, DateTimeKind.Utc).AddTicks(6965),
                             DoctorID = "doc-01",
                             EndTime = new DateTime(2025, 12, 12, 17, 0, 0, 0, DateTimeKind.Utc),
                             StartTime = new DateTime(2025, 12, 12, 8, 0, 0, 0, DateTimeKind.Utc),
-                            UpdatedDatetime = new DateTime(2025, 11, 30, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(2898)
+                            UpdatedDatetime = new DateTime(2025, 11, 30, 1, 55, 16, 311, DateTimeKind.Utc).AddTicks(6966)
                         },
                         new
                         {
                             ScheduleID = "sch-12",
-                            CreatedDatetime = new DateTime(2025, 12, 1, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(2901),
+                            CreatedDatetime = new DateTime(2025, 12, 1, 1, 55, 16, 311, DateTimeKind.Utc).AddTicks(6969),
                             DoctorID = "doc-01",
                             EndTime = new DateTime(2025, 12, 11, 17, 0, 0, 0, DateTimeKind.Utc),
                             StartTime = new DateTime(2025, 12, 11, 8, 0, 0, 0, DateTimeKind.Utc),
-                            UpdatedDatetime = new DateTime(2025, 12, 1, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(2902)
+                            UpdatedDatetime = new DateTime(2025, 12, 1, 1, 55, 16, 311, DateTimeKind.Utc).AddTicks(6969)
                         },
                         new
                         {
                             ScheduleID = "sch-13",
-                            CreatedDatetime = new DateTime(2025, 12, 2, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(2905),
+                            CreatedDatetime = new DateTime(2025, 12, 2, 1, 55, 16, 311, DateTimeKind.Utc).AddTicks(6973),
                             DoctorID = "doc-02",
                             EndTime = new DateTime(2025, 12, 9, 21, 0, 0, 0, DateTimeKind.Utc),
                             StartTime = new DateTime(2025, 12, 9, 13, 0, 0, 0, DateTimeKind.Utc),
-                            UpdatedDatetime = new DateTime(2025, 12, 2, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(2905)
+                            UpdatedDatetime = new DateTime(2025, 12, 2, 1, 55, 16, 311, DateTimeKind.Utc).AddTicks(6973)
                         },
                         new
                         {
                             ScheduleID = "sch-14",
-                            CreatedDatetime = new DateTime(2025, 12, 3, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(2910),
+                            CreatedDatetime = new DateTime(2025, 12, 3, 1, 55, 16, 311, DateTimeKind.Utc).AddTicks(6978),
                             DoctorID = "doc-02",
                             EndTime = new DateTime(2025, 12, 8, 21, 0, 0, 0, DateTimeKind.Utc),
                             StartTime = new DateTime(2025, 12, 8, 13, 0, 0, 0, DateTimeKind.Utc),
-                            UpdatedDatetime = new DateTime(2025, 12, 3, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(2910)
+                            UpdatedDatetime = new DateTime(2025, 12, 3, 1, 55, 16, 311, DateTimeKind.Utc).AddTicks(6978)
                         },
                         new
                         {
                             ScheduleID = "sch-15",
-                            CreatedDatetime = new DateTime(2025, 12, 4, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(2913),
+                            CreatedDatetime = new DateTime(2025, 12, 4, 1, 55, 16, 311, DateTimeKind.Utc).AddTicks(6981),
                             DoctorID = "doc-03",
                             EndTime = new DateTime(2025, 12, 4, 18, 0, 0, 0, DateTimeKind.Utc),
                             StartTime = new DateTime(2025, 12, 4, 9, 0, 0, 0, DateTimeKind.Utc),
-                            UpdatedDatetime = new DateTime(2025, 12, 4, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(2914)
+                            UpdatedDatetime = new DateTime(2025, 12, 4, 1, 55, 16, 311, DateTimeKind.Utc).AddTicks(6982)
                         },
                         new
                         {
                             ScheduleID = "sch-16",
-                            CreatedDatetime = new DateTime(2025, 12, 5, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(2917),
+                            CreatedDatetime = new DateTime(2025, 12, 5, 1, 55, 16, 311, DateTimeKind.Utc).AddTicks(6985),
                             DoctorID = "doc-03",
                             EndTime = new DateTime(2025, 12, 3, 18, 0, 0, 0, DateTimeKind.Utc),
                             StartTime = new DateTime(2025, 12, 3, 9, 0, 0, 0, DateTimeKind.Utc),
-                            UpdatedDatetime = new DateTime(2025, 12, 5, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(2917)
+                            UpdatedDatetime = new DateTime(2025, 12, 5, 1, 55, 16, 311, DateTimeKind.Utc).AddTicks(6985)
                         },
                         new
                         {
                             ScheduleID = "sch-17",
-                            CreatedDatetime = new DateTime(2025, 12, 6, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(2921),
+                            CreatedDatetime = new DateTime(2025, 12, 6, 1, 55, 16, 311, DateTimeKind.Utc).AddTicks(6989),
                             DoctorID = "doc-04",
                             EndTime = new DateTime(2025, 12, 7, 19, 0, 0, 0, DateTimeKind.Utc),
                             StartTime = new DateTime(2025, 12, 7, 7, 0, 0, 0, DateTimeKind.Utc),
-                            UpdatedDatetime = new DateTime(2025, 12, 6, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(2921)
+                            UpdatedDatetime = new DateTime(2025, 12, 6, 1, 55, 16, 311, DateTimeKind.Utc).AddTicks(6989)
                         },
                         new
                         {
                             ScheduleID = "sch-18",
-                            CreatedDatetime = new DateTime(2025, 12, 7, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(2924),
+                            CreatedDatetime = new DateTime(2025, 12, 7, 1, 55, 16, 311, DateTimeKind.Utc).AddTicks(6992),
                             DoctorID = "doc-04",
                             EndTime = new DateTime(2025, 12, 6, 19, 0, 0, 0, DateTimeKind.Utc),
                             StartTime = new DateTime(2025, 12, 6, 7, 0, 0, 0, DateTimeKind.Utc),
-                            UpdatedDatetime = new DateTime(2025, 12, 7, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(2925)
+                            UpdatedDatetime = new DateTime(2025, 12, 7, 1, 55, 16, 311, DateTimeKind.Utc).AddTicks(6993)
                         },
                         new
                         {
                             ScheduleID = "sch-19",
-                            CreatedDatetime = new DateTime(2025, 12, 8, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(2928),
+                            CreatedDatetime = new DateTime(2025, 12, 8, 1, 55, 16, 311, DateTimeKind.Utc).AddTicks(6996),
                             DoctorID = "doc-01",
                             EndTime = new DateTime(2025, 12, 21, 17, 0, 0, 0, DateTimeKind.Utc),
                             StartTime = new DateTime(2025, 12, 21, 8, 0, 0, 0, DateTimeKind.Utc),
-                            UpdatedDatetime = new DateTime(2025, 12, 8, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(2928)
+                            UpdatedDatetime = new DateTime(2025, 12, 8, 1, 55, 16, 311, DateTimeKind.Utc).AddTicks(6997)
                         },
                         new
                         {
                             ScheduleID = "sch-20",
-                            CreatedDatetime = new DateTime(2025, 12, 9, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(2931),
+                            CreatedDatetime = new DateTime(2025, 12, 9, 1, 55, 16, 311, DateTimeKind.Utc).AddTicks(7000),
                             DoctorID = "doc-01",
                             EndTime = new DateTime(2025, 12, 22, 17, 0, 0, 0, DateTimeKind.Utc),
                             StartTime = new DateTime(2025, 12, 22, 8, 0, 0, 0, DateTimeKind.Utc),
-                            UpdatedDatetime = new DateTime(2025, 12, 9, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(2932)
+                            UpdatedDatetime = new DateTime(2025, 12, 9, 1, 55, 16, 311, DateTimeKind.Utc).AddTicks(7000)
                         },
                         new
                         {
                             ScheduleID = "sch-21",
-                            CreatedDatetime = new DateTime(2025, 12, 10, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(2935),
+                            CreatedDatetime = new DateTime(2025, 12, 10, 1, 55, 16, 311, DateTimeKind.Utc).AddTicks(7003),
                             DoctorID = "doc-02",
                             EndTime = new DateTime(2025, 12, 23, 21, 0, 0, 0, DateTimeKind.Utc),
                             StartTime = new DateTime(2025, 12, 23, 13, 0, 0, 0, DateTimeKind.Utc),
-                            UpdatedDatetime = new DateTime(2025, 12, 10, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(2935)
+                            UpdatedDatetime = new DateTime(2025, 12, 10, 1, 55, 16, 311, DateTimeKind.Utc).AddTicks(7004)
                         },
                         new
                         {
                             ScheduleID = "sch-22",
-                            CreatedDatetime = new DateTime(2025, 12, 11, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(2939),
+                            CreatedDatetime = new DateTime(2025, 12, 11, 1, 55, 16, 311, DateTimeKind.Utc).AddTicks(7008),
                             DoctorID = "doc-02",
                             EndTime = new DateTime(2025, 12, 24, 21, 0, 0, 0, DateTimeKind.Utc),
                             StartTime = new DateTime(2025, 12, 24, 13, 0, 0, 0, DateTimeKind.Utc),
-                            UpdatedDatetime = new DateTime(2025, 12, 11, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(2940)
+                            UpdatedDatetime = new DateTime(2025, 12, 11, 1, 55, 16, 311, DateTimeKind.Utc).AddTicks(7008)
                         },
                         new
                         {
                             ScheduleID = "sch-23",
-                            CreatedDatetime = new DateTime(2025, 12, 12, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(2943),
+                            CreatedDatetime = new DateTime(2025, 12, 12, 1, 55, 16, 311, DateTimeKind.Utc).AddTicks(7012),
                             DoctorID = "doc-03",
                             EndTime = new DateTime(2025, 12, 25, 17, 0, 0, 0, DateTimeKind.Utc),
                             StartTime = new DateTime(2025, 12, 25, 9, 0, 0, 0, DateTimeKind.Utc),
-                            UpdatedDatetime = new DateTime(2025, 12, 12, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(2943)
+                            UpdatedDatetime = new DateTime(2025, 12, 12, 1, 55, 16, 311, DateTimeKind.Utc).AddTicks(7015)
                         },
                         new
                         {
                             ScheduleID = "sch-24",
-                            CreatedDatetime = new DateTime(2025, 12, 13, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(2947),
+                            CreatedDatetime = new DateTime(2025, 12, 13, 1, 55, 16, 311, DateTimeKind.Utc).AddTicks(7019),
                             DoctorID = "doc-03",
                             EndTime = new DateTime(2025, 12, 26, 17, 0, 0, 0, DateTimeKind.Utc),
                             StartTime = new DateTime(2025, 12, 26, 9, 0, 0, 0, DateTimeKind.Utc),
-                            UpdatedDatetime = new DateTime(2025, 12, 13, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(2947)
+                            UpdatedDatetime = new DateTime(2025, 12, 13, 1, 55, 16, 311, DateTimeKind.Utc).AddTicks(7019)
                         },
                         new
                         {
                             ScheduleID = "sch-25",
-                            CreatedDatetime = new DateTime(2025, 12, 14, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(2950),
+                            CreatedDatetime = new DateTime(2025, 12, 14, 1, 55, 16, 311, DateTimeKind.Utc).AddTicks(7023),
                             DoctorID = "doc-04",
                             EndTime = new DateTime(2025, 12, 27, 16, 0, 0, 0, DateTimeKind.Utc),
                             StartTime = new DateTime(2025, 12, 27, 8, 0, 0, 0, DateTimeKind.Utc),
-                            UpdatedDatetime = new DateTime(2025, 12, 14, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(2951)
+                            UpdatedDatetime = new DateTime(2025, 12, 14, 1, 55, 16, 311, DateTimeKind.Utc).AddTicks(7024)
                         },
                         new
                         {
                             ScheduleID = "sch-26",
-                            CreatedDatetime = new DateTime(2025, 12, 14, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(2954),
+                            CreatedDatetime = new DateTime(2025, 12, 14, 1, 55, 16, 311, DateTimeKind.Utc).AddTicks(7028),
                             DoctorID = "doc-04",
                             EndTime = new DateTime(2025, 12, 28, 16, 0, 0, 0, DateTimeKind.Utc),
                             StartTime = new DateTime(2025, 12, 28, 8, 0, 0, 0, DateTimeKind.Utc),
-                            UpdatedDatetime = new DateTime(2025, 12, 14, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(2954)
+                            UpdatedDatetime = new DateTime(2025, 12, 14, 1, 55, 16, 311, DateTimeKind.Utc).AddTicks(7028)
                         },
                         new
                         {
                             ScheduleID = "sch-27",
-                            CreatedDatetime = new DateTime(2025, 11, 25, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(2957),
+                            CreatedDatetime = new DateTime(2025, 11, 25, 1, 55, 16, 311, DateTimeKind.Utc).AddTicks(7032),
                             DoctorID = "doc-01",
                             EndTime = new DateTime(2025, 12, 2, 17, 0, 0, 0, DateTimeKind.Utc),
                             StartTime = new DateTime(2025, 12, 2, 8, 0, 0, 0, DateTimeKind.Utc),
-                            UpdatedDatetime = new DateTime(2025, 11, 25, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(2958)
+                            UpdatedDatetime = new DateTime(2025, 11, 25, 1, 55, 16, 311, DateTimeKind.Utc).AddTicks(7033)
                         },
                         new
                         {
                             ScheduleID = "sch-28",
-                            CreatedDatetime = new DateTime(2025, 11, 26, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(2961),
+                            CreatedDatetime = new DateTime(2025, 11, 26, 1, 55, 16, 311, DateTimeKind.Utc).AddTicks(7036),
                             DoctorID = "doc-01",
                             EndTime = new DateTime(2025, 12, 1, 17, 0, 0, 0, DateTimeKind.Utc),
                             StartTime = new DateTime(2025, 12, 1, 8, 0, 0, 0, DateTimeKind.Utc),
-                            UpdatedDatetime = new DateTime(2025, 11, 26, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(2961)
+                            UpdatedDatetime = new DateTime(2025, 11, 26, 1, 55, 16, 311, DateTimeKind.Utc).AddTicks(7037)
                         },
                         new
                         {
                             ScheduleID = "sch-29",
-                            CreatedDatetime = new DateTime(2025, 11, 27, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(2965),
+                            CreatedDatetime = new DateTime(2025, 11, 27, 1, 55, 16, 311, DateTimeKind.Utc).AddTicks(7041),
                             DoctorID = "doc-02",
                             EndTime = new DateTime(2025, 11, 30, 21, 0, 0, 0, DateTimeKind.Utc),
                             StartTime = new DateTime(2025, 11, 30, 13, 0, 0, 0, DateTimeKind.Utc),
-                            UpdatedDatetime = new DateTime(2025, 11, 27, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(2965)
+                            UpdatedDatetime = new DateTime(2025, 11, 27, 1, 55, 16, 311, DateTimeKind.Utc).AddTicks(7041)
                         },
                         new
                         {
                             ScheduleID = "sch-30",
-                            CreatedDatetime = new DateTime(2025, 11, 28, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(2968),
+                            CreatedDatetime = new DateTime(2025, 11, 28, 1, 55, 16, 311, DateTimeKind.Utc).AddTicks(7045),
                             DoctorID = "doc-02",
                             EndTime = new DateTime(2025, 11, 29, 21, 0, 0, 0, DateTimeKind.Utc),
                             StartTime = new DateTime(2025, 11, 29, 13, 0, 0, 0, DateTimeKind.Utc),
-                            UpdatedDatetime = new DateTime(2025, 11, 28, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(2969)
+                            UpdatedDatetime = new DateTime(2025, 11, 28, 1, 55, 16, 311, DateTimeKind.Utc).AddTicks(7046)
                         });
                 });
 
@@ -1494,9 +1497,9 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                             AppointmentID = "appt-01",
                             Diagnosis = "Acute Pharyngitis (Strep Throat)",
                             DoctorNotes = "Patient advised to finish full course of medication.",
-                            NextVisitDate = new DateTime(2025, 12, 22, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(2274),
+                            NextVisitDate = new DateTime(2025, 12, 22, 1, 55, 16, 311, DateTimeKind.Utc).AddTicks(6337),
                             TreatmentPlan = "Antibiotics course and rest.",
-                            VisitTime = new DateTime(2025, 12, 14, 11, 11, 34, 644, DateTimeKind.Utc).AddTicks(2271)
+                            VisitTime = new DateTime(2025, 12, 14, 11, 10, 16, 311, DateTimeKind.Utc).AddTicks(6335)
                         },
                         new
                         {
@@ -1504,9 +1507,9 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                             AppointmentID = "appt-02",
                             Diagnosis = "Essential Hypertension",
                             DoctorNotes = "BP slightly elevated. Monitoring required.",
-                            NextVisitDate = new DateTime(2026, 1, 15, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(2277),
+                            NextVisitDate = new DateTime(2026, 1, 15, 1, 55, 16, 311, DateTimeKind.Utc).AddTicks(6340),
                             TreatmentPlan = "Lifestyle modification and daily medication.",
-                            VisitTime = new DateTime(2025, 12, 13, 16, 26, 34, 644, DateTimeKind.Utc).AddTicks(2276)
+                            VisitTime = new DateTime(2025, 12, 13, 16, 25, 16, 311, DateTimeKind.Utc).AddTicks(6339)
                         },
                         new
                         {
@@ -1514,9 +1517,9 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                             AppointmentID = "appt-03",
                             Diagnosis = "Stable Angina",
                             DoctorNotes = "Patient needs to monitor heart rate.",
-                            NextVisitDate = new DateTime(2025, 12, 29, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(2283),
+                            NextVisitDate = new DateTime(2025, 12, 29, 1, 55, 16, 311, DateTimeKind.Utc).AddTicks(6346),
                             TreatmentPlan = "Prescribed statins and nitroglycerin. Cardiac stress test ordered.",
-                            VisitTime = new DateTime(2025, 12, 10, 12, 26, 34, 644, DateTimeKind.Utc).AddTicks(2282)
+                            VisitTime = new DateTime(2025, 12, 10, 12, 25, 16, 311, DateTimeKind.Utc).AddTicks(6345)
                         },
                         new
                         {
@@ -1524,9 +1527,9 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                             AppointmentID = "appt-05",
                             Diagnosis = "Deep Vein Thrombosis (DVT)",
                             DoctorNotes = "Confirmed via Ultrasound.",
-                            NextVisitDate = new DateTime(2025, 12, 18, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(2286),
+                            NextVisitDate = new DateTime(2025, 12, 18, 1, 55, 16, 311, DateTimeKind.Utc).AddTicks(6348),
                             TreatmentPlan = "Anticoagulant therapy immediately.",
-                            VisitTime = new DateTime(2025, 12, 5, 16, 56, 34, 644, DateTimeKind.Utc).AddTicks(2284)
+                            VisitTime = new DateTime(2025, 12, 5, 16, 55, 16, 311, DateTimeKind.Utc).AddTicks(6347)
                         },
                         new
                         {
@@ -1534,9 +1537,9 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                             AppointmentID = "appt-07",
                             Diagnosis = "Migraine with Aura",
                             DoctorNotes = "Patient advised to identify triggers.",
-                            NextVisitDate = new DateTime(2026, 1, 14, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(2289),
+                            NextVisitDate = new DateTime(2026, 1, 14, 1, 55, 16, 311, DateTimeKind.Utc).AddTicks(6351),
                             TreatmentPlan = "Triptan medication and lifestyle modifications.",
-                            VisitTime = new DateTime(2025, 12, 12, 13, 16, 34, 644, DateTimeKind.Utc).AddTicks(2288)
+                            VisitTime = new DateTime(2025, 12, 12, 13, 15, 16, 311, DateTimeKind.Utc).AddTicks(6350)
                         },
                         new
                         {
@@ -1544,9 +1547,9 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                             AppointmentID = "appt-08",
                             Diagnosis = "Anemia",
                             DoctorNotes = "Blood test shows low hemoglobin.",
-                            NextVisitDate = new DateTime(2025, 12, 29, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(2292),
+                            NextVisitDate = new DateTime(2025, 12, 29, 1, 55, 16, 311, DateTimeKind.Utc).AddTicks(6353),
                             TreatmentPlan = "Iron supplements and dietary changes.",
-                            VisitTime = new DateTime(2025, 12, 8, 18, 21, 34, 644, DateTimeKind.Utc).AddTicks(2291)
+                            VisitTime = new DateTime(2025, 12, 8, 18, 20, 16, 311, DateTimeKind.Utc).AddTicks(6352)
                         },
                         new
                         {
@@ -1554,9 +1557,9 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                             AppointmentID = "appt-09",
                             Diagnosis = "Lumbar Disc Herniation",
                             DoctorNotes = "MRI recommended if symptoms persist.",
-                            NextVisitDate = new DateTime(2026, 1, 5, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(2295),
+                            NextVisitDate = new DateTime(2026, 1, 5, 1, 55, 16, 311, DateTimeKind.Utc).AddTicks(6356),
                             TreatmentPlan = "Physical therapy and pain management.",
-                            VisitTime = new DateTime(2025, 12, 1, 15, 26, 34, 644, DateTimeKind.Utc).AddTicks(2294)
+                            VisitTime = new DateTime(2025, 12, 1, 15, 25, 16, 311, DateTimeKind.Utc).AddTicks(6355)
                         },
                         new
                         {
@@ -1564,9 +1567,9 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                             AppointmentID = "appt-10",
                             Diagnosis = "Contact Dermatitis",
                             DoctorNotes = "Avoid known irritants.",
-                            NextVisitDate = new DateTime(2025, 12, 22, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(2297),
+                            NextVisitDate = new DateTime(2025, 12, 22, 1, 55, 16, 311, DateTimeKind.Utc).AddTicks(6358),
                             TreatmentPlan = "Topical corticosteroids and antihistamines.",
-                            VisitTime = new DateTime(2025, 12, 11, 12, 11, 34, 644, DateTimeKind.Utc).AddTicks(2296)
+                            VisitTime = new DateTime(2025, 12, 11, 12, 10, 16, 311, DateTimeKind.Utc).AddTicks(6357)
                         },
                         new
                         {
@@ -1574,9 +1577,9 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                             AppointmentID = "appt-13",
                             Diagnosis = "Chronic Bronchitis",
                             DoctorNotes = "Patient needs pulmonary function tests.",
-                            NextVisitDate = new DateTime(2025, 12, 25, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(2300),
+                            NextVisitDate = new DateTime(2025, 12, 25, 1, 55, 16, 311, DateTimeKind.Utc).AddTicks(6364),
                             TreatmentPlan = "Bronchodilators and antibiotics. Smoking cessation counseling.",
-                            VisitTime = new DateTime(2025, 12, 7, 17, 16, 34, 644, DateTimeKind.Utc).AddTicks(2299)
+                            VisitTime = new DateTime(2025, 12, 7, 17, 15, 16, 311, DateTimeKind.Utc).AddTicks(6363)
                         },
                         new
                         {
@@ -1584,9 +1587,9 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                             AppointmentID = "appt-14",
                             Diagnosis = "Acute Otitis Media",
                             DoctorNotes = "Monitor for hearing changes.",
-                            NextVisitDate = new DateTime(2025, 12, 20, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(2303),
+                            NextVisitDate = new DateTime(2025, 12, 20, 1, 55, 16, 311, DateTimeKind.Utc).AddTicks(6367),
                             TreatmentPlan = "Antibiotic ear drops and pain management.",
-                            VisitTime = new DateTime(2025, 12, 9, 13, 11, 34, 644, DateTimeKind.Utc).AddTicks(2301)
+                            VisitTime = new DateTime(2025, 12, 9, 13, 10, 16, 311, DateTimeKind.Utc).AddTicks(6366)
                         },
                         new
                         {
@@ -1594,9 +1597,9 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                             AppointmentID = "appt-15",
                             Diagnosis = "Orthostatic Hypotension",
                             DoctorNotes = "Cardiac monitoring recommended.",
-                            NextVisitDate = new DateTime(2025, 12, 22, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(2305),
+                            NextVisitDate = new DateTime(2025, 12, 22, 1, 55, 16, 311, DateTimeKind.Utc).AddTicks(6369),
                             TreatmentPlan = "Fluid replacement and medication adjustment.",
-                            VisitTime = new DateTime(2025, 12, 3, 11, 21, 34, 644, DateTimeKind.Utc).AddTicks(2304)
+                            VisitTime = new DateTime(2025, 12, 3, 11, 20, 16, 311, DateTimeKind.Utc).AddTicks(6368)
                         },
                         new
                         {
@@ -1604,9 +1607,9 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                             AppointmentID = "appt-16",
                             Diagnosis = "Rheumatoid Arthritis",
                             DoctorNotes = "Rheumatology referral needed.",
-                            NextVisitDate = new DateTime(2025, 12, 29, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(2308),
+                            NextVisitDate = new DateTime(2025, 12, 29, 1, 55, 16, 311, DateTimeKind.Utc).AddTicks(6371),
                             TreatmentPlan = "Anti-inflammatory medication and physical therapy.",
-                            VisitTime = new DateTime(2025, 12, 6, 16, 26, 34, 644, DateTimeKind.Utc).AddTicks(2307)
+                            VisitTime = new DateTime(2025, 12, 6, 16, 25, 16, 311, DateTimeKind.Utc).AddTicks(6370)
                         },
                         new
                         {
@@ -1614,9 +1617,9 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                             AppointmentID = "appt-17",
                             Diagnosis = "Acute Pancreatitis",
                             DoctorNotes = "CT scan abdomen ordered. Admit for observation.",
-                            NextVisitDate = new DateTime(2025, 12, 18, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(2310),
+                            NextVisitDate = new DateTime(2025, 12, 18, 1, 55, 16, 311, DateTimeKind.Utc).AddTicks(6374),
                             TreatmentPlan = "NPO status, IV fluids, and pain management.",
-                            VisitTime = new DateTime(2025, 12, 4, 18, 16, 34, 644, DateTimeKind.Utc).AddTicks(2309)
+                            VisitTime = new DateTime(2025, 12, 4, 18, 15, 16, 311, DateTimeKind.Utc).AddTicks(6373)
                         },
                         new
                         {
@@ -1624,9 +1627,9 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                             AppointmentID = "appt-18",
                             Diagnosis = "Allergic Conjunctivitis",
                             DoctorNotes = "Avoid allergens when possible.",
-                            NextVisitDate = new DateTime(2025, 12, 22, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(2313),
+                            NextVisitDate = new DateTime(2025, 12, 22, 1, 55, 16, 311, DateTimeKind.Utc).AddTicks(6376),
                             TreatmentPlan = "Antihistamine eye drops and cool compresses.",
-                            VisitTime = new DateTime(2025, 11, 30, 12, 11, 34, 644, DateTimeKind.Utc).AddTicks(2312)
+                            VisitTime = new DateTime(2025, 11, 30, 12, 10, 16, 311, DateTimeKind.Utc).AddTicks(6375)
                         },
                         new
                         {
@@ -1634,9 +1637,9 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                             AppointmentID = "appt-19",
                             Diagnosis = "Mild Cognitive Impairment",
                             DoctorNotes = "Neurology consultation recommended.",
-                            NextVisitDate = new DateTime(2026, 1, 14, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(2315),
+                            NextVisitDate = new DateTime(2026, 1, 14, 1, 55, 16, 311, DateTimeKind.Utc).AddTicks(6378),
                             TreatmentPlan = "Cognitive exercises and regular monitoring.",
-                            VisitTime = new DateTime(2025, 12, 2, 15, 36, 34, 644, DateTimeKind.Utc).AddTicks(2314)
+                            VisitTime = new DateTime(2025, 12, 2, 15, 35, 16, 311, DateTimeKind.Utc).AddTicks(6377)
                         },
                         new
                         {
@@ -1644,9 +1647,9 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                             AppointmentID = "appt-20",
                             Diagnosis = "Hypothyroidism (Controlled)",
                             DoctorNotes = "TSH levels within normal range.",
-                            NextVisitDate = new DateTime(2026, 3, 15, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(2318),
+                            NextVisitDate = new DateTime(2026, 3, 15, 1, 55, 16, 311, DateTimeKind.Utc).AddTicks(6381),
                             TreatmentPlan = "Continue current levothyroxine dosage.",
-                            VisitTime = new DateTime(2025, 12, 8, 10, 21, 34, 644, DateTimeKind.Utc).AddTicks(2317)
+                            VisitTime = new DateTime(2025, 12, 8, 10, 20, 16, 311, DateTimeKind.Utc).AddTicks(6380)
                         },
                         new
                         {
@@ -1654,9 +1657,9 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                             AppointmentID = "appt-23",
                             Diagnosis = "Cholecystitis",
                             DoctorNotes = "Ultrasound confirms gallbladder inflammation.",
-                            NextVisitDate = new DateTime(2025, 12, 17, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(2320),
+                            NextVisitDate = new DateTime(2025, 12, 17, 1, 55, 16, 311, DateTimeKind.Utc).AddTicks(6383),
                             TreatmentPlan = "Surgical consultation for cholecystectomy.",
-                            VisitTime = new DateTime(2025, 11, 29, 11, 26, 34, 644, DateTimeKind.Utc).AddTicks(2319)
+                            VisitTime = new DateTime(2025, 11, 29, 11, 25, 16, 311, DateTimeKind.Utc).AddTicks(6382)
                         },
                         new
                         {
@@ -1664,9 +1667,9 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                             AppointmentID = "appt-24",
                             Diagnosis = "Attention Deficit Hyperactivity Disorder",
                             DoctorNotes = "School evaluation needed.",
-                            NextVisitDate = new DateTime(2026, 1, 5, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(2323),
+                            NextVisitDate = new DateTime(2026, 1, 5, 1, 55, 16, 311, DateTimeKind.Utc).AddTicks(6385),
                             TreatmentPlan = "Behavioral therapy and medication management.",
-                            VisitTime = new DateTime(2025, 11, 28, 16, 41, 34, 644, DateTimeKind.Utc).AddTicks(2322)
+                            VisitTime = new DateTime(2025, 11, 28, 16, 40, 16, 311, DateTimeKind.Utc).AddTicks(6384)
                         },
                         new
                         {
@@ -1674,9 +1677,9 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                             AppointmentID = "appt-25",
                             Diagnosis = "Peripheral Neuropathy",
                             DoctorNotes = "EMG study ordered.",
-                            NextVisitDate = new DateTime(2025, 12, 29, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(2326),
+                            NextVisitDate = new DateTime(2025, 12, 29, 1, 55, 16, 311, DateTimeKind.Utc).AddTicks(6388),
                             TreatmentPlan = "Neuropathic pain medication and B vitamin supplements.",
-                            VisitTime = new DateTime(2025, 11, 27, 12, 16, 34, 644, DateTimeKind.Utc).AddTicks(2324)
+                            VisitTime = new DateTime(2025, 11, 27, 12, 15, 16, 311, DateTimeKind.Utc).AddTicks(6387)
                         },
                         new
                         {
@@ -1684,9 +1687,9 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                             AppointmentID = "appt-26",
                             Diagnosis = "Iron Deficiency Anemia",
                             DoctorNotes = "Hemoglobin critically low.",
-                            NextVisitDate = new DateTime(2025, 12, 22, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(2328),
+                            NextVisitDate = new DateTime(2025, 12, 22, 1, 55, 16, 311, DateTimeKind.Utc).AddTicks(6390),
                             TreatmentPlan = "Iron infusion and dietary modifications.",
-                            VisitTime = new DateTime(2025, 11, 26, 18, 11, 34, 644, DateTimeKind.Utc).AddTicks(2327)
+                            VisitTime = new DateTime(2025, 11, 26, 18, 10, 16, 311, DateTimeKind.Utc).AddTicks(6389)
                         },
                         new
                         {
@@ -1694,9 +1697,9 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                             AppointmentID = "appt-27",
                             Diagnosis = "Post-operative Infection",
                             DoctorNotes = "Culture and sensitivity sent.",
-                            NextVisitDate = new DateTime(2025, 12, 17, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(2331),
+                            NextVisitDate = new DateTime(2025, 12, 17, 1, 55, 16, 311, DateTimeKind.Utc).AddTicks(6392),
                             TreatmentPlan = "IV antibiotics and wound care.",
-                            VisitTime = new DateTime(2025, 11, 25, 10, 26, 34, 644, DateTimeKind.Utc).AddTicks(2330)
+                            VisitTime = new DateTime(2025, 11, 25, 10, 25, 16, 311, DateTimeKind.Utc).AddTicks(6391)
                         },
                         new
                         {
@@ -1704,9 +1707,9 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                             AppointmentID = "appt-28",
                             Diagnosis = "Systemic Lupus Erythematosus",
                             DoctorNotes = "Rheumatology follow-up essential.",
-                            NextVisitDate = new DateTime(2025, 12, 29, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(2333),
+                            NextVisitDate = new DateTime(2025, 12, 29, 1, 55, 16, 311, DateTimeKind.Utc).AddTicks(6395),
                             TreatmentPlan = "Immunosuppressants and regular monitoring.",
-                            VisitTime = new DateTime(2025, 11, 24, 15, 21, 34, 644, DateTimeKind.Utc).AddTicks(2332)
+                            VisitTime = new DateTime(2025, 11, 24, 15, 20, 16, 311, DateTimeKind.Utc).AddTicks(6394)
                         },
                         new
                         {
@@ -1714,9 +1717,9 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                             AppointmentID = "appt-29",
                             Diagnosis = "Chronic Kidney Disease Stage 3",
                             DoctorNotes = "Nephrology referral made.",
-                            NextVisitDate = new DateTime(2026, 1, 14, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(2336),
+                            NextVisitDate = new DateTime(2026, 1, 14, 1, 55, 16, 311, DateTimeKind.Utc).AddTicks(6397),
                             TreatmentPlan = "Blood pressure control and dietary protein restriction.",
-                            VisitTime = new DateTime(2025, 11, 23, 13, 31, 34, 644, DateTimeKind.Utc).AddTicks(2335)
+                            VisitTime = new DateTime(2025, 11, 23, 13, 30, 16, 311, DateTimeKind.Utc).AddTicks(6396)
                         },
                         new
                         {
@@ -1724,9 +1727,9 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                             AppointmentID = "appt-30",
                             Diagnosis = "Diabetes Mellitus Type 2",
                             DoctorNotes = "HbA1c elevated. Dietitian referral needed.",
-                            NextVisitDate = new DateTime(2025, 12, 29, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(2338),
+                            NextVisitDate = new DateTime(2025, 12, 29, 1, 55, 16, 311, DateTimeKind.Utc).AddTicks(6399),
                             TreatmentPlan = "Metformin therapy and lifestyle modifications.",
-                            VisitTime = new DateTime(2025, 11, 22, 17, 16, 34, 644, DateTimeKind.Utc).AddTicks(2337)
+                            VisitTime = new DateTime(2025, 11, 22, 17, 15, 16, 311, DateTimeKind.Utc).AddTicks(6399)
                         },
                         new
                         {
@@ -1734,9 +1737,9 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                             AppointmentID = "appt-31",
                             Diagnosis = "Herniated Disc C6-C7",
                             DoctorNotes = "Consider surgical intervention if no improvement.",
-                            NextVisitDate = new DateTime(2026, 1, 5, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(2341),
+                            NextVisitDate = new DateTime(2026, 1, 5, 1, 55, 16, 311, DateTimeKind.Utc).AddTicks(6402),
                             TreatmentPlan = "Conservative management with physical therapy.",
-                            VisitTime = new DateTime(2025, 11, 21, 11, 11, 34, 644, DateTimeKind.Utc).AddTicks(2340)
+                            VisitTime = new DateTime(2025, 11, 21, 11, 10, 16, 311, DateTimeKind.Utc).AddTicks(6401)
                         },
                         new
                         {
@@ -1744,9 +1747,9 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                             AppointmentID = "appt-32",
                             Diagnosis = "Complex Regional Pain Syndrome",
                             DoctorNotes = "Specialized pain clinic referral required.",
-                            NextVisitDate = new DateTime(2025, 12, 29, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(2344),
+                            NextVisitDate = new DateTime(2025, 12, 29, 1, 55, 16, 311, DateTimeKind.Utc).AddTicks(6404),
                             TreatmentPlan = "Multidisciplinary pain management approach.",
-                            VisitTime = new DateTime(2025, 11, 20, 16, 36, 34, 644, DateTimeKind.Utc).AddTicks(2342)
+                            VisitTime = new DateTime(2025, 11, 20, 16, 35, 16, 311, DateTimeKind.Utc).AddTicks(6403)
                         },
                         new
                         {
@@ -1754,9 +1757,9 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                             AppointmentID = "appt-21",
                             Diagnosis = "Atrial Fibrillation (Controlled)",
                             DoctorNotes = "Regular ECG monitoring needed.",
-                            NextVisitDate = new DateTime(2026, 1, 14, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(2346),
+                            NextVisitDate = new DateTime(2026, 1, 14, 1, 55, 16, 311, DateTimeKind.Utc).AddTicks(6406),
                             TreatmentPlan = "Continue anticoagulation and rate control.",
-                            VisitTime = new DateTime(2025, 11, 19, 13, 21, 34, 644, DateTimeKind.Utc).AddTicks(2345)
+                            VisitTime = new DateTime(2025, 11, 19, 13, 20, 16, 311, DateTimeKind.Utc).AddTicks(6406)
                         },
                         new
                         {
@@ -1764,9 +1767,9 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                             AppointmentID = "appt-22",
                             Diagnosis = "Diabetic Peripheral Neuropathy",
                             DoctorNotes = "Foot care education provided.",
-                            NextVisitDate = new DateTime(2026, 1, 5, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(2348),
+                            NextVisitDate = new DateTime(2026, 1, 5, 1, 55, 16, 311, DateTimeKind.Utc).AddTicks(6409),
                             TreatmentPlan = "Glycemic control and neuropathic pain management.",
-                            VisitTime = new DateTime(2025, 11, 18, 17, 26, 34, 644, DateTimeKind.Utc).AddTicks(2347)
+                            VisitTime = new DateTime(2025, 11, 18, 17, 25, 16, 311, DateTimeKind.Utc).AddTicks(6408)
                         });
                 });
 
@@ -2750,7 +2753,7 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                         new
                         {
                             LogID = "log-01",
-                            CreatedAt = new DateTime(2025, 11, 15, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(3108),
+                            CreatedAt = new DateTime(2025, 11, 15, 1, 55, 16, 311, DateTimeKind.Utc).AddTicks(7183),
                             MedicationID = "med-amox-500",
                             QuantityChange = 1000,
                             Reason = "Initial Stock Import"
@@ -2758,7 +2761,7 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                         new
                         {
                             LogID = "log-02",
-                            CreatedAt = new DateTime(2025, 11, 15, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(3111),
+                            CreatedAt = new DateTime(2025, 11, 15, 1, 55, 16, 311, DateTimeKind.Utc).AddTicks(7188),
                             MedicationID = "med-ibu-400",
                             QuantityChange = 500,
                             Reason = "Initial Stock Import"
@@ -2766,7 +2769,7 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                         new
                         {
                             LogID = "log-03",
-                            CreatedAt = new DateTime(2025, 12, 14, 11, 41, 34, 644, DateTimeKind.Utc).AddTicks(3112),
+                            CreatedAt = new DateTime(2025, 12, 14, 11, 40, 16, 311, DateTimeKind.Utc).AddTicks(7191),
                             MedicationID = "med-amox-500",
                             QuantityChange = -21,
                             Reason = "Dispensed to Patient",
@@ -2775,7 +2778,7 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                         new
                         {
                             LogID = "log-04",
-                            CreatedAt = new DateTime(2025, 12, 14, 11, 41, 34, 644, DateTimeKind.Utc).AddTicks(3116),
+                            CreatedAt = new DateTime(2025, 12, 14, 11, 40, 16, 311, DateTimeKind.Utc).AddTicks(7193),
                             MedicationID = "med-ibu-400",
                             QuantityChange = -10,
                             Reason = "Dispensed to Patient",
@@ -2784,7 +2787,7 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                         new
                         {
                             LogID = "log-05",
-                            CreatedAt = new DateTime(2025, 12, 13, 17, 41, 34, 644, DateTimeKind.Utc).AddTicks(3118),
+                            CreatedAt = new DateTime(2025, 12, 13, 17, 40, 16, 311, DateTimeKind.Utc).AddTicks(7195),
                             MedicationID = "med-met-850",
                             QuantityChange = -60,
                             Reason = "Dispensed to Patient",
@@ -2793,7 +2796,7 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                         new
                         {
                             LogID = "log-06",
-                            CreatedAt = new DateTime(2025, 12, 10, 13, 26, 34, 644, DateTimeKind.Utc).AddTicks(3120),
+                            CreatedAt = new DateTime(2025, 12, 10, 13, 25, 16, 311, DateTimeKind.Utc).AddTicks(7198),
                             MedicationID = "med-ator-20",
                             QuantityChange = -30,
                             Reason = "Dispensed to Patient",
@@ -2802,7 +2805,7 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                         new
                         {
                             LogID = "log-07",
-                            CreatedAt = new DateTime(2025, 12, 10, 13, 26, 34, 644, DateTimeKind.Utc).AddTicks(3121),
+                            CreatedAt = new DateTime(2025, 12, 10, 13, 25, 16, 311, DateTimeKind.Utc).AddTicks(7200),
                             MedicationID = "med-omep-20",
                             QuantityChange = -14,
                             Reason = "Dispensed to Patient",
@@ -2811,7 +2814,7 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                         new
                         {
                             LogID = "log-08",
-                            CreatedAt = new DateTime(2025, 11, 15, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(3124),
+                            CreatedAt = new DateTime(2025, 11, 15, 1, 55, 16, 311, DateTimeKind.Utc).AddTicks(7202),
                             MedicationID = "med-para-500",
                             QuantityChange = 2000,
                             Reason = "Initial Stock Import"
@@ -2819,7 +2822,7 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                         new
                         {
                             LogID = "log-09",
-                            CreatedAt = new DateTime(2025, 11, 15, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(3126),
+                            CreatedAt = new DateTime(2025, 11, 15, 1, 55, 16, 311, DateTimeKind.Utc).AddTicks(7204),
                             MedicationID = "med-cet-10",
                             QuantityChange = 2000,
                             Reason = "Initial Stock Import"
@@ -2827,7 +2830,7 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                         new
                         {
                             LogID = "log-10",
-                            CreatedAt = new DateTime(2025, 12, 12, 14, 11, 34, 644, DateTimeKind.Utc).AddTicks(3128),
+                            CreatedAt = new DateTime(2025, 12, 12, 14, 10, 16, 311, DateTimeKind.Utc).AddTicks(7206),
                             MedicationID = "med-para-500",
                             QuantityChange = -15,
                             Reason = "Dispensed to Patient",
@@ -2836,7 +2839,7 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                         new
                         {
                             LogID = "log-11",
-                            CreatedAt = new DateTime(2025, 12, 8, 19, 16, 34, 644, DateTimeKind.Utc).AddTicks(3130),
+                            CreatedAt = new DateTime(2025, 12, 8, 19, 15, 16, 311, DateTimeKind.Utc).AddTicks(7208),
                             MedicationID = "med-cet-10",
                             QuantityChange = -30,
                             Reason = "Dispensed to Patient",
@@ -2845,7 +2848,7 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                         new
                         {
                             LogID = "log-12",
-                            CreatedAt = new DateTime(2025, 12, 15, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(3132),
+                            CreatedAt = new DateTime(2025, 12, 15, 1, 55, 16, 311, DateTimeKind.Utc).AddTicks(7210),
                             MedicationID = "med-ibu-400",
                             QuantityChange = -40,
                             Reason = "Dispensed to Patient",
@@ -2854,291 +2857,11 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                         new
                         {
                             LogID = "log-13",
-                            CreatedAt = new DateTime(2025, 12, 11, 13, 21, 34, 644, DateTimeKind.Utc).AddTicks(3133),
+                            CreatedAt = new DateTime(2025, 12, 11, 13, 20, 16, 311, DateTimeKind.Utc).AddTicks(7212),
                             MedicationID = "med-omep-20",
                             QuantityChange = -30,
                             Reason = "Dispensed to Patient",
                             RelatedPrescriptionID = "presc-08"
-                        },
-                        new
-                        {
-                            LogID = "log-14",
-                            CreatedAt = new DateTime(2025, 10, 15, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(3135),
-                            MedicationID = "med-aspirin-100",
-                            QuantityChange = 1500,
-                            Reason = "Initial Stock Import"
-                        },
-                        new
-                        {
-                            LogID = "log-15",
-                            CreatedAt = new DateTime(2025, 10, 15, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(3137),
-                            MedicationID = "med-lisinopril-10",
-                            QuantityChange = 600,
-                            Reason = "Initial Stock Import"
-                        },
-                        new
-                        {
-                            LogID = "log-16",
-                            CreatedAt = new DateTime(2025, 10, 15, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(3138),
-                            MedicationID = "metformin-500",
-                            QuantityChange = 1200,
-                            Reason = "Initial Stock Import"
-                        },
-                        new
-                        {
-                            LogID = "log-17",
-                            CreatedAt = new DateTime(2025, 10, 15, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(3140),
-                            MedicationID = "med-simvastatin-20",
-                            QuantityChange = 900,
-                            Reason = "Initial Stock Import"
-                        },
-                        new
-                        {
-                            LogID = "log-18",
-                            CreatedAt = new DateTime(2025, 10, 15, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(3142),
-                            MedicationID = "med-amlodipine-5",
-                            QuantityChange = 700,
-                            Reason = "Initial Stock Import"
-                        },
-                        new
-                        {
-                            LogID = "log-19",
-                            CreatedAt = new DateTime(2025, 10, 15, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(3143),
-                            MedicationID = "med-prednisone-5",
-                            QuantityChange = 400,
-                            Reason = "Initial Stock Import"
-                        },
-                        new
-                        {
-                            LogID = "log-20",
-                            CreatedAt = new DateTime(2025, 12, 7, 17, 56, 34, 644, DateTimeKind.Utc).AddTicks(3145),
-                            MedicationID = "med-azithromycin-250",
-                            QuantityChange = -6,
-                            Reason = "Dispensed to Patient",
-                            RelatedPrescriptionID = "presc-09"
-                        },
-                        new
-                        {
-                            LogID = "log-21",
-                            CreatedAt = new DateTime(2025, 12, 7, 17, 56, 34, 644, DateTimeKind.Utc).AddTicks(3147),
-                            MedicationID = "med-albuterol-syrup",
-                            QuantityChange = -120,
-                            Reason = "Dispensed to Patient",
-                            RelatedPrescriptionID = "presc-09"
-                        },
-                        new
-                        {
-                            LogID = "log-22",
-                            CreatedAt = new DateTime(2025, 12, 9, 13, 56, 34, 644, DateTimeKind.Utc).AddTicks(3150),
-                            MedicationID = "med-aspirin-100",
-                            QuantityChange = -20,
-                            Reason = "Dispensed to Patient",
-                            RelatedPrescriptionID = "presc-10"
-                        },
-                        new
-                        {
-                            LogID = "log-23",
-                            CreatedAt = new DateTime(2025, 12, 3, 11, 56, 34, 644, DateTimeKind.Utc).AddTicks(3151),
-                            MedicationID = "med-lisinopril-10",
-                            QuantityChange = -30,
-                            Reason = "Dispensed to Patient",
-                            RelatedPrescriptionID = "presc-11"
-                        },
-                        new
-                        {
-                            LogID = "log-24",
-                            CreatedAt = new DateTime(2025, 12, 4, 18, 56, 34, 644, DateTimeKind.Utc).AddTicks(3153),
-                            MedicationID = "metformin-500",
-                            QuantityChange = -60,
-                            Reason = "Dispensed to Patient",
-                            RelatedPrescriptionID = "presc-13"
-                        },
-                        new
-                        {
-                            LogID = "log-25",
-                            CreatedAt = new DateTime(2025, 12, 4, 18, 56, 34, 644, DateTimeKind.Utc).AddTicks(3155),
-                            MedicationID = "med-ondansetron-4",
-                            QuantityChange = -10,
-                            Reason = "Dispensed to Patient",
-                            RelatedPrescriptionID = "presc-13"
-                        },
-                        new
-                        {
-                            LogID = "log-26",
-                            CreatedAt = new DateTime(2025, 11, 30, 12, 56, 34, 644, DateTimeKind.Utc).AddTicks(3157),
-                            MedicationID = "med-prednisone-5",
-                            QuantityChange = -20,
-                            Reason = "Dispensed to Patient",
-                            RelatedPrescriptionID = "presc-14"
-                        },
-                        new
-                        {
-                            LogID = "log-27",
-                            CreatedAt = new DateTime(2025, 12, 2, 15, 56, 34, 644, DateTimeKind.Utc).AddTicks(3158),
-                            MedicationID = "med-fluoxetine-20",
-                            QuantityChange = -30,
-                            Reason = "Dispensed to Patient",
-                            RelatedPrescriptionID = "presc-15"
-                        },
-                        new
-                        {
-                            LogID = "log-28",
-                            CreatedAt = new DateTime(2025, 12, 2, 15, 56, 34, 644, DateTimeKind.Utc).AddTicks(3160),
-                            MedicationID = "med-vit-c-500",
-                            QuantityChange = -60,
-                            Reason = "Dispensed to Patient",
-                            RelatedPrescriptionID = "presc-15"
-                        },
-                        new
-                        {
-                            LogID = "log-29",
-                            CreatedAt = new DateTime(2025, 12, 8, 10, 56, 34, 644, DateTimeKind.Utc).AddTicks(3162),
-                            MedicationID = "med-levothyroxine-50",
-                            QuantityChange = -90,
-                            Reason = "Dispensed to Patient",
-                            RelatedPrescriptionID = "presc-16"
-                        },
-                        new
-                        {
-                            LogID = "log-30",
-                            CreatedAt = new DateTime(2025, 11, 28, 17, 56, 34, 644, DateTimeKind.Utc).AddTicks(3163),
-                            MedicationID = "med-clonazepam-0-5",
-                            QuantityChange = -30,
-                            Reason = "Dispensed to Patient",
-                            RelatedPrescriptionID = "presc-18"
-                        },
-                        new
-                        {
-                            LogID = "log-31",
-                            CreatedAt = new DateTime(2025, 11, 27, 12, 56, 34, 644, DateTimeKind.Utc).AddTicks(3165),
-                            MedicationID = "med-gabapentin-300",
-                            QuantityChange = -90,
-                            Reason = "Dispensed to Patient",
-                            RelatedPrescriptionID = "presc-19"
-                        },
-                        new
-                        {
-                            LogID = "log-32",
-                            CreatedAt = new DateTime(2025, 11, 26, 18, 56, 34, 644, DateTimeKind.Utc).AddTicks(3167),
-                            MedicationID = "med-omep-20",
-                            QuantityChange = -30,
-                            Reason = "Dispensed to Patient",
-                            RelatedPrescriptionID = "presc-20"
-                        },
-                        new
-                        {
-                            LogID = "log-33",
-                            CreatedAt = new DateTime(2025, 11, 23, 13, 56, 34, 644, DateTimeKind.Utc).AddTicks(3168),
-                            MedicationID = "med-losartan-50",
-                            QuantityChange = -30,
-                            Reason = "Dispensed to Patient",
-                            RelatedPrescriptionID = "presc-23"
-                        },
-                        new
-                        {
-                            LogID = "log-34",
-                            CreatedAt = new DateTime(2025, 11, 22, 17, 56, 34, 644, DateTimeKind.Utc).AddTicks(3170),
-                            MedicationID = "metformin-500",
-                            QuantityChange = -60,
-                            Reason = "Dispensed to Patient",
-                            RelatedPrescriptionID = "presc-24"
-                        },
-                        new
-                        {
-                            LogID = "log-35",
-                            CreatedAt = new DateTime(2025, 11, 21, 11, 56, 34, 644, DateTimeKind.Utc).AddTicks(3172),
-                            MedicationID = "med-amlodipine-5",
-                            QuantityChange = -30,
-                            Reason = "Dispensed to Patient",
-                            RelatedPrescriptionID = "presc-25"
-                        },
-                        new
-                        {
-                            LogID = "log-36",
-                            CreatedAt = new DateTime(2025, 11, 20, 17, 56, 34, 644, DateTimeKind.Utc).AddTicks(3173),
-                            MedicationID = "med-duloxetine-30",
-                            QuantityChange = -30,
-                            Reason = "Dispensed to Patient",
-                            RelatedPrescriptionID = "presc-26"
-                        },
-                        new
-                        {
-                            LogID = "log-37",
-                            CreatedAt = new DateTime(2025, 11, 19, 13, 56, 34, 644, DateTimeKind.Utc).AddTicks(3175),
-                            MedicationID = "med-warfarin-5",
-                            QuantityChange = -30,
-                            Reason = "Dispensed to Patient",
-                            RelatedPrescriptionID = "presc-27"
-                        },
-                        new
-                        {
-                            LogID = "log-38",
-                            CreatedAt = new DateTime(2025, 11, 18, 16, 56, 34, 644, DateTimeKind.Utc).AddTicks(3177),
-                            MedicationID = "med-pregabalin-75",
-                            QuantityChange = -60,
-                            Reason = "Dispensed to Patient",
-                            RelatedPrescriptionID = "presc-28"
-                        },
-                        new
-                        {
-                            LogID = "log-39",
-                            CreatedAt = new DateTime(2025, 12, 10, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(3178),
-                            MedicationID = "med-amox-500",
-                            QuantityChange = 500,
-                            Reason = "Restock Order"
-                        },
-                        new
-                        {
-                            LogID = "log-40",
-                            CreatedAt = new DateTime(2025, 12, 12, 1, 56, 34, 644, DateTimeKind.Utc).AddTicks(3180),
-                            MedicationID = "med-ibu-400",
-                            QuantityChange = 300,
-                            Reason = "Restock Order"
-                        },
-                        new
-                        {
-                            LogID = "log-41",
-                            CreatedAt = new DateTime(2025, 11, 26, 18, 56, 34, 644, DateTimeKind.Utc).AddTicks(3182),
-                            MedicationID = "med-ferrous-sulfate-325",
-                            QuantityChange = -90,
-                            Reason = "Dispensed to Patient",
-                            RelatedPrescriptionID = "presc-20"
-                        },
-                        new
-                        {
-                            LogID = "log-42",
-                            CreatedAt = new DateTime(2025, 12, 1, 14, 56, 34, 644, DateTimeKind.Utc).AddTicks(3183),
-                            MedicationID = "med-metoprolol-25",
-                            QuantityChange = -60,
-                            Reason = "Dispensed to Patient",
-                            RelatedPrescriptionID = "presc-12"
-                        },
-                        new
-                        {
-                            LogID = "log-43",
-                            CreatedAt = new DateTime(2025, 12, 1, 14, 56, 34, 644, DateTimeKind.Utc).AddTicks(3185),
-                            MedicationID = "med-para-500",
-                            QuantityChange = -30,
-                            Reason = "Dispensed to Patient",
-                            RelatedPrescriptionID = "presc-12"
-                        },
-                        new
-                        {
-                            LogID = "log-44",
-                            CreatedAt = new DateTime(2025, 11, 25, 15, 56, 34, 644, DateTimeKind.Utc).AddTicks(3187),
-                            MedicationID = "med-vancomycin-500",
-                            QuantityChange = -40,
-                            Reason = "Dispensed to Patient",
-                            RelatedPrescriptionID = "presc-21"
-                        },
-                        new
-                        {
-                            LogID = "log-45",
-                            CreatedAt = new DateTime(2025, 11, 24, 12, 56, 34, 644, DateTimeKind.Utc).AddTicks(3188),
-                            MedicationID = "med-hydroxychloroquine-200",
-                            QuantityChange = -60,
-                            Reason = "Dispensed to Patient",
-                            RelatedPrescriptionID = "presc-22"
                         });
                 });
 
@@ -3851,7 +3574,7 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                         new
                         {
                             PrescriptionID = "presc-01",
-                            PrescriptionDateTime = new DateTime(2025, 12, 14, 11, 26, 34, 644, DateTimeKind.Utc).AddTicks(2512),
+                            PrescriptionDateTime = new DateTime(2025, 12, 14, 11, 25, 16, 311, DateTimeKind.Utc).AddTicks(6598),
                             Priority = 0,
                             RecordID = "rec-01",
                             Status = 0
@@ -3859,29 +3582,29 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                         new
                         {
                             PrescriptionID = "presc-02",
-                            DispensedAt = new DateTime(2025, 12, 13, 17, 41, 34, 644, DateTimeKind.Utc).AddTicks(2523),
+                            DispensedAt = new DateTime(2025, 12, 13, 17, 40, 16, 311, DateTimeKind.Utc).AddTicks(6612),
                             PharmacistID = "phar-01",
-                            PrescriptionDateTime = new DateTime(2025, 12, 13, 16, 56, 34, 644, DateTimeKind.Utc).AddTicks(2517),
+                            PrescriptionDateTime = new DateTime(2025, 12, 13, 16, 55, 16, 311, DateTimeKind.Utc).AddTicks(6606),
                             Priority = 0,
                             RecordID = "rec-02",
                             Status = 2,
-                            VerifiedAt = new DateTime(2025, 12, 13, 17, 26, 34, 644, DateTimeKind.Utc).AddTicks(2518)
+                            VerifiedAt = new DateTime(2025, 12, 13, 17, 25, 16, 311, DateTimeKind.Utc).AddTicks(6607)
                         },
                         new
                         {
                             PrescriptionID = "presc-03",
                             PharmacistID = "phar-02",
-                            PrescriptionDateTime = new DateTime(2025, 12, 10, 12, 56, 34, 644, DateTimeKind.Utc).AddTicks(2526),
+                            PrescriptionDateTime = new DateTime(2025, 12, 10, 12, 55, 16, 311, DateTimeKind.Utc).AddTicks(6614),
                             Priority = 1,
                             RecordID = "rec-03",
                             Status = 1,
-                            VerifiedAt = new DateTime(2025, 12, 10, 13, 11, 34, 644, DateTimeKind.Utc).AddTicks(2526)
+                            VerifiedAt = new DateTime(2025, 12, 10, 13, 10, 16, 311, DateTimeKind.Utc).AddTicks(6615)
                         },
                         new
                         {
                             PrescriptionID = "presc-04",
-                            CancelledAt = new DateTime(2025, 12, 5, 17, 56, 34, 644, DateTimeKind.Utc).AddTicks(2530),
-                            PrescriptionDateTime = new DateTime(2025, 12, 5, 17, 26, 34, 644, DateTimeKind.Utc).AddTicks(2529),
+                            CancelledAt = new DateTime(2025, 12, 5, 17, 55, 16, 311, DateTimeKind.Utc).AddTicks(6620),
+                            PrescriptionDateTime = new DateTime(2025, 12, 5, 17, 25, 16, 311, DateTimeKind.Utc).AddTicks(6618),
                             Priority = 2,
                             Reason = "Duplicate prescription detected.",
                             RecordID = "rec-04",
@@ -3890,18 +3613,18 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                         new
                         {
                             PrescriptionID = "presc-05",
-                            DispensedAt = new DateTime(2025, 12, 12, 14, 11, 34, 644, DateTimeKind.Utc).AddTicks(2534),
+                            DispensedAt = new DateTime(2025, 12, 12, 14, 10, 16, 311, DateTimeKind.Utc).AddTicks(6623),
                             PharmacistID = "phar-01",
-                            PrescriptionDateTime = new DateTime(2025, 12, 12, 13, 41, 34, 644, DateTimeKind.Utc).AddTicks(2532),
+                            PrescriptionDateTime = new DateTime(2025, 12, 12, 13, 40, 16, 311, DateTimeKind.Utc).AddTicks(6622),
                             Priority = 0,
                             RecordID = "rec-05",
                             Status = 2,
-                            VerifiedAt = new DateTime(2025, 12, 12, 13, 56, 34, 644, DateTimeKind.Utc).AddTicks(2533)
+                            VerifiedAt = new DateTime(2025, 12, 12, 13, 55, 16, 311, DateTimeKind.Utc).AddTicks(6623)
                         },
                         new
                         {
                             PrescriptionID = "presc-06",
-                            PrescriptionDateTime = new DateTime(2025, 12, 8, 18, 41, 34, 644, DateTimeKind.Utc).AddTicks(2536),
+                            PrescriptionDateTime = new DateTime(2025, 12, 8, 18, 40, 16, 311, DateTimeKind.Utc).AddTicks(6626),
                             Priority = 1,
                             RecordID = "rec-06",
                             Status = 0
@@ -3910,117 +3633,117 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                         {
                             PrescriptionID = "presc-07",
                             PharmacistID = "phar-01",
-                            PrescriptionDateTime = new DateTime(2025, 12, 1, 15, 56, 34, 644, DateTimeKind.Utc).AddTicks(2539),
+                            PrescriptionDateTime = new DateTime(2025, 12, 1, 15, 55, 16, 311, DateTimeKind.Utc).AddTicks(6629),
                             Priority = 0,
                             RecordID = "rec-07",
                             Status = 1,
-                            VerifiedAt = new DateTime(2025, 12, 1, 16, 26, 34, 644, DateTimeKind.Utc).AddTicks(2540)
+                            VerifiedAt = new DateTime(2025, 12, 1, 16, 25, 16, 311, DateTimeKind.Utc).AddTicks(6631)
                         },
                         new
                         {
                             PrescriptionID = "presc-08",
-                            CancelledAt = new DateTime(2025, 12, 11, 13, 6, 34, 644, DateTimeKind.Utc).AddTicks(2544),
+                            CancelledAt = new DateTime(2025, 12, 11, 13, 5, 16, 311, DateTimeKind.Utc).AddTicks(6637),
                             PharmacistID = "phar-02",
-                            PrescriptionDateTime = new DateTime(2025, 12, 11, 12, 26, 34, 644, DateTimeKind.Utc).AddTicks(2542),
+                            PrescriptionDateTime = new DateTime(2025, 12, 11, 12, 25, 16, 311, DateTimeKind.Utc).AddTicks(6635),
                             Priority = 0,
                             Reason = "Patient refused medication due to cost.",
                             RecordID = "rec-08",
                             Status = 3,
-                            VerifiedAt = new DateTime(2025, 12, 11, 12, 56, 34, 644, DateTimeKind.Utc).AddTicks(2543)
+                            VerifiedAt = new DateTime(2025, 12, 11, 12, 55, 16, 311, DateTimeKind.Utc).AddTicks(6636)
                         },
                         new
                         {
                             PrescriptionID = "presc-09",
-                            DispensedAt = new DateTime(2025, 12, 7, 17, 56, 34, 644, DateTimeKind.Utc).AddTicks(2549),
+                            DispensedAt = new DateTime(2025, 12, 7, 17, 55, 16, 311, DateTimeKind.Utc).AddTicks(6643),
                             PharmacistID = "phar-01",
-                            PrescriptionDateTime = new DateTime(2025, 12, 7, 17, 26, 34, 644, DateTimeKind.Utc).AddTicks(2547),
+                            PrescriptionDateTime = new DateTime(2025, 12, 7, 17, 25, 16, 311, DateTimeKind.Utc).AddTicks(6640),
                             Priority = 1,
                             RecordID = "rec-09",
                             Status = 2,
-                            VerifiedAt = new DateTime(2025, 12, 7, 17, 41, 34, 644, DateTimeKind.Utc).AddTicks(2548)
+                            VerifiedAt = new DateTime(2025, 12, 7, 17, 40, 16, 311, DateTimeKind.Utc).AddTicks(6643)
                         },
                         new
                         {
                             PrescriptionID = "presc-10",
-                            DispensedAt = new DateTime(2025, 12, 9, 13, 56, 34, 644, DateTimeKind.Utc).AddTicks(2553),
+                            DispensedAt = new DateTime(2025, 12, 9, 13, 55, 16, 311, DateTimeKind.Utc).AddTicks(6647),
                             PharmacistID = "phar-02",
-                            PrescriptionDateTime = new DateTime(2025, 12, 9, 13, 26, 34, 644, DateTimeKind.Utc).AddTicks(2551),
+                            PrescriptionDateTime = new DateTime(2025, 12, 9, 13, 25, 16, 311, DateTimeKind.Utc).AddTicks(6646),
                             Priority = 0,
                             RecordID = "rec-10",
                             Status = 2,
-                            VerifiedAt = new DateTime(2025, 12, 9, 13, 41, 34, 644, DateTimeKind.Utc).AddTicks(2552)
+                            VerifiedAt = new DateTime(2025, 12, 9, 13, 40, 16, 311, DateTimeKind.Utc).AddTicks(6646)
                         },
                         new
                         {
                             PrescriptionID = "presc-11",
-                            DispensedAt = new DateTime(2025, 12, 3, 11, 56, 34, 644, DateTimeKind.Utc).AddTicks(2557),
+                            DispensedAt = new DateTime(2025, 12, 3, 11, 55, 16, 311, DateTimeKind.Utc).AddTicks(6651),
                             PharmacistID = "phar-01",
-                            PrescriptionDateTime = new DateTime(2025, 12, 3, 11, 26, 34, 644, DateTimeKind.Utc).AddTicks(2555),
+                            PrescriptionDateTime = new DateTime(2025, 12, 3, 11, 25, 16, 311, DateTimeKind.Utc).AddTicks(6649),
                             Priority = 0,
                             RecordID = "rec-11",
                             Status = 1,
-                            VerifiedAt = new DateTime(2025, 12, 3, 11, 41, 34, 644, DateTimeKind.Utc).AddTicks(2556)
+                            VerifiedAt = new DateTime(2025, 12, 3, 11, 40, 16, 311, DateTimeKind.Utc).AddTicks(6650)
                         },
                         new
                         {
                             PrescriptionID = "presc-12",
-                            DispensedAt = new DateTime(2025, 12, 1, 14, 56, 34, 644, DateTimeKind.Utc).AddTicks(2561),
+                            DispensedAt = new DateTime(2025, 12, 1, 14, 55, 16, 311, DateTimeKind.Utc).AddTicks(6655),
                             PharmacistID = "phar-02",
-                            PrescriptionDateTime = new DateTime(2025, 12, 1, 14, 26, 34, 644, DateTimeKind.Utc).AddTicks(2559),
+                            PrescriptionDateTime = new DateTime(2025, 12, 1, 14, 25, 16, 311, DateTimeKind.Utc).AddTicks(6653),
                             Priority = 0,
                             RecordID = "rec-12",
                             Status = 2,
-                            VerifiedAt = new DateTime(2025, 12, 1, 14, 41, 34, 644, DateTimeKind.Utc).AddTicks(2560)
+                            VerifiedAt = new DateTime(2025, 12, 1, 14, 40, 16, 311, DateTimeKind.Utc).AddTicks(6654)
                         },
                         new
                         {
                             PrescriptionID = "presc-13",
-                            DispensedAt = new DateTime(2025, 12, 4, 18, 56, 34, 644, DateTimeKind.Utc).AddTicks(2565),
+                            DispensedAt = new DateTime(2025, 12, 4, 18, 55, 16, 311, DateTimeKind.Utc).AddTicks(6659),
                             PharmacistID = "phar-01",
-                            PrescriptionDateTime = new DateTime(2025, 12, 4, 18, 26, 34, 644, DateTimeKind.Utc).AddTicks(2563),
+                            PrescriptionDateTime = new DateTime(2025, 12, 4, 18, 25, 16, 311, DateTimeKind.Utc).AddTicks(6657),
                             Priority = 1,
                             RecordID = "rec-13",
                             Status = 2,
-                            VerifiedAt = new DateTime(2025, 12, 4, 18, 41, 34, 644, DateTimeKind.Utc).AddTicks(2564)
+                            VerifiedAt = new DateTime(2025, 12, 4, 18, 40, 16, 311, DateTimeKind.Utc).AddTicks(6658)
                         },
                         new
                         {
                             PrescriptionID = "presc-14",
-                            DispensedAt = new DateTime(2025, 11, 30, 12, 56, 34, 644, DateTimeKind.Utc).AddTicks(2616),
+                            DispensedAt = new DateTime(2025, 11, 30, 12, 55, 16, 311, DateTimeKind.Utc).AddTicks(6664),
                             PharmacistID = "phar-02",
-                            PrescriptionDateTime = new DateTime(2025, 11, 30, 12, 26, 34, 644, DateTimeKind.Utc).AddTicks(2614),
+                            PrescriptionDateTime = new DateTime(2025, 11, 30, 12, 25, 16, 311, DateTimeKind.Utc).AddTicks(6662),
                             Priority = 0,
                             RecordID = "rec-14",
                             Status = 1,
-                            VerifiedAt = new DateTime(2025, 11, 30, 12, 41, 34, 644, DateTimeKind.Utc).AddTicks(2615)
+                            VerifiedAt = new DateTime(2025, 11, 30, 12, 40, 16, 311, DateTimeKind.Utc).AddTicks(6663)
                         },
                         new
                         {
                             PrescriptionID = "presc-15",
-                            DispensedAt = new DateTime(2025, 12, 2, 15, 56, 34, 644, DateTimeKind.Utc).AddTicks(2621),
+                            DispensedAt = new DateTime(2025, 12, 2, 15, 55, 16, 311, DateTimeKind.Utc).AddTicks(6668),
                             PharmacistID = "phar-01",
-                            PrescriptionDateTime = new DateTime(2025, 12, 2, 15, 26, 34, 644, DateTimeKind.Utc).AddTicks(2619),
+                            PrescriptionDateTime = new DateTime(2025, 12, 2, 15, 25, 16, 311, DateTimeKind.Utc).AddTicks(6666),
                             Priority = 0,
                             RecordID = "rec-15",
                             Status = 2,
-                            VerifiedAt = new DateTime(2025, 12, 2, 15, 41, 34, 644, DateTimeKind.Utc).AddTicks(2620)
+                            VerifiedAt = new DateTime(2025, 12, 2, 15, 40, 16, 311, DateTimeKind.Utc).AddTicks(6667)
                         },
                         new
                         {
                             PrescriptionID = "presc-16",
-                            DispensedAt = new DateTime(2025, 12, 8, 10, 56, 34, 644, DateTimeKind.Utc).AddTicks(2625),
+                            DispensedAt = new DateTime(2025, 12, 8, 10, 55, 16, 311, DateTimeKind.Utc).AddTicks(6672),
                             PharmacistID = "phar-02",
-                            PrescriptionDateTime = new DateTime(2025, 12, 8, 10, 26, 34, 644, DateTimeKind.Utc).AddTicks(2623),
+                            PrescriptionDateTime = new DateTime(2025, 12, 8, 10, 25, 16, 311, DateTimeKind.Utc).AddTicks(6670),
                             Priority = 0,
                             RecordID = "rec-16",
                             Status = 1,
-                            VerifiedAt = new DateTime(2025, 12, 8, 10, 41, 34, 644, DateTimeKind.Utc).AddTicks(2624)
+                            VerifiedAt = new DateTime(2025, 12, 8, 10, 40, 16, 311, DateTimeKind.Utc).AddTicks(6671)
                         },
                         new
                         {
                             PrescriptionID = "presc-17",
-                            CancelledAt = new DateTime(2025, 11, 29, 16, 56, 34, 644, DateTimeKind.Utc).AddTicks(2628),
-                            PrescriptionDateTime = new DateTime(2025, 11, 29, 16, 26, 34, 644, DateTimeKind.Utc).AddTicks(2627),
+                            CancelledAt = new DateTime(2025, 11, 29, 16, 55, 16, 311, DateTimeKind.Utc).AddTicks(6676),
+                            PrescriptionDateTime = new DateTime(2025, 11, 29, 16, 25, 16, 311, DateTimeKind.Utc).AddTicks(6674),
                             Priority = 0,
                             Reason = "Medication discontinued by physician.",
                             RecordID = "rec-17",
@@ -4029,123 +3752,123 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Migrations
                         new
                         {
                             PrescriptionID = "presc-18",
-                            DispensedAt = new DateTime(2025, 11, 28, 17, 56, 34, 644, DateTimeKind.Utc).AddTicks(2632),
+                            DispensedAt = new DateTime(2025, 11, 28, 17, 55, 16, 311, DateTimeKind.Utc).AddTicks(6680),
                             PharmacistID = "phar-01",
-                            PrescriptionDateTime = new DateTime(2025, 11, 28, 17, 26, 34, 644, DateTimeKind.Utc).AddTicks(2630),
+                            PrescriptionDateTime = new DateTime(2025, 11, 28, 17, 25, 16, 311, DateTimeKind.Utc).AddTicks(6678),
                             Priority = 0,
                             RecordID = "rec-18",
                             Status = 2,
-                            VerifiedAt = new DateTime(2025, 11, 28, 17, 41, 34, 644, DateTimeKind.Utc).AddTicks(2631)
+                            VerifiedAt = new DateTime(2025, 11, 28, 17, 40, 16, 311, DateTimeKind.Utc).AddTicks(6679)
                         },
                         new
                         {
                             PrescriptionID = "presc-19",
-                            DispensedAt = new DateTime(2025, 11, 27, 12, 56, 34, 644, DateTimeKind.Utc).AddTicks(2637),
+                            DispensedAt = new DateTime(2025, 11, 27, 12, 55, 16, 311, DateTimeKind.Utc).AddTicks(6685),
                             PharmacistID = "phar-02",
-                            PrescriptionDateTime = new DateTime(2025, 11, 27, 12, 26, 34, 644, DateTimeKind.Utc).AddTicks(2634),
+                            PrescriptionDateTime = new DateTime(2025, 11, 27, 12, 25, 16, 311, DateTimeKind.Utc).AddTicks(6682),
                             Priority = 0,
                             RecordID = "rec-19",
                             Status = 1,
-                            VerifiedAt = new DateTime(2025, 11, 27, 12, 41, 34, 644, DateTimeKind.Utc).AddTicks(2635)
+                            VerifiedAt = new DateTime(2025, 11, 27, 12, 40, 16, 311, DateTimeKind.Utc).AddTicks(6683)
                         },
                         new
                         {
                             PrescriptionID = "presc-20",
-                            DispensedAt = new DateTime(2025, 11, 26, 18, 56, 34, 644, DateTimeKind.Utc).AddTicks(2641),
+                            DispensedAt = new DateTime(2025, 11, 26, 18, 55, 16, 311, DateTimeKind.Utc).AddTicks(6688),
                             PharmacistID = "phar-01",
-                            PrescriptionDateTime = new DateTime(2025, 11, 26, 18, 26, 34, 644, DateTimeKind.Utc).AddTicks(2640),
+                            PrescriptionDateTime = new DateTime(2025, 11, 26, 18, 25, 16, 311, DateTimeKind.Utc).AddTicks(6687),
                             Priority = 0,
                             RecordID = "rec-20",
                             Status = 2,
-                            VerifiedAt = new DateTime(2025, 11, 26, 18, 41, 34, 644, DateTimeKind.Utc).AddTicks(2640)
+                            VerifiedAt = new DateTime(2025, 11, 26, 18, 40, 16, 311, DateTimeKind.Utc).AddTicks(6687)
                         },
                         new
                         {
                             PrescriptionID = "presc-21",
-                            DispensedAt = new DateTime(2025, 11, 25, 15, 56, 34, 644, DateTimeKind.Utc).AddTicks(2649),
+                            DispensedAt = new DateTime(2025, 11, 25, 15, 55, 16, 311, DateTimeKind.Utc).AddTicks(6692),
                             PharmacistID = "phar-02",
-                            PrescriptionDateTime = new DateTime(2025, 11, 25, 15, 26, 34, 644, DateTimeKind.Utc).AddTicks(2647),
+                            PrescriptionDateTime = new DateTime(2025, 11, 25, 15, 25, 16, 311, DateTimeKind.Utc).AddTicks(6690),
                             Priority = 2,
                             RecordID = "rec-21",
                             Status = 2,
-                            VerifiedAt = new DateTime(2025, 11, 25, 15, 41, 34, 644, DateTimeKind.Utc).AddTicks(2648)
+                            VerifiedAt = new DateTime(2025, 11, 25, 15, 40, 16, 311, DateTimeKind.Utc).AddTicks(6691)
                         },
                         new
                         {
                             PrescriptionID = "presc-22",
-                            DispensedAt = new DateTime(2025, 11, 24, 12, 56, 34, 644, DateTimeKind.Utc).AddTicks(2652),
+                            DispensedAt = new DateTime(2025, 11, 24, 12, 55, 16, 311, DateTimeKind.Utc).AddTicks(6696),
                             PharmacistID = "phar-01",
-                            PrescriptionDateTime = new DateTime(2025, 11, 24, 12, 26, 34, 644, DateTimeKind.Utc).AddTicks(2651),
+                            PrescriptionDateTime = new DateTime(2025, 11, 24, 12, 25, 16, 311, DateTimeKind.Utc).AddTicks(6694),
                             Priority = 0,
                             RecordID = "rec-22",
                             Status = 1,
-                            VerifiedAt = new DateTime(2025, 11, 24, 12, 41, 34, 644, DateTimeKind.Utc).AddTicks(2652)
+                            VerifiedAt = new DateTime(2025, 11, 24, 12, 40, 16, 311, DateTimeKind.Utc).AddTicks(6695)
                         },
                         new
                         {
                             PrescriptionID = "presc-23",
-                            DispensedAt = new DateTime(2025, 11, 23, 13, 56, 34, 644, DateTimeKind.Utc).AddTicks(2656),
+                            DispensedAt = new DateTime(2025, 11, 23, 13, 55, 16, 311, DateTimeKind.Utc).AddTicks(6731),
                             PharmacistID = "phar-02",
-                            PrescriptionDateTime = new DateTime(2025, 11, 23, 13, 26, 34, 644, DateTimeKind.Utc).AddTicks(2654),
+                            PrescriptionDateTime = new DateTime(2025, 11, 23, 13, 25, 16, 311, DateTimeKind.Utc).AddTicks(6729),
                             Priority = 0,
                             RecordID = "rec-23",
                             Status = 2,
-                            VerifiedAt = new DateTime(2025, 11, 23, 13, 41, 34, 644, DateTimeKind.Utc).AddTicks(2655)
+                            VerifiedAt = new DateTime(2025, 11, 23, 13, 40, 16, 311, DateTimeKind.Utc).AddTicks(6730)
                         },
                         new
                         {
                             PrescriptionID = "presc-24",
-                            DispensedAt = new DateTime(2025, 11, 22, 17, 56, 34, 644, DateTimeKind.Utc).AddTicks(2664),
+                            DispensedAt = new DateTime(2025, 11, 22, 17, 55, 16, 311, DateTimeKind.Utc).AddTicks(6735),
                             PharmacistID = "phar-01",
-                            PrescriptionDateTime = new DateTime(2025, 11, 22, 17, 26, 34, 644, DateTimeKind.Utc).AddTicks(2661),
+                            PrescriptionDateTime = new DateTime(2025, 11, 22, 17, 25, 16, 311, DateTimeKind.Utc).AddTicks(6733),
                             Priority = 0,
                             RecordID = "rec-24",
                             Status = 1,
-                            VerifiedAt = new DateTime(2025, 11, 22, 17, 41, 34, 644, DateTimeKind.Utc).AddTicks(2663)
+                            VerifiedAt = new DateTime(2025, 11, 22, 17, 40, 16, 311, DateTimeKind.Utc).AddTicks(6734)
                         },
                         new
                         {
                             PrescriptionID = "presc-25",
-                            DispensedAt = new DateTime(2025, 11, 21, 11, 56, 34, 644, DateTimeKind.Utc).AddTicks(2668),
+                            DispensedAt = new DateTime(2025, 11, 21, 11, 55, 16, 311, DateTimeKind.Utc).AddTicks(6739),
                             PharmacistID = "phar-02",
-                            PrescriptionDateTime = new DateTime(2025, 11, 21, 11, 26, 34, 644, DateTimeKind.Utc).AddTicks(2666),
+                            PrescriptionDateTime = new DateTime(2025, 11, 21, 11, 25, 16, 311, DateTimeKind.Utc).AddTicks(6737),
                             Priority = 0,
                             RecordID = "rec-25",
                             Status = 2,
-                            VerifiedAt = new DateTime(2025, 11, 21, 11, 41, 34, 644, DateTimeKind.Utc).AddTicks(2667)
+                            VerifiedAt = new DateTime(2025, 11, 21, 11, 40, 16, 311, DateTimeKind.Utc).AddTicks(6738)
                         },
                         new
                         {
                             PrescriptionID = "presc-26",
-                            DispensedAt = new DateTime(2025, 11, 20, 17, 56, 34, 644, DateTimeKind.Utc).AddTicks(2675),
+                            DispensedAt = new DateTime(2025, 11, 20, 17, 55, 16, 311, DateTimeKind.Utc).AddTicks(6743),
                             PharmacistID = "phar-01",
-                            PrescriptionDateTime = new DateTime(2025, 11, 20, 17, 26, 34, 644, DateTimeKind.Utc).AddTicks(2670),
+                            PrescriptionDateTime = new DateTime(2025, 11, 20, 17, 25, 16, 311, DateTimeKind.Utc).AddTicks(6741),
                             Priority = 1,
                             RecordID = "rec-26",
                             Status = 1,
-                            VerifiedAt = new DateTime(2025, 11, 20, 17, 41, 34, 644, DateTimeKind.Utc).AddTicks(2674)
+                            VerifiedAt = new DateTime(2025, 11, 20, 17, 40, 16, 311, DateTimeKind.Utc).AddTicks(6742)
                         },
                         new
                         {
                             PrescriptionID = "presc-27",
-                            DispensedAt = new DateTime(2025, 11, 19, 13, 56, 34, 644, DateTimeKind.Utc).AddTicks(2679),
+                            DispensedAt = new DateTime(2025, 11, 19, 13, 55, 16, 311, DateTimeKind.Utc).AddTicks(6747),
                             PharmacistID = "phar-02",
-                            PrescriptionDateTime = new DateTime(2025, 11, 19, 13, 26, 34, 644, DateTimeKind.Utc).AddTicks(2677),
+                            PrescriptionDateTime = new DateTime(2025, 11, 19, 13, 25, 16, 311, DateTimeKind.Utc).AddTicks(6745),
                             Priority = 0,
                             RecordID = "rec-27",
                             Status = 2,
-                            VerifiedAt = new DateTime(2025, 11, 19, 13, 41, 34, 644, DateTimeKind.Utc).AddTicks(2678)
+                            VerifiedAt = new DateTime(2025, 11, 19, 13, 40, 16, 311, DateTimeKind.Utc).AddTicks(6746)
                         },
                         new
                         {
                             PrescriptionID = "presc-28",
-                            DispensedAt = new DateTime(2025, 11, 18, 16, 56, 34, 644, DateTimeKind.Utc).AddTicks(2683),
+                            DispensedAt = new DateTime(2025, 11, 18, 16, 55, 16, 311, DateTimeKind.Utc).AddTicks(6751),
                             PharmacistID = "phar-01",
-                            PrescriptionDateTime = new DateTime(2025, 11, 18, 16, 26, 34, 644, DateTimeKind.Utc).AddTicks(2681),
+                            PrescriptionDateTime = new DateTime(2025, 11, 18, 16, 25, 16, 311, DateTimeKind.Utc).AddTicks(6749),
                             Priority = 0,
                             RecordID = "rec-28",
                             Status = 1,
-                            VerifiedAt = new DateTime(2025, 11, 18, 16, 41, 34, 644, DateTimeKind.Utc).AddTicks(2682)
+                            VerifiedAt = new DateTime(2025, 11, 18, 16, 40, 16, 311, DateTimeKind.Utc).AddTicks(6750)
                         });
                 });
 
