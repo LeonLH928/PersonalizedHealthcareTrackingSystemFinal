@@ -163,16 +163,5 @@
         <Setter Property="HeadersVisibility" Value="Column"/>
         <Setter Property="RowHeight" Value="60"/>
     </Style>
-
-    <!-- DataGrid Header Style -->
-    <Style TargetType="DataGridColumnHeader">
-        <Setter Property="Background" Value="#f8fafc"/>
-        <Setter Property="Foreground" Value="{StaticResource TextSecondary}"/>
-        <Setter Property="FontWeight" Value="SemiBold"/>
-        <Setter Property="FontSize" Value="12"/>
-        <Setter Property="Padding" Value="24,16"/>
-        <Setter Property="BorderBrush" Value="{StaticResource BorderColor}"/>
-        <Setter Property="BorderThickness" Value="0,0,0,1"/>
-        <Setter Property="HorizontalContentAlignment" Value="Left"/>
-    </Style>
+    
 </ResourceDictionary>

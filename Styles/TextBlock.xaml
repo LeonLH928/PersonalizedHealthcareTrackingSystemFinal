@@ -50,13 +50,13 @@
     <Style x:Key="BMIStatusPrescriptionItemViewModelTextBlockStyle" TargetType="TextBlock" BasedOn="{StaticResource CustomBaseTextBlockStyle}">
         <Setter Property="Foreground" Value="{StaticResource MediumCompletedStatusBorder}"/>
         <Style.Triggers>
-            <DataTrigger Binding="{Binding SelectedClinicalExamination.MedicalRecord.Examination.BMIStatus}" Value="Overweight">
+            <DataTrigger Binding="{Binding SelectedClinicalExamination.StatusBMI}" Value="Overweight">
                 <Setter Property="Foreground" Value="{StaticResource UrgentTagTextBlock}"/>
             </DataTrigger>
-            <DataTrigger Binding="{Binding SelectedClinicalExamination.MedicalRecord.Examination.BMIStatus}" Value="Underweight">
+            <DataTrigger Binding="{Binding SelectedClinicalExamination.StatusBMI}" Value="Underweight">
                 <Setter Property="Foreground" Value="{StaticResource HappeningStatusBorder}"/>
             </DataTrigger>
-            <DataTrigger Binding="{Binding SelectedClinicalExamination.MedicalRecord.Examination.BMIStatus}" Value="Obese">
+            <DataTrigger Binding="{Binding SelectedClinicalExamination.StatusBMI}" Value="Obese">
                 <Setter Property="Foreground" Value="{StaticResource StatTagTextBlock}"/>
             </DataTrigger>
         </Style.Triggers>
