@@ -1,7 +1,11 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using CommunityToolkit.Mvvm.Messaging;
+using Microsoft.Extensions.DependencyInjection;
+using PersonalizedHealthcareTrackingSystemFinal.Messages;
 using PersonalizedHealthcareTrackingSystemFinal.Views.PharmacistView;
 using System;
+using System.CodeDom;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,6 +36,16 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Views.PharmacistView
                 var DashboardPage = _serviceProvider.GetRequiredService<PharmacistDashboard>();
                 PharmacistMainContent.Navigate(DashboardPage);
             };
+
+            WeakReferenceMessenger.Default.Register<PageTypeMessage>(this, (r, m) =>
+            {
+                var page = _serviceProvider.GetRequiredService(m.Value);
+                PharmacistMainContent.Navigate(page);
+                if (m.Value == typeof(PharmacistQueuePage))
+                    Sidebar.SelectedItem = Sidebar.Items[1];
+                else if (m.Value == typeof(InventoryManagementPage))
+                    Sidebar.SelectedItem = Sidebar.Items[2];
+            });
         }
         private void NavigateToPage(string NamePage)
         {
@@ -45,7 +59,6 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Views.PharmacistView
                     var PatientQueuePage = _serviceProvider.GetRequiredService<PharmacistQueuePage>();
                     PharmacistMainContent.Navigate(PatientQueuePage);
                     break;
-
                 case "Inventory Management":
                     var InventoryManagementPage = _serviceProvider.GetRequiredService<InventoryManagementPage>();
                     PharmacistMainContent.Navigate(InventoryManagementPage);

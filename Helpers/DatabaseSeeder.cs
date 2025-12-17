@@ -581,6 +581,141 @@ public static class DatabaseSeeder
                 SideEffect = "Dizziness, drowsiness, dry mouth, weight gain, blurred vision",
                 StorageInstruction = "Store at room temperature",
                 Price = 185000
+            },
+            new MedicationModel
+            {
+                MedicationID = "med-alprazolam-0-5",
+                Name = "Alprazolam 0.5mg",
+                ActiveIngredient = "Alprazolam",
+                Form = Form.Tablet,
+                BaseUnit = "mg",
+                StockTotalQuantity = 15,
+                PackingUnit = "blister",
+                UnitsPerPack = 10,
+                PackingDescription = "Blister of 10 tablets",
+                SideEffect = "Drowsiness, dizziness",
+                StorageInstruction = "Store at room temperature",
+                Price = 85000
+            },
+            new MedicationModel
+            {
+                MedicationID = "med-furosemide-40",
+                Name = "Furosemide 40mg",
+                ActiveIngredient = "Furosemide",
+                Form = Form.Tablet,
+                BaseUnit = "mg",
+                StockTotalQuantity = 8,
+                PackingUnit = "bottle",
+                UnitsPerPack = 50,
+                PackingDescription = "Bottle of 50 tablets",
+                SideEffect = "Dehydration, electrolyte imbalance",
+                StorageInstruction = "Protect from light",
+                Price = 40000
+            },
+            new MedicationModel
+            {
+                MedicationID = "med-clopidogrel-75",
+                Name = "Clopidogrel 75mg",
+                ActiveIngredient = "Clopidogrel Bisulfate",
+                Form = Form.Tablet,
+                BaseUnit = "mg",
+                StockTotalQuantity = 12,
+                PackingUnit = "box",
+                UnitsPerPack = 28,
+                PackingDescription = "Box of 28 tablets",
+                SideEffect = "Bleeding, bruising",
+                StorageInstruction = "Store in a dry place",
+                Price = 320000
+            },
+            new MedicationModel
+            {
+                MedicationID = "med-spironolactone-25",
+                Name = "Spironolactone 25mg",
+                ActiveIngredient = "Spironolactone",
+                Form = Form.Tablet,
+                BaseUnit = "mg",
+                StockTotalQuantity = 5,
+                PackingUnit = "bottle",
+                UnitsPerPack = 30,
+                PackingDescription = "Bottle of 30 tablets",
+                SideEffect = "Hyperkalemia, dizziness",
+                StorageInstruction = "Store below 25°C",
+                Price = 75000
+            },
+            new MedicationModel
+            {
+                MedicationID = "med-allopurinol-100",
+                Name = "Allopurinol 100mg",
+                ActiveIngredient = "Allopurinol",
+                Form = Form.Tablet,
+                BaseUnit = "mg",
+                StockTotalQuantity = 18,
+                PackingUnit = "box",
+                UnitsPerPack = 50,
+                PackingDescription = "Box of 5 blisters",
+                SideEffect = "Rash, nausea",
+                StorageInstruction = "Store at room temperature",
+                Price = 60000
+            },
+            new MedicationModel
+            {
+                MedicationID = "med-digoxin-250",
+                Name = "Digoxin 250mcg",
+                ActiveIngredient = "Digoxin",
+                Form = Form.Tablet,
+                BaseUnit = "mcg",
+                StockTotalQuantity = 9,
+                PackingUnit = "bottle",
+                UnitsPerPack = 100,
+                PackingDescription = "Bottle of 100 tablets",
+                SideEffect = "Nausea, dizziness, vision changes",
+                StorageInstruction = "Store at room temperature",
+                Price = 95000
+            },
+            new MedicationModel
+            {
+                MedicationID = "med-nitro-sublingual",
+                Name = "Nitroglycerin 0.5mg",
+                ActiveIngredient = "Nitroglycerin",
+                Form = Form.Tablet,
+                BaseUnit = "mg",
+                StockTotalQuantity = 4,
+                PackingUnit = "bottle",
+                UnitsPerPack = 25,
+                PackingDescription = "Glass bottle of 25 sublingual tablets",
+                SideEffect = "Headache, hypotension",
+                StorageInstruction = "Keep tightly closed",
+                Price = 110000
+            },
+            new MedicationModel
+            {
+                MedicationID = "med-cefdinir-300",
+                Name = "Cefdinir 300mg",
+                ActiveIngredient = "Cefdinir",
+                Form = Form.Capsule,
+                BaseUnit = "mg",
+                StockTotalQuantity = 10,
+                PackingUnit = "box",
+                UnitsPerPack = 10,
+                PackingDescription = "Box of 10 capsules",
+                SideEffect = "Diarrhea, nausea",
+                StorageInstruction = "Store at room temperature",
+                Price = 250000
+            },
+            new MedicationModel
+            {
+                MedicationID = "med-epinephrine-pen",
+                Name = "Epinephrine Auto-Injector",
+                ActiveIngredient = "Epinephrine",
+                Form = Form.Injection,
+                BaseUnit = "mg",
+                StockTotalQuantity = 2,
+                PackingUnit = "pen",
+                UnitsPerPack = 2,
+                PackingDescription = "Pack of 2 auto-injectors",
+                SideEffect = "Palpitations, anxiety",
+                StorageInstruction = "Do not refrigerate, protect from light",
+                Price = 1200000
             }
         );
     }

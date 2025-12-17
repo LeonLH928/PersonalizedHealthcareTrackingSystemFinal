@@ -42,7 +42,7 @@
                         </Grid.ColumnDefinitions>
                         <TextBlock
                             VerticalAlignment="Top"
-                            Text="Waiting to verify"
+                            Text="Prescriptions Queue"
                             Style="{StaticResource PageHeaderTextBlockStyle}"/>
                         <StackPanel Grid.Column="1">
                             <Border 
@@ -63,7 +63,7 @@
                                 Style="{StaticResource BaseCustomBorderStyle}"
                                 VerticalAlignment="Center">
                                 <TextBlock
-                                    Text="{Binding NumberPending, StringFormat={}{0} waiting}"
+                                    Text="{Binding NumberDispensing, StringFormat={}{0} dispensing}"
                                     Foreground="{StaticResource StatusPendingText}"
                                     HorizontalAlignment="Right"
                                     VerticalAlignment="Center"
@@ -661,7 +661,7 @@
                             <TextBlock
                                 Text="Drug Details &amp; Inventory Check"
                                 Style="{StaticResource CustomBaseTextBlockStyle}"
-                                FontSize="24"
+                                  FontSize="24"
                                 FontWeight="Bold"
                                 Margin="0,0,0,10"/>
 
@@ -753,9 +753,15 @@
                         Style="{StaticResource SecondaryTextTextBlockStyle}"
                         FontSize="18"
                         FontWeight="Bold"
-                        Text="Me"
                         VerticalAlignment="Center"
-                        Margin="0,0,20,0"/>
+                        Margin="0,0,20,0">
+                        <TextBlock.Text>
+                            <MultiBinding StringFormat="{}{0} {1}">
+                                <Binding Path="CurrentUser.FirstName"/>
+                                <Binding Path="CurrentUser.LastName"/>
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
                     <Button
                         Style="{StaticResource PrimaryButtonStyle}"
                         Margin="0,0,10,0"
@@ -1092,9 +1098,15 @@
                         Style="{StaticResource SecondaryTextTextBlockStyle}"
                         FontSize="18"
                         FontWeight="Bold"
-                        Text="Me"
                         VerticalAlignment="Center"
-                        Margin="0,0,20,0"/>
+                        Margin="0,0,20,0">
+                        <TextBlock.Text>
+                            <MultiBinding StringFormat="{}{0} {1}">
+                                <Binding Path="CurrentUser.FirstName"/>
+                                <Binding Path="CurrentUser.LastName"/>
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
                     <Button
                         Style="{StaticResource PrimaryButtonStyle}"
                         Margin="0,0,10,0"

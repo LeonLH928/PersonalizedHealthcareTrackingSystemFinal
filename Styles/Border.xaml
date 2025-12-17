@@ -215,7 +215,7 @@
         <Setter Property="BorderBrush" Value="{StaticResource UrgentTagBorderBrush}"/>
         <Setter Property="BorderThickness" Value="1"/>
     </Style>
-    
+
     <!-- Priority Tag Border Style -->
     <Style x:Key="PriorityTagBorderStyle" TargetType="Border" BasedOn="{StaticResource BaseCustomBorderStyle}">
         <Setter Property="Background" Value="{StaticResource RoutineTagBorder}"/>
@@ -229,6 +229,25 @@
             <DataTrigger Binding="{Binding Priority}" Value="Stat">
                 <Setter Property="Background" Value="{StaticResource StatTagBorder}"/>
                 <Setter Property="BorderBrush" Value="{StaticResource StatTagBorderBrush}"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+    
+    <!-- Priority Card Border Style -->
+    <Style x:Key="PriorityCardBorderStyle" TargetType="Border" BasedOn="{StaticResource BaseCustomBorderStyle}">
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="BorderBrush" Value="{StaticResource LightBorder}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding Priority}" Value="Urgent">
+                <Setter Property="Background" Value="{StaticResource StatusPendingText}"/>
+                <Setter Property="BorderBrush" Value="{StaticResource UrgentTagBorderBrush}"/>
+                <Setter Property="BorderThickness" Value="5,1,1,1"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Priority}" Value="Stat">
+                <Setter Property="Background" Value="{StaticResource DangerBg}"/>
+                <Setter Property="BorderBrush" Value="{StaticResource DangerColor}"/>
+                <Setter Property="BorderThickness" Value="5,1,1,1"/>
             </DataTrigger>
         </Style.Triggers>
     </Style>
@@ -275,7 +294,7 @@
         </Setter>
     </Style>
 
-    <!-- Stock Badge Styles -->
+    <!-- Stock Badge Style -->
     <Style x:Key="StockBadgeOk" TargetType="Border">
         <Setter Property="Background" Value="{StaticResource StockOkBg}"/>
         <Setter Property="CornerRadius" Value="20"/>
