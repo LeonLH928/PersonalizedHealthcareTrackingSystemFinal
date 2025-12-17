@@ -112,6 +112,7 @@ public static class AppModule
         services.AddScoped<IPrescriptionRepository, PrescriptionRepository>();
         services.AddScoped<IDoctorRepository, DoctorRepository>();
         services.AddScoped<IDoctorScheduleRepository, DoctorScheduleRepository>();
+        services.AddScoped<IPharmacistRepository, PharmacistRepository>();
 
         // Register Services
         services.AddScoped<IAppointmentService, AppointmentService>();
@@ -127,6 +128,7 @@ public static class AppModule
         services.AddScoped<IDoctorService, DoctorService>();
         services.AddScoped<ICurrentUserStoreService, CurrentUserStoreService>();
         services.AddScoped<IDoctorScheduleService, DoctorScheduleService>();
+        services.AddScoped<IPharmacistService, PharmacistService>();
 
         return services;
     }

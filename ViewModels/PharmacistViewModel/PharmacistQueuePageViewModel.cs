@@ -19,15 +19,26 @@ public partial class PharmacistQueuePageViewModel : ObservableObject
     private readonly IPrescriptionService _prescriptionService;
     private readonly IClinicalExaminationService _clinicalExaminationService;
     private readonly IPrescriptionItemService _prescriptionItemService;
+    private readonly ICurrentUserStoreService _currentUserService;
+    private readonly IPharmacistService _pharmacistService;
     public PharmacistQueuePageViewModel(IPrescriptionService prescriptionService,
                                         IClinicalExaminationService clinicalExamination,
-                                        IPrescriptionItemService prescriptionItemService)
+                                        IPrescriptionItemService prescriptionItemService,
+                                        ICurrentUserStoreService currentUserService,
+                                        IPharmacistService pharmacistService)
     {
         _prescriptionService = prescriptionService;
         _clinicalExaminationService = clinicalExamination;
         _prescriptionItemService = prescriptionItemService;
+        _currentUserService = currentUserService;
+        _pharmacistService = pharmacistService;
+
         _ = LoadDataAsync();
     }
+    [ObservableProperty]
+    private UserModel currentUser = null!;
+    [ObservableProperty]
+    private PharmacistModel currentPharmacist = null!;
     [ObservableProperty]
     private bool isPendingSelected = false;
     [ObservableProperty]
@@ -66,6 +77,8 @@ public partial class PharmacistQueuePageViewModel : ObservableObject
         IsLoadingBar = true;
         try
         {
+            CurrentUser = _currentUserService.GetCurrentUser()!;
+            CurrentPharmacist = (await _pharmacistService.GetPharmacistByUserIDAsync(CurrentUser.UserID))!;
             PrescriptionsPending = [.. await _prescriptionService.GetAllPendingPrescriptionsAsync()];
             NumberPending = PrescriptionsPending.Count();
             PrescriptionsDispensing = [.. await _prescriptionService.GetAllDispensingPrescriptionsAsync()];
@@ -216,5 +229,4 @@ public partial class PharmacistQueuePageViewModel : ObservableObject
             IsBusy = false;
         }
     }
-
 }
