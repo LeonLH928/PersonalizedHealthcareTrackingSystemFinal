@@ -8,5 +8,6 @@ public interface IPrescriptionService
     Task<IEnumerable<PrescriptionModel>> GetAllDispensingPrescriptionsAsync();
     Task<IEnumerable<PrescriptionModel>> GetAllCompletedPrescriptionsAsync();
     Task<IEnumerable<PrescriptionModel>> GetAllCancelledPrescriptionsAsync();
+    Task<IEnumerable<PrescriptionModel>> GetAllPrescriptionsAsync();
     Task<IEnumerable<PrescriptionModel>> SearchByText(string SearchText);
 }
