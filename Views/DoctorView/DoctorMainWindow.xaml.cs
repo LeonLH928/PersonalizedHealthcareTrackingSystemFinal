@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using LiveChartsCore.Painting;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -41,9 +42,25 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Views.DoctorView
                     var DashboardPage = _serviceProvider.GetRequiredService<DoctorDashboardPage>();
                     DoctorMainContent.Navigate(DashboardPage);
                     break;
-                case "PatientQueue":
-                    var PatientQueuePage = _serviceProvider.GetRequiredService<DoctorUpcomingsPage>();
-                    DoctorMainContent.Navigate(PatientQueuePage);
+
+                case "Waiting List":
+                    var WaitingListPage = _serviceProvider.GetRequiredService<DoctorUpcomingsPage>();
+                    DoctorMainContent.Navigate(WaitingListPage);
+                    break;
+
+                case "Patient List":
+                    var PatientListPage = _serviceProvider.GetRequiredService<DoctorPatientListPage>();
+                    DoctorMainContent.Navigate(PatientListPage);
+                    break;
+
+                case "Work Schedule":
+                    var WorkSchedulePage = _serviceProvider.GetRequiredService<DoctorWorkSchedulePage>();
+                    DoctorMainContent.Navigate(WorkSchedulePage);
+                    break;
+
+                case "Pharmacy Inventory":
+                    var PharmacyInventoryPage = _serviceProvider.GetRequiredService<DoctorPharmacyInventoryPage>();
+                    DoctorMainContent.Navigate(PharmacyInventoryPage);
                     break;
             }
         }

@@ -73,6 +73,9 @@ public static class AppModule
         services.AddTransient<Views.DoctorView.DoctorConsultationWindow>();
         services.AddTransient<Views.DoctorView.DoctorUpcomingsPage>();
         services.AddTransient<Views.DoctorView.AddDrugWindow>();
+        services.AddTransient<Views.DoctorView.DoctorPatientListPage>();
+        services.AddTransient<Views.DoctorView.DoctorWorkSchedulePage>();
+        services.AddTransient<Views.DoctorView.DoctorPharmacyInventoryPage>();
 
         services.AddTransient<Views.PharmacistView.PharmacistMainWindow>();
         services.AddTransient<Views.PharmacistView.PharmacistQueuePage>();
