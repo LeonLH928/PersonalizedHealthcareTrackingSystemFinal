@@ -62,4 +62,9 @@ public partial class PatientHomePageViewModel : ObservableObject
             MessageBox.Show($"Cannot load data: {e.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
+    [RelayCommand]
+    public void BookingButton()
+    {
+
+    }
 }

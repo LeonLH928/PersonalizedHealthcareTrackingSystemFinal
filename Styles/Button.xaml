@@ -579,7 +579,7 @@
             </DataTrigger>
         </Style.Triggers>
     </Style>
-    
+
     <Style x:Key="BtnPrimary" TargetType="Button">
         <Setter Property="Background" Value="{StaticResource PrimaryColor}"/>
         <Setter Property="Foreground" Value="White"/>
@@ -602,6 +602,62 @@
                             <Setter Property="Background" Value="#cbd5e1"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <Style x:Key="PatientBtnPrimary" TargetType="Button">
+        <Setter Property="Background" Value="{StaticResource PrimaryColor}"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Padding" Value="24,12"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border 
+                        x:Name="Border"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        Padding="{TemplateBinding Padding}"
+                        CornerRadius="8">
+
+                        <ContentPresenter HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"/>
+
+                        <Border.Effect>
+                            <DropShadowEffect Color="Black"
+                                              Direction="315"
+                                              ShadowDepth="3"
+                                              BlurRadius="10"
+                                              Opacity="0.3"/>
+                        </Border.Effect>
+
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualStateGroup.Transitions>
+                                    <VisualTransition GeneratedDuration="0:0:0.2"/>
+                                </VisualStateGroup.Transitions>
+
+                                <VisualState x:Name="Normal"/>
+
+                                <VisualState x:Name="MouseOver">
+                                    <Storyboard>
+                                        <ColorAnimation 
+                                            Storyboard.TargetName="Border"
+                                            Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
+                                            To="#cbd5e1"/>
+                                    </Storyboard>
+                                </VisualState>
+
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+
+                    </Border>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
