@@ -122,6 +122,59 @@
     </Style>
 
     <!-- Outline Button Style-->
+    <Style x:Key="OutlineButtonStyleWithoutBorderBrush" TargetType="Button">
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Foreground" Value="#64748b"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="FontFamily" Value="Arial"/>
+        <Setter Property="FontWeight" Value="Semibold"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border
+                        x:Name="Border"
+                        Padding="10"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        TextElement.Foreground="{TemplateBinding Foreground}"
+                        TextElement.FontSize="{TemplateBinding FontSize}"
+                        TextElement.FontFamily="{TemplateBinding FontFamily}"
+                        TextElement.FontWeight="{TemplateBinding FontWeight}"
+                        CornerRadius="8">
+
+                        <ContentPresenter x:Name="Container"
+                                          HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"/>
+
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualStateGroup.Transitions>
+                                    <VisualTransition GeneratedDuration="0:0:0.2"/>
+                                </VisualStateGroup.Transitions>
+
+                                <VisualState x:Name="Normal"/>
+
+                                <VisualState x:Name="MouseOver">
+                                    <Storyboard>
+                                        <ColorAnimation 
+                                            Storyboard.TargetName="Border"
+                                            Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)"
+                                            To="#2563eb"/>
+                                    </Storyboard>
+                                </VisualState>
+
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <!-- Outline Button Style-->
     <Style x:Key="OutlineButtonStyle" TargetType="Button">
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="Foreground" Value="#64748b"/>

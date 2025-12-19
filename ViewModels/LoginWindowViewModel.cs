@@ -89,6 +89,10 @@ namespace PersonalizedHealthcareTrackingSystemFinal.ViewModels
                     {
                         NavigateToDoctorMainWindow();
                     }
+                    else if (user.Role == Models.UserRole.Pharmacist)
+                    {
+                        NavigateToPharmacistMainWindow(); 
+                    }
                     else
                     {
                         ShowError("Unknown user role.");
@@ -158,6 +162,23 @@ namespace PersonalizedHealthcareTrackingSystemFinal.ViewModels
             if (window != null)
             {
                 window.WindowState = WindowState.Minimized;
+            }
+        }
+
+        private void NavigateToPharmacistMainWindow()
+        {
+            try
+            {
+                var pharmacistMainWindow = _serviceProvider.GetRequiredService<Views.PharmacistView.PharmacistMainWindow>();
+                pharmacistMainWindow.Show();
+                Application.Current.Windows.OfType<LoginWindow>().FirstOrDefault()?.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Navigation failed: {ex.Message}",
+                               "Error",
+                               MessageBoxButton.OK,
+                               MessageBoxImage.Error);
             }
         }
 

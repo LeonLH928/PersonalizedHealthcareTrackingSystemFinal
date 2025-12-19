@@ -1,5 +1,4 @@
-﻿using PersonalizedHealthcareTrackingSystemFinal.ViewModels.PharmacistViewModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,17 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace PersonalizedHealthcareTrackingSystemFinal.Views.PharmacistView
+namespace PersonalizedHealthcareTrackingSystemFinal.Views.DoctorView
 {
     /// <summary>
-    /// Interaction logic for PharmacistDashboard.xaml
+    /// Interaction logic for DoctorPatientListPage.xaml
     /// </summary>
-    public partial class PharmacistDashboard : Page
+    public partial class DoctorPatientListPage : Page
     {
-        public PharmacistDashboard(PharmacistDashboardPageViewModel vm)
+        public DoctorPatientListPage()
         {
             InitializeComponent();
-            DataContext = vm;
         }
     }
 }

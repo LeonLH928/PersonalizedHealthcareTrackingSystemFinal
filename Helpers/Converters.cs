@@ -1,4 +1,5 @@
 ﻿using Microsoft.IdentityModel.Tokens;
+using PersonalizedHealthcareTrackingSystemFinal.Models;
 using System.Diagnostics;
 using System.Globalization;
 using System.Windows;
@@ -44,6 +45,40 @@ public class ZeroToEmptyStringConverter : IValueConverter
         if (value is int inumber && inumber == 0)
             return string.Empty;
         return value is null ? string.Empty : value.ToString()!;
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        if (value is not string s || string.IsNullOrWhiteSpace(s))
+            return 0;
+
+        return double.TryParse(s, out var result) ? result : 0;
+    }
+}
+public class ZeroStockToVisibility : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        if (value is int stock && stock == 0)
+            return Visibility.Visible;
+        return Visibility.Collapsed;
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        if (value is not string s || string.IsNullOrWhiteSpace(s))
+            return 0;
+
+        return double.TryParse(s, out var result) ? result : 0;
+    }
+}
+public class LowStockToVisibility : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        if (value is int stock && stock < 20 && stock > 0)
+            return Visibility.Visible;
+        return Visibility.Collapsed;
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -268,6 +303,39 @@ public class LocalToUtcDisplayConverter : IValueConverter
             return dt.AddHours(-7);
         }
         return value;
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}
+
+public class StatToVisibility : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        if (value is Priority priority && priority == Priority.Stat)
+        {
+            return Visibility.Visible;
+        }
+        return Visibility.Collapsed;
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}
+public class UrgentToVisibility : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        if (value is Priority priority && priority == Priority.Urgent)
+        {
+            return Visibility.Visible;
+        }
+        return Visibility.Collapsed;
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

@@ -69,7 +69,7 @@
                         </StackPanel>
                     </ListBoxItem>
 
-                    <ListBoxItem Tag="PatientQueue">
+                    <ListBoxItem Tag="Waiting List">
                         <StackPanel Orientation="Horizontal">
                             <fa:ImageAwesome 
                                 Icon="AlignJustify" 
@@ -78,21 +78,57 @@
                                 Margin="0,0,20,0" 
                                 VerticalAlignment="Center" 
                                 Foreground="White"/>
-                            <TextBlock Text="Patient Queue"/>
+                            <TextBlock Text="Waiting List"/>
                         </StackPanel>
                     </ListBoxItem>
 
-                    <ListBoxItem Tag="Settings">
+                    <ListBoxItem Tag="Examination And Prescription">
                         <StackPanel Orientation="Horizontal">
-                            <fa:ImageAwesome Icon="Cog" 
+                            <fa:ImageAwesome Icon="stethoscope" 
                                              Width="20" 
                                              Height="20" 
                                              Margin="0,0,20,0" 
                                              VerticalAlignment="Center" 
                                              Foreground="White"/>
-                            <TextBlock Text="Settings"/>
+                            <TextBlock Text="Examination And Prescription"/>
                         </StackPanel>
                     </ListBoxItem>
+
+                    <ListBoxItem Tag="Patient List">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:ImageAwesome Icon="users" 
+                         Width="20" 
+                         Height="20" 
+                         Margin="0,0,20,0" 
+                         VerticalAlignment="Center" 
+                         Foreground="White"/>
+                            <TextBlock Text="Patient List"/>
+                        </StackPanel>
+                    </ListBoxItem>
+
+                    <ListBoxItem Tag="Work Schedule">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:ImageAwesome Icon="calendar" 
+                         Width="20" 
+                         Height="20" 
+                         Margin="0,0,20,0" 
+                         VerticalAlignment="Center" 
+                         Foreground="White"/>
+                            <TextBlock Text="Work Schedule"/>
+                        </StackPanel>
+                    </ListBoxItem>
+
+                    <ListBoxItem Tag="Pharmacy Inventory">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:ImageAwesome Icon="medkit" 
+                                             Width="20" 
+                                             Height="20" 
+                                             Margin="0,0,20,0" 
+                                             VerticalAlignment="Center" 
+                                             Foreground="White"/>
+                            <TextBlock Text="Pharmacy Inventory"/>
+                        </StackPanel>
+                    </ListBoxItem>  
 
                 </ListBox>
 

@@ -3,9 +3,19 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"       
+             xmlns:fa="http://schemas.fontawesome.io/icons/"
+             xmlns:converters="clr-namespace:PersonalizedHealthcareTrackingSystemFinal.Helpers"       
              mc:Ignorable="d" 
              d:DesignHeight="900" d:DesignWidth="1200"
              Background="#F1F5F9" FontFamily="Segoe UI">
+    <Page.Resources>
+        <converters:LocalToUtcDisplayConverter x:Key="LocalToUtcDisplayConverter"/>
+        <converters:StatToVisibility x:Key="StatToVisibility"/>
+        <converters:UrgentToVisibility x:Key="UrgentToVisibility"/>
+        <converters:ZeroStockToVisibility x:Key="ZeroStockToVisibility"/>
+        <converters:LowStockToVisibility x:Key="LowStockToVisibility"/>
+    </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -14,168 +24,221 @@
         <Border Grid.Row="0" Background="{StaticResource BgWhite}" BorderBrush="{StaticResource BorderColor}" BorderThickness="0,0,0,1" Padding="32,24">
             <Grid>
                 <StackPanel>
-                    <TextBlock Text="Pharmacy Overview" FontSize="26" FontWeight="Bold" Foreground="{StaticResource TextDark}"/>
-                    <TextBlock Text="Good morning, Pharmacist Thu Ha. Here's today's activity status." Foreground="{StaticResource TextSecondary}" Margin="0,4,0,0"/>
+                    <TextBlock Text="Pharmacy's Dashboard" 
+                               Style="{StaticResource PageHeaderTextBlockStyle}"/>
+                    <TextBlock 
+                               Style="{StaticResource SecondaryTextTextBlockStyle}">
+                        <TextBlock.Text>
+                            <MultiBinding StringFormat="{}Good morning, Pharmacist {0} {1}. Here's today's activity status.">
+                                <Binding Path="CurrentUser.FirstName"/>
+                                <Binding Path="CurrentUser.LastName"/>
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
                 </StackPanel>
                 <Border HorizontalAlignment="Right" VerticalAlignment="Center" Background="#F1F5F9" CornerRadius="20" Padding="12,6">
-                    <TextBlock Text="📅 Friday, October 27, 2023" FontWeight="SemiBold" Foreground="{StaticResource TextSecondary}"/>
+                    <TextBlock Style="{StaticResource SecondaryTextTextBlockStyle}">
+                        <TextBlock.Text>
+                            <Binding Source="{x:Static sys:DateTime.Now}" 
+                                     StringFormat="{}Today, {0:dddd - dd/MM/yyyy}"/>
+                        </TextBlock.Text>
+                    </TextBlock>
                 </Border>
             </Grid>
         </Border>
-        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
-            <Grid Margin="32">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <Grid Grid.Row="0" Margin="0,0,0,24">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="24"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="24"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="24"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <Border Grid.Column="0" Style="{StaticResource KpiCardStyle}" Background="#FFF7ED" BorderBrush="#FDBA74">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <Border Width="56" Height="56" CornerRadius="12" Background="#FFEDD5" Margin="0,0,16,0">
-                                <TextBlock Text="⏳" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            </Border>
-                            <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                                <TextBlock Text="5" FontSize="32" FontWeight="Bold" Foreground="#EA580C"/>
-                                <TextBlock Text="Pending Approval" FontSize="14" FontWeight="SemiBold" Foreground="{StaticResource TextSecondary}"/>
-                            </StackPanel>
-                        </Grid>
-                    </Border>
-                    <Border Grid.Column="2" Style="{StaticResource KpiCardStyle}">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <Border Width="56" Height="56" CornerRadius="12" Background="#DBEAFE" Margin="0,0,16,0">
-                                <TextBlock Text="✅" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            </Border>
-                            <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                                <TextBlock Text="2" FontSize="32" FontWeight="Bold" Foreground="#1E293B"/>
-                                <TextBlock Text="Ready to Dispense" FontSize="14" FontWeight="SemiBold" Foreground="{StaticResource TextSecondary}"/>
-                            </StackPanel>
-                        </Grid>
-                    </Border>
-                    <Border Grid.Column="4" Style="{StaticResource KpiCardStyle}">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <Border Width="56" Height="56" CornerRadius="12" Background="#DCFCE7" Margin="0,0,16,0">
-                                <TextBlock Text="🎉" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            </Border>
-                            <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                                <TextBlock Text="45" FontSize="32" FontWeight="Bold" Foreground="#1E293B"/>
-                                <TextBlock Text="Dispensed" FontSize="14" FontWeight="SemiBold" Foreground="{StaticResource TextSecondary}"/>
-                            </StackPanel>
-                        </Grid>
-                    </Border>
-                    <Border Grid.Column="6" Style="{StaticResource KpiCardStyle}" BorderBrush="#FCA5A5">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <Border Width="56" Height="56" CornerRadius="12" Background="#FEE2E2" Margin="0,0,16,0">
-                                <TextBlock Text="⚠️" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            </Border>
-                            <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                                <TextBlock Text="3" FontSize="32" FontWeight="Bold" Foreground="#DC2626"/>
-                                <TextBlock Text="Low Stock" FontSize="14" FontWeight="SemiBold" Foreground="{StaticResource TextSecondary}"/>
-                            </StackPanel>
-                        </Grid>
-                    </Border>
-                </Grid>
-                <Grid Grid.Row="1">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="3*"/>
-                        <ColumnDefinition Width="24"/>
-                        <ColumnDefinition Width="1*"/>
-                    </Grid.ColumnDefinitions>
-                    <Border Grid.Column="0" Background="{StaticResource BgWhite}" CornerRadius="16" BorderBrush="{StaticResource BorderColor}" BorderThickness="1">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="*"/>
-                            </Grid.RowDefinitions>
-                            <Border Grid.Row="0" Background="#F8FAFC" BorderBrush="{StaticResource BorderColor}" BorderThickness="0,0,0,1" Padding="24,16" CornerRadius="16,16,0,0">
-                                <Grid>
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="🔄" Margin="0,0,8,0"/>
-                                        <TextBlock Text="Latest Prescriptions (Queue)" FontWeight="Bold" Foreground="{StaticResource TextDark}" FontSize="16"/>
-                                    </StackPanel>
-                                    <TextBlock Text="View all →" HorizontalAlignment="Right" Foreground="#0d9488" FontWeight="SemiBold" Cursor="Hand"/>
-                                </Grid>
-                            </Border>
-                            <StackPanel Grid.Row="1">
-                                <Border Background="#FEF2F2" BorderBrush="#EF4444" BorderThickness="4,1,1,1" CornerRadius="4,8,8,4" Padding="16,12" Margin="0,0,0,8">
-                                    <Grid>
-                                        <StackPanel>
-                                            <StackPanel Orientation="Horizontal">
-                                                <TextBlock Text="09:15 AM" FontWeight="SemiBold" Foreground="{StaticResource TextDark}"/>
-                                                <Border Background="#FEE2E2" CornerRadius="4" Margin="8,0,0,0" Padding="6,2">
-                                                    <TextBlock Text="🔥 URGENT" FontSize="11" FontWeight="Bold" Foreground="#DC2626"/>
-                                                </Border>
-                                            </StackPanel>
-                                            <TextBlock Text="Patient: Nguyen Van A (Dr. Tuan)" FontSize="13" Foreground="{StaticResource TextSecondary}" Margin="0,4,0,0"/>
-                                        </StackPanel>
-                                        <Border HorizontalAlignment="Right" Background="#FFF7ED" CornerRadius="20" Padding="10,4" VerticalAlignment="Center">
-                                            <TextBlock Text="Pending" FontSize="12" FontWeight="SemiBold" Foreground="#C2410C"/>
-                                        </Border>
-                                    </Grid>
-                                </Border>
-                                <Border Background="White" BorderBrush="{StaticResource BorderColor}" BorderThickness="1" CornerRadius="8" Padding="16,12" Margin="0,0,0,8">
-                                    <Grid>
-                                        <StackPanel>
-                                            <TextBlock Text="09:10 AM" FontWeight="SemiBold" Foreground="{StaticResource TextDark}"/>
-                                            <TextBlock Text="Patient: Le Thi B (Dr. Lan)" FontSize="13" Foreground="{StaticResource TextSecondary}" Margin="0,4,0,0"/>
-                                        </StackPanel>
-                                        <Border HorizontalAlignment="Right" Background="#FFF7ED" CornerRadius="20" Padding="10,4" VerticalAlignment="Center">
-                                            <TextBlock Text="Pending" FontSize="12" FontWeight="SemiBold" Foreground="#C2410C"/>
-                                        </Border>
-                                    </Grid>
-                                </Border>
-                                <Border Background="#F0F9FF" BorderBrush="{StaticResource BorderColor}" BorderThickness="1" CornerRadius="8" Padding="16,12">
-                                    <Grid>
-                                        <StackPanel>
-                                            <TextBlock Text="09:05 AM" FontWeight="SemiBold" Foreground="{StaticResource TextDark}"/>
-                                            <TextBlock Text="Patient: Tran Van C (Dr. Hoang)" FontSize="13" Foreground="{StaticResource TextSecondary}" Margin="0,4,0,0"/>
-                                        </StackPanel>
-                                        <Border HorizontalAlignment="Right" Background="#EFF6FF" CornerRadius="20" Padding="10,4" VerticalAlignment="Center">
-                                            <TextBlock Text="Approved" FontSize="12" FontWeight="SemiBold" Foreground="#1D4ED8"/>
-                                        </Border>
-                                    </Grid>
-                                </Border>
-                            </StackPanel>
-                        </Grid>
-                    </Border>
-                    <Border Grid.Column="2" Background="{StaticResource BgWhite}" CornerRadius="16" BorderBrush="#FCA5A5" BorderThickness="1">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="*"/>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
-                            <Border Grid.Row="0" Background="#FEF2F2" BorderBrush="{StaticResource BorderColor}" BorderThickness="0,0,0,1" Padding="24,16" CornerRadius="16,16,0,0">
+        
+        <Grid Margin="32"
+                Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" Margin="0,0,0,24">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="24"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="24"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="24"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Border Grid.Column="0" Style="{StaticResource KpiCardStyle}" Background="#FFF7ED" BorderBrush="#FDBA74">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Border Width="56" Height="56" CornerRadius="12" Background="#FFEDD5" Margin="0,0,16,0">
+                            <TextBlock Text="⏳" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                            <TextBlock Text="{Binding PendingTotal}" FontSize="32" FontWeight="Bold" Foreground="#EA580C"/>
+                            <TextBlock Text="Pending Approval" FontSize="14" FontWeight="SemiBold" Foreground="{StaticResource TextSecondary}"/>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+                <Border Grid.Column="2" Style="{StaticResource KpiCardStyle}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Border Width="56" Height="56" CornerRadius="12" Background="#DBEAFE" Margin="0,0,16,0">
+                            <TextBlock Text="✅" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                            <TextBlock Text="{Binding DispensingTotal}" FontSize="32" FontWeight="Bold" Foreground="#1E293B"/>
+                            <TextBlock Text="Ready to Dispense" FontSize="14" FontWeight="SemiBold" Foreground="{StaticResource TextSecondary}"/>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+                <Border Grid.Column="4" Style="{StaticResource KpiCardStyle}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Border Width="56" Height="56" CornerRadius="12" Background="#DCFCE7" Margin="0,0,16,0">
+                            <TextBlock Text="🎉" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                            <TextBlock Text="{Binding CompletedTotal}" FontSize="32" FontWeight="Bold" Foreground="#1E293B"/>
+                            <TextBlock Text="Dispensed" FontSize="14" FontWeight="SemiBold" Foreground="{StaticResource TextSecondary}"/>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+                <Border Grid.Column="6" Style="{StaticResource KpiCardStyle}" BorderBrush="#FCA5A5">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Border Width="56" Height="56" CornerRadius="12" Background="#FEE2E2" Margin="0,0,16,0">
+                            <TextBlock Text="⚠️" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                            <TextBlock Text="{Binding LowStockTotal}" FontSize="32" FontWeight="Bold" Foreground="#DC2626"/>
+                            <TextBlock Text="Low Stock" FontSize="14" FontWeight="SemiBold" Foreground="{StaticResource TextSecondary}"/>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+            </Grid>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="24"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Border Grid.Column="0" Background="{StaticResource BgWhite}" CornerRadius="16" BorderBrush="{StaticResource BorderColor}" BorderThickness="1">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Border Grid.Row="0" Background="#F8FAFC" BorderBrush="{StaticResource BorderColor}" BorderThickness="0,0,0,1" Padding="24,16" CornerRadius="16,16,0,0">
+                            <Grid>
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="⚠️" Margin="0,0,8,0"/>
-                                    <TextBlock Text="Inventory Alerts" FontWeight="Bold" Foreground="#DC2626" FontSize="16"/>
+                                    <TextBlock Text="&#x1F4CB;" 
+                                               Style="{StaticResource CustomBaseTextBlockStyle}"
+                                               FontWeight="SemiBold"
+                                               FontSize="20"
+                                               Margin="0,0,8,0"/>
+                                    <TextBlock Text="Latest Prescriptions" 
+                                               Style="{StaticResource CustomBaseTextBlockStyle}"
+                                               FontWeight="SemiBold"
+                                               FontSize="20"/>
                                 </StackPanel>
-                            </Border>
-                            <StackPanel Grid.Row="1">
+                                <Button Content="View all →" 
+                                        Command="{Binding ViewAllButtonCommand}"
+                                        HorizontalAlignment="Right" 
+                                        Foreground="#0d9488" 
+                                        FontWeight="SemiBold" 
+                                        Cursor="Hand"
+                                        Style="{StaticResource OutlineButtonStyleWithoutBorderBrush}"
+                                        FontSize="16"/>
+                            </Grid>
+                        </Border>
+                        <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="16"
+                                        Grid.Row="1"
+                                        HorizontalScrollBarVisibility="Disabled">
+                            <ItemsControl ItemsSource="{Binding LatestPrescriptions}"
+                                            Margin="0,0,0,20">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border Style="{StaticResource PriorityCardBorderStyle}"
+                                                Margin="0,0,0,10"
+                                                Padding="16,12">
+                                            <Grid>
+                                                <StackPanel>
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <TextBlock Text="{Binding PrescriptionDateTime,
+                                                                                StringFormat={}{0: hh:mm tt},
+                                                                                Converter={StaticResource LocalToUtcDisplayConverter}}" 
+                                                                FontWeight="SemiBold" 
+                                                                Style="{StaticResource CustomBaseTextBlockStyle}"/>
+                                                        <Border Background="#FEE2E2" CornerRadius="4" Margin="8,0,0,0" Padding="6,2"
+                                                                Visibility="{Binding Priority,
+                                                                                        Converter={StaticResource StatToVisibility}}">
+                                                            <TextBlock Text="🔥 STAT" FontWeight="Bold" Foreground="#DC2626"
+                                                                       FontSize="12"
+                                                                        Style="{StaticResource CustomBaseTextBlockStyle}"/>
+                                                        </Border>
+                                                        <Border Background="{StaticResource UrgentTagTextBlock}" CornerRadius="4" Margin="8,0,0,0" Padding="6,2"
+                                                                Visibility="{Binding Priority,
+                                                                                        Converter={StaticResource UrgentToVisibility}}">
+                                                            <TextBlock Text="⚠️ URGENT" Style="{StaticResource CustomBaseTextBlockStyle}" 
+                                                                        FontSize="12"
+                                                                        FontWeight="Bold" Foreground="{StaticResource UrgentTagBorder}"/>
+                                                        </Border>
+                                                    </StackPanel>
+                                                    <TextBlock Style="{StaticResource SecondaryTextTextBlockStyle}" Margin="0,4,0,0">
+                                                        <TextBlock.Text>
+                                                            <MultiBinding StringFormat="{}Patient: {0} {1} (Dr. {2} {3})">
+                                                                <Binding Path="MedicalRecord.Appointment.Patient.User.FirstName"/>
+                                                                <Binding Path="MedicalRecord.Appointment.Patient.User.LastName"/>
+                                                                <Binding Path="MedicalRecord.Appointment.Doctor.User.FirstName"/>
+                                                                <Binding Path="MedicalRecord.Appointment.Doctor.User.LastName"/>
+                                                            </MultiBinding>
+                                                        </TextBlock.Text>
+                                                    </TextBlock>
+                                                </StackPanel>
+                                                <TextBlock Text="&#x231B; Pending" FontSize="16" FontWeight="SemiBold" Foreground="#C2410C"
+                                                            HorizontalAlignment="Right"
+                                                            VerticalAlignment="Center"/>
+                                            </Grid>
+                                        </Border>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </ScrollViewer>
+                    </Grid>
+                </Border>
+                <Border Grid.Column="2" Background="{StaticResource BgWhite}" CornerRadius="16" BorderBrush="#FCA5A5" BorderThickness="1">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Border Background="#FEF2F2" BorderBrush="{StaticResource BorderColor}" BorderThickness="0,0,0,1" Padding="24,16" CornerRadius="16,16,0,0">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="⚠️" Margin="0,0,8,0"
+                                            Foreground="#DC2626" 
+                                            Style="{StaticResource CustomBaseTextBlockStyle}"
+                                            FontWeight="SemiBold"
+                                            FontSize="20"/>
+                                <TextBlock Text="Inventory Alerts"  
+                                            Foreground="#DC2626" 
+                                            Style="{StaticResource CustomBaseTextBlockStyle}"
+                                            FontWeight="SemiBold"
+                                            FontSize="20"/>
+                            </StackPanel>
+                        </Border>
+                        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                                      VerticalScrollBarVisibility="Auto" 
+                                      Grid.Row="1">
+                            <!--StackPanel>
                                 <Grid Margin="20,16">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto"/>
@@ -215,14 +278,67 @@
                                         <TextBlock Margin="0,4,0,0" FontSize="13" Foreground="#DC2626" FontWeight="Bold" Text="OUT OF STOCK (0)"/>
                                     </StackPanel>
                                 </Grid>
-                            </StackPanel>
-                            <Border Grid.Row="2" BorderBrush="{StaticResource BorderColor}" BorderThickness="0,1,0,0" Padding="16">
-                                <TextBlock Text="Go to Inventory Management →" HorizontalAlignment="Center" Foreground="#0d9488" FontWeight="SemiBold" Cursor="Hand"/>
-                            </Border>
-                        </Grid>
-                    </Border>
-                </Grid>
+                            </StackPanel-->
+                            <ItemsControl ItemsSource="{Binding LowStockMedications}"
+                                            Margin="0,0,0,20">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Margin="0,0,0,5">
+                                            <Grid Margin="20,16">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock Text="📉" FontSize="18" Foreground="#DC2626" Margin="0,0,12,0"
+                                                           Visibility="{Binding StockTotalQuantity,
+                                                                                Converter={StaticResource LowStockToVisibility}}"/>
+                                                <TextBlock Text="🚫" FontSize="18" Foreground="#DC2626" Margin="0,0,12,0"
+                                                           Visibility="{Binding StockTotalQuantity,
+                                                                                Converter={StaticResource ZeroStockToVisibility}}"/>
+                                                <StackPanel Grid.Column="1">
+                                                    <TextBlock Text="{Binding Name}" FontWeight="SemiBold" FontSize="14"/>
+                                                    <TextBlock Margin="0,4,0,0" FontSize="13" Foreground="{StaticResource TextSecondary}"
+                                                               Visibility="{Binding StockTotalQuantity,
+                                                                                    Converter={StaticResource LowStockToVisibility}}">
+                                                        Only: 
+                                                        <Run Text="{Binding StockTotalQuantity}" FontWeight="Bold" Foreground="#DC2626"/> 
+                                                        <Run Text="{Binding Form, StringFormat={}{0}s}" FontWeight="Bold" Foreground="#DC2626"/>
+                                                    </TextBlock>
+                                                    <TextBlock Margin="0,4,0,0" FontSize="13" Foreground="#DC2626" FontWeight="Bold" Text="OUT OF STOCK (0)"
+                                                               Visibility="{Binding StockTotalQuantity,
+                                                                                    Converter={StaticResource ZeroStockToVisibility}}"/>
+                                                </StackPanel>
+                                            </Grid>
+                                            <Separator Background="{StaticResource BorderColor}"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+
+                        </ScrollViewer>
+
+                        <Border Grid.Row="2" BorderBrush="{StaticResource BorderColor}" BorderThickness="0,1,0,0" Padding="16">
+                            <Button Content="Go to Inventory Management →"
+                                    Command="{Binding GoToInventoryManagementButtonCommand}"
+                                    Foreground="#0d9488" 
+                                    FontWeight="SemiBold" 
+                                    Cursor="Hand"
+                                    Style="{StaticResource OutlineButtonStyleWithoutBorderBrush}"
+                                    FontSize="16"/>
+                        </Border>
+                    </Grid>
+                </Border>
             </Grid>
-        </ScrollViewer>
+        </Grid>
+        <Grid Visibility="{Binding IsLoading, Converter={StaticResource BoolToVisibilityConverter}}"
+              Grid.RowSpan="2" 
+              Background="#80FFFFFF" 
+              d:IsHidden="False">
+            <fa:ImageAwesome 
+                Icon="Spinner" 
+                Spin="True" 
+                Height="48" 
+                Width="48" />
+        </Grid>
     </Grid>
 </Page>

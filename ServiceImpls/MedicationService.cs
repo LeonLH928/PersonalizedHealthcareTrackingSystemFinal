@@ -22,4 +22,9 @@ public class MedicationService : IMedicationService
     {
         return await _medicationRepository.GetAllMedicationsByIDs(MedicationIDs);
     }
+    public async Task<IEnumerable<MedicationModel>> GetAllLowStockMedications()
+    {
+        var medications = await _medicationRepository.GetAllMedications();
+        return medications.Where(m => m.StockTotalQuantity < 50).ToList();
+    }
 }

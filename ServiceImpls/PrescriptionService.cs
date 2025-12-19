@@ -33,6 +33,10 @@ public class PrescriptionService : IPrescriptionService
     {
         return await _prescriptionRepository.GetAllCancelledPrescriptionsAsync();
     }
+    public async Task<IEnumerable<PrescriptionModel>> GetAllPrescriptionsAsync()
+    {
+        return await _prescriptionRepository.GetAllPrescriptionsAsync();
+    }
     public async Task<IEnumerable<PrescriptionModel>> SearchByText(string SearchText)
     {
         return await _prescriptionRepository.SearchByText(SearchText);

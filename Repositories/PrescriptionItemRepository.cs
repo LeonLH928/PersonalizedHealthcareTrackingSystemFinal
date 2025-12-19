@@ -1,6 +1,9 @@
 ﻿using PersonalizedHealthcareTrackingSystemFinal.Interfaces;
 using PersonalizedHealthcareTrackingSystemFinal.SupabaseModels;
 using Supabase;
+using System.Diagnostics;
+using System.Linq.Expressions;
+using System.Printing.IndexedProperties;
 using System.Text.Json;
 
 namespace PersonalizedHealthcareTrackingSystemFinal.Repositories;
@@ -31,14 +34,19 @@ public class PrescriptionItemRepository : IPrescriptionItemRepository
         var response = await _client.From<PrescriptionItemModel>()
                                     .Select("""
                                         *,
-                                        Medication:Medications(
-                                            *
-                                        )
-                                     """)
+                                        ME:Medications(*),
+                                        PE:Prescriptions(*)
+                                        """)
                                     .Where(p => p.PrescriptionID == PrescriptionID)
                                     .Get();
 
-        var prescriptionItems = JsonSerializer.Deserialize<List<PrescriptionItemModel>>(response.Content!, options);
+        var content = response.Content!;
+        content = content.Replace("\"Medications\"", "\"tempME\"")
+                         .Replace("\"ME\"", "\"Medication\"")
+                         .Replace("\"Prescriptions\"", "\"tempPE\"")
+                         .Replace("\"PE\"", "\"Prescription\"");
+
+        var prescriptionItems = JsonSerializer.Deserialize<List<PrescriptionItemModel>>(content, options);
 
         return prescriptionItems == null ? [] : prescriptionItems;
     }
