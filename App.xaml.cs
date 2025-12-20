@@ -29,8 +29,8 @@ namespace PersonalizedHealthcareTrackingSystemFinal
             services.RegisterDependency();
             ServiceProvider = services.BuildServiceProvider();
 
-            //var IntroductionWindow = ServiceProvider.GetRequiredService<IntroductionWindow>();
-            //IntroductionWindow.Show(); 
+            var IntroductionWindow = ServiceProvider.GetRequiredService<IntroductionWindow>();
+            IntroductionWindow.Show(); 
             //var LoginWindow = ServiceProvider.GetRequiredService<LoginWindow>();
             //LoginWindow.Show();
             //var PatientMainWindow = ServiceProvider.GetRequiredService<PatientMainWindow>();   

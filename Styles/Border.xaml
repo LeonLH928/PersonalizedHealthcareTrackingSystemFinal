@@ -315,4 +315,24 @@
         <Setter Property="Padding" Value="12,6"/>
         <Setter Property="MinWidth" Value="110"/>
     </Style>
+    
+    <Style x:Key="TakenMedicationBorderStyle" TargetType="Border" BasedOn="{StaticResource BaseCustomBorderStyle}">
+        <Setter Property="Background" Value="#F1F5F9"/>
+        <Setter Property="Padding" Value="12"/>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding Status}" Value="Missed">
+                <Setter Property="Background" Value="{StaticResource StatTagBorder}"/>
+                <Setter Property="BorderBrush" Value="#c2410c"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Status}" Value="Taken">
+                <Setter Property="Opacity" Value="0.7"/>
+                <Setter Property="Background" Value="#f8fafc"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Status}" Value="Skipped">
+                <Setter Property="Opacity" Value="0.7"/>
+                <Setter Property="Background" Value="#f8fafc"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
 </ResourceDictionary>

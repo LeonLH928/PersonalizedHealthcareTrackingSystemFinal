@@ -1,6 +1,9 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:converters="clr-namespace:PersonalizedHealthcareTrackingSystemFinal.Helpers">
 
+    <converters:LocalToUtcDisplayConverter x:Key="LocalToUtcDisplayConverter"/>
+    
     <Style x:Key="TealButtonStyle" TargetType="Button">
         <Setter Property="Background" Value="{StaticResource PrimaryTeal}"/>
         <Setter Property="Foreground" Value="#FFFFFF"/>
@@ -828,4 +831,30 @@
         </Style.Triggers>
     </Style>
 
+    <Style x:Key="TakenMedicationButtonStyle" TargetType="Button" BasedOn="{StaticResource PatientBtnPrimary}">
+        <Setter Property="Content" Value="Mark taken"/>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding Status}" Value="Taken">
+                <Setter Property="IsEnabled" Value="False"/>
+                <Setter Property="Content">
+                    <Setter.Value>
+                        <MultiBinding StringFormat="{}✓ Taken at {0:hh:mm tt}" >
+                            <Binding Converter="{StaticResource LocalToUtcDisplayConverter}"
+                                     Path="TakenDateTime"/>
+                        </MultiBinding>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="Background" Value="#dcfce7"/>
+                <Setter Property="Foreground" Value="#166534"/>
+                <Setter Property="Cursor" Value="Arrow"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Status}" Value="Missed">
+                <Setter Property="Background" Value="{StaticResource WarningColor}"/>
+                <Setter Property="Content" Value="Take now"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Status}" Value="Skipped">
+                <Setter Property="Background" Value="#f8fafc"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
 </ResourceDictionary>
