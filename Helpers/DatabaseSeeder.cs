@@ -17,6 +17,7 @@ public static class DatabaseSeeder
         SeedClinicalExaminations(modelBuilder);
         SeedPrescriptions(modelBuilder);
         SeedPrescriptionItems(modelBuilder);
+        SeedMedicationAdherence(modelBuilder);
         SeedDoctorSchedules(modelBuilder);
         SeedMedicationInteractions(modelBuilder);
         SeedMedicationStockLogs(modelBuilder);
@@ -3128,7 +3129,479 @@ public static class DatabaseSeeder
             }
         );
     }
-
+    private static void SeedMedicationAdherence(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<MedicationAdherenceModel>().HasData(
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-001",
+                PrescriptionItemID = "pi-01",
+                ScheduledDateTime = DateTime.UtcNow.Date.AddDays(-1).AddHours(8),
+                TakenDateTime = DateTime.UtcNow.Date.AddDays(-1).AddHours(8).AddMinutes(15),
+                Status = AdherenceStatus.Taken,
+                Notes = null
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-002",
+                PrescriptionItemID = "pi-01",
+                ScheduledDateTime = DateTime.UtcNow.Date.AddDays(-1).AddHours(13),
+                TakenDateTime = DateTime.UtcNow.Date.AddDays(-1).AddHours(13).AddMinutes(30),
+                Status = AdherenceStatus.Taken,
+                Notes = null
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-003",
+                PrescriptionItemID = "pi-01",
+                ScheduledDateTime = DateTime.UtcNow.Date.AddHours(8),
+                TakenDateTime = DateTime.UtcNow.Date.AddHours(8).AddMinutes(5),
+                Status = AdherenceStatus.Taken,
+                Notes = null
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-004",
+                PrescriptionItemID = "pi-01",
+                ScheduledDateTime = DateTime.UtcNow.Date.AddHours(13),
+                TakenDateTime = null,
+                Status = AdherenceStatus.Pending,
+                Notes = null
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-005",
+                PrescriptionItemID = "pi-02",
+                ScheduledDateTime = DateTime.UtcNow.Date.AddDays(-1).AddHours(14),
+                TakenDateTime = null,
+                Status = AdherenceStatus.Skipped,
+                Notes = "Stomach pain"
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-006",
+                PrescriptionItemID = "pi-03",
+                ScheduledDateTime = DateTime.UtcNow.Date.AddDays(-1).AddHours(8),
+                TakenDateTime = DateTime.UtcNow.Date.AddDays(-1).AddHours(8).AddMinutes(10),
+                Status = AdherenceStatus.Taken,
+                Notes = null
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-007",
+                PrescriptionItemID = "pi-03",
+                ScheduledDateTime = DateTime.UtcNow.Date.AddDays(-1).AddHours(20),
+                TakenDateTime = null,
+                Status = AdherenceStatus.Missed,
+                Notes = null
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-008",
+                PrescriptionItemID = "pi-03",
+                ScheduledDateTime = DateTime.UtcNow.Date.AddHours(8),
+                TakenDateTime = DateTime.UtcNow.Date.AddHours(8).AddMinutes(20),
+                Status = AdherenceStatus.Taken,
+                Notes = null
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-009",
+                PrescriptionItemID = "pi-04",
+                ScheduledDateTime = DateTime.UtcNow.Date.AddDays(-1).AddHours(21),
+                TakenDateTime = DateTime.UtcNow.Date.AddDays(-1).AddHours(21).AddMinutes(45),
+                Status = AdherenceStatus.Taken,
+                Notes = null
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-010",
+                PrescriptionItemID = "pi-04",
+                ScheduledDateTime = DateTime.UtcNow.Date.AddHours(21),
+                TakenDateTime = null,
+                Status = AdherenceStatus.Pending,
+                Notes = null
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-011",
+                PrescriptionItemID = "pi-05",
+                ScheduledDateTime = DateTime.UtcNow.Date.AddHours(7),
+                TakenDateTime = DateTime.UtcNow.Date.AddHours(7).AddMinutes(5),
+                Status = AdherenceStatus.Taken,
+                Notes = null
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-012",
+                PrescriptionItemID = "pi-06",
+                ScheduledDateTime = DateTime.UtcNow.AddHours(-2),
+                TakenDateTime = DateTime.UtcNow.AddHours(-1.9),
+                Status = AdherenceStatus.Taken,
+                Notes = null
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-013",
+                PrescriptionItemID = "pi-06",
+                ScheduledDateTime = DateTime.UtcNow.AddHours(4),
+                TakenDateTime = null,
+                Status = AdherenceStatus.Pending,
+                Notes = null
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-014",
+                PrescriptionItemID = "pi-07",
+                ScheduledDateTime = DateTime.UtcNow.AddHours(-5),
+                TakenDateTime = DateTime.UtcNow.AddHours(-4.8),
+                Status = AdherenceStatus.Taken,
+                Notes = "Headache"
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-015",
+                PrescriptionItemID = "pi-08",
+                ScheduledDateTime = DateTime.UtcNow.Date.AddDays(-1).AddHours(22),
+                TakenDateTime = DateTime.UtcNow.Date.AddDays(-1).AddHours(22).AddMinutes(10),
+                Status = AdherenceStatus.Taken,
+                Notes = null
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-016",
+                PrescriptionItemID = "pi-08",
+                ScheduledDateTime = DateTime.UtcNow.Date.AddHours(22),
+                TakenDateTime = null,
+                Status = AdherenceStatus.Pending,
+                Notes = null
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-017",
+                PrescriptionItemID = "pi-09",
+                ScheduledDateTime = DateTime.UtcNow.AddHours(-3),
+                TakenDateTime = null,
+                Status = AdherenceStatus.Skipped,
+                Notes = "Pain improved"
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-018",
+                PrescriptionItemID = "pi-10",
+                ScheduledDateTime = DateTime.UtcNow.Date.AddHours(7),
+                TakenDateTime = DateTime.UtcNow.Date.AddHours(7).AddMinutes(15),
+                Status = AdherenceStatus.Taken,
+                Notes = null
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-019",
+                PrescriptionItemID = "pi-11",
+                ScheduledDateTime = DateTime.UtcNow.AddHours(-1),
+                TakenDateTime = null,
+                Status = AdherenceStatus.Pending,
+                Notes = null
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-020",
+                PrescriptionItemID = "pi-12",
+                ScheduledDateTime = DateTime.UtcNow.Date.AddDays(-1).AddHours(9),
+                TakenDateTime = null,
+                Status = AdherenceStatus.Missed,
+                Notes = null
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-021",
+                PrescriptionItemID = "pi-13",
+                ScheduledDateTime = DateTime.UtcNow.AddHours(-6),
+                TakenDateTime = DateTime.UtcNow.AddHours(-5.5),
+                Status = AdherenceStatus.Taken,
+                Notes = null
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-022",
+                PrescriptionItemID = "pi-14",
+                ScheduledDateTime = DateTime.UtcNow.Date.AddHours(21),
+                TakenDateTime = null,
+                Status = AdherenceStatus.Pending,
+                Notes = null
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-023",
+                PrescriptionItemID = "pi-15",
+                ScheduledDateTime = DateTime.UtcNow.Date.AddHours(8),
+                TakenDateTime = DateTime.UtcNow.Date.AddHours(8).AddMinutes(30),
+                Status = AdherenceStatus.Taken,
+                Notes = null
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-024",
+                PrescriptionItemID = "pi-16",
+                ScheduledDateTime = DateTime.UtcNow.Date.AddDays(-1).AddHours(8),
+                TakenDateTime = DateTime.UtcNow.Date.AddDays(-1).AddHours(8).AddMinutes(5),
+                Status = AdherenceStatus.Taken,
+                Notes = null
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-025",
+                PrescriptionItemID = "pi-16",
+                ScheduledDateTime = DateTime.UtcNow.Date.AddDays(-1).AddHours(20),
+                TakenDateTime = null,
+                Status = AdherenceStatus.Skipped,
+                Notes = "Felt dizzy"
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-026",
+                PrescriptionItemID = "pi-17",
+                ScheduledDateTime = DateTime.UtcNow.AddHours(-2),
+                TakenDateTime = null,
+                Status = AdherenceStatus.Pending,
+                Notes = null
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-027",
+                PrescriptionItemID = "pi-18",
+                ScheduledDateTime = DateTime.UtcNow.AddHours(-4),
+                TakenDateTime = DateTime.UtcNow.AddHours(-3.9),
+                Status = AdherenceStatus.Taken,
+                Notes = null
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-028",
+                PrescriptionItemID = "pi-19",
+                ScheduledDateTime = DateTime.UtcNow.Date.AddDays(-1).AddHours(19),
+                TakenDateTime = null,
+                Status = AdherenceStatus.Missed,
+                Notes = null
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-029",
+                PrescriptionItemID = "pi-19",
+                ScheduledDateTime = DateTime.UtcNow.Date.AddHours(8),
+                TakenDateTime = DateTime.UtcNow.Date.AddHours(8).AddMinutes(10),
+                Status = AdherenceStatus.Taken,
+                Notes = null
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-030",
+                PrescriptionItemID = "pi-20",
+                ScheduledDateTime = DateTime.UtcNow.Date.AddHours(9),
+                TakenDateTime = DateTime.UtcNow.Date.AddHours(9).AddMinutes(5),
+                Status = AdherenceStatus.Taken,
+                Notes = null
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-031",
+                PrescriptionItemID = "pi-21",
+                ScheduledDateTime = DateTime.UtcNow.Date.AddHours(8),
+                TakenDateTime = DateTime.UtcNow.Date.AddHours(8).AddMinutes(2),
+                Status = AdherenceStatus.Taken,
+                Notes = null
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-032",
+                PrescriptionItemID = "pi-22",
+                ScheduledDateTime = DateTime.UtcNow.Date.AddHours(8),
+                TakenDateTime = DateTime.UtcNow.Date.AddHours(8).AddMinutes(3),
+                Status = AdherenceStatus.Taken,
+                Notes = null
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-033",
+                PrescriptionItemID = "pi-22",
+                ScheduledDateTime = DateTime.UtcNow.Date.AddHours(20),
+                TakenDateTime = null,
+                Status = AdherenceStatus.Pending,
+                Notes = null
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-034",
+                PrescriptionItemID = "pi-23",
+                ScheduledDateTime = DateTime.UtcNow.Date.AddHours(6),
+                TakenDateTime = DateTime.UtcNow.Date.AddHours(6).AddMinutes(10),
+                Status = AdherenceStatus.Taken,
+                Notes = null
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-035",
+                PrescriptionItemID = "pi-24",
+                ScheduledDateTime = DateTime.UtcNow.AddHours(-5),
+                TakenDateTime = null,
+                Status = AdherenceStatus.Missed,
+                Notes = null
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-036",
+                PrescriptionItemID = "pi-25",
+                ScheduledDateTime = DateTime.UtcNow.AddHours(-1),
+                TakenDateTime = null,
+                Status = AdherenceStatus.Pending,
+                Notes = null
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-037",
+                PrescriptionItemID = "pi-26",
+                ScheduledDateTime = DateTime.UtcNow.AddHours(-4),
+                TakenDateTime = DateTime.UtcNow.AddHours(-3.8),
+                Status = AdherenceStatus.Taken,
+                Notes = null
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-038",
+                PrescriptionItemID = "pi-26",
+                ScheduledDateTime = DateTime.UtcNow.AddHours(4),
+                TakenDateTime = null,
+                Status = AdherenceStatus.Pending,
+                Notes = null
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-039",
+                PrescriptionItemID = "pi-27",
+                ScheduledDateTime = DateTime.UtcNow.Date.AddDays(-1).AddHours(7),
+                TakenDateTime = null,
+                Status = AdherenceStatus.Skipped,
+                Notes = "Ran out of water"
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-040",
+                PrescriptionItemID = "pi-27",
+                ScheduledDateTime = DateTime.UtcNow.Date.AddHours(7),
+                TakenDateTime = DateTime.UtcNow.Date.AddHours(7).AddMinutes(15),
+                Status = AdherenceStatus.Taken,
+                Notes = null
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-041",
+                PrescriptionItemID = "pi-28",
+                ScheduledDateTime = DateTime.UtcNow.AddHours(-2),
+                TakenDateTime = DateTime.UtcNow.AddHours(-1.9),
+                Status = AdherenceStatus.Taken,
+                Notes = null
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-042",
+                PrescriptionItemID = "pi-28",
+                ScheduledDateTime = DateTime.UtcNow.AddHours(4),
+                TakenDateTime = null,
+                Status = AdherenceStatus.Pending,
+                Notes = null
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-043",
+                PrescriptionItemID = "pi-29",
+                ScheduledDateTime = DateTime.UtcNow.Date.AddHours(9),
+                TakenDateTime = DateTime.UtcNow.Date.AddHours(9).AddMinutes(5),
+                Status = AdherenceStatus.Taken,
+                Notes = null
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-044",
+                PrescriptionItemID = "pi-29",
+                ScheduledDateTime = DateTime.UtcNow.Date.AddHours(21),
+                TakenDateTime = null,
+                Status = AdherenceStatus.Pending,
+                Notes = null
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-045",
+                PrescriptionItemID = "pi-30",
+                ScheduledDateTime = DateTime.UtcNow.Date.AddHours(8),
+                TakenDateTime = DateTime.UtcNow.Date.AddHours(8).AddMinutes(20),
+                Status = AdherenceStatus.Taken,
+                Notes = null
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-046",
+                PrescriptionItemID = "pi-31",
+                ScheduledDateTime = DateTime.UtcNow.Date.AddDays(-1).AddHours(19),
+                TakenDateTime = null,
+                Status = AdherenceStatus.Missed,
+                Notes = null
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-047",
+                PrescriptionItemID = "pi-31",
+                ScheduledDateTime = DateTime.UtcNow.Date.AddHours(8),
+                TakenDateTime = DateTime.UtcNow.Date.AddHours(8).AddMinutes(10),
+                Status = AdherenceStatus.Taken,
+                Notes = null
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-048",
+                PrescriptionItemID = "pi-32",
+                ScheduledDateTime = DateTime.UtcNow.Date.AddHours(9),
+                TakenDateTime = DateTime.UtcNow.Date.AddHours(9).AddMinutes(1),
+                Status = AdherenceStatus.Taken,
+                Notes = null
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-049",
+                PrescriptionItemID = "pi-33",
+                ScheduledDateTime = DateTime.UtcNow.Date.AddHours(8),
+                TakenDateTime = DateTime.UtcNow.Date.AddHours(8).AddMinutes(5),
+                Status = AdherenceStatus.Taken,
+                Notes = null
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-050",
+                PrescriptionItemID = "pi-34",
+                ScheduledDateTime = DateTime.UtcNow.Date.AddHours(18),
+                TakenDateTime = null,
+                Status = AdherenceStatus.Pending,
+                Notes = null
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-051",
+                PrescriptionItemID = "pi-35",
+                ScheduledDateTime = DateTime.UtcNow.AddHours(-6),
+                TakenDateTime = DateTime.UtcNow.AddHours(-5.5),
+                Status = AdherenceStatus.Taken,
+                Notes = null
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-052",
+                PrescriptionItemID = "pi-35",
+                ScheduledDateTime = DateTime.UtcNow.AddHours(6),
+                TakenDateTime = null,
+                Status = AdherenceStatus.Pending,
+                Notes = null
+            }
+        );
+    }
     private static void SeedDoctorSchedules(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<DoctorScheduleModel>().HasData(

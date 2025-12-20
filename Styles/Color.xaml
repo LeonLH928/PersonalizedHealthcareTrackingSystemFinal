@@ -48,4 +48,5 @@
     <SolidColorBrush x:Key="StockLowText" Color="#c2410c"/>
     <SolidColorBrush x:Key="StockOutBg" Color="#fef2f2"/>
     <SolidColorBrush x:Key="StockOutText" Color="#b91c1c"/>
+    <SolidColorBrush x:Key="WarningColor" Color="#f59e0b"/>
 </ResourceDictionary>
