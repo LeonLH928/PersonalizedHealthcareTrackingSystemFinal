@@ -8,7 +8,96 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="DoctorPharmacyInventoryPage">
 
-    <Grid>
-        
+    <Grid Margin="32">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Margin="0,0,0,24">
+            <TextBlock Text="Pharmacy Inventory" 
+                       FontSize="24" FontWeight="Bold" Foreground="{StaticResource DarkText}"/>
+            <TextBlock Text="Check real-time stock status and medication details for 450 items." 
+                       FontSize="14" Foreground="{StaticResource TextSecondary}" Margin="0,4,0,0"/>
+        </StackPanel>
+
+        <Border Grid.Row="1" Style="{StaticResource CardStyle}" Padding="16" Margin="0,0,0,24">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <Border BorderBrush="{StaticResource LightBorder}" BorderThickness="1" CornerRadius="8" Padding="8,0" HorizontalAlignment="Left" Width="400">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="🔍" VerticalAlignment="Center" Margin="0,0,8,0" Foreground="{StaticResource TextSecondary}"/>
+                        <TextBox Grid.Column="1" BorderThickness="0" Background="Transparent" 
+                                 VerticalContentAlignment="Center" Padding="4"
+                                 Text="Search by trade name, active ingredient or ID..."/>
+                    </Grid>
+                </Border>
+
+                <StackPanel Grid.Column="1" Orientation="Horizontal">
+                    <ComboBox Width="180" Padding="8" SelectedIndex="0" Style="{x:Null}">
+                        <ComboBoxItem Content="All Categories"/>
+                        <ComboBoxItem Content="Cardiovascular"/>
+                        <ComboBoxItem Content="Antibiotics"/>
+                        <ComboBoxItem Content="Painkillers"/>
+                    </ComboBox>
+
+                    <ComboBox Width="180" Padding="8" SelectedIndex="0">
+                        <ComboBoxItem Content="Status: All"/>
+                        <ComboBoxItem Content="✅ Available"/>
+                        <ComboBoxItem Content="⚠️ Low Stock"/>
+                        <ComboBoxItem Content="🚫 Out of Stock"/>
+                    </ComboBox>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <DataGrid Grid.Row="2" Style="{StaticResource InventoryDataGrid}" RowHeight="80">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="100" FontWeight="SemiBold"/>
+
+                <DataGridTemplateColumn Header="Medication &amp; Active Ingredient" Width="2.5*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <Border Width="40" Height="40" Background="#F1F5F9" CornerRadius="8" Margin="0,0,12,0">
+                                    <TextBlock Text="💊" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"/>
+                                </Border>
+                                <StackPanel VerticalAlignment="Center">
+                                    <TextBlock Text="{Binding Name}" FontWeight="SemiBold" FontSize="14" Foreground="{StaticResource DarkText}"/>
+                                    <TextBlock Text="{Binding ActiveIngredient, StringFormat='Active: {0}'}" FontSize="12" Foreground="{StaticResource TextSecondary}"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTextColumn Header="Dosage Form" Binding="{Binding Form}" Width="*"/>
+
+                <DataGridTextColumn Header="Unit" Binding="{Binding Unit}" Width="0.8*"/>
+
+                <DataGridTemplateColumn Header="Real-time Stock" Width="1.5*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Border Background="{StaticResource StockOkBg}" CornerRadius="16" Padding="12,6" HorizontalAlignment="Left">
+                                <TextBlock Text="✅ Available (500+)" Foreground="{StaticResource StockOkText}" FontWeight="Bold" FontSize="12"/>
+                            </Border>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTextColumn Header="Unit Price" Binding="{Binding Price}" Width="*"/>
+            </DataGrid.Columns>
+
+            
+        </DataGrid>
     </Grid>
 </Page>
