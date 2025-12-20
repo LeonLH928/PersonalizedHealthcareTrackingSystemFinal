@@ -48,7 +48,7 @@
                     </Grid>
                 </Border>
 
-                <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="16">
+                <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="20">
                     <ComboBox Width="180" Padding="8" SelectedIndex="0">
                         <ComboBoxItem Content="Cancelled By: All"/>
                         <ComboBoxItem Content="👨‍⚕️ Doctor"/>
