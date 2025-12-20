@@ -57,12 +57,12 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Views.PatientView
                     break;
                 case "Medication Schedule":
                     var MedicationSchedulePage = _serviceProvider.GetRequiredService<PatientMedicationSchedulePage>();
-                    MainContent.Navigate(MedicationSchedulePage);
+                    PatientMainContent.Navigate(MedicationSchedulePage);
                     break;
 
                 case "Medical Records":
                     var MedicalRecordsPage = _serviceProvider.GetRequiredService<PatientMedicalRecordsPage>();
-                    MainContent.Navigate(MedicalRecordsPage);
+                    PatientMainContent.Navigate(MedicalRecordsPage);
                     break;
 
                 case "Settings":
