@@ -66,6 +66,8 @@ public static class AppModule
         services.AddTransient<Views.PatientView.PatientHomePage>();
         services.AddTransient<Views.PatientView.PatientBookingPage>();
         services.AddTransient<Views.PatientView.PatientSetting>();
+        services.AddTransient<Views.PatientView.PatientMedicationSchedulePage>();
+        services.AddTransient<Views.PatientView.PatientMedicalRecordsPage>();
         services.AddTransient<Views.PatientView.PatientBookingConfirmationWindow>();
 
         services.AddTransient<Views.DoctorView.DoctorMainWindow>();

@@ -55,6 +55,16 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Views.PatientView
                     var BookingPage = _serviceProvider.GetRequiredService<PatientBookingPage>();
                     PatientMainContent.Navigate(BookingPage);
                     break;
+                case "Medication Schedule":
+                    var MedicationSchedulePage = _serviceProvider.GetRequiredService<PatientMedicationSchedulePage>();
+                    MainContent.Navigate(MedicationSchedulePage);
+                    break;
+
+                case "Medical Records":
+                    var MedicalRecordsPage = _serviceProvider.GetRequiredService<PatientMedicalRecordsPage>();
+                    MainContent.Navigate(MedicalRecordsPage);
+                    break;
+
                 case "Settings":
                     var SettingPage = _serviceProvider.GetRequiredService<PatientSetting>();
                     PatientMainContent.Navigate(SettingPage);
