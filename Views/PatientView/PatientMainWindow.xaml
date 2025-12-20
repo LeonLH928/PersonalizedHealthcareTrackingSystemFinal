@@ -82,6 +82,20 @@
                         </StackPanel>
                     </ListBoxItem>
 
+                    <ListBoxItem Tag="Medication Schedule">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:ImageAwesome Icon="Calendar" Width="20" Height="20" Margin="0,0,10,0" VerticalAlignment="Center" Foreground="White"/>
+                            <TextBlock Text="Medication Schedule"/>
+                        </StackPanel>
+                    </ListBoxItem>
+
+                    <ListBoxItem Tag="Medical Records">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:ImageAwesome Icon="Clipboard" Width="20" Height="20" Margin="0,0,10,0" VerticalAlignment="Center" Foreground="White"/>
+                            <TextBlock Text="Medical Records"/>
+                        </StackPanel>
+                    </ListBoxItem>
+
                     <ListBoxItem Tag="Settings">
                         <StackPanel Orientation="Horizontal">
                             <fa:ImageAwesome Icon="Cog" Width="20" Height="20" Margin="0,0,10,0" VerticalAlignment="Center" Foreground="White"/>
