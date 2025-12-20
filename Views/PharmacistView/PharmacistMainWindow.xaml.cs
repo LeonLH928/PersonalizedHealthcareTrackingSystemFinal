@@ -59,9 +59,17 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Views.PharmacistView
                     var PatientQueuePage = _serviceProvider.GetRequiredService<PharmacistQueuePage>();
                     PharmacistMainContent.Navigate(PatientQueuePage);
                     break;
-                case "Inventory Management":
+                case "Inventory":
                     var InventoryManagementPage = _serviceProvider.GetRequiredService<InventoryManagementPage>();
                     PharmacistMainContent.Navigate(InventoryManagementPage);
+                    break;
+                case "History":
+                    var HistoryPage = _serviceProvider.GetRequiredService<PharmacistHistoryPage>();
+                    PharmacistMainContent.Navigate(HistoryPage);
+                    break;
+                case "Cancelled":
+                    var CancelledPage = _serviceProvider.GetRequiredService<PharmacistCancelledPage>();
+                    PharmacistMainContent.Navigate(CancelledPage);
                     break;
             }
         }
