@@ -102,13 +102,7 @@
             </Setter.Value>
         </Setter>
     </Style>
-
-    <Storyboard x:Key="BlinkAnimation" RepeatBehavior="Forever">
-        <DoubleAnimation Storyboard.TargetProperty="Opacity"
-                   From="1.0" To="0.4" Duration="0:0:0.75"
-                   AutoReverse="True"/>
-    </Storyboard>
-
+    
     <Style x:Key="CardTitleStyle" TargetType="TextBlock">
         <Setter Property="FontSize" Value="19"/>
         <Setter Property="FontWeight" Value="SemiBold"/>

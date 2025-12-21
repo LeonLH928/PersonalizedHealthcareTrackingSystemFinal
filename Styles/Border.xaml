@@ -170,6 +170,15 @@
         <Setter Property="HorizontalAlignment" Value="Right"/>
     </Style>
     
+    <!-- Appointment Status dot -->
+    <Style x:Key="AppointmentStatusDot" TargetType="Border" BasedOn="{StaticResource Dot}">
+        <Style.Triggers>
+            <EventTrigger RoutedEvent="Loaded">
+                <BeginStoryboard Storyboard="{DynamicResource BlinkAnimation}"/>
+            </EventTrigger>
+        </Style.Triggers>
+    </Style>
+    
     <!-- Urgent Border Style -->
     <Style x:Key="UrgentBorderStyle" TargetType="Border" BasedOn="{StaticResource BaseCustomBorderStyle}">
         <Setter Property="Background" Value="{StaticResource UrgentTagBorder}"/>
