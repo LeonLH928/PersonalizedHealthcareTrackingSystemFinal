@@ -143,4 +143,46 @@ public class AppointmentRepository : IAppointmentRepository
 
         return appointment;
     }
+    public async Task<IEnumerable<AppointmentModel>> SearchByText(string SearchText)
+    {
+        var response = await _client.From<AppointmentModel>()
+                                    .Select("""
+                                                *,
+                                                PA:Patients(
+                                                    *,
+                                                    User:Users(*)
+                                                ),
+                                                DO:Doctors(
+                                                    *,
+                                                    User:Users(*)
+                                                )
+                                             """)
+                                    .Limit(20)
+                                    .Get();
+
+        var content = response.Content!;
+        content = content.Replace("\"Patients\"", "\"tempPA\"")
+                         .Replace("\"PA\"", "\"Patient\"")
+                         .Replace("\"Doctors\"", "\"tempDO\"")
+                         .Replace("\"DO\"", "\"Doctor\"");
+
+        var models = JsonSerializer.Deserialize<List<AppointmentModel>>(content, options);
+
+        if (models == null)
+            return [];
+
+        SearchText = SearchText.ToLower().Trim();
+        var appointments = models.Where(a =>
+            a.Priority.ToString().ToLower().Contains(SearchText)
+         || a.ChiefComplaint.ToLower().Contains(SearchText)
+         || a.Doctor.User.FirstName.ToLower().Contains(SearchText)
+         || a.Doctor.User.LastName.ToLower().Contains(SearchText)
+         || a.Patient.User.LastName.ToLower().Contains(SearchText)
+         || a.Patient.User.FirstName.ToLower().Contains(SearchText)
+         || a.AppointmentDateTime.ToString().ToLower().Contains(SearchText)
+         || SearchText.Contains(a.Patient.Age.ToString().ToLower())
+            );
+
+        return appointments;
+    }
 }

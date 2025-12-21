@@ -103,14 +103,6 @@
         </Setter>
     </Style>
 
-    <Style x:Key="FormComboBox" TargetType="ComboBox">
-        <Setter Property="Padding" Value="12"/>
-        <Setter Property="BorderBrush" Value="{StaticResource BorderColor}"/>
-        <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="FontSize" Value="14"/>
-        <Setter Property="Margin" Value="0,0,0,16"/>
-    </Style>
-
     <Storyboard x:Key="BlinkAnimation" RepeatBehavior="Forever">
         <DoubleAnimation Storyboard.TargetProperty="Opacity"
                    From="1.0" To="0.4" Duration="0:0:0.75"

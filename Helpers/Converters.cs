@@ -3,7 +3,9 @@ using PersonalizedHealthcareTrackingSystemFinal.Models;
 using System.Diagnostics;
 using System.Globalization;
 using System.Windows;
+using System.Windows.Automation.Peers;
 using System.Windows.Data;
+using System.Windows.Media;
 
 namespace PersonalizedHealthcareTrackingSystemFinal.Helpers;
 public class GreaterThanOneToVisibilityConverter : IValueConverter
@@ -433,6 +435,54 @@ public class IsCurrentNotSundayAndSmallerThanCurrentToVisibility : IValueConvert
          || dt != null && dt.Value.DayOfWeek != DayOfWeek.Sunday && dt.Value >= DateTime.Now)
             return Visibility.Visible;
         return Visibility.Collapsed;
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}
+
+public class AppointmentStatusToBorderBrush : IValueConverter
+{
+    private static readonly BrushConverter _converter = new();
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        if (value is not StatusAppointment sa)
+            return value;
+        string hexColor = sa switch
+        {
+            StatusAppointment.Happening => "#26B4E2",
+            StatusAppointment.Scheduled => "#3b82f6", 
+            StatusAppointment.Completed => "#22c55e", 
+            StatusAppointment.Cancelled => "#ECA0A8", 
+            _ => "#354863"
+        };
+        return (Brush)_converter.ConvertFromString(hexColor)!;
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}
+
+public class AppointmentStatusToBackground : IValueConverter
+{
+    private static readonly BrushConverter _converter = new();
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        if (value is not StatusAppointment sa)
+            return value;
+        string hexColor = sa switch
+        {
+            StatusAppointment.Happening => "#ACC7E0",
+            StatusAppointment.Scheduled => "#eff6ff",
+            StatusAppointment.Completed => "#f0fdf4",
+            StatusAppointment.Cancelled => "#fee2e2",
+            _ => "#E2E8F0"
+        };
+        return (Brush)_converter.ConvertFromString(hexColor)!;
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

@@ -1,8 +1,10 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:converters="clr-namespace:PersonalizedHealthcareTrackingSystemFinal.Helpers">
-    
+
     <converters:GreaterThanOneToVisibilityConverter x:Key="GreaterThanOneToVisibilityConverter"/>
+    <converters:AppointmentStatusToBorderBrush x:Key="AppointmentStatusToBorderBrush"/>
+    <converters:AppointmentStatusToBackground x:Key="AppointmentStatusToBackground"/>
     
     <!-- Page Header Border Style -->
     <Style x:Key="PageHeaderBorderStyle" TargetType="Border">
@@ -98,56 +100,16 @@
             </Setter.Value>
         </Setter>
     </Style>
-
-    <!-- Happening patient Border Style -->
-    <Style x:Key="HappeningPatientBorderStyle" TargetType="Border">
-        <Setter Property="Padding" Value="24"/>
-        <Setter Property="BorderBrush" Value="#26B4E2"/>
-        <Setter Property="BorderThickness" Value="8,0,0,0"/>
-        <Setter Property="Background" Value="#ACC7E0"/>
-        <Setter Property="CornerRadius" Value="8"/>
-        <Setter Property="Effect">
-            <Setter.Value>
-                <DropShadowEffect Color="Black"
-                                  Direction="100"
-                                  ShadowDepth="0"
-                                  BlurRadius="0"
-                                  Opacity="0.3"/>
-            </Setter.Value>
-        </Setter>
-
-        <Style.Triggers>
-            <Trigger Property="IsMouseOver" Value="True">
-                <Trigger.EnterActions>
-                    <BeginStoryboard>
-                        <Storyboard>
-                            <DoubleAnimation 
-                                Storyboard.TargetProperty="(Border.Effect).(DropShadowEffect.BlurRadius)"
-                                To="20" Duration="0:0:0.2"/>
-                        </Storyboard>
-                    </BeginStoryboard>
-                </Trigger.EnterActions>
-                <Trigger.ExitActions>
-                    <BeginStoryboard>
-                        <Storyboard>
-                            <DoubleAnimation 
-                                Storyboard.TargetProperty="(Border.Effect).(DropShadowEffect.BlurRadius)"
-                                To="0" Duration="0:0:0.2"/>
-                        </Storyboard>
-                    </BeginStoryboard>
-                </Trigger.ExitActions>
-            </Trigger>
-        </Style.Triggers>
-    </Style>
-
-
-    <!-- Upcoming patient Border Style -->
-    <Style x:Key="UpcomingPatientBorderStyle" TargetType="Border">
+    
+    <!-- Status appointment Border Style -->
+    <Style x:Key="StatusAppointmentBorderStyle" TargetType="Border">
         <Setter Property="Padding" Value="24"/>
         <Setter Property="CornerRadius" Value="8"/>
-        <Setter Property="BorderBrush" Value="{StaticResource AccentBlue}"/>
         <Setter Property="BorderThickness" Value="8,0,0,0"/>
-        <Setter Property="Background" Value="{StaticResource LightWaitingStatusBorder}"/>
+        <Setter Property="BorderBrush" Value="{Binding Status, 
+                                                       Converter={StaticResource AppointmentStatusToBorderBrush}}"/>
+        <Setter Property="Background" Value="{Binding Status,
+                                                      Converter={StaticResource AppointmentStatusToBackground}}"/>
         <Setter Property="Effect">
             <Setter.Value>
                 <DropShadowEffect Color="Black"
@@ -218,7 +180,7 @@
 
     <!-- Priority Tag Border Style -->
     <Style x:Key="PriorityTagBorderStyle" TargetType="Border" BasedOn="{StaticResource BaseCustomBorderStyle}">
-        <Setter Property="Background" Value="{StaticResource RoutineTagBorder}"/>
+        <Setter Property="Background" Value="{StaticResource MediumWaitingStatusBorder}"/>
         <Setter Property="BorderBrush" Value="{StaticResource RoutineTagBorderBrush}"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Style.Triggers>

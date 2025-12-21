@@ -29,7 +29,7 @@
 
         <!-- Toolbar -->
         <Border Grid.Row="1" Style="{StaticResource PageHeaderBorderStyle}" 
-              Padding="16 32" BorderThickness="0 1 0 1">
+                Padding="16 32" BorderThickness="0 1 0 1">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -37,21 +37,21 @@
                 </Grid.ColumnDefinitions>
 
                 <!-- Search -->
-                <TextBox Grid.Column="0" MaxWidth="400" HorizontalAlignment="Left"
-                       Style="{StaticResource SearchInputTextBoxStyle}"
-                       Tag="Search by name, ID, or phone number..."/>
+                <TextBox Margin="0 0 12 0"
+                         Style="{StaticResource SearchInputTextBoxStyle}"
+                         Tag="Search by name, ID, or phone number..."/>
 
                 <!-- Filters & Add Button -->
                 <StackPanel Grid.Column="1" Orientation="Horizontal">
                     <ComboBox Style="{StaticResource FormComboBox}" Width="200" 
-                            Margin="0 0 12 0">
+                              Margin="0 0 12 0">
                         <ComboBoxItem Content="All Status" IsSelected="True"/>
                         <ComboBoxItem Content="Chronic Disease"/>
                         <ComboBoxItem Content="Need Follow-up"/>
                         <ComboBoxItem Content="Stable"/>
                     </ComboBox>
                     <ComboBox Style="{StaticResource FormComboBox}" Width="180"
-                            Margin="0 0 12 0">
+                              Margin="0 0 12 0">
                         <ComboBoxItem Content="Sort: Latest" IsSelected="True"/>
                         <ComboBoxItem Content="Sort: Name A-Z"/>
                     </ComboBox>
