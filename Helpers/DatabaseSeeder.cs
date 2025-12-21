@@ -928,6 +928,7 @@ public static class DatabaseSeeder
                 PatientID = "pat-01",
                 UserID = "user-pat-01",
                 DateOfBirth = new DateTime(1985, 5, 20, 0, 0, 0, DateTimeKind.Utc),
+                Age = (int)((DateTime.UtcNow - new DateTime(1985, 5, 20, 0, 0, 0, DateTimeKind.Utc)).TotalDays / 365.25),
                 Gender = Gender.Male,
                 InsuranceNumber = "INS-123456",
                 BloodType = "A+"
@@ -937,6 +938,7 @@ public static class DatabaseSeeder
                 PatientID = "pat-02",
                 UserID = "user-pat-02",
                 DateOfBirth = new DateTime(1990, 8, 15, 0, 0, 0, DateTimeKind.Utc),
+                Age = (int)((DateTime.UtcNow - new DateTime(1990, 8, 15, 0, 0, 0, DateTimeKind.Utc)).TotalDays / 365.25),
                 Gender = Gender.Female,
                 InsuranceNumber = "INS-987654",
                 BloodType = "O-"
@@ -946,6 +948,7 @@ public static class DatabaseSeeder
                 PatientID = "pat-03",
                 UserID = "user-pat-03",
                 DateOfBirth = new DateTime(1975, 2, 14, 0, 0, 0, DateTimeKind.Utc),
+                Age = (int)((DateTime.UtcNow - new DateTime(1975, 2, 14, 0, 0, 0, DateTimeKind.Utc)).TotalDays / 365.25),
                 Gender = Gender.Male,
                 InsuranceNumber = "INS-555666",
                 BloodType = "AB-"
@@ -955,6 +958,7 @@ public static class DatabaseSeeder
                 PatientID = "pat-04",
                 UserID = "user-pat-04",
                 DateOfBirth = new DateTime(2015, 6, 1, 0, 0, 0, DateTimeKind.Utc),
+                Age = (int)((DateTime.UtcNow - new DateTime(2015, 6, 1, 0, 0, 0, DateTimeKind.Utc)).TotalDays / 365.25),
                 Gender = Gender.Female,
                 InsuranceNumber = "INS-CHILD-01",
                 BloodType = "B+"
@@ -964,6 +968,7 @@ public static class DatabaseSeeder
                 PatientID = "pat-05",
                 UserID = "user-pat-05",
                 DateOfBirth = new DateTime(1982, 11, 8, 0, 0, 0, DateTimeKind.Utc),
+                Age = (int)((DateTime.UtcNow - new DateTime(1982, 11, 8, 0, 0, 0, DateTimeKind.Utc)).TotalDays / 365.25),
                 Gender = Gender.Male,
                 InsuranceNumber = "INS-777888",
                 BloodType = "O+"
@@ -973,6 +978,7 @@ public static class DatabaseSeeder
                 PatientID = "pat-06",
                 UserID = "user-pat-06",
                 DateOfBirth = new DateTime(1995, 3, 22, 0, 0, 0, DateTimeKind.Utc),
+                Age = (int)((DateTime.UtcNow - new DateTime(1995, 3, 22, 0, 0, 0, DateTimeKind.Utc)).TotalDays / 365.25),
                 Gender = Gender.Female,
                 InsuranceNumber = "INS-666555",
                 BloodType = "A-"
@@ -982,6 +988,7 @@ public static class DatabaseSeeder
                 PatientID = "pat-07",
                 UserID = "user-pat-07",
                 DateOfBirth = new DateTime(1968, 7, 15, 0, 0, 0, DateTimeKind.Utc),
+                Age = (int)((DateTime.UtcNow - new DateTime(1968, 7, 15, 0, 0, 0, DateTimeKind.Utc)).TotalDays / 365.25),
                 Gender = Gender.Male,
                 InsuranceNumber = "INS-444333",
                 BloodType = "AB+"
@@ -991,6 +998,7 @@ public static class DatabaseSeeder
                 PatientID = "pat-08",
                 UserID = "user-pat-08",
                 DateOfBirth = new DateTime(2001, 9, 30, 0, 0, 0, DateTimeKind.Utc),
+                Age = (int)((DateTime.UtcNow - new DateTime(2001, 9, 30, 0, 0, 0, DateTimeKind.Utc)).TotalDays / 365.25),
                 Gender = Gender.Female,
                 InsuranceNumber = "INS-222111",
                 BloodType = "B-"
@@ -1000,6 +1008,7 @@ public static class DatabaseSeeder
                 PatientID = "pat-09",
                 UserID = "user-pat-09",
                 DateOfBirth = new DateTime(1978, 12, 5, 0, 0, 0, DateTimeKind.Utc),
+                Age = (int)((DateTime.UtcNow - new DateTime(1978, 12, 5, 0, 0, 0, DateTimeKind.Utc)).TotalDays / 365.25),
                 Gender = Gender.Male,
                 InsuranceNumber = "INS-999000",
                 BloodType = "O-"
@@ -1009,6 +1018,7 @@ public static class DatabaseSeeder
                 PatientID = "pat-10",
                 UserID = "user-pat-10",
                 DateOfBirth = new DateTime(1988, 4, 18, 0, 0, 0, DateTimeKind.Utc),
+                Age = (int)((DateTime.UtcNow - new DateTime(1988, 4, 18, 0, 0, 0, DateTimeKind.Utc)).TotalDays / 365.25),
                 Gender = Gender.Female,
                 InsuranceNumber = "INS-111222",
                 BloodType = "A+"
