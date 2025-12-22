@@ -3,10 +3,21 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:PersonalizedHealthcareTrackingSystemFinal.Views.PharmacistView" xmlns:fa="http://schemas.fontawesome.io/icons/"
+      xmlns:fa="http://schemas.fontawesome.io/icons/"
+      xmlns:converters="clr-namespace:PersonalizedHealthcareTrackingSystemFinal.Helpers"       
+      xmlns:local="clr-namespace:PersonalizedHealthcareTrackingSystemFinal.Views.PharmacistView"
       mc:Ignorable="d" 
-      d:DesignHeight="1000" d:DesignWidth="1200"
+      d:DesignHeight="1000" d:DesignWidth="1500"
       Title="PharmacistHistoryPage">
+
+    <Page.Resources>
+        <converters:LocalToUtcDisplayConverter x:Key="LocalToUtcDisplayConverter"/>
+        <converters:StatToVisibility x:Key="StatToVisibility"/>
+        <converters:UrgentToVisibility x:Key="UrgentToVisibility"/>
+        <converters:ZeroStockToVisibility x:Key="ZeroStockToVisibility"/>
+        <converters:LowStockToVisibility x:Key="LowStockToVisibility"/>
+        <converters:NormalStockToVisibility x:Key="NormalStockToVisibility"/>
+    </Page.Resources>
 
     <Grid Margin="32">
         <Grid.RowDefinitions>
@@ -32,28 +43,28 @@
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
-                <Border BorderBrush="{StaticResource LightBorder}" BorderThickness="1" CornerRadius="8" Padding="8,0" HorizontalAlignment="Left" Width="350">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <fa:FontAwesome Icon="Search" Foreground="{StaticResource TextSecondary}" VerticalAlignment="Center" Margin="8,0"/>
-                        <TextBox Grid.Column="1" BorderThickness="0" Background="Transparent" 
-                                 VerticalContentAlignment="Center" Padding="4"
-                                 Text="Search by Rx ID, Patient or Pharmacist..."/>
-                    </Grid>
-                </Border>
+                <TextBox 
+                         VerticalAlignment="Center"
+                         Style="{StaticResource SearchInputTextBoxStyle}"
+                         Tag="Search Prescription, Patient Name Or Pharmacist Name"
+                         Text="{Binding SearchText, Mode=TwoWay, UpdateSourceTrigger=LostFocus}">
+                    <TextBox.InputBindings>
+                        <KeyBinding Key="Enter" 
+                                    Command="{Binding SearchCommand}"
+                                    CommandParameter="{Binding Text, 
+                                    RelativeSource={RelativeSource AncestorType=TextBox}}"/>
+                    </TextBox.InputBindings>
+                </TextBox>
 
                 <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="16">
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                         <TextBlock Text="From:" VerticalAlignment="Center" Foreground="{StaticResource TextSecondary}" Margin="0,0,8,0"/>
-                        <DatePicker Style="{StaticResource StandardDatePicker}" SelectedDate="2023-10-01" Width="180"/>
+                        <DatePicker Style="{StaticResource StandardDatePicker}" SelectedDate="2024-01-01" Width="180"/>
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                         <TextBlock Text="To:" VerticalAlignment="Center" Foreground="{StaticResource TextSecondary}" Margin="0,0,8,0"/>
-                        <DatePicker Style="{StaticResource StandardDatePicker}" SelectedDate="2023-10-27" Width="180"/>
+                        <DatePicker Style="{StaticResource StandardDatePicker}" SelectedDate="2025-01-01" Width="180"/>
                     </StackPanel>
 
                     <Button Style="{StaticResource BtnSecondary}" Padding="16,8" Margin="8,0,0,0">
@@ -66,52 +77,88 @@
             </Grid>
         </Border>
 
-        <DataGrid Grid.Row="2" Style="{StaticResource InventoryDataGrid}" RowHeight="70">
+        <DataGrid Grid.Row="2" 
+                  Style="{StaticResource DefaultDataGridStyle}"
+          ItemsSource="{Binding PrescriptionHistory}"
+          x:Name="HistoryDataGrid"
+          ScrollViewer.CanContentScroll="True"
+          ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+          ScrollViewer.VerticalScrollBarVisibility="Auto">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Rx ID" Binding="{Binding Id}" Width="100" FontWeight="Bold" Foreground="{StaticResource SidebarActive}"/>
+                <DataGridTextColumn Header="ID" 
+                            Width="*"
+                            ElementStyle="{StaticResource ColumnTextBlockStyle}"
+                            Binding="{Binding PrescriptionID}"/>
 
-                <DataGridTemplateColumn Header="Completion Time" Width="150">
+                <DataGridTextColumn Header="Completion Time" 
+                            ElementStyle="{StaticResource ColumnTextBlockStyle}"
+                            Width="Auto"
+                            Binding="{Binding VerifiedAt, StringFormat={}{0:dd/MM/yyyy HH:mm}}"/>
+
+                <DataGridTemplateColumn 
+                            Header="Patient" 
+                            Width="*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel VerticalAlignment="Center">
-                                <TextBlock Text="{Binding Date}" FontWeight="SemiBold"/>
-                                <TextBlock Text="{Binding Time}" FontSize="12" Foreground="{StaticResource TextSecondary}"/>
+                                <TextBlock 
+                                           FontWeight="SemiBold"
+                                           Style="{StaticResource CustomBaseTextBlockStyle}">
+                                    <TextBlock.Text>
+                                        <MultiBinding StringFormat="{}{0} {1}">
+                                            <Binding Path="MedicalRecord.Appointment.Patient.User.FirstName"/>
+                                            <Binding Path="MedicalRecord.Appointment.Patient.User.LastName"/>
+                                        </MultiBinding>
+                                    </TextBlock.Text>
+                                </TextBlock>
                             </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
 
-                <DataGridTemplateColumn Header="Patient" Width="200">
+                <DataGridTemplateColumn 
+                            Header="Doctor" 
+                            Width="*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel VerticalAlignment="Center">
-                                <TextBlock Text="{Binding PatientName}" FontWeight="SemiBold"/>
-                                <TextBlock Text="{Binding PatientId}" FontSize="12" Foreground="{StaticResource TextSecondary}"/>
+                                <TextBlock 
+                           FontWeight="SemiBold"
+                           Style="{StaticResource CustomBaseTextBlockStyle}">
+                                    <TextBlock.Text>
+                                        <MultiBinding StringFormat="{}{0} {1}">
+                                            <Binding Path="MedicalRecord.Appointment.Doctor.User.FirstName"/>
+                                            <Binding Path="MedicalRecord.Appointment.Doctor.User.LastName"/>
+                                        </MultiBinding>
+                                    </TextBlock.Text>
+                                </TextBlock>
                             </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
 
-                <DataGridTextColumn Header="Prescriber" Binding="{Binding DoctorName}" Width="180"/>
-
-                <DataGridTextColumn Header="Medication Summary" Binding="{Binding MedSummary}" Width="*" Foreground="{StaticResource TextSecondary}"/>
-
-                <DataGridTextColumn Header="Dispensed By" Binding="{Binding PharmacistName}" Width="150"/>
-
-                <DataGridTemplateColumn Header="Status" Width="140">
+                <DataGridTemplateColumn 
+                            Header="Dispensed By" 
+                            Width="*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Border Style="{StaticResource StockBadgeOk}" Background="#dcfce7" HorizontalAlignment="Left">
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                    <TextBlock Text="✓" Foreground="#15803d" FontWeight="Bold" Margin="0,0,4,0"/>
-                                    <TextBlock Text="Dispensed" Foreground="#15803d" FontWeight="SemiBold"/>
-                                </StackPanel>
-                            </Border>
+                            <StackPanel VerticalAlignment="Center">
+                                <TextBlock 
+                            FontWeight="SemiBold"
+                            Style="{StaticResource CustomBaseTextBlockStyle}">
+                                    <TextBlock.Text>
+                                        <MultiBinding StringFormat="{}{0} {1}">
+                                            <Binding Path="Pharmacist.User.FirstName"/>
+                                            <Binding Path="Pharmacist.User.LastName"/>
+                                        </MultiBinding>
+                                    </TextBlock.Text>
+                                </TextBlock>
+                            </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
 
-                <DataGridTemplateColumn Header="Actions" Width="Auto">
+                <DataGridTemplateColumn Header="Actions" Width="*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal" Margin="8">
@@ -121,9 +168,10 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-            </DataGrid.Columns>
-        </DataGrid>
 
+            </DataGrid.Columns>
+
+        </DataGrid>
         <Grid Grid.Row="3" Margin="0,16,0,0">
             <TextBlock Text="Showing 1-10 of 1,250 records" VerticalAlignment="Center" Foreground="{StaticResource TextSecondary}"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
