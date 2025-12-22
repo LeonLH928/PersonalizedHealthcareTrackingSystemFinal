@@ -51,14 +51,14 @@
                         <StackPanel Orientation="Horizontal">
                             <Button Content="Day" Style="{StaticResource SecondaryButton}"
                                     Margin="12,8" BorderThickness="0"/>
-                            <Button Content="Week" Style="{StaticResource PrimaryButton}"
+                            <Button Content="Week" Style="{StaticResource PatientBtnPrimary}"
                                     Margin="12,8"/>
                             <Button Content="Month" Style="{StaticResource SecondaryButton}"
                                     Margin="12,8" BorderThickness="0"/>
                         </StackPanel>
                     </Border>
 
-                    <Button Style="{StaticResource PrimaryButton}" Margin="16,10" Background="#0f172a">
+                    <Button Style="{StaticResource PatientBtnPrimary}" Margin="16,10" Background="#0f172a">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="🔒" Margin="0,0,8,0"/>
                             <TextBlock Text="Block Schedule"/>

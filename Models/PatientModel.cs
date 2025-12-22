@@ -16,6 +16,8 @@ public class PatientModel
     [Required]
     public DateTime DateOfBirth { get; set; } = DateTime.UtcNow;
     [Required]
+    public int Age { get; set; }
+    [Required]
     public Gender Gender { get; set; }
     [Required]
     public string InsuranceNumber { get; set; } = "";

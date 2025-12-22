@@ -6,7 +6,7 @@
              xmlns:converters="clr-namespace:PersonalizedHealthcareTrackingSystemFinal.Helpers" 
              xmlns:fa="http://schemas.fontawesome.io/icons/"
              mc:Ignorable="d" 
-             d:DesignHeight="800" d:DesignWidth="1000"
+             d:DesignHeight="1000" d:DesignWidth="1500"
              Background="#F1F5F9" FontFamily="Segoe UI">
 
     <Page.Resources>

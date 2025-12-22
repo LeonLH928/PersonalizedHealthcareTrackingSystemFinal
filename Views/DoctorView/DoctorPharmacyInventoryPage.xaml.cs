@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PersonalizedHealthcareTrackingSystemFinal.ViewModels.DoctorViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,10 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Views.DoctorView
     /// </summary>
     public partial class DoctorPharmacyInventoryPage : Page
     {
-        public DoctorPharmacyInventoryPage()
+        public DoctorPharmacyInventoryPage(DoctorPharmacyInventoryPageViewModel vm)
         {
             InitializeComponent();
+            DataContext = vm;
         }
     }
 }

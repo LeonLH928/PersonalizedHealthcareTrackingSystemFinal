@@ -68,9 +68,9 @@
                                 <BeginStoryboard>
                                     <Storyboard RepeatBehavior="Forever">
                                         <DoubleAnimation Storyboard.TargetName="SpinnerRotate"
-                                                       Storyboard.TargetProperty="Angle"
-                                                       From="0" To="360"
-                                                       Duration="0:0:1.5"/>
+                                                         Storyboard.TargetProperty="Angle"
+                                                         From="0" To="360"
+                                                         Duration="0:0:1.5"/>
                                     </Storyboard>
                                 </BeginStoryboard>
                             </EventTrigger>
