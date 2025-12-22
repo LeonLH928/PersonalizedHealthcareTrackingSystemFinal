@@ -12,6 +12,19 @@ public enum Form
     Inhaler,
     Other
 }
+
+public enum MedicationCategory
+{
+    Antibiotic,
+    PainReliever,
+    ChronicCondition, 
+    Supplement,       
+    Respiratory,      
+    MentalHealth,     
+    Allergy,
+    Other
+}
+
 public class MedicationModel
 {
     [Key]
@@ -22,6 +35,8 @@ public class MedicationModel
 
     [Required]
     public Form Form { get; set; }
+    [Required]
+    public MedicationCategory Category { get; set; } = MedicationCategory.Other;
     public string BaseUnit { get; set; } = "";
     public int StockTotalQuantity { get; set; }
     public string PackingUnit { get; set; } = "";
