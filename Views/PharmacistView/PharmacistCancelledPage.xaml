@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:PersonalizedHealthcareTrackingSystemFinal.Views.PharmacistView" xmlns:fa="http://schemas.fontawesome.io/icons/"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="1080" d:DesignWidth="1400"
       Title="PharmacistCancelledPage">
 
     <Grid Margin="32">
@@ -35,41 +35,62 @@
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
-                <Border BorderBrush="{StaticResource LightBorder}" BorderThickness="1" CornerRadius="8" Padding="8,0" HorizontalAlignment="Left" Width="300">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <fa:FontAwesome Icon="Search" Foreground="{StaticResource TextSecondary}" VerticalAlignment="Center" Margin="8,0"/>
-                        <TextBox Grid.Column="1" BorderThickness="0" Background="Transparent" 
-                                 VerticalContentAlignment="Center" Padding="4"
-                                 Text="Search by Rx ID, Patient..."/>
-                    </Grid>
-                </Border>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBox
+                        Tag="Search by Rx ID, Patient..."
+                        FontSize="14"
+                        Style="{StaticResource SearchInputTextBoxStyle}"
+                        VerticalAlignment="Center"
+                        Text="{Binding SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.ColumnSpan="2">
+                        <TextBox.InputBindings>
+                            <KeyBinding Key="Enter" Command="{Binding SearchCommand}"/>
+                        </TextBox.InputBindings>
+                    </TextBox>
+                </Grid>
 
                 <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="20">
-                    <ComboBox Width="180" Padding="8" SelectedIndex="0">
-                        <ComboBoxItem Content="Cancelled By: All"/>
+                    <ComboBox Grid.Column="2"
+                        Style="{StaticResource FormComboBox}"
+                        MinWidth="150"
+                        Padding="16,10"
+                        BorderBrush="{StaticResource BorderColor}"
+                        Margin="0,0,16,0">
+                        <ComboBoxItem Content="Cancelled By: All" IsSelected="True"/>
                         <ComboBoxItem Content="👨‍⚕️ Doctor"/>
                         <ComboBoxItem Content="⚙️ System (Auto)"/>
                         <ComboBoxItem Content="👤 Patient Request"/>
                     </ComboBox>
 
-                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                        <TextBlock Text="From:" VerticalAlignment="Center" Foreground="{StaticResource TextSecondary}" Margin="0,0,8,0"/>
-                        <DatePicker Style="{StaticResource StandardDatePicker}" SelectedDate="2023-10-01" Width="180"/>
-                    </StackPanel>
+                    <ComboBox Grid.Column="2"
+                        Style="{StaticResource FormComboBox}"
+                        MinWidth="150"
+                        Padding="16,10"
+                        BorderBrush="{StaticResource BorderColor}"
+                        Margin="0,0,16,0">
+                        <ComboBoxItem Content="Group: All" IsSelected="True"/>
+                        <ComboBoxItem Content="Antibiotics"/>
+                        <ComboBoxItem Content="Cardiovascular"/>
+                    </ComboBox>
 
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <TextBlock Text="From:" VerticalAlignment="Center" Foreground="{StaticResource TextSecondary}" Margin="0,0,8,0"/>
+                        <DatePicker Style="{StaticResource StandardDatePicker}" SelectedDate="2024-01-01" Width="180"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="10">
                         <TextBlock Text="To:" VerticalAlignment="Center" Foreground="{StaticResource TextSecondary}" Margin="0,0,8,0"/>
-                        <DatePicker Style="{StaticResource StandardDatePicker}" SelectedDate="2023-10-27" Width="180"/>
+                        <DatePicker Style="{StaticResource StandardDatePicker}" SelectedDate="2025-01-01" Width="180"/>
                     </StackPanel>
                 </StackPanel>
             </Grid>
         </Border>
 
-        <DataGrid Grid.Row="2" Style="{StaticResource InventoryDataGrid}" RowHeight="70">
+        <!--DataGrid Grid.Row="2" Style="{StaticResource InventoryDataGrid}" RowHeight="70">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Rx ID" Binding="{Binding Id}" Width="100" FontWeight="Bold" Foreground="{StaticResource DangerColor}"/>
 
@@ -132,6 +153,105 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Button Style="{StaticResource BtnSecondary}" Content="👁️ Details" Padding="10,6" FontSize="12"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid-->
+
+        <DataGrid Grid.Row="2" 
+                    Style="{StaticResource DefaultDataGridStyle}"
+                    ItemsSource="{Binding PrescriptionCancelled}"
+                    x:Name="CancelledDataGrid"
+                    ScrollViewer.CanContentScroll="True"
+                    ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                    ScrollViewer.VerticalScrollBarVisibility="Auto">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" 
+                    Width="*"
+                    ElementStyle="{StaticResource ColumnTextBlockStyle}"
+                    Binding="{Binding PrescriptionID}"/>
+
+                <DataGridTextColumn Header="Cancellation Time" 
+                    ElementStyle="{StaticResource ColumnTextBlockStyle}"
+                    Width="*"
+                    Binding="{Binding CancelledAt, StringFormat={}{0:dd/MM/yyyy HH:mm}}"/>
+
+                <DataGridTemplateColumn 
+                    Header="Patient" 
+                    Width="*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel VerticalAlignment="Center">
+                                <TextBlock 
+                                   FontWeight="SemiBold"
+                                   Style="{StaticResource CustomBaseTextBlockStyle}">
+                                    <TextBlock.Text>
+                                        <MultiBinding StringFormat="{}{0} {1}">
+                                            <Binding Path="MedicalRecord.Appointment.Patient.User.FirstName"/>
+                                            <Binding Path="MedicalRecord.Appointment.Patient.User.LastName"/>
+                                        </MultiBinding>
+                                    </TextBlock.Text>
+                                </TextBlock>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn 
+                    Header="Doctor" 
+                    Width="*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel VerticalAlignment="Center">
+                                <TextBlock 
+                   FontWeight="SemiBold"
+                   Style="{StaticResource CustomBaseTextBlockStyle}">
+                                    <TextBlock.Text>
+                                        <MultiBinding StringFormat="{}{0} {1}">
+                                            <Binding Path="MedicalRecord.Appointment.Doctor.User.FirstName"/>
+                                            <Binding Path="MedicalRecord.Appointment.Doctor.User.LastName"/>
+                                        </MultiBinding>
+                                    </TextBlock.Text>
+                                </TextBlock>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTextColumn Header="Reason" 
+                    Width="*"
+                    ElementStyle="{StaticResource ColumnTextBlockStyle}"
+                    Binding="{Binding Reason}"/>
+
+                <DataGridTemplateColumn 
+                    Header="Cancelled By" 
+                    Width="*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel VerticalAlignment="Center">
+                                <TextBlock 
+                    FontWeight="SemiBold"
+                    Style="{StaticResource CustomBaseTextBlockStyle}">
+                                    <TextBlock.Text>
+                                        <MultiBinding StringFormat="{}{0} {1}">
+                                            <Binding Path="Pharmacist.User.FirstName"/>
+                                            <Binding Path="Pharmacist.User.LastName"/>
+                                        </MultiBinding>
+                                    </TextBlock.Text>
+                                </TextBlock>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn Header="Actions" Width="*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" Margin="8">
+                                <Button Style="{StaticResource BtnSecondary}" Content="👁️ Details" Padding="10,6" FontSize="12"/>
+                                <Button Style="{StaticResource BtnSecondary}" Content="🖨️ Reprint" Padding="10,6" FontSize="12"/>
+                            </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

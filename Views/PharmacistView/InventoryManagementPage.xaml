@@ -78,6 +78,7 @@
 
                 <!-- Status Filter -->
                 <ComboBox Grid.Column="1"
+                        Style="{StaticResource FormComboBox}"
                         MinWidth="150"
                         Padding="16,10"
                         BorderBrush="{StaticResource BorderColor}"
@@ -89,6 +90,7 @@
 
                 <!-- Group Filter -->
                 <ComboBox Grid.Column="2"
+                        Style="{StaticResource FormComboBox}"
                         MinWidth="150"
                         Padding="16,10"
                         BorderBrush="{StaticResource BorderColor}">
