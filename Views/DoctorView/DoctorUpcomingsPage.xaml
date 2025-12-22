@@ -12,6 +12,9 @@
     <Page.Resources>
         <converters:LocalToUtcDisplayConverter x:Key="LocalToUtcDisplayConverter"/>
         <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+        <converters:AppointmentStatusToVisibility x:Key="AppointmentStatusToVisibility"/>
+        <converters:CollectionToVisibilityConverter x:Key="CollectionToVisibilityConverter"/>
+        <converters:EmptyCollectionToVisibilityConverter x:Key="EmptyCollectionToVisibilityConverter"/>
     </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -65,7 +68,7 @@
                             Orientation="Horizontal"
                             VerticalAlignment="Center">
                             <TextBlock
-                                Text="👨‍⚕️ 3"
+                                Text="{Binding HappeningNumber, StringFormat={}👨‍⚕️ {0}}"
                                 Style="{StaticResource SecondaryTextTextBlockStyle}"
                                 VerticalAlignment="Center"
                                 Margin="0,0,5,0"
@@ -113,9 +116,12 @@
                 <TextBox Margin="0 0 6 0"
                          Style="{StaticResource SearchInputTextBoxStyle}"
                          Tag="Search by name, ID, or phone number..."
-                         Text="{Binding SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                         Text="{Binding SearchText, Mode=TwoWay, UpdateSourceTrigger=LostFocus}">
                     <TextBox.InputBindings>
-                        <KeyBinding Key="Enter" Command="{Binding SearchCommand}"/>
+                        <KeyBinding Key="Enter" 
+                                    Command="{Binding SearchCommand}"
+                                    CommandParameter="{Binding Text, 
+                                                               RelativeSource={RelativeSource AncestorType=TextBox}}"/>
                     </TextBox.InputBindings>
                 </TextBox>
                 <!-- Filters & Add Button -->
@@ -128,7 +134,9 @@
                         Margin="0 0 12 0"/>
 
                     <ComboBox Style="{StaticResource FormComboBox}" Width="200" 
-                              Margin="0 0 12 0">
+                              Margin="0 0 12 0"
+                              SelectedValuePath="Content"
+                              SelectedValue="{Binding SelectedStatus}">
                         <ComboBoxItem Content="All Status" IsSelected="True"/>
                         <ComboBoxItem Content="Happening"/>
                         <ComboBoxItem Content="Scheduled"/>
@@ -137,27 +145,13 @@
                         <ComboBoxItem Content="Not show up"/>
                     </ComboBox>
                     <ComboBox Style="{StaticResource FormComboBox}" Width="180"
-                              Margin="0 0 12 0">
-                        <ComboBoxItem Content="Sort: Latest" IsSelected="True"/>
+                              Margin="0 0 12 0"
+                              SelectedValuePath="Content"
+                              SelectedValue="{Binding SelectedSort}">
+                        <ComboBoxItem Content="No sort" IsSelected="True"/>
+                        <ComboBoxItem Content="Sort: Latest"/>
                         <ComboBoxItem Content="Sort: Name A-Z"/>
                     </ComboBox>
-                    <StackPanel
-                                Orientation="Horizontal"
-                                Grid.Row="1">
-                        <TextBlock Text="Preferred date: " Style="{StaticResource CustomBaseTextBlockStyle}"
-                                        VerticalAlignment="Center"
-                                        FontWeight="Bold"
-                                        FontSize="20"/>
-                        <DatePicker Style="{StaticResource StandardDatePicker}"
-                                        SelectedDate="{Binding SelectedDate}"
-                                        FontSize="18"
-                                        VerticalAlignment="Center"
-                                        Margin="0,0,5,0" Height="44"
-                                        HorizontalAlignment="Stretch"
-                                        Padding="10,0"
-                                        HorizontalContentAlignment="Left"
-                                        Width="Auto"/>
-                    </StackPanel>
 
                 </StackPanel>
             </Grid>
@@ -166,18 +160,142 @@
         <ScrollViewer
             Grid.Row="2"
             HorizontalScrollBarVisibility="Auto"
-            Visibility="{Binding IsAppointments,
-                                 Converter={StaticResource BoolToVisibilityConverter}}">
-
+            Visibility="{Binding Appointments,
+                                 Converter={StaticResource CollectionToVisibilityConverter}}">
             <Border Style="{StaticResource PageContentBorderStyle}">
+                <StackPanel>
+                    <ItemsControl ItemsSource="{Binding Appointments}"
+                                  Visibility="{Binding Appointments,
+                                                       Converter={StaticResource CollectionToVisibilityConverter}}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border
+                                    Style="{StaticResource StatusAppointmentBorderStyle}"
+                                    Margin="0,10">
+
+                                    <Grid>
+
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" SharedSizeGroup="TimeGroup"/>
+                                            <ColumnDefinition Width="Auto" SharedSizeGroup="IdentificationGroup"/>
+                                            <ColumnDefinition Width="Auto" SharedSizeGroup="ReasonGroup"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <StackPanel
+                                                Orientation="Vertical"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center">
+                                            <TextBlock
+                                                Text="{Binding AppointmentDateTime, 
+                                                                StringFormat={}{0:hh:MM tt},
+                                                                Converter={StaticResource LocalToUtcDisplayConverter}}"
+                                                FontFamily="Segoe UI"
+                                                FontWeight="SemiBold"
+                                                FontSize="18"
+                                                Margin="0,0,20,0"/>
+                                        </StackPanel>
+
+                                        <StackPanel
+                                            Grid.Column="1"
+                                            Orientation="Vertical"
+                                            HorizontalAlignment="Left"
+                                            VerticalAlignment="Center"
+                                            Margin="0,0,20,0">
+
+                                            <TextBlock
+                                                FontFamily="Segoe UI"
+                                                FontWeight="SemiBold"
+                                                FontSize="16"
+                                                Margin="0,0,0,5">
+                                                <TextBlock.Text>
+                                                    <MultiBinding StringFormat="{}{0} {1}">
+                                                        <Binding Path="Patient.User.FirstName"/>
+                                                        <Binding Path="Patient.User.LastName"/>
+                                                    </MultiBinding>
+                                                </TextBlock.Text>
+                                            </TextBlock>
+
+                                            <TextBlock
+                                                    Style="{StaticResource SecondaryTextTextBlockStyle}">
+                                                <TextBlock.Text>
+                                                    <MultiBinding StringFormat="{}{0}, {1} years old • ID: {2}">
+                                                        <Binding Path="Patient.Gender"/>
+                                                        <Binding Path="Patient.Age"/>
+                                                        <Binding Path="PatientID"/>
+                                                    </MultiBinding>
+                                                </TextBlock.Text>
+                                            </TextBlock>
+
+                                        </StackPanel>
+
+                                        <StackPanel
+                                                Grid.Column="2"
+                                                Orientation="Vertical"
+                                                HorizontalAlignment="Left"
+                                                VerticalAlignment="Center"
+                                                Margin="0,0,20,0">
+
+                                            <Border
+                                                Style="{StaticResource SecondaryTextBorderStyle}">
+                                                <TextBlock
+                                                    Text="{Binding ChiefComplaint, StringFormat={}Chief complaint: {0}}"
+                                                    Style="{StaticResource SecondaryTextTextBlockStyle}"/>
+                                            </Border>
+
+                                        </StackPanel>
+
+                                        <StackPanel Grid.Column="3"
+                                                    HorizontalAlignment="Right"
+                                                    VerticalAlignment="Center"
+                                                    Orientation="Horizontal">
+                                            <Button
+                                                Style="{StaticResource PrimaryButtonStyle}"
+                                                Margin="0,0,10,0"
+                                                Command="{Binding DataContext.CallToTheClinicButtonCommand,
+                                                            RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                                CommandParameter="{Binding}"
+                                                Visibility="{Binding Status,
+                                                                     Converter={StaticResource AppointmentStatusToVisibility}}">
+                                                <StackPanel 
+                                                        Orientation="Horizontal">
+                                                    <TextBlock
+                                                        Text="🔊"
+                                                        Foreground="White"
+                                                        FontSize="20"/>
+                                                    <TextBlock
+                                                        Text=" Call to the clinic"
+                                                        FontSize="20"
+                                                        Foreground="White"
+                                                        FontWeight="SemiBold"/>
+                                                </StackPanel>
+                                            </Button>
+                                            <Button
+                                                Style="{StaticResource OutlineButtonStyle}"
+                                                Margin="0,0,10,0"
+                                                Background="White"
+                                                Content="See medical records"/>
+
+                                            <Button
+                                                Style="{StaticResource CancelOutlineButtonStyle}"
+                                                Content="✕ Cancel"
+                                                Visibility="{Binding Status,
+                                                                     Converter={StaticResource AppointmentStatusToVisibility}}"/>
+                                        </StackPanel>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
             </Border>
         </ScrollViewer>
         
         <ScrollViewer
             Grid.Row="2"
             HorizontalScrollBarVisibility="Auto"
-            Visibility="{Binding IsAppointmentsEmpty,
-                                 Converter={StaticResource BoolToVisibilityConverter}}">
+            Visibility="{Binding Appointments,
+                                 Converter={StaticResource EmptyCollectionToVisibilityConverter}}">
 
             <Border Style="{StaticResource PageContentBorderStyle}">
                 <Grid Grid.IsSharedSizeScope="True">
@@ -202,7 +320,8 @@
                             VerticalAlignment="Center"
                             Orientation="Horizontal">
 
-                            <Border Style="{StaticResource Dot}" Background="{StaticResource HappeningStatusBorder}"/>
+                            <Border Style="{StaticResource AppointmentStatusDot}" 
+                                    Background="{StaticResource HappeningStatusBorder}"/>
                             
                             <TextBlock
                                 Text="Happening"
@@ -217,14 +336,14 @@
                     <TextBlock
                         Grid.Row="1"
                         Text="There is no current happening appointment."
-                        Visibility="{Binding IsHappeningEmpty,     
-                                             Converter={StaticResource BoolToVisibilityConverter}}"
+                        Visibility="{Binding HappeningAppointments,     
+                                             Converter={StaticResource EmptyCollectionToVisibilityConverter}}"
                         Style="{StaticResource SecondaryTextTextBlockStyle}"
                         Margin="0,10,0,20"/>
-                    
+
                     <ItemsControl ItemsSource="{Binding HappeningAppointments}"
-                                  Visibility="{Binding IsHappening,
-                                                       Converter={StaticResource BoolToVisibilityConverter}}"
+                                  Visibility="{Binding HappeningAppointments,
+                                                       Converter={StaticResource CollectionToVisibilityConverter}}"
                                   Grid.Row="1">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
@@ -333,7 +452,7 @@
                             VerticalAlignment="Center"
                             Orientation="Horizontal">
 
-                            <Border Style="{StaticResource Dot}" Background="{StaticResource AccentBlue}"/>
+                            <Border Style="{StaticResource AppointmentStatusDot}" Background="{StaticResource AccentBlue}"/>
                             <TextBlock
                                 Text="Upcoming appointments"
                                 FontFamily="Segoe UI"
@@ -346,15 +465,15 @@
                     <TextBlock
                         Grid.Row="3"
                         Text="There is no current happening appointment."
-                        Visibility="{Binding IsUpcomingEmpty,     
-                                             Converter={StaticResource BoolToVisibilityConverter}}"
+                        Visibility="{Binding UpcomingAppointments,     
+                                             Converter={StaticResource EmptyCollectionToVisibilityConverter}}"
                         Style="{StaticResource SecondaryTextTextBlockStyle}"
                         Margin="0,10,0,20"/>
 
                     <ItemsControl ItemsSource="{Binding UpcomingAppointments}"
                                   Grid.Row="3"
-                                  Visibility="{Binding IsUpcoming,
-                                               Converter={StaticResource BoolToVisibilityConverter}}">
+                                  Visibility="{Binding UpcomingAppointments,
+                                                       Converter={StaticResource CollectionToVisibilityConverter}}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <Border
@@ -480,7 +599,7 @@
                             VerticalAlignment="Center"
                             Orientation="Horizontal">
 
-                            <Border Style="{StaticResource Dot}" Background="{StaticResource MediumCompletedStatusBorder}"/>
+                            <Border Style="{StaticResource AppointmentStatusDot}" Background="{StaticResource MediumCompletedStatusBorder}"/>
                             <TextBlock
                                 Text="Completed"
                                 FontFamily="Segoe UI"
@@ -493,15 +612,15 @@
                     <TextBlock
                         Grid.Row="5"
                         Text="There are no completed appointments yet."
-                        Visibility="{Binding IsCompletedEmpty,     
-                                             Converter={StaticResource BoolToVisibilityConverter}}"
+                        Visibility="{Binding CompletedAppointments,     
+                                             Converter={StaticResource EmptyCollectionToVisibilityConverter}}"
                         Style="{StaticResource SecondaryTextTextBlockStyle}"
                         Margin="0,10,0,20"/>
 
                     <ItemsControl ItemsSource="{Binding CompletedAppointments}"
                                   Grid.Row="5"
-                                  Visibility="{Binding IsCompleted,
-                                               Converter={StaticResource BoolToVisibilityConverter}}">
+                                  Visibility="{Binding CompletedAppointments,
+                                                       Converter={StaticResource CollectionToVisibilityConverter}}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <Border
@@ -606,7 +725,7 @@
                             VerticalAlignment="Center"
                             Orientation="Horizontal">
 
-                            <Border Style="{StaticResource Dot}" Background="{StaticResource CancelledStatusBorder}"/>
+                            <Border Style="{StaticResource AppointmentStatusDot}" Background="{StaticResource CancelledStatusBorder}"/>
                             <TextBlock
                                 Text="Cancelled"
                                 FontFamily="Segoe UI"
@@ -619,15 +738,15 @@
                     <TextBlock
                         Grid.Row="7"
                         Text="There are no cancelled appointments."
-                        Visibility="{Binding IsCancelledEmpty,     
-                                             Converter={StaticResource BoolToVisibilityConverter}}"
+                        Visibility="{Binding CancelledAppointments,     
+                                             Converter={StaticResource EmptyCollectionToVisibilityConverter}}"
                         Style="{StaticResource SecondaryTextTextBlockStyle}"
                         Margin="0,10,0,20"/>
 
                     <ItemsControl ItemsSource="{Binding CancelledAppointments}"
                                   Grid.Row="7"
-                                  Visibility="{Binding IsCancelled,
-                                               Converter={StaticResource BoolToVisibilityConverter}}">
+                                  Visibility="{Binding CancelledAppointments,
+                                                       Converter={StaticResource CollectionToVisibilityConverter}}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <Border
@@ -732,7 +851,7 @@
                             VerticalAlignment="Center"
                             Orientation="Horizontal">
 
-                            <Border Style="{StaticResource Dot}" Background="{StaticResource NotShowUpStatusBorder}"/>
+                            <Border Style="{StaticResource AppointmentStatusDot}" Background="{StaticResource NotShowUpStatusBorder}"/>
                             <TextBlock
                                 Text="Not show up"
                                 FontFamily="Segoe UI"
@@ -746,15 +865,15 @@
                     <TextBlock
                         Grid.Row="9"
                         Text="There is no absence."
-                        Visibility="{Binding IsNotShowUpEmpty,     
-                                             Converter={StaticResource BoolToVisibilityConverter}}"
+                        Visibility="{Binding NotShowUpAppointments,     
+                                             Converter={StaticResource EmptyCollectionToVisibilityConverter}}"
                         Style="{StaticResource SecondaryTextTextBlockStyle}"
                         Margin="0,10,0,20"/>
 
                     <ItemsControl ItemsSource="{Binding NotShowUpAppointments}"
                                   Grid.Row="9"
-                                  Visibility="{Binding IsNotShowUp,
-                                               Converter={StaticResource BoolToVisibilityConverter}}">
+                                  Visibility="{Binding NotShowUpAppointments,
+                                               Converter={StaticResource CollectionToVisibilityConverter}}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <Border

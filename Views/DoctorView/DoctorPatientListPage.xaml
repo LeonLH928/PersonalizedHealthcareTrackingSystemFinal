@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:PersonalizedHealthcareTrackingSystemFinal.Views.DoctorView"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="1000" d:DesignWidth="1500"
       Title="DoctorPatientListPage">
 
     <Grid Background="{StaticResource BgLight}">
@@ -39,7 +39,13 @@
                 <!-- Search -->
                 <TextBox Margin="0 0 12 0"
                          Style="{StaticResource SearchInputTextBoxStyle}"
-                         Tag="Search by name, ID, or phone number..."/>
+                         Tag="Search by name, ID, or phone number..."                         
+                         Text="{Binding SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    <TextBox.InputBindings>
+                        <KeyBinding Key="Enter" Command="{Binding SearchCommand}"/>
+                    </TextBox.InputBindings>
+                </TextBox>
+
 
                 <!-- Filters & Add Button -->
                 <StackPanel Grid.Column="1" Orientation="Horizontal">

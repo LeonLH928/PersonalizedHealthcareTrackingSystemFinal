@@ -14,4 +14,6 @@ public interface IAppointmentService
     Task<AppointmentModel?> GetNearestAppointmentByPatientIDAsync(string PatientID);
     Task<AppointmentModel?> GetAppointmentByIDAsync(string AppointmentID);
     Task<IEnumerable<AppointmentModel>> SearchByText(string SearchText);
+    Task<IEnumerable<AppointmentModel>> GetAppointmentsSortByLatest(string DoctorID);
+    Task<IEnumerable<AppointmentModel>> GetAppointmentsSortByNameAZ(string DoctorID);
 }

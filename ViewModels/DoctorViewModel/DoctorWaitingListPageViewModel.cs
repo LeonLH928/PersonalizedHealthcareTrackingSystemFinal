@@ -10,6 +10,7 @@ using PersonalizedHealthcareTrackingSystemFinal.SupabaseModels;
 using PersonalizedHealthcareTrackingSystemFinal.Views.DoctorView;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace PersonalizedHealthcareTrackingSystemFinal.ViewModels.DoctorViewModel;
@@ -20,6 +21,7 @@ public partial class DoctorWaitingListPageViewModel : ObservableObject
     private readonly ICurrentUserStoreService _currentUserService;
     private readonly IDoctorService _doctorService;
     private readonly IServiceProvider _serviceProvider;
+    private DoctorModel _doctor = null!;
     public DoctorWaitingListPageViewModel(IAppointmentService appointmentService,
                                           ICurrentUserStoreService currentUserService,
                                           IDoctorService doctorService,
@@ -37,33 +39,13 @@ public partial class DoctorWaitingListPageViewModel : ObservableObject
     [ObservableProperty]
     private bool isBusy = false;
     [ObservableProperty]
-    private bool isSearched = false;
-    [ObservableProperty]
-    private bool isHappening = false;
-    [ObservableProperty]
-    private bool isHappeningEmpty = false;
-    [ObservableProperty]
-    private bool isUpcoming = false;
-    [ObservableProperty]
-    private bool isUpcomingEmpty = false;
-    [ObservableProperty]
-    private bool isCompleted = false;
-    [ObservableProperty]
-    private bool isCompletedEmpty = false;
-    [ObservableProperty]
-    private bool isCancelled = false;
-    [ObservableProperty]
-    private bool isCancelledEmpty = false;
-    [ObservableProperty]
-    private bool isNotShowUp = false;
-    [ObservableProperty]
-    private bool isNotShowUpEmpty = false;
-    [ObservableProperty]
-    private ObservableCollection<AppointmentModel> happeningAppointment = null!;
+    private ObservableCollection<AppointmentModel> happeningAppointments = null!;
     [ObservableProperty]
     private ObservableCollection<AppointmentModel> upcomingAppointments = [];
     [ObservableProperty]
     private int upcomingNumber;
+    [ObservableProperty]
+    private int happeningNumber;
     [ObservableProperty]
     private ObservableCollection<AppointmentModel> completedAppointments = [];
     [ObservableProperty]
@@ -75,35 +57,35 @@ public partial class DoctorWaitingListPageViewModel : ObservableObject
     [ObservableProperty]
     private ObservableCollection<AppointmentModel> appointments = [];
     [ObservableProperty]
-    private bool isAppointments = false;
+    private string selectedStatus = "All Status";
     [ObservableProperty]
-    private bool isAppointmentsEmpty = true;
+    private string selectedSort = "No sort";
     public async Task LoadDataAsync()
     {
         IsLoading = true;
         try
         {
             var CurrentUser = _currentUserService.GetCurrentUser();
-            var Doctor = await (_doctorService.GetDoctorByUserIDAsync(CurrentUser!.UserID))!;
+            _doctor = (await _doctorService.GetDoctorByUserIDAsync(CurrentUser!.UserID))!;
+            Appointments = [];
+            SelectedStatus = "All Status";
+            SelectedSort = "No sort";
 
-            HappeningAppointment = [.. await _appointmentService.GetHappeningAppointmentByDoctorIDAsync(Doctor!.DoctorID)];
-            UpcomingAppointments = [.. await _appointmentService.GetUpcomingAppointmentsByDoctorIDAsync(Doctor!.DoctorID)];
-            CompletedAppointments = [.. await _appointmentService.GetCompletedAppointmentsByDoctorIDAsync(Doctor!.DoctorID)];
-            CancelledAppointments = [.. await _appointmentService.GetCancelledAppointmentsByDoctorIDAsync(Doctor!.DoctorID)];
-            NotShowUpAppointments = [.. await _appointmentService.GetNotShowUpAppointmentsByDoctorIDAsync(Doctor!.DoctorID)];
+            var happeningTask = _appointmentService.GetHappeningAppointmentByDoctorIDAsync(_doctor!.DoctorID);
+            var upcomingTask = _appointmentService.GetUpcomingAppointmentsByDoctorIDAsync(_doctor!.DoctorID);
+            var completedTask = _appointmentService.GetCompletedAppointmentsByDoctorIDAsync(_doctor!.DoctorID);
+            var cancelledTask = _appointmentService.GetCancelledAppointmentsByDoctorIDAsync(_doctor!.DoctorID);
+            var notShowUpTask = _appointmentService.GetNotShowUpAppointmentsByDoctorIDAsync(_doctor!.DoctorID);
+            await Task.WhenAll(happeningTask, upcomingTask, completedTask, cancelledTask, notShowUpTask);
 
-            IsHappening = HappeningAppointment.Count > 0;
-            IsHappeningEmpty = !IsHappening;
-            IsUpcoming = UpcomingAppointments.Count > 0;
-            IsUpcomingEmpty = !IsUpcoming;
-            IsCompleted = CompletedAppointments.Count > 0;
-            IsCompletedEmpty = !IsCompleted;
-            IsCancelled = CancelledAppointments.Count > 0;
-            IsCancelledEmpty = !IsCancelled;
-            IsNotShowUp = NotShowUpAppointments.Count > 0;
-            IsNotShowUpEmpty = !IsNotShowUp;
+            HappeningAppointments = [.. happeningTask.Result];
+            UpcomingAppointments = [.. upcomingTask.Result];
+            CompletedAppointments = [.. completedTask.Result];
+            CancelledAppointments = [.. cancelledTask.Result];
+            NotShowUpAppointments = [.. notShowUpTask.Result];
 
             UpcomingNumber = UpcomingAppointments.Count;
+            HappeningNumber = HappeningAppointments.Count;
         }
         catch (Exception e)
         {
@@ -124,37 +106,93 @@ public partial class DoctorWaitingListPageViewModel : ObservableObject
             WeakReferenceMessenger.Default.Send(new SelectedAppointmentIDMessage(SelectedAppointment.AppointmentID));
         }
     }
+    
     [RelayCommand]
     public async Task ReloadButton()
     {
         SearchText = "";
-        Appointments.Clear();
         await LoadDataAsync();
     }
-    partial void OnSearchTextChanged(string value)
-    {
-        IsSearched = !SearchText.IsNullOrEmpty();
-    }
+
     [RelayCommand]
-    public async Task Search()
+    public async Task Search(string? query)
     {
+        SearchText = query ?? "";
+
         if (SearchText.IsNullOrEmpty())
             MessageBox.Show("Please enter text!", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
 
         IsBusy = true;
         try
         {
-            Appointments.Clear();
-            Appointments = [.. await _appointmentService.SearchByText(SearchText)];
+            await RefreshViewAsync();
         }
         finally
         {
             IsBusy = false;
         }
     }
-    partial void OnAppointmentsChanged(ObservableCollection<AppointmentModel> value)
+
+    partial void OnSelectedStatusChanged(string value) => _ = RefreshViewAsync();
+    partial void OnSelectedSortChanged(string value) => _ = RefreshViewAsync();
+    partial void OnSearchTextChanged(string value) => _ = RefreshViewAsync();  
+
+    private async Task RefreshViewAsync()
     {
-        IsAppointments = Appointments.Count > 0;
-        IsAppointmentsEmpty = !IsAppointments;
+        IsBusy = true;
+        try
+        {
+            IEnumerable<AppointmentModel> query = [];
+            if (!SearchText.IsNullOrEmpty())
+                query = await _appointmentService.SearchByText(SearchText);
+
+            IEnumerable<AppointmentModel> result = [];
+
+            switch (SelectedStatus)
+            {
+                case "All Status":
+                    await LoadDataAsync();
+                    return;
+                case "Happening":
+                    result = await _appointmentService.GetHappeningAppointmentByDoctorIDAsync(_doctor.DoctorID);
+                    break;
+                case "Scheduled":
+                    result = await _appointmentService.GetUpcomingAppointmentsByDoctorIDAsync(_doctor.DoctorID);
+                    break;
+                case "Completed":
+                    result = await _appointmentService.GetCompletedAppointmentsByDoctorIDAsync(_doctor.DoctorID);
+                    break;
+                case "Cancelled":
+                    result = await _appointmentService.GetCancelledAppointmentsByDoctorIDAsync(_doctor.DoctorID);
+                    break;
+                case "Not show up":
+                    result = await _appointmentService.GetNotShowUpAppointmentsByDoctorIDAsync(_doctor.DoctorID);
+                    break;
+            }
+
+            IEnumerable<string> listIDs = result.Select(a => a.AppointmentID);
+
+            if (query.IsNullOrEmpty())
+                query = result;
+            else
+                query = query.Where(a => listIDs.Contains(a.AppointmentID));
+
+            switch (SelectedSort)
+            {
+                case "Sort: Latest":
+                    query = query.OrderByDescending(a => a.AppointmentDateTime);
+                    break;
+                case "Sort: Name A-Z":
+                    query = query.OrderBy(a => a.Patient.User.FirstName);
+                    break;
+            }
+
+            Appointments = new ObservableCollection<AppointmentModel>(query);
+        }
+        finally
+        {
+            IsBusy = false;
+        }
     }
 }
+

@@ -19,6 +19,7 @@
                 <ResourceDictionary Source="/Styles/ListBox.xaml"/>
                 <ResourceDictionary Source="/Styles/DataGrid.xaml"/>
                 <ResourceDictionary Source="/Styles/ComboBox.xaml"/>
+                <ResourceDictionary Source="/Styles/Animation.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <local:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
         </ResourceDictionary>

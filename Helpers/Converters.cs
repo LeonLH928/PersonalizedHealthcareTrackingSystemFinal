@@ -1,5 +1,6 @@
 ﻿using Microsoft.IdentityModel.Tokens;
 using PersonalizedHealthcareTrackingSystemFinal.Models;
+using System.Collections;
 using System.Diagnostics;
 using System.Globalization;
 using System.Windows;
@@ -485,6 +486,64 @@ public class AppointmentStatusToBackground : IValueConverter
         return (Brush)_converter.ConvertFromString(hexColor)!;
     }
 
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}
+public class AppointmentStatusToVisibility : IValueConverter
+{
+    private static readonly BrushConverter _converter = new();
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        if (value is not StatusAppointment sa)
+            return value;
+        return sa switch
+        {
+            StatusAppointment.Happening => Visibility.Visible,
+            StatusAppointment.Scheduled => Visibility.Visible,
+            _ => Visibility.Collapsed
+        };
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}
+
+public class CollectionToVisibilityConverter : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        int count = 0;
+
+        if (value is ICollection collection)
+            count = collection.Count;
+
+        bool isVisible = count > 0;
+
+        return isVisible ? Visibility.Visible : Visibility.Collapsed;
+    }
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}
+
+public class EmptyCollectionToVisibilityConverter : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        int count = 0;
+
+        if (value is ICollection collection)
+            count = collection.Count;
+
+        bool isVisible = count == 0;
+
+        return isVisible ? Visibility.Visible : Visibility.Collapsed;
+    }
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
     {
         throw new NotImplementedException();

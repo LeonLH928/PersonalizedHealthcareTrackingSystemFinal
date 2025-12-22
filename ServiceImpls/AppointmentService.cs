@@ -59,4 +59,14 @@ public class AppointmentService : IAppointmentService
     {
         return await _appointmentRepository.SearchByText(SearchText);
     }
+    public async Task<IEnumerable<AppointmentModel>> GetAppointmentsSortByLatest(string DoctorID)
+    {
+        var Appointments = await _appointmentRepository.GetAllAppointmentsByDoctorIDAsync(DoctorID);
+        return Appointments.OrderByDescending(a => a.AppointmentDateTime);
+    }
+    public async Task<IEnumerable<AppointmentModel>> GetAppointmentsSortByNameAZ(string DoctorID)
+    {
+        var Appointments = await _appointmentRepository.GetAllAppointmentsByDoctorIDAsync(DoctorID);
+        return Appointments.OrderBy(a => a.Patient.User.FirstName);
+    }
 }
