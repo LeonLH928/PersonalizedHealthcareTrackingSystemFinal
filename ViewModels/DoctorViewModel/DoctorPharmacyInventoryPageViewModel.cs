@@ -28,14 +28,17 @@ public partial class DoctorPharmacyInventoryPageViewModel : ObservableObject
     [ObservableProperty]
     private string searchText = "";
     [ObservableProperty]
-    private string selectedCategory = "";
+    private string selectedCategory = "All Categories";
     [ObservableProperty]
-    private string selectedStatus = "";
+    private string selectedStatus = "Status: All";
     public async Task LoadDataAsync()
     {
         IsLoading = true;
         try
         {
+            SelectedCategory = "All Categories";
+            SelectedStatus = "Status: All";
+
             Medications = [.. await _medicationService.GetAllMedications()];
             TotalItems = Medications.Count();
         }
@@ -59,7 +62,7 @@ public partial class DoctorPharmacyInventoryPageViewModel : ObservableObject
         IsBusy = true;
         try
         {
-            //await RefreshViewAsync();
+            await RefreshViewAsync();
         }
         finally
         {
@@ -67,66 +70,74 @@ public partial class DoctorPharmacyInventoryPageViewModel : ObservableObject
         }
     }
 
-    //partial void OnSelectedStatusChanged(string value) => _ = RefreshViewAsync();
-    //partial void OnSelectedCategoryChanged(string value) => _ = RefreshViewAsync();
-    //partial void OnSearchTextChanged(string value) => _ = RefreshViewAsync();
+    partial void OnSelectedStatusChanged(string value) => _ = RefreshViewAsync();
+    partial void OnSelectedCategoryChanged(string value) => _ = RefreshViewAsync();
+    partial void OnSearchTextChanged(string value) => _ = RefreshViewAsync();
+    [RelayCommand]
+    public async Task ReloadButton()
+    {
+        SearchText = "";
+        await LoadDataAsync();
+    }
 
-    //private async Task RefreshViewAsync()
-    //{
-    //    IsBusy = true;
-    //    try
-    //    {
-    //        IEnumerable<AppointmentModel> query = [];
-    //        if (!SearchText.IsNullOrEmpty())
-    //            query = await _medicationService.SearchByText(SearchText);
+    private async Task RefreshViewAsync()
+    {
+        IsBusy = true;
+        try
+        {
+            IEnumerable<MedicationModel> result = [];
 
-    //        IEnumerable<AppointmentModel> result = [];
+            if (!SearchText.IsNullOrEmpty())
+                result = await _medicationService.SearchByText(SearchText);
+            else
+                result = await _medicationService.GetAllMedications();
 
-    //        switch (SelectedStatus)
-    //        {
-    //            case "All Status":
-    //                await LoadDataAsync();
-    //                return;
-    //            case "Happening":
-    //                result = await _appointmentService.GetHappeningAppointmentByDoctorIDAsync(_doctor.DoctorID);
-    //                break;
-    //            case "Scheduled":
-    //                result = await _appointmentService.GetUpcomingAppointmentsByDoctorIDAsync(_doctor.DoctorID);
-    //                break;
-    //            case "Completed":
-    //                result = await _appointmentService.GetCompletedAppointmentsByDoctorIDAsync(_doctor.DoctorID);
-    //                break;
-    //            case "Cancelled":
-    //                result = await _appointmentService.GetCancelledAppointmentsByDoctorIDAsync(_doctor.DoctorID);
-    //                break;
-    //            case "Not show up":
-    //                result = await _appointmentService.GetNotShowUpAppointmentsByDoctorIDAsync(_doctor.DoctorID);
-    //                break;
-    //        }
+            switch (SelectedStatus)
+            {
+                case "✅ Available":
+                    result = result.Where(m => m.StockTotalQuantity > 20);
+                    break;
+                case "⚠️ Low Stock":
+                    result = result.Where(m => m.StockTotalQuantity <= 20 && m.StockTotalQuantity > 0);
+                    break;
+                case "🚫 Out of Stock":
+                    result = result.Where(m => m.StockTotalQuantity == 0);
+                    break;
+            }
 
-    //        IEnumerable<string> listIDs = result.Select(a => a.AppointmentID);
+            switch (SelectedCategory)
+            {
+                case "Antibiotics":
+                    result = result.Where(m => m.Category == Models.MedicationCategory.Antibiotic);
+                    break;
+                case "Painkillers":
+                    result = result.Where(m => m.Category == Models.MedicationCategory.PainReliever);
+                    break;
+                case "Chronic Condition":
+                    result = result.Where(m => m.Category == Models.MedicationCategory.ChronicCondition);
+                    break;
+                case "Supplement":
+                    result = result.Where(m => m.Category == Models.MedicationCategory.Supplement);
+                    break;
+                case "Respiratory":
+                    result = result.Where(m => m.Category == Models.MedicationCategory.Respiratory);
+                    break;
+                case "Mental Health":
+                    result = result.Where(m => m.Category == Models.MedicationCategory.MentalHealth);
+                    break;
+                case "Allergy":
+                    result = result.Where(m => m.Category == Models.MedicationCategory.Allergy);
+                    break;
+                case "Other":
+                    result = result.Where(m => m.Category == Models.MedicationCategory.Other);
+                    break;
+            }
 
-    //        if (query.IsNullOrEmpty())
-    //            query = result;
-    //        else
-    //            query = query.Where(a => listIDs.Contains(a.AppointmentID));
-
-    //        switch (SelectedSort)
-    //        {
-    //            case "Sort: Latest":
-    //                query = query.OrderByDescending(a => a.AppointmentDateTime);
-    //                break;
-    //            case "Sort: Name A-Z":
-    //                query = query.OrderBy(a => a.Patient.User.FirstName);
-    //                break;
-    //        }
-
-    //        Appointments = new ObservableCollection<AppointmentModel>(query);
-    //    }
-    //    finally
-    //    {
-    //        IsBusy = false;
-    //    }
-    //}
-
+            Medications = [.. result];
+        }
+        finally
+        {
+            IsBusy = false;
+        }
+    }
 }

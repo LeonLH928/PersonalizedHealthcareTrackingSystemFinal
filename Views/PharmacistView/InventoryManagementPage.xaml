@@ -78,10 +78,7 @@
 
                 <!-- Status Filter -->
                 <ComboBox Grid.Column="1"
-                        MinWidth="150"
-                        Padding="16,10"
-                        BorderBrush="{StaticResource BorderColor}"
-                        Margin="0,0,16,0">
+                          Style="{StaticResource FormComboBox}">
                     <ComboBoxItem Content="All Statuses" IsSelected="True"/>
                     <ComboBoxItem Content="⚠️ Low Stock"/>
                     <ComboBoxItem Content="🚫 Out of Stock"/>
@@ -89,9 +86,7 @@
 
                 <!-- Group Filter -->
                 <ComboBox Grid.Column="2"
-                        MinWidth="150"
-                        Padding="16,10"
-                        BorderBrush="{StaticResource BorderColor}">
+                          Style="{StaticResource FormComboBox}">
                     <ComboBoxItem Content="Group: All" IsSelected="True"/>
                     <ComboBoxItem Content="Antibiotics"/>
                     <ComboBoxItem Content="Cardiovascular"/>

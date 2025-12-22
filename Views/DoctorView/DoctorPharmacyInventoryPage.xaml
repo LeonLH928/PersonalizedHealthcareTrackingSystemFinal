@@ -7,7 +7,7 @@
       mc:Ignorable="d" 
       xmlns:fa="http://schemas.fontawesome.io/icons/"
       xmlns:converters="clr-namespace:PersonalizedHealthcareTrackingSystemFinal.Helpers"       
-      d:DesignHeight="800" d:DesignWidth="1200"
+      d:DesignHeight="1200" d:DesignWidth="1500"
       Title="DoctorPharmacyInventoryPage">
     <Page.Resources>
         <converters:ZeroStockToVisibility x:Key="ZeroStockToVisibility"/>
@@ -50,13 +50,25 @@
                 </TextBox>
 
                 <StackPanel Grid.Column="1" Orientation="Horizontal">
+                    <Button
+                        Grid.Column="1"
+                        Content="&#128472;"
+                        Command="{Binding ReloadButtonCommand}"
+                        Style="{StaticResource ReloadButtonStyle}"
+                        Margin="0 0 12 0"/>
+
                     <ComboBox Width="180" Padding="8" Style="{StaticResource FormComboBox}"
                               SelectedValuePath="Content"
                               SelectedValue="{Binding SelectedCategory}">
                         <ComboBoxItem Content="All Categories" IsSelected="True"/>
-                        <ComboBoxItem Content="Cardiovascular"/>
                         <ComboBoxItem Content="Antibiotics"/>
                         <ComboBoxItem Content="Painkillers"/>
+                        <ComboBoxItem Content="Chronic Condition"/>
+                        <ComboBoxItem Content="Supplement"/>
+                        <ComboBoxItem Content="Respiratory"/>
+                        <ComboBoxItem Content="Mental Health"/>
+                        <ComboBoxItem Content="Allergy"/>
+                        <ComboBoxItem Content="Other"/>
                     </ComboBox>
 
                     <ComboBox Width="180" Padding="8" Style="{StaticResource FormComboBox}"
@@ -183,6 +195,16 @@
             </DataGrid.Columns>
         </DataGrid>
         <Grid Visibility="{Binding IsLoading, Converter={StaticResource BoolToVisibilityConverter}}"
+              Grid.RowSpan="3" 
+              Background="#80FFFFFF" 
+              d:IsHidden="False">
+            <fa:ImageAwesome 
+                Icon="Spinner" 
+                Spin="True" 
+                Height="48" 
+                Width="48"/>
+        </Grid>
+        <Grid Visibility="{Binding IsBusy, Converter={StaticResource BoolToVisibilityConverter}}"
               Grid.RowSpan="3" 
               Background="#80FFFFFF" 
               d:IsHidden="False">
