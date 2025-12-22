@@ -25,6 +25,52 @@ public class MedicationService : IMedicationService
     public async Task<IEnumerable<MedicationModel>> GetAllLowStockMedications()
     {
         var medications = await _medicationRepository.GetAllMedications();
-        return medications.Where(m => m.StockTotalQuantity < 50).ToList();
+        return medications.Where(m => m.StockTotalQuantity < 20);
+    }
+    public async Task<IEnumerable<MedicationModel>> GetAllZeroStockMedications()
+    {
+        var medications = await _medicationRepository.GetAllMedications();
+        return medications.Where(m => m.StockTotalQuantity == 0);
+    }
+    public async Task<IEnumerable<MedicationModel>> GetAllAvailableMedications()
+    {
+        var medications = await _medicationRepository.GetAllMedications();
+        return medications.Where(m => m.StockTotalQuantity > 20);
+    }
+    public async Task<IEnumerable<MedicationModel>> GetAllMedicationsByCategory(string Category)
+    {
+        IEnumerable<MedicationModel> resultCategory = [];
+        var medications = await GetAllMedications();
+        switch (Category)
+        {
+            case "All Categories":
+                resultCategory = medications;
+                break;
+            case "Antibiotics":
+                resultCategory = medications.Where(m => m.Category == Models.MedicationCategory.Antibiotic);
+                break;
+            case "Painkillers":
+                resultCategory = medications.Where(m => m.Category == Models.MedicationCategory.PainReliever);
+                break;
+            case "Chronic Condition":
+                resultCategory = medications.Where(m => m.Category == Models.MedicationCategory.ChronicCondition);
+                break;
+            case "Supplement":
+                resultCategory = medications.Where(m => m.Category == Models.MedicationCategory.Supplement);
+                break;
+            case "Respiratory":
+                resultCategory = medications.Where(m => m.Category == Models.MedicationCategory.Respiratory);
+                break;
+            case "Mental Health":
+                resultCategory = medications.Where(m => m.Category == Models.MedicationCategory.MentalHealth);
+                break;
+            case "Allergy":
+                resultCategory = medications.Where(m => m.Category == Models.MedicationCategory.Allergy);
+                break;
+            case "Other":
+                resultCategory = medications.Where(m => m.Category == Models.MedicationCategory.Other);
+                break;
+        }
+        return resultCategory;
     }
 }

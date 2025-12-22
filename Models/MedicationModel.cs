@@ -32,7 +32,6 @@ public class MedicationModel
     [Required]
     public string Name { get; set; } = "";
     public string ActiveIngredient { get; set; } = "";
-
     [Required]
     public Form Form { get; set; }
     [Required]
