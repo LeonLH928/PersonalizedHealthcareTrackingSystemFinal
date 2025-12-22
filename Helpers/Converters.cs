@@ -3,6 +3,7 @@ using PersonalizedHealthcareTrackingSystemFinal.Models;
 using System.Collections;
 using System.Diagnostics;
 using System.Globalization;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Automation.Peers;
 using System.Windows.Data;
@@ -347,6 +348,21 @@ public class UrgentToVisibility : IValueConverter
     }
 }
 
+public class NormalStockToVisibility : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        if (value is int stock && stock >= 20)
+            return Visibility.Visible;
+        return Visibility.Collapsed;
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}
+
 public class NullDateTimeToCurrentDate : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -544,6 +560,23 @@ public class EmptyCollectionToVisibilityConverter : IValueConverter
 
         return isVisible ? Visibility.Visible : Visibility.Collapsed;
     }
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}
+
+public class PascalCaseToSpaceConverter : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        if (value == null) return string.Empty;
+
+        string text = value.ToString()!;
+
+        return Regex.Replace(text, "([a-z])([A-Z])", "$1 $2");
+    }
+
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
     {
         throw new NotImplementedException();
