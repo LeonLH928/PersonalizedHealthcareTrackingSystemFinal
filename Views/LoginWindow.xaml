@@ -153,7 +153,7 @@
             </StackPanel>
 
             <Grid Background="#AA000000" 
-                  Visibility="{Binding IsLoading, Converter={StaticResource BoolToVisibilityConverter}}">
+                  Visibility="{Binding IsLoading, Converter={StaticResource BoolToVisibilityConverter}}" Margin="10,0,15,10">
                 <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
                     <ProgressBar IsIndeterminate="True" 
                                  Width="100" 
