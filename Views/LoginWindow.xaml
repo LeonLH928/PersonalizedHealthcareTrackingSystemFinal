@@ -14,6 +14,7 @@
         Background="Transparent"
         ResizeMode="NoResize"
         Icon="/Resources/Logo/logo.ico"
+        BorderThickness="0"
         
     FontFamily="/PersonalizedHealthcareTrackingSystemFinal;component/Resources/Fonts/#Poppins">
 
