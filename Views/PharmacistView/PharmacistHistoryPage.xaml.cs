@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PersonalizedHealthcareTrackingSystemFinal.ViewModels.PharmacistViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,10 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Views.PharmacistView
     /// </summary>
     public partial class PharmacistHistoryPage : Page
     {
-        public PharmacistHistoryPage()
+        public PharmacistHistoryPage(PharmacistHistoryViewModel vm)
         {
             InitializeComponent();
+            DataContext = vm;
         }
     }
 }

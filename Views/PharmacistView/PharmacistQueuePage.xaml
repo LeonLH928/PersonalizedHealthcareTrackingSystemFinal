@@ -671,8 +671,8 @@
                                 <DataGrid.Columns>
                                     <DataGridTextColumn
                                         Binding="{Binding Item.Medication.MedicationID}"
-                                        Width="*"
                                         Header="Medication ID"
+                                        Width="*"
                                         ElementStyle="{StaticResource ColumnTextBlockStyle}"/>
                                     <DataGridTextColumn
                                         Binding="{Binding Item.Medication.Name}"
@@ -763,7 +763,7 @@
                         </TextBlock.Text>
                     </TextBlock>
                     <Button
-                        Style="{StaticResource PrimaryButtonStyle}"
+                        Style="{StaticResource PharmacistPrimaryButton}"
                         Margin="0,0,10,0"
                         Command="{Binding VerifyButtonCommand}">
                         <StackPanel 
@@ -1108,7 +1108,7 @@
                         </TextBlock.Text>
                     </TextBlock>
                     <Button
-                        Style="{StaticResource PrimaryButtonStyle}"
+                        Style="{StaticResource PharmacistPrimaryButton}"
                         Margin="0,0,10,0"
                         Command="{Binding DoneDispensingButtonCommand}">
                         <StackPanel 

@@ -252,14 +252,15 @@ public class PrescriptionRepository : IPrescriptionRepository
         if (models == null)
             return [];
 
+        SearchText = SearchText.ToLower().Trim();
         var prescriptions = models.Where(p =>
-            p.PrescriptionID.ToLower().Contains(SearchText.ToLower().Trim())
-         || p.Priority.ToString().ToLower().Contains(SearchText.ToLower().Trim())
-         || p.RecordID.ToLower().Contains(SearchText.ToLower().Trim())
-         || p.MedicalRecord.Appointment.Doctor.User.FirstName.ToLower().Contains(SearchText.ToLower().Trim())
-         || p.MedicalRecord.Appointment.Doctor.User.LastName.ToLower().Contains(SearchText.ToLower().Trim())
-         || p.MedicalRecord.Appointment.Patient.User.LastName.ToLower().Contains(SearchText.ToLower().Trim())
-         || p.MedicalRecord.Appointment.Patient.User.FirstName.ToLower().Contains(SearchText.ToLower().Trim())
+            p.PrescriptionID.ToLower().Contains(SearchText)
+         || p.Priority.ToString().ToLower().Contains(SearchText)
+         || p.RecordID.ToLower().Contains(SearchText)
+         || p.MedicalRecord.Appointment.Doctor.User.FirstName.ToLower().Contains(SearchText)
+         || p.MedicalRecord.Appointment.Doctor.User.LastName.ToLower().Contains(SearchText)
+         || p.MedicalRecord.Appointment.Patient.User.LastName.ToLower().Contains(SearchText)
+         || p.MedicalRecord.Appointment.Patient.User.FirstName.ToLower().Contains(SearchText)
             );
 
         return prescriptions;

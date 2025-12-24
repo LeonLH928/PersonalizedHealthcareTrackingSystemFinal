@@ -14,6 +14,7 @@
         Background="Transparent"
         ResizeMode="NoResize"
         Icon="/Resources/Logo/logo.ico"
+        BorderThickness="0"
         
     FontFamily="/PersonalizedHealthcareTrackingSystemFinal;component/Resources/Fonts/#Poppins">
 
@@ -108,7 +109,8 @@
                 <Button Command="{Binding LoginCommand}" 
                         Content="LOG IN" 
                         Style="{StaticResource TealButtonStyle}" 
-                        Height="50" Margin="0,0,0,25"/>
+                        Height="50" Margin="0,0,0,25"
+                        IsDefault="True"/>
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                     <TextBlock Text="Don't have an account? " 
@@ -152,7 +154,7 @@
             </StackPanel>
 
             <Grid Background="#AA000000" 
-                  Visibility="{Binding IsLoading, Converter={StaticResource BoolToVisibilityConverter}}">
+                  Visibility="{Binding IsLoading, Converter={StaticResource BoolToVisibilityConverter}}" Margin="10,0,15,10">
                 <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
                     <ProgressBar IsIndeterminate="True" 
                                  Width="100" 

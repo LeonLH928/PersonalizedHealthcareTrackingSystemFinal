@@ -95,14 +95,20 @@ public static class AppModule
         services.AddTransient<ViewModels.PatientViewModel.PatientHomePageViewModel>();
         services.AddTransient<ViewModels.PatientViewModel.PatientBookingPageViewModel>();
         services.AddTransient<ViewModels.PatientViewModel.PatientBookingConfirmationWindowViewModel>();
+        services.AddTransient<ViewModels.PatientViewModel.PatientMainWindowViewModel>();
 
         services.AddTransient<ViewModels.DoctorViewModel.DoctorDashboardPageViewModel>();
         services.AddTransient<ViewModels.DoctorViewModel.DoctorConsultationWindowViewModel>();
         services.AddTransient<ViewModels.DoctorViewModel.AddDrugWindowViewModel>();
+        services.AddTransient<ViewModels.DoctorViewModel.DoctorWaitingListPageViewModel>();
+        services.AddTransient<ViewModels.DoctorViewModel.DoctorPharmacyInventoryPageViewModel>();
 
         services.AddTransient<ViewModels.PharmacistViewModel.PharmacistQueuePageViewModel>();
         services.AddTransient<ViewModels.PharmacistViewModel.PharmacistDashboardPageViewModel>();
         services.AddTransient<ViewModels.PharmacistViewModel.PharmacistMainWindowViewModel>();
+        services.AddTransient<ViewModels.PharmacistViewModel.InventoryManagementPageViewModel>();
+        services.AddTransient<ViewModels.PharmacistViewModel.PharmacistHistoryViewModel>();
+        services.AddTransient<ViewModels.PharmacistViewModel.PharmacistCancelledViewModel>();
 
         // Register Repositories
         services.AddScoped<IAppointmentRepository, AppointmentRepository>();
@@ -123,6 +129,7 @@ public static class AppModule
         services.AddScoped<IDoctorScheduleRepository, DoctorScheduleRepository>();
         services.AddScoped<IPharmacistRepository, PharmacistRepository>();
         services.AddScoped<IMedicationAdherenceRepository, MedicationAdherenceRepository>();
+        services.AddScoped<IMedicationStockLogRepository, MedicationStockLogRepository>();
 
         // Register Services
         services.AddScoped<IAppointmentService, AppointmentService>();
@@ -140,6 +147,7 @@ public static class AppModule
         services.AddScoped<IDoctorScheduleService, DoctorScheduleService>();
         services.AddScoped<IPharmacistService, PharmacistService>();
         services.AddScoped<IMedicationAdherenceService, MedicationAdherenceService>();
+        services.AddScoped<IMedicationStockLogService, MedicationStockLogService>();
 
         return services;
     }

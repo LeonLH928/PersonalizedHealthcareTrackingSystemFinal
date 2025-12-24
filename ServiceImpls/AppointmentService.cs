@@ -30,4 +30,43 @@ public class AppointmentService : IAppointmentService
     {
         return await _appointmentRepository.GetAppointmentByIDAsync(AppointmentID);
     }
+    public async Task<IEnumerable<AppointmentModel>> GetHappeningAppointmentByDoctorIDAsync(string DoctorID)
+    {
+        var Appointments = await _appointmentRepository.GetAllAppointmentsByDoctorIDAsync(DoctorID);
+        return Appointments.Where(a => a.Status == Models.StatusAppointment.Happening);
+    }
+    public async Task<IEnumerable<AppointmentModel>> GetUpcomingAppointmentsByDoctorIDAsync(string DoctorID)
+    {
+        var Appointments = await _appointmentRepository.GetAllAppointmentsByDoctorIDAsync(DoctorID);
+        return Appointments.Where(a => a.Status == Models.StatusAppointment.Scheduled);
+    }
+    public async Task<IEnumerable<AppointmentModel>> GetCompletedAppointmentsByDoctorIDAsync(string DoctorID)
+    {
+        var Appointments = await _appointmentRepository.GetAllAppointmentsByDoctorIDAsync(DoctorID);
+        return Appointments.Where(a => a.Status == Models.StatusAppointment.Completed);
+    }
+    public async Task<IEnumerable<AppointmentModel>> GetCancelledAppointmentsByDoctorIDAsync(string DoctorID)
+    {
+        var Appointments = await _appointmentRepository.GetAllAppointmentsByDoctorIDAsync(DoctorID);
+        return Appointments.Where(a => a.Status == Models.StatusAppointment.Cancelled);
+    }
+    public async Task<IEnumerable<AppointmentModel>> GetNotShowUpAppointmentsByDoctorIDAsync(string DoctorID)
+    {
+        var Appointments = await _appointmentRepository.GetAllAppointmentsByDoctorIDAsync(DoctorID);
+        return Appointments.Where(a => a.Status == Models.StatusAppointment.No_show);
+    }
+    public async Task<IEnumerable<AppointmentModel>> SearchByText(string SearchText)
+    {
+        return await _appointmentRepository.SearchByText(SearchText);
+    }
+    public async Task<IEnumerable<AppointmentModel>> GetAppointmentsSortByLatest(string DoctorID)
+    {
+        var Appointments = await _appointmentRepository.GetAllAppointmentsByDoctorIDAsync(DoctorID);
+        return Appointments.OrderByDescending(a => a.AppointmentDateTime);
+    }
+    public async Task<IEnumerable<AppointmentModel>> GetAppointmentsSortByNameAZ(string DoctorID)
+    {
+        var Appointments = await _appointmentRepository.GetAllAppointmentsByDoctorIDAsync(DoctorID);
+        return Appointments.OrderBy(a => a.Patient.User.FirstName);
+    }
 }

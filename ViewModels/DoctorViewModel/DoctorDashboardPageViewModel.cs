@@ -59,19 +59,21 @@ public partial class DoctorDashboardPageViewModel : ObservableObject
     [NotifyPropertyChangedFor(nameof(Data))]
     private int cancelleds;
     [ObservableProperty]
-    private int age;
-    [ObservableProperty]
     private string gender = "";
     [ObservableProperty]
     private string defaultAvatar = "";
     [ObservableProperty]
     private string priority = "";
     [ObservableProperty]
+    private int age;
+    [ObservableProperty]
     private string fullName = "";
     [ObservableProperty]
     private string chiefComplaint = "";
     [ObservableProperty]
     private DateTime appointmentDateTime = DateTime.Now;
+    [ObservableProperty]
+    private double progress;
     [ObservableProperty]
     private int visitNumber;
     public async Task LoadDataAsync()
@@ -91,20 +93,19 @@ public partial class DoctorDashboardPageViewModel : ObservableObject
             TodayFinisheds = Appointments.Count(a => a.Status == Models.StatusAppointment.Completed);
             Overdues = Appointments.Count(a => a.Status == Models.StatusAppointment.No_show);
             Cancelleds = Appointments.Count(a => a.Status == Models.StatusAppointment.Cancelled);
-            Age = DateTime.Now.Year - NearestPatient.DateOfBirth.Year;
             Gender = NearestPatient.Gender.ToString();
             foreach (var c in NearestPatientUser.FirstName.Split())
                 DefaultAvatar += c[0];
             Priority = NearestUpcoming.Status.ToString();
+            Age = NearestPatient.Age;
             FullName = NearestPatientUser.FirstName + " " + NearestPatientUser.LastName;
             ChiefComplaint = NearestUpcoming.ChiefComplaint;
             AppointmentDateTime = NearestUpcoming.AppointmentDateTime;
             VisitNumber = NearestUpcoming.VisitNumber;
+            Progress = 100 * TodayFinisheds / TotalAppointments;
         }
         catch (Exception e)
         {
-            Debug.Write($"\n{e.Message}\n");
-            IsLoading = false;
             MessageBox.Show($"An error occured: {e.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
         }
         finally
@@ -117,6 +118,7 @@ public partial class DoctorDashboardPageViewModel : ObservableObject
     private ObservableCollection<ISeries> data = [];
     public void InitializeChart()
     {
+        Progress = 100 * TodayFinisheds / TotalAppointments;
         Data = [
             new PieSeries<int>
             {
@@ -164,6 +166,8 @@ public partial class DoctorDashboardPageViewModel : ObservableObject
             e.PropertyName == nameof(Upcomings) ||
             e.PropertyName == nameof(Overdues) ||
             e.PropertyName == nameof(Cancelleds))
+        {
             InitializeChart();
+        }
     }
 }
