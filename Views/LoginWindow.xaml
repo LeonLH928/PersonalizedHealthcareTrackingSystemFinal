@@ -66,6 +66,7 @@
                              TextChanged="txtVisiblePassword_TextChanged"/>
 
                     <ToggleButton x:Name="btnToggleShow"
+                                  IsTabStop="False"
                                   HorizontalAlignment="Right" VerticalAlignment="Center"
                                   Width="30" Height="30" Margin="0,0,15,0"
                                   Background="Transparent" BorderThickness="0" Cursor="Hand"
