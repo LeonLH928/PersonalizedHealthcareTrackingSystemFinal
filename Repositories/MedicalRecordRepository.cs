@@ -53,7 +53,6 @@ public class MedicalRecordRepository : IMedicalRecordRepository
                                                    User:Users(*)
                                                )
                                            )
-            
                                     """)
                                     .Filter("AppointmentID", Supabase.Postgrest.Constants.Operator.In, appointmentIds)
                                     .Order("VisitTime", Supabase.Postgrest.Constants.Ordering.Descending)

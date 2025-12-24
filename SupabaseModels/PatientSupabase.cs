@@ -13,6 +13,9 @@ public class PatientModel : BaseModel
 
     [Column("DateOfBirth")]
     public DateTime DateOfBirth { get; set; } = DateTime.UtcNow;
+    
+    [Column("Age")]
+    public int Age { get; set; }
 
     [Column("Gender")]
     public Gender Gender { get; set; }

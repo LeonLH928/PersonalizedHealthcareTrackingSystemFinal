@@ -5,9 +5,16 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:PersonalizedHealthcareTrackingSystemFinal.Views.DoctorView"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      xmlns:fa="http://schemas.fontawesome.io/icons/"
+      xmlns:converters="clr-namespace:PersonalizedHealthcareTrackingSystemFinal.Helpers"       
+      d:DesignHeight="1200" d:DesignWidth="1500"
       Title="DoctorPharmacyInventoryPage">
-
+    <Page.Resources>
+        <converters:ZeroStockToVisibility x:Key="ZeroStockToVisibility"/>
+        <converters:LowStockToVisibility x:Key="LowStockToVisibility"/>
+        <converters:NormalStockToVisibility x:Key="NormalStockToVisibility"/>
+        <converters:PascalCaseToSpaceConverter x:Key="PascalCaseToSpaceConverter"/>
+    </Page.Resources>
     <Grid Margin="32">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -18,7 +25,8 @@
         <StackPanel Grid.Row="0" Margin="0,0,0,24">
             <TextBlock Text="Pharmacy Inventory" 
                        FontSize="24" FontWeight="Bold" Foreground="{StaticResource DarkText}"/>
-            <TextBlock Text="Check real-time stock status and medication details for 450 items." 
+            <TextBlock Text="{Binding TotalItems,
+                       StringFormat={}Check real-time stock status and medication details for {0} items.}" 
                        FontSize="14" Foreground="{StaticResource TextSecondary}" Margin="0,4,0,0"/>
         </StackPanel>
 
@@ -29,29 +37,44 @@
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
-                <Border BorderBrush="{StaticResource LightBorder}" BorderThickness="1" CornerRadius="8" Padding="8,0" HorizontalAlignment="Left" Width="400">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Text="🔍" VerticalAlignment="Center" Margin="0,0,8,0" Foreground="{StaticResource TextSecondary}"/>
-                        <TextBox Grid.Column="1" BorderThickness="0" Background="Transparent" 
-                                 VerticalContentAlignment="Center" Padding="4"
-                                 Text="Search by trade name, active ingredient or ID..."/>
-                    </Grid>
-                </Border>
+                <TextBox Margin="0 0 10 0"
+                    Style="{StaticResource SearchInputTextBoxStyle}"
+                    Tag="Search by name, ID,..."
+                    Text="{Binding SearchText, Mode=TwoWay, UpdateSourceTrigger=LostFocus}">
+                    <TextBox.InputBindings>
+                        <KeyBinding Key="Enter" 
+                            Command="{Binding SearchCommand}"
+                            CommandParameter="{Binding Text, 
+                                                       RelativeSource={RelativeSource AncestorType=TextBox}}"/>
+                    </TextBox.InputBindings>
+                </TextBox>
 
                 <StackPanel Grid.Column="1" Orientation="Horizontal">
-                    <ComboBox Width="180" Padding="8" SelectedIndex="0" Style="{x:Null}">
-                        <ComboBoxItem Content="All Categories"/>
-                        <ComboBoxItem Content="Cardiovascular"/>
+                    <Button
+                        Grid.Column="1"
+                        Content="&#128472;"
+                        Command="{Binding ReloadButtonCommand}"
+                        Style="{StaticResource ReloadButtonStyle}"
+                        Margin="0 0 12 0"/>
+
+                    <ComboBox Width="180" Padding="8" Style="{StaticResource FormComboBox}"
+                              SelectedValuePath="Content"
+                              SelectedValue="{Binding SelectedCategory}">
+                        <ComboBoxItem Content="All Categories" IsSelected="True"/>
                         <ComboBoxItem Content="Antibiotics"/>
                         <ComboBoxItem Content="Painkillers"/>
+                        <ComboBoxItem Content="Chronic Condition"/>
+                        <ComboBoxItem Content="Supplement"/>
+                        <ComboBoxItem Content="Respiratory"/>
+                        <ComboBoxItem Content="Mental Health"/>
+                        <ComboBoxItem Content="Allergy"/>
+                        <ComboBoxItem Content="Other"/>
                     </ComboBox>
 
-                    <ComboBox Width="180" Padding="8" SelectedIndex="0">
-                        <ComboBoxItem Content="Status: All"/>
+                    <ComboBox Width="180" Padding="8" Style="{StaticResource FormComboBox}"
+                              SelectedValuePath="Content"
+                              SelectedValue="{Binding SelectedStatus}">
+                        <ComboBoxItem Content="Status: All" IsSelected="True"/>
                         <ComboBoxItem Content="✅ Available"/>
                         <ComboBoxItem Content="⚠️ Low Stock"/>
                         <ComboBoxItem Content="🚫 Out of Stock"/>
@@ -60,44 +83,136 @@
             </Grid>
         </Border>
 
-        <DataGrid Grid.Row="2" Style="{StaticResource InventoryDataGrid}" RowHeight="80">
+        <DataGrid Style="{StaticResource DefaultDataGridStyle}"
+                  Grid.Row="2"
+                  ItemsSource="{Binding Medications}"
+                  x:Name="InventoryDataGrid"
+                  ScrollViewer.CanContentScroll="True"
+                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                  ScrollViewer.VerticalScrollBarVisibility="Auto">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="100" FontWeight="SemiBold"/>
+                <!-- ID Column -->
+                <DataGridTextColumn Header="ID" 
+                                    Width="Auto"
+                                    ElementStyle="{StaticResource ColumnTextBlockStyle}"
+                                    Binding="{Binding MedicationID}"/>
 
-                <DataGridTemplateColumn Header="Medication &amp; Active Ingredient" Width="2.5*">
+                <!-- Medication Info Column -->
+                <DataGridTemplateColumn 
+                                    Header="Name &amp; Active ingredient" 
+                                    Width="Auto">
+                    <DataGridTemplateColumn.CellStyle>
+                        <Style TargetType="DataGridCell">
+                            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                        </Style>
+                    </DataGridTemplateColumn.CellStyle>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                <Border Width="40" Height="40" Background="#F1F5F9" CornerRadius="8" Margin="0,0,12,0">
-                                    <TextBlock Text="💊" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"/>
+                            <StackPanel Orientation="Horizontal"
+                                            HorizontalAlignment="Left" VerticalAlignment="Center">
+                                <Border Padding="10"
+                                        Background="#f0fdfa"
+                                        CornerRadius="8"
+                                        Margin="30,0,12,0">
+                                    <TextBlock Text="💊" 
+                                               FontSize="18"/>
                                 </Border>
                                 <StackPanel VerticalAlignment="Center">
-                                    <TextBlock Text="{Binding Name}" FontWeight="SemiBold" FontSize="14" Foreground="{StaticResource DarkText}"/>
-                                    <TextBlock Text="{Binding ActiveIngredient, StringFormat='Active: {0}'}" FontSize="12" Foreground="{StaticResource TextSecondary}"/>
+                                    <TextBlock Text="{Binding Name}" 
+                                                    FontWeight="SemiBold"
+                                                    Style="{StaticResource CustomBaseTextBlockStyle}"/>
+                                    <TextBlock Text="{Binding ActiveIngredient}"
+                                                    Style="{StaticResource SecondaryTextTextBlockStyle}"
+                                                    FontSize="14"
+                                                    Margin="0,2,0,0"/>
                                 </StackPanel>
                             </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
 
-                <DataGridTextColumn Header="Dosage Form" Binding="{Binding Form}" Width="*"/>
+                <!-- Category Column -->
+                <DataGridTextColumn Header="Category" 
+                                    ElementStyle="{StaticResource ColumnTextBlockStyle}"
+                                    Width="*"
+                                    Binding="{Binding Category, StringFormat={}{0},
+                                                      Converter={StaticResource PascalCaseToSpaceConverter}}"/>
 
-                <DataGridTextColumn Header="Unit" Binding="{Binding Unit}" Width="0.8*"/>
+                <!-- Form/Unit Column -->
+                <DataGridTextColumn Header="Form / Unit" 
+                                    ElementStyle="{StaticResource ColumnTextBlockStyle}"
+                                    Width="*">
+                    <DataGridTextColumn.Binding>
+                        <MultiBinding StringFormat="{}{0} / {1}">
+                            <Binding Path="Form"/>
+                            <Binding Path="PackingUnit"/>
+                        </MultiBinding>
+                    </DataGridTextColumn.Binding>
+                </DataGridTextColumn>
+                
 
-                <DataGridTemplateColumn Header="Real-time Stock" Width="1.5*">
+                <!-- Price Column -->
+                <DataGridTextColumn Header="Price" 
+                                    ElementStyle="{StaticResource ColumnTextBlockStyle}"
+                                    Binding="{Binding Price, StringFormat={}{0:N0}đ}"
+                                    Width="*"/>
+
+                <!-- Current Stock Column -->
+                <DataGridTemplateColumn Header="Current Stock" 
+                                        Width="*">
+                    <DataGridTemplateColumn.CellStyle>
+                        <Style TargetType="DataGridCell">
+                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                            <Setter Property="VerticalContentAlignment" Value="Center"/>
+                        </Style>
+                    </DataGridTemplateColumn.CellStyle>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Border Background="{StaticResource StockOkBg}" CornerRadius="16" Padding="12,6" HorizontalAlignment="Left">
-                                <TextBlock Text="✅ Available (500+)" Foreground="{StaticResource StockOkText}" FontWeight="Bold" FontSize="12"/>
-                            </Border>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock Margin="0,4,0,0" FontSize="16" Foreground="{StaticResource TextSecondary}"
+                                               Visibility="{Binding StockTotalQuantity,
+                                                                    Converter={StaticResource LowStockToVisibility}}">
+                                        Only: 
+                                        <Run Text="{Binding StockTotalQuantity}" FontWeight="Bold" Foreground="#DC2626"/> 
+                                        <Run Text="{Binding Form, StringFormat={}{0}s}" FontWeight="Bold" Foreground="#DC2626"/>
+                                    </TextBlock>
+                                    <TextBlock Margin="0,4,0,0" FontSize="16" Foreground="#DC2626" FontWeight="Bold" Text="OUT OF STOCK (0)"
+                                               Visibility="{Binding StockTotalQuantity,
+                                                                    Converter={StaticResource ZeroStockToVisibility}}"/>
+                                    <TextBlock Margin="0,4,0,0" FontSize="16" FontWeight="Bold" Text="{Binding StockTotalQuantity}"
+                                               Visibility="{Binding StockTotalQuantity,
+                                                                    Converter={StaticResource NormalStockToVisibility}}"/>
+                                </StackPanel>
+                            </Grid>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-
-                <DataGridTextColumn Header="Unit Price" Binding="{Binding Price}" Width="*"/>
             </DataGrid.Columns>
-
-            
         </DataGrid>
+        <Grid Visibility="{Binding IsLoading, Converter={StaticResource BoolToVisibilityConverter}}"
+              Grid.RowSpan="3" 
+              Background="#80FFFFFF" 
+              d:IsHidden="False">
+            <fa:ImageAwesome 
+                Icon="Spinner" 
+                Spin="True" 
+                Height="48" 
+                Width="48"/>
+        </Grid>
+        <Grid Visibility="{Binding IsBusy, Converter={StaticResource BoolToVisibilityConverter}}"
+              Grid.RowSpan="3" 
+              Background="#80FFFFFF" 
+              d:IsHidden="False">
+            <fa:ImageAwesome 
+                Icon="Spinner" 
+                Spin="True" 
+                Height="48" 
+                Width="48"/>
+        </Grid>
     </Grid>
 </Page>

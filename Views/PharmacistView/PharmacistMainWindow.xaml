@@ -82,7 +82,7 @@
                         </StackPanel>
                     </ListBoxItem>
 
-                    <ListBoxItem Tag="Inventory Management">
+                    <ListBoxItem Tag="Inventory">
                         <StackPanel Orientation="Horizontal">
                             <fa:ImageAwesome Icon="Inbox" 
                                              Width="20" 
@@ -90,7 +90,31 @@
                                              Margin="0,0,20,0" 
                                              VerticalAlignment="Center" 
                                              Foreground="White"/>
-                            <TextBlock Text="Inventory Management"/>
+                            <TextBlock Text="Inventory"/>
+                        </StackPanel>
+                    </ListBoxItem>
+
+                    <ListBoxItem Tag="History">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:ImageAwesome Icon="History" 
+                         Width="20" 
+                         Height="20" 
+                         Margin="0,0,20,0" 
+                         VerticalAlignment="Center" 
+                         Foreground="White"/>
+                            <TextBlock Text="History"/>
+                        </StackPanel>
+                    </ListBoxItem>
+
+                    <ListBoxItem Tag="Cancelled">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:ImageAwesome Icon="Ban" 
+                         Width="20" 
+                         Height="20" 
+                         Margin="0,0,20,0" 
+                         VerticalAlignment="Center" 
+                         Foreground="White"/>
+                            <TextBlock Text="Cancelled"/>
                         </StackPanel>
                     </ListBoxItem>
 
@@ -116,11 +140,11 @@
                         </Ellipse>
 
                         <StackPanel Orientation="Vertical" Margin="10,0,0,0" VerticalAlignment="Center">
-                            <TextBlock Text="Nguyễn Đại Hưng"
+                            <TextBlock Text="{Binding PharmacistName}"
                                            Foreground="White"
                                            FontWeight="SemiBold"
                                            FontSize="14"/>
-                            <TextBlock Text="hun9nd@gmail.com"
+                            <TextBlock Text="{Binding PharmacistEmail}"
                                            Foreground="#BDC3C7"
                                            FontSize="11"
                                            TextTrimming="CharacterEllipsis"

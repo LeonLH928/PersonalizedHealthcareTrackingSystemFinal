@@ -17,6 +17,7 @@ public static class DatabaseSeeder
         SeedClinicalExaminations(modelBuilder);
         SeedPrescriptions(modelBuilder);
         SeedPrescriptionItems(modelBuilder);
+        SeedMedicationAdherence(modelBuilder);
         SeedDoctorSchedules(modelBuilder);
         SeedMedicationInteractions(modelBuilder);
         SeedMedicationStockLogs(modelBuilder);
@@ -39,7 +40,8 @@ public static class DatabaseSeeder
                 PackingDescription = "Box of 20 tablets",
                 SideEffect = "Nausea, rash, diarrhea",
                 StorageInstruction = "Store at room temperature, away from moisture",
-                Price = 150000
+                Price = 150000,
+                Category = MedicationCategory.Antibiotic
             },
             new MedicationModel
             {
@@ -54,7 +56,8 @@ public static class DatabaseSeeder
                 PackingDescription = "Bottle of 50 tablets",
                 SideEffect = "Stomach upset, heartburn, dizziness",
                 StorageInstruction = "Keep dry, store below 30°C",
-                Price = 80000
+                Price = 80000,
+                Category = MedicationCategory.PainReliever
             },
             new MedicationModel
             {
@@ -69,7 +72,8 @@ public static class DatabaseSeeder
                 PackingDescription = "Box of 10 blisters x 10 tablets",
                 SideEffect = "Liver toxicity (high dose or long-term use)",
                 StorageInstruction = "Store in a cool, dry place",
-                Price = 50000
+                Price = 50000,
+                Category = MedicationCategory.PainReliever
             },
             new MedicationModel
             {
@@ -84,7 +88,8 @@ public static class DatabaseSeeder
                 PackingDescription = "Box of 60 tablets",
                 SideEffect = "Nausea, gastrointestinal disturbance, metallic taste",
                 StorageInstruction = "Store at room temperature",
-                Price = 120000
+                Price = 120000,
+                Category = MedicationCategory.ChronicCondition
             },
             new MedicationModel
             {
@@ -99,7 +104,8 @@ public static class DatabaseSeeder
                 PackingDescription = "Blister pack of 10 tablets",
                 SideEffect = "Drowsiness, dry mouth, fatigue",
                 StorageInstruction = "Store in a dry place, protected from light",
-                Price = 45000
+                Price = 45000,
+                Category = MedicationCategory.Allergy
             },
             new MedicationModel
             {
@@ -114,7 +120,8 @@ public static class DatabaseSeeder
                 PackingDescription = "Box of 30 tablets",
                 SideEffect = "Muscle pain, digestive issues, liver enzyme changes",
                 StorageInstruction = "Store at room temperature",
-                Price = 180000
+                Price = 180000,
+                Category = MedicationCategory.ChronicCondition
             },
             new MedicationModel
             {
@@ -129,7 +136,8 @@ public static class DatabaseSeeder
                 PackingDescription = "Bottle of 28 capsules",
                 SideEffect = "Headache, nausea, diarrhea, stomach pain",
                 StorageInstruction = "Keep away from light and moisture",
-                Price = 95000
+                Price = 95000,
+                Category = MedicationCategory.Other
             },
             new MedicationModel
             {
@@ -144,7 +152,8 @@ public static class DatabaseSeeder
                 PackingDescription = "Canister with 200 metered doses",
                 SideEffect = "Tremors, nervousness, increased heart rate",
                 StorageInstruction = "Store below 30°C, away from direct sunlight and heat",
-                Price = 110000
+                Price = 110000,
+                Category = MedicationCategory.Respiratory
             },
             new MedicationModel
             {
@@ -159,7 +168,8 @@ public static class DatabaseSeeder
                 PackingDescription = "Bottle of 100 chewable tablets",
                 SideEffect = "Stomach cramps, nausea (high dose)",
                 StorageInstruction = "Keep tightly closed in a cool, dry place",
-                Price = 60000
+                Price = 60000,
+                Category = MedicationCategory.Supplement
             },
             // Additional 20 medications
             new MedicationModel
@@ -175,7 +185,8 @@ public static class DatabaseSeeder
                 PackingDescription = "Bottle of 100 enteric-coated tablets",
                 SideEffect = "Stomach irritation, bleeding risk",
                 StorageInstruction = "Store at room temperature, keep dry",
-                Price = 75000
+                Price = 75000,
+                Category = MedicationCategory.PainReliever
             },
             new MedicationModel
             {
@@ -190,7 +201,8 @@ public static class DatabaseSeeder
                 PackingDescription = "Bottle of 30 tablets",
                 SideEffect = "Dry cough, dizziness, fatigue",
                 StorageInstruction = "Store at controlled room temperature",
-                Price = 95000
+                Price = 95000,
+                Category = MedicationCategory.ChronicCondition
             },
             new MedicationModel
             {
@@ -205,7 +217,8 @@ public static class DatabaseSeeder
                 PackingDescription = "Bottle of 60 tablets",
                 SideEffect = "Gastrointestinal upset, lactic acidosis risk",
                 StorageInstruction = "Store at room temperature",
-                Price = 85000
+                Price = 85000,
+                Category = MedicationCategory.ChronicCondition
             },
             new MedicationModel
             {
@@ -220,7 +233,8 @@ public static class DatabaseSeeder
                 PackingDescription = "Bottle of 30 tablets",
                 SideEffect = "Muscle pain, liver enzyme elevation",
                 StorageInstruction = "Store below 30°C, protect from light",
-                Price = 140000
+                Price = 140000,
+                Category = MedicationCategory.ChronicCondition
             },
             new MedicationModel
             {
@@ -235,7 +249,8 @@ public static class DatabaseSeeder
                 PackingDescription = "Bottle of 30 tablets",
                 SideEffect = "Swelling in ankles, flushing, headache",
                 StorageInstruction = "Store at room temperature",
-                Price = 120000
+                Price = 120000,
+                Category = MedicationCategory.ChronicCondition
             },
             new MedicationModel
             {
@@ -250,7 +265,8 @@ public static class DatabaseSeeder
                 PackingDescription = "Bottle of 20 tablets",
                 SideEffect = "Weight gain, mood changes, increased appetite",
                 StorageInstruction = "Store at room temperature",
-                Price = 65000
+                Price = 65000,
+                Category = MedicationCategory.Other
             },
             new MedicationModel
             {
@@ -265,7 +281,8 @@ public static class DatabaseSeeder
                 PackingDescription = "Blister pack of 6 tablets",
                 SideEffect = "Nausea, diarrhea, abdominal pain",
                 StorageInstruction = "Store at room temperature",
-                Price = 180000
+                Price = 180000,
+                Category = MedicationCategory.Antibiotic
             },
             new MedicationModel
             {
@@ -280,7 +297,8 @@ public static class DatabaseSeeder
                 PackingDescription = "Bottle of 90 capsules",
                 SideEffect = "Dizziness, drowsiness, coordination problems",
                 StorageInstruction = "Store at room temperature",
-                Price = 160000
+                Price = 160000,
+                Category = MedicationCategory.PainReliever
             },
             new MedicationModel
             {
@@ -295,7 +313,8 @@ public static class DatabaseSeeder
                 PackingDescription = "Bottle of 30 scored tablets",
                 SideEffect = "Bleeding risk, bruising, nosebleeds",
                 StorageInstruction = "Store at room temperature, protected from light",
-                Price = 95000
+                Price = 95000,
+                Category = MedicationCategory.ChronicCondition
             },
             new MedicationModel
             {
@@ -310,7 +329,8 @@ public static class DatabaseSeeder
                 PackingDescription = "Bottle of 100 tablets",
                 SideEffect = "Palpitations, anxiety, weight loss",
                 StorageInstruction = "Store at room temperature",
-                Price = 110000
+                Price = 110000,
+                Category = MedicationCategory.ChronicCondition
             },
             new MedicationModel
             {
@@ -325,7 +345,8 @@ public static class DatabaseSeeder
                 PackingDescription = "Bottle of 120ml syrup",
                 SideEffect = "Tremor, nervousness, increased heart rate",
                 StorageInstruction = "Store at room temperature, protect from light",
-                Price = 95000
+                Price = 95000,
+                Category = MedicationCategory.Respiratory
             },
             new MedicationModel
             {
@@ -340,7 +361,8 @@ public static class DatabaseSeeder
                 PackingDescription = "Bottle of 100 tablets",
                 SideEffect = "Increased urination, dizziness, potassium loss",
                 StorageInstruction = "Store at room temperature",
-                Price = 55000
+                Price = 55000,
+                Category = MedicationCategory.ChronicCondition
             },
             new MedicationModel
             {
@@ -355,7 +377,8 @@ public static class DatabaseSeeder
                 PackingDescription = "Blister pack of 20 tablets",
                 SideEffect = "Dizziness, nausea, constipation, dependence risk",
                 StorageInstruction = "Store at room temperature",
-                Price = 140000
+                Price = 140000,
+                Category = MedicationCategory.PainReliever
             },
             new MedicationModel
             {
@@ -370,7 +393,8 @@ public static class DatabaseSeeder
                 PackingDescription = "Bottle of 10 orally disintegrating tablets",
                 SideEffect = "Headache, constipation, dizziness",
                 StorageInstruction = "Store at room temperature",
-                Price = 220000
+                Price = 220000,
+                Category = MedicationCategory.Other
             },
             new MedicationModel
             {
@@ -385,7 +409,8 @@ public static class DatabaseSeeder
                 PackingDescription = "Bottle of 30 tablets",
                 SideEffect = "Dizziness, hyperkalemia, cough",
                 StorageInstruction = "Store at room temperature",
-                Price = 130000
+                Price = 130000,
+                Category = MedicationCategory.ChronicCondition
             },
             new MedicationModel
             {
@@ -400,7 +425,8 @@ public static class DatabaseSeeder
                 PackingDescription = "Bottle of 20 capsules",
                 SideEffect = "Insomnia, headache, sexual dysfunction",
                 StorageInstruction = "Store at room temperature",
-                Price = 175000
+                Price = 175000,
+                Category = MedicationCategory.MentalHealth
             },
             new MedicationModel
             {
@@ -415,7 +441,8 @@ public static class DatabaseSeeder
                 PackingDescription = "Bottle of 60 tablets",
                 SideEffect = "Fatigue, dizziness, slow heartbeat",
                 StorageInstruction = "Store at room temperature",
-                Price = 85000
+                Price = 85000,
+                Category = MedicationCategory.ChronicCondition
             },
             new MedicationModel
             {
@@ -430,7 +457,8 @@ public static class DatabaseSeeder
                 PackingDescription = "Bottle of 30 tablets",
                 SideEffect = "Drowsiness, dizziness, dependence risk",
                 StorageInstruction = "Store at room temperature",
-                Price = 95000
+                Price = 95000,
+                Category = MedicationCategory.MentalHealth
             },
             new MedicationModel
             {
@@ -445,7 +473,8 @@ public static class DatabaseSeeder
                 PackingDescription = "Prefilled pen injector 3ml (100U/ml)",
                 SideEffect = "Hypoglycemia, weight gain, injection site reactions",
                 StorageInstruction = "Refrigerate until use, then room temperature for 28 days",
-                Price = 450000
+                Price = 450000,
+                Category = MedicationCategory.ChronicCondition
             },
             new MedicationModel
             {
@@ -460,7 +489,8 @@ public static class DatabaseSeeder
                 PackingDescription = "Box of 14 tablets",
                 SideEffect = "Nausea, altered taste, diarrhea, liver enzyme changes",
                 StorageInstruction = "Store at room temperature",
-                Price = 195000
+                Price = 195000,
+                Category = MedicationCategory.Antibiotic
             },
             new MedicationModel
             {
@@ -475,7 +505,8 @@ public static class DatabaseSeeder
                 PackingDescription = "Bottle of 60 tablets",
                 SideEffect = "Dizziness, headache, ankle swelling, constipation",
                 StorageInstruction = "Store at room temperature",
-                Price = 145000
+                Price = 145000,
+                Category = MedicationCategory.ChronicCondition
             },
             new MedicationModel
             {
@@ -490,7 +521,8 @@ public static class DatabaseSeeder
                 PackingDescription = "Bottle of 60 tablets",
                 SideEffect = "Nausea, vomiting, visual disturbances, arrhythmias",
                 StorageInstruction = "Store at room temperature, protect from light",
-                Price = 85000
+                Price = 85000,
+                Category = MedicationCategory.ChronicCondition
             },
             new MedicationModel
             {
@@ -505,7 +537,8 @@ public static class DatabaseSeeder
                 PackingDescription = "Vial of 100ml injection solution",
                 SideEffect = "Allergic reactions, nausea, kidney damage risk",
                 StorageInstruction = "Store at room temperature, protect from light",
-                Price = 350000
+                Price = 350000,
+                Category = MedicationCategory.Other
             },
             new MedicationModel
             {
@@ -520,7 +553,8 @@ public static class DatabaseSeeder
                 PackingDescription = "Bottle of 100 tablets",
                 SideEffect = "Constipation, dark stools, stomach upset, nausea",
                 StorageInstruction = "Store at room temperature, keep tightly closed",
-                Price = 70000
+                Price = 70000,
+                Category = MedicationCategory.Supplement
             },
             new MedicationModel
             {
@@ -535,7 +569,8 @@ public static class DatabaseSeeder
                 PackingDescription = "Vial for IV injection 500mg",
                 SideEffect = "Red man syndrome, nephrotoxicity, ototoxicity",
                 StorageInstruction = "Refrigerate, protect from light",
-                Price = 280000
+                Price = 280000,
+                Category = MedicationCategory.Antibiotic
             },
             new MedicationModel
             {
@@ -550,7 +585,8 @@ public static class DatabaseSeeder
                 PackingDescription = "Bottle of 60 tablets",
                 SideEffect = "Nausea, headache, dizziness, retinal toxicity (long-term)",
                 StorageInstruction = "Store at room temperature, protect from light",
-                Price = 210000
+                Price = 210000,
+                Category = MedicationCategory.ChronicCondition
             },
             new MedicationModel
             {
@@ -565,7 +601,8 @@ public static class DatabaseSeeder
                 PackingDescription = "Bottle of 30 delayed-release capsules",
                 SideEffect = "Nausea, dry mouth, drowsiness, dizziness, constipation",
                 StorageInstruction = "Store at room temperature",
-                Price = 190000
+                Price = 190000,
+                Category = MedicationCategory.PainReliever
             },
             new MedicationModel
             {
@@ -580,7 +617,8 @@ public static class DatabaseSeeder
                 PackingDescription = "Bottle of 60 capsules",
                 SideEffect = "Dizziness, drowsiness, dry mouth, weight gain, blurred vision",
                 StorageInstruction = "Store at room temperature",
-                Price = 185000
+                Price = 185000,
+                Category = MedicationCategory.PainReliever
             },
             new MedicationModel
             {
@@ -595,7 +633,8 @@ public static class DatabaseSeeder
                 PackingDescription = "Blister of 10 tablets",
                 SideEffect = "Drowsiness, dizziness",
                 StorageInstruction = "Store at room temperature",
-                Price = 85000
+                Price = 85000,
+                Category = MedicationCategory.MentalHealth
             },
             new MedicationModel
             {
@@ -610,7 +649,8 @@ public static class DatabaseSeeder
                 PackingDescription = "Bottle of 50 tablets",
                 SideEffect = "Dehydration, electrolyte imbalance",
                 StorageInstruction = "Protect from light",
-                Price = 40000
+                Price = 40000,
+                Category = MedicationCategory.ChronicCondition
             },
             new MedicationModel
             {
@@ -625,7 +665,8 @@ public static class DatabaseSeeder
                 PackingDescription = "Box of 28 tablets",
                 SideEffect = "Bleeding, bruising",
                 StorageInstruction = "Store in a dry place",
-                Price = 320000
+                Price = 320000,
+                Category = MedicationCategory.ChronicCondition
             },
             new MedicationModel
             {
@@ -640,7 +681,8 @@ public static class DatabaseSeeder
                 PackingDescription = "Bottle of 30 tablets",
                 SideEffect = "Hyperkalemia, dizziness",
                 StorageInstruction = "Store below 25°C",
-                Price = 75000
+                Price = 75000,
+                Category = MedicationCategory.ChronicCondition
             },
             new MedicationModel
             {
@@ -655,7 +697,8 @@ public static class DatabaseSeeder
                 PackingDescription = "Box of 5 blisters",
                 SideEffect = "Rash, nausea",
                 StorageInstruction = "Store at room temperature",
-                Price = 60000
+                Price = 60000,
+                Category = MedicationCategory.ChronicCondition
             },
             new MedicationModel
             {
@@ -670,7 +713,8 @@ public static class DatabaseSeeder
                 PackingDescription = "Bottle of 100 tablets",
                 SideEffect = "Nausea, dizziness, vision changes",
                 StorageInstruction = "Store at room temperature",
-                Price = 95000
+                Price = 95000,
+                Category = MedicationCategory.ChronicCondition
             },
             new MedicationModel
             {
@@ -685,7 +729,8 @@ public static class DatabaseSeeder
                 PackingDescription = "Glass bottle of 25 sublingual tablets",
                 SideEffect = "Headache, hypotension",
                 StorageInstruction = "Keep tightly closed",
-                Price = 110000
+                Price = 110000,
+                Category = MedicationCategory.Other
             },
             new MedicationModel
             {
@@ -700,7 +745,8 @@ public static class DatabaseSeeder
                 PackingDescription = "Box of 10 capsules",
                 SideEffect = "Diarrhea, nausea",
                 StorageInstruction = "Store at room temperature",
-                Price = 250000
+                Price = 250000,
+                Category = MedicationCategory.Antibiotic
             },
             new MedicationModel
             {
@@ -715,11 +761,11 @@ public static class DatabaseSeeder
                 PackingDescription = "Pack of 2 auto-injectors",
                 SideEffect = "Palpitations, anxiety",
                 StorageInstruction = "Do not refrigerate, protect from light",
-                Price = 1200000
+                Price = 1200000,
+                Category = MedicationCategory.Other
             }
         );
     }
-
     private static void SeedUsers(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<UserModel>().HasData(
@@ -927,6 +973,7 @@ public static class DatabaseSeeder
                 PatientID = "pat-01",
                 UserID = "user-pat-01",
                 DateOfBirth = new DateTime(1985, 5, 20, 0, 0, 0, DateTimeKind.Utc),
+                Age = (int)((DateTime.UtcNow - new DateTime(1985, 5, 20, 0, 0, 0, DateTimeKind.Utc)).TotalDays / 365.25),
                 Gender = Gender.Male,
                 InsuranceNumber = "INS-123456",
                 BloodType = "A+"
@@ -936,6 +983,7 @@ public static class DatabaseSeeder
                 PatientID = "pat-02",
                 UserID = "user-pat-02",
                 DateOfBirth = new DateTime(1990, 8, 15, 0, 0, 0, DateTimeKind.Utc),
+                Age = (int)((DateTime.UtcNow - new DateTime(1990, 8, 15, 0, 0, 0, DateTimeKind.Utc)).TotalDays / 365.25),
                 Gender = Gender.Female,
                 InsuranceNumber = "INS-987654",
                 BloodType = "O-"
@@ -945,6 +993,7 @@ public static class DatabaseSeeder
                 PatientID = "pat-03",
                 UserID = "user-pat-03",
                 DateOfBirth = new DateTime(1975, 2, 14, 0, 0, 0, DateTimeKind.Utc),
+                Age = (int)((DateTime.UtcNow - new DateTime(1975, 2, 14, 0, 0, 0, DateTimeKind.Utc)).TotalDays / 365.25),
                 Gender = Gender.Male,
                 InsuranceNumber = "INS-555666",
                 BloodType = "AB-"
@@ -954,6 +1003,7 @@ public static class DatabaseSeeder
                 PatientID = "pat-04",
                 UserID = "user-pat-04",
                 DateOfBirth = new DateTime(2015, 6, 1, 0, 0, 0, DateTimeKind.Utc),
+                Age = (int)((DateTime.UtcNow - new DateTime(2015, 6, 1, 0, 0, 0, DateTimeKind.Utc)).TotalDays / 365.25),
                 Gender = Gender.Female,
                 InsuranceNumber = "INS-CHILD-01",
                 BloodType = "B+"
@@ -963,6 +1013,7 @@ public static class DatabaseSeeder
                 PatientID = "pat-05",
                 UserID = "user-pat-05",
                 DateOfBirth = new DateTime(1982, 11, 8, 0, 0, 0, DateTimeKind.Utc),
+                Age = (int)((DateTime.UtcNow - new DateTime(1982, 11, 8, 0, 0, 0, DateTimeKind.Utc)).TotalDays / 365.25),
                 Gender = Gender.Male,
                 InsuranceNumber = "INS-777888",
                 BloodType = "O+"
@@ -972,6 +1023,7 @@ public static class DatabaseSeeder
                 PatientID = "pat-06",
                 UserID = "user-pat-06",
                 DateOfBirth = new DateTime(1995, 3, 22, 0, 0, 0, DateTimeKind.Utc),
+                Age = (int)((DateTime.UtcNow - new DateTime(1995, 3, 22, 0, 0, 0, DateTimeKind.Utc)).TotalDays / 365.25),
                 Gender = Gender.Female,
                 InsuranceNumber = "INS-666555",
                 BloodType = "A-"
@@ -981,6 +1033,7 @@ public static class DatabaseSeeder
                 PatientID = "pat-07",
                 UserID = "user-pat-07",
                 DateOfBirth = new DateTime(1968, 7, 15, 0, 0, 0, DateTimeKind.Utc),
+                Age = (int)((DateTime.UtcNow - new DateTime(1968, 7, 15, 0, 0, 0, DateTimeKind.Utc)).TotalDays / 365.25),
                 Gender = Gender.Male,
                 InsuranceNumber = "INS-444333",
                 BloodType = "AB+"
@@ -990,6 +1043,7 @@ public static class DatabaseSeeder
                 PatientID = "pat-08",
                 UserID = "user-pat-08",
                 DateOfBirth = new DateTime(2001, 9, 30, 0, 0, 0, DateTimeKind.Utc),
+                Age = (int)((DateTime.UtcNow - new DateTime(2001, 9, 30, 0, 0, 0, DateTimeKind.Utc)).TotalDays / 365.25),
                 Gender = Gender.Female,
                 InsuranceNumber = "INS-222111",
                 BloodType = "B-"
@@ -999,6 +1053,7 @@ public static class DatabaseSeeder
                 PatientID = "pat-09",
                 UserID = "user-pat-09",
                 DateOfBirth = new DateTime(1978, 12, 5, 0, 0, 0, DateTimeKind.Utc),
+                Age = (int)((DateTime.UtcNow - new DateTime(1978, 12, 5, 0, 0, 0, DateTimeKind.Utc)).TotalDays / 365.25),
                 Gender = Gender.Male,
                 InsuranceNumber = "INS-999000",
                 BloodType = "O-"
@@ -1008,6 +1063,7 @@ public static class DatabaseSeeder
                 PatientID = "pat-10",
                 UserID = "user-pat-10",
                 DateOfBirth = new DateTime(1988, 4, 18, 0, 0, 0, DateTimeKind.Utc),
+                Age = (int)((DateTime.UtcNow - new DateTime(1988, 4, 18, 0, 0, 0, DateTimeKind.Utc)).TotalDays / 365.25),
                 Gender = Gender.Female,
                 InsuranceNumber = "INS-111222",
                 BloodType = "A+"
@@ -3128,7 +3184,479 @@ public static class DatabaseSeeder
             }
         );
     }
-
+    private static void SeedMedicationAdherence(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<MedicationAdherenceModel>().HasData(
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-001",
+                PrescriptionItemID = "pi-01",
+                ScheduledDateTime = DateTime.UtcNow.Date.AddDays(-1).AddHours(8),
+                TakenDateTime = DateTime.UtcNow.Date.AddDays(-1).AddHours(8).AddMinutes(15),
+                Status = AdherenceStatus.Taken,
+                Notes = null
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-002",
+                PrescriptionItemID = "pi-01",
+                ScheduledDateTime = DateTime.UtcNow.Date.AddDays(-1).AddHours(13),
+                TakenDateTime = DateTime.UtcNow.Date.AddDays(-1).AddHours(13).AddMinutes(30),
+                Status = AdherenceStatus.Taken,
+                Notes = null
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-003",
+                PrescriptionItemID = "pi-01",
+                ScheduledDateTime = DateTime.UtcNow.Date.AddHours(8),
+                TakenDateTime = DateTime.UtcNow.Date.AddHours(8).AddMinutes(5),
+                Status = AdherenceStatus.Taken,
+                Notes = null
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-004",
+                PrescriptionItemID = "pi-01",
+                ScheduledDateTime = DateTime.UtcNow.Date.AddHours(13),
+                TakenDateTime = null,
+                Status = AdherenceStatus.Pending,
+                Notes = null
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-005",
+                PrescriptionItemID = "pi-02",
+                ScheduledDateTime = DateTime.UtcNow.Date.AddDays(-1).AddHours(14),
+                TakenDateTime = null,
+                Status = AdherenceStatus.Skipped,
+                Notes = "Stomach pain"
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-006",
+                PrescriptionItemID = "pi-03",
+                ScheduledDateTime = DateTime.UtcNow.Date.AddDays(-1).AddHours(8),
+                TakenDateTime = DateTime.UtcNow.Date.AddDays(-1).AddHours(8).AddMinutes(10),
+                Status = AdherenceStatus.Taken,
+                Notes = null
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-007",
+                PrescriptionItemID = "pi-03",
+                ScheduledDateTime = DateTime.UtcNow.Date.AddDays(-1).AddHours(20),
+                TakenDateTime = null,
+                Status = AdherenceStatus.Missed,
+                Notes = null
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-008",
+                PrescriptionItemID = "pi-03",
+                ScheduledDateTime = DateTime.UtcNow.Date.AddHours(8),
+                TakenDateTime = DateTime.UtcNow.Date.AddHours(8).AddMinutes(20),
+                Status = AdherenceStatus.Taken,
+                Notes = null
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-009",
+                PrescriptionItemID = "pi-04",
+                ScheduledDateTime = DateTime.UtcNow.Date.AddDays(-1).AddHours(21),
+                TakenDateTime = DateTime.UtcNow.Date.AddDays(-1).AddHours(21).AddMinutes(45),
+                Status = AdherenceStatus.Taken,
+                Notes = null
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-010",
+                PrescriptionItemID = "pi-04",
+                ScheduledDateTime = DateTime.UtcNow.Date.AddHours(21),
+                TakenDateTime = null,
+                Status = AdherenceStatus.Pending,
+                Notes = null
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-011",
+                PrescriptionItemID = "pi-05",
+                ScheduledDateTime = DateTime.UtcNow.Date.AddHours(7),
+                TakenDateTime = DateTime.UtcNow.Date.AddHours(7).AddMinutes(5),
+                Status = AdherenceStatus.Taken,
+                Notes = null
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-012",
+                PrescriptionItemID = "pi-06",
+                ScheduledDateTime = DateTime.UtcNow.AddHours(-2),
+                TakenDateTime = DateTime.UtcNow.AddHours(-1.9),
+                Status = AdherenceStatus.Taken,
+                Notes = null
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-013",
+                PrescriptionItemID = "pi-06",
+                ScheduledDateTime = DateTime.UtcNow.AddHours(4),
+                TakenDateTime = null,
+                Status = AdherenceStatus.Pending,
+                Notes = null
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-014",
+                PrescriptionItemID = "pi-07",
+                ScheduledDateTime = DateTime.UtcNow.AddHours(-5),
+                TakenDateTime = DateTime.UtcNow.AddHours(-4.8),
+                Status = AdherenceStatus.Taken,
+                Notes = "Headache"
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-015",
+                PrescriptionItemID = "pi-08",
+                ScheduledDateTime = DateTime.UtcNow.Date.AddDays(-1).AddHours(22),
+                TakenDateTime = DateTime.UtcNow.Date.AddDays(-1).AddHours(22).AddMinutes(10),
+                Status = AdherenceStatus.Taken,
+                Notes = null
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-016",
+                PrescriptionItemID = "pi-08",
+                ScheduledDateTime = DateTime.UtcNow.Date.AddHours(22),
+                TakenDateTime = null,
+                Status = AdherenceStatus.Pending,
+                Notes = null
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-017",
+                PrescriptionItemID = "pi-09",
+                ScheduledDateTime = DateTime.UtcNow.AddHours(-3),
+                TakenDateTime = null,
+                Status = AdherenceStatus.Skipped,
+                Notes = "Pain improved"
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-018",
+                PrescriptionItemID = "pi-10",
+                ScheduledDateTime = DateTime.UtcNow.Date.AddHours(7),
+                TakenDateTime = DateTime.UtcNow.Date.AddHours(7).AddMinutes(15),
+                Status = AdherenceStatus.Taken,
+                Notes = null
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-019",
+                PrescriptionItemID = "pi-11",
+                ScheduledDateTime = DateTime.UtcNow.AddHours(-1),
+                TakenDateTime = null,
+                Status = AdherenceStatus.Pending,
+                Notes = null
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-020",
+                PrescriptionItemID = "pi-12",
+                ScheduledDateTime = DateTime.UtcNow.Date.AddDays(-1).AddHours(9),
+                TakenDateTime = null,
+                Status = AdherenceStatus.Missed,
+                Notes = null
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-021",
+                PrescriptionItemID = "pi-13",
+                ScheduledDateTime = DateTime.UtcNow.AddHours(-6),
+                TakenDateTime = DateTime.UtcNow.AddHours(-5.5),
+                Status = AdherenceStatus.Taken,
+                Notes = null
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-022",
+                PrescriptionItemID = "pi-14",
+                ScheduledDateTime = DateTime.UtcNow.Date.AddHours(21),
+                TakenDateTime = null,
+                Status = AdherenceStatus.Pending,
+                Notes = null
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-023",
+                PrescriptionItemID = "pi-15",
+                ScheduledDateTime = DateTime.UtcNow.Date.AddHours(8),
+                TakenDateTime = DateTime.UtcNow.Date.AddHours(8).AddMinutes(30),
+                Status = AdherenceStatus.Taken,
+                Notes = null
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-024",
+                PrescriptionItemID = "pi-16",
+                ScheduledDateTime = DateTime.UtcNow.Date.AddDays(-1).AddHours(8),
+                TakenDateTime = DateTime.UtcNow.Date.AddDays(-1).AddHours(8).AddMinutes(5),
+                Status = AdherenceStatus.Taken,
+                Notes = null
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-025",
+                PrescriptionItemID = "pi-16",
+                ScheduledDateTime = DateTime.UtcNow.Date.AddDays(-1).AddHours(20),
+                TakenDateTime = null,
+                Status = AdherenceStatus.Skipped,
+                Notes = "Felt dizzy"
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-026",
+                PrescriptionItemID = "pi-17",
+                ScheduledDateTime = DateTime.UtcNow.AddHours(-2),
+                TakenDateTime = null,
+                Status = AdherenceStatus.Pending,
+                Notes = null
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-027",
+                PrescriptionItemID = "pi-18",
+                ScheduledDateTime = DateTime.UtcNow.AddHours(-4),
+                TakenDateTime = DateTime.UtcNow.AddHours(-3.9),
+                Status = AdherenceStatus.Taken,
+                Notes = null
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-028",
+                PrescriptionItemID = "pi-19",
+                ScheduledDateTime = DateTime.UtcNow.Date.AddDays(-1).AddHours(19),
+                TakenDateTime = null,
+                Status = AdherenceStatus.Missed,
+                Notes = null
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-029",
+                PrescriptionItemID = "pi-19",
+                ScheduledDateTime = DateTime.UtcNow.Date.AddHours(8),
+                TakenDateTime = DateTime.UtcNow.Date.AddHours(8).AddMinutes(10),
+                Status = AdherenceStatus.Taken,
+                Notes = null
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-030",
+                PrescriptionItemID = "pi-20",
+                ScheduledDateTime = DateTime.UtcNow.Date.AddHours(9),
+                TakenDateTime = DateTime.UtcNow.Date.AddHours(9).AddMinutes(5),
+                Status = AdherenceStatus.Taken,
+                Notes = null
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-031",
+                PrescriptionItemID = "pi-21",
+                ScheduledDateTime = DateTime.UtcNow.Date.AddHours(8),
+                TakenDateTime = DateTime.UtcNow.Date.AddHours(8).AddMinutes(2),
+                Status = AdherenceStatus.Taken,
+                Notes = null
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-032",
+                PrescriptionItemID = "pi-22",
+                ScheduledDateTime = DateTime.UtcNow.Date.AddHours(8),
+                TakenDateTime = DateTime.UtcNow.Date.AddHours(8).AddMinutes(3),
+                Status = AdherenceStatus.Taken,
+                Notes = null
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-033",
+                PrescriptionItemID = "pi-22",
+                ScheduledDateTime = DateTime.UtcNow.Date.AddHours(20),
+                TakenDateTime = null,
+                Status = AdherenceStatus.Pending,
+                Notes = null
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-034",
+                PrescriptionItemID = "pi-23",
+                ScheduledDateTime = DateTime.UtcNow.Date.AddHours(6),
+                TakenDateTime = DateTime.UtcNow.Date.AddHours(6).AddMinutes(10),
+                Status = AdherenceStatus.Taken,
+                Notes = null
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-035",
+                PrescriptionItemID = "pi-24",
+                ScheduledDateTime = DateTime.UtcNow.AddHours(-5),
+                TakenDateTime = null,
+                Status = AdherenceStatus.Missed,
+                Notes = null
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-036",
+                PrescriptionItemID = "pi-25",
+                ScheduledDateTime = DateTime.UtcNow.AddHours(-1),
+                TakenDateTime = null,
+                Status = AdherenceStatus.Pending,
+                Notes = null
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-037",
+                PrescriptionItemID = "pi-26",
+                ScheduledDateTime = DateTime.UtcNow.AddHours(-4),
+                TakenDateTime = DateTime.UtcNow.AddHours(-3.8),
+                Status = AdherenceStatus.Taken,
+                Notes = null
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-038",
+                PrescriptionItemID = "pi-26",
+                ScheduledDateTime = DateTime.UtcNow.AddHours(4),
+                TakenDateTime = null,
+                Status = AdherenceStatus.Pending,
+                Notes = null
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-039",
+                PrescriptionItemID = "pi-27",
+                ScheduledDateTime = DateTime.UtcNow.Date.AddDays(-1).AddHours(7),
+                TakenDateTime = null,
+                Status = AdherenceStatus.Skipped,
+                Notes = "Ran out of water"
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-040",
+                PrescriptionItemID = "pi-27",
+                ScheduledDateTime = DateTime.UtcNow.Date.AddHours(7),
+                TakenDateTime = DateTime.UtcNow.Date.AddHours(7).AddMinutes(15),
+                Status = AdherenceStatus.Taken,
+                Notes = null
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-041",
+                PrescriptionItemID = "pi-28",
+                ScheduledDateTime = DateTime.UtcNow.AddHours(-2),
+                TakenDateTime = DateTime.UtcNow.AddHours(-1.9),
+                Status = AdherenceStatus.Taken,
+                Notes = null
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-042",
+                PrescriptionItemID = "pi-28",
+                ScheduledDateTime = DateTime.UtcNow.AddHours(4),
+                TakenDateTime = null,
+                Status = AdherenceStatus.Pending,
+                Notes = null
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-043",
+                PrescriptionItemID = "pi-29",
+                ScheduledDateTime = DateTime.UtcNow.Date.AddHours(9),
+                TakenDateTime = DateTime.UtcNow.Date.AddHours(9).AddMinutes(5),
+                Status = AdherenceStatus.Taken,
+                Notes = null
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-044",
+                PrescriptionItemID = "pi-29",
+                ScheduledDateTime = DateTime.UtcNow.Date.AddHours(21),
+                TakenDateTime = null,
+                Status = AdherenceStatus.Pending,
+                Notes = null
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-045",
+                PrescriptionItemID = "pi-30",
+                ScheduledDateTime = DateTime.UtcNow.Date.AddHours(8),
+                TakenDateTime = DateTime.UtcNow.Date.AddHours(8).AddMinutes(20),
+                Status = AdherenceStatus.Taken,
+                Notes = null
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-046",
+                PrescriptionItemID = "pi-31",
+                ScheduledDateTime = DateTime.UtcNow.Date.AddDays(-1).AddHours(19),
+                TakenDateTime = null,
+                Status = AdherenceStatus.Missed,
+                Notes = null
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-047",
+                PrescriptionItemID = "pi-31",
+                ScheduledDateTime = DateTime.UtcNow.Date.AddHours(8),
+                TakenDateTime = DateTime.UtcNow.Date.AddHours(8).AddMinutes(10),
+                Status = AdherenceStatus.Taken,
+                Notes = null
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-048",
+                PrescriptionItemID = "pi-32",
+                ScheduledDateTime = DateTime.UtcNow.Date.AddHours(9),
+                TakenDateTime = DateTime.UtcNow.Date.AddHours(9).AddMinutes(1),
+                Status = AdherenceStatus.Taken,
+                Notes = null
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-049",
+                PrescriptionItemID = "pi-33",
+                ScheduledDateTime = DateTime.UtcNow.Date.AddHours(8),
+                TakenDateTime = DateTime.UtcNow.Date.AddHours(8).AddMinutes(5),
+                Status = AdherenceStatus.Taken,
+                Notes = null
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-050",
+                PrescriptionItemID = "pi-34",
+                ScheduledDateTime = DateTime.UtcNow.Date.AddHours(18),
+                TakenDateTime = null,
+                Status = AdherenceStatus.Pending,
+                Notes = null
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-051",
+                PrescriptionItemID = "pi-35",
+                ScheduledDateTime = DateTime.UtcNow.AddHours(-6),
+                TakenDateTime = DateTime.UtcNow.AddHours(-5.5),
+                Status = AdherenceStatus.Taken,
+                Notes = null
+            },
+            new MedicationAdherenceModel
+            {
+                AdherenceID = "ma-052",
+                PrescriptionItemID = "pi-35",
+                ScheduledDateTime = DateTime.UtcNow.AddHours(6),
+                TakenDateTime = null,
+                Status = AdherenceStatus.Pending,
+                Notes = null
+            }
+        );
+    }
     private static void SeedDoctorSchedules(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<DoctorScheduleModel>().HasData(

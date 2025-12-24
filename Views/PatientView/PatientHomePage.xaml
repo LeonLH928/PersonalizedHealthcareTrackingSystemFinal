@@ -4,8 +4,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:converters="clr-namespace:PersonalizedHealthcareTrackingSystemFinal.Helpers" 
+             xmlns:fa="http://schemas.fontawesome.io/icons/"
              mc:Ignorable="d" 
-             d:DesignHeight="800" d:DesignWidth="1000"
+             d:DesignHeight="1000" d:DesignWidth="1500"
              Background="#F1F5F9" FontFamily="Segoe UI">
 
     <Page.Resources>
@@ -32,248 +33,431 @@
         </Style>
     </Page.Resources>
 
-        <ScrollViewer VerticalScrollBarVisibility="Auto">
-            <Grid Margin="32">
+    <Grid Margin="32">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Margin="0,0,0,32">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0" VerticalAlignment="Center">
+            <TextBlock 
+                Style="{StaticResource PageHeaderTextBlockStyle}">
+                <TextBlock.Text>
+                    <MultiBinding StringFormat="{}Good morning, {0} {1}!">
+                        <Binding Path="CurrentUser.FirstName"/>
+                        <Binding Path="CurrentUser.LastName"/>
+                    </MultiBinding>
+                </TextBlock.Text>
+            </TextBlock>
+            <TextBlock Text="Have a good day! Here's your overall health today." Style="{StaticResource SecondaryTextTextBlockStyle}"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+            <Button Content="📅 Book new appointments" Foreground="White" Padding="15,10" BorderThickness="0"
+                    Command="{Binding BookingButtonCommand}"
+                    Style="{StaticResource PatientBtnPrimary}"/>
+
+            <Border Width="40" Height="40" CornerRadius="20" Background="White" BorderBrush="{StaticResource BorderColor}" BorderThickness="1" Margin="16,0">
+                    <Grid>
+                        <TextBlock Text="🔔" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <Border Width="10" Height="10" CornerRadius="5" Background="#EF4444" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,8,8,0" BorderBrush="White" BorderThickness="2"/>
+                    </Grid>
+                </Border>
+
+                <Border Width="48" Height="48" CornerRadius="24" Background="#CBD5E1"/>
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="24"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
+                <Border Style="{StaticResource CardStyle}" BorderThickness="0">
+                    <Border.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                            <GradientStop Color="#0284c7" Offset="0"/>
+                            <GradientStop Color="#0ea5e9" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                    <StackPanel>
+                        <Grid Margin="0,0,0,20">
+                            <TextBlock 
+                                Text="🗓️ Your next appointment" 
+                                Foreground="White" 
+                                FontSize="18" 
+                                FontWeight="SemiBold" 
+                                VerticalAlignment="Center"/>
+                            <Border Background="#33FFFFFF" CornerRadius="20" HorizontalAlignment="Right" Padding="12,4">
+                                <TextBlock Text="{Binding MostUpcomingAppointment.AppointmentDateTime,
+                                                            Converter={StaticResource AppointmentDateToDay}}" Foreground="White" FontSize="12"/>
+                            </Border>
+                        </Grid>
 
-                <Grid Grid.Row="0" Margin="0,0,0,32">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
+                        <Grid Margin="0,16,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
 
-                    <StackPanel Grid.Column="0" VerticalAlignment="Center">
-                    <TextBlock 
-                        Style="{StaticResource PageHeaderTextBlockStyle}">
-                        <TextBlock.Text>
-                            <MultiBinding StringFormat="{}Good morning, {0} {1}!">
-                                <Binding Path="CurrentUser.FirstName"/>
-                                <Binding Path="CurrentUser.LastName"/>
-                            </MultiBinding>
-                        </TextBlock.Text>
-                    </TextBlock>
-                    <TextBlock Text="Have a good day! Here's your overall health today." Style="{StaticResource SecondaryTextTextBlockStyle}"/>
+                            <StackPanel Grid.Column="0">
+                                <TextBlock Text="Time" Foreground="White" Opacity="0.8" Style="{StaticResource CustomBaseTextBlockStyle}"/>
+                                <TextBlock Text="{Binding MostUpcomingAppointment.AppointmentDateTime, 
+                                                            Converter={StaticResource TimeRangeConverter}}" 
+                                            Foreground="White" FontWeight="Bold" FontSize="18" Margin="0,4"/>
+                            <TextBlock Foreground="White" Opacity="0.8" Style="{StaticResource CustomBaseTextBlockStyle}">
+                                <TextBlock.Text>
+                                    <MultiBinding StringFormat="{}{0:dd, MMM yyyy}">
+                                        <Binding Path="MostUpcomingAppointment.AppointmentDateTime"/>
+                                    </MultiBinding>
+                                </TextBlock.Text>
+                            </TextBlock>
+                            </StackPanel>
+
+                            <Border Grid.Column="1" Width="1" Background="White" Opacity="0.3" Margin="32,0"/>
+
+                            <StackPanel Grid.Column="2">
+                            <TextBlock Text="Clinical room" Foreground="White" Opacity="0.8" Style="{StaticResource CustomBaseTextBlockStyle}"/>
+                                <TextBlock Text="{Binding MostUpcomingAppointment.Location}" Foreground="White" FontWeight="Bold" FontSize="18" Margin="0,4"/>
+                            <TextBlock Text="Medicare Hospital" Foreground="White" Opacity="0.8" Style="{StaticResource CustomBaseTextBlockStyle}"/>
+                            </StackPanel>
+                        </Grid>
+
+                        <Border BorderBrush="#33FFFFFF" BorderThickness="0,1,0,0" Margin="0,24,0,0" Padding="0,24,0,0">
+                            <StackPanel Orientation="Horizontal">
+                                <Border Width="40" Height="40" CornerRadius="20" Background="#33FFFFFF"/>
+                                <StackPanel Margin="12,0,0,0" VerticalAlignment="Center">
+                                <TextBlock Foreground="White" FontWeight="SemiBold" Style="{StaticResource CustomBaseTextBlockStyle}" FontSize="18">
+                                    <TextBlock.Text>
+                                        <MultiBinding StringFormat="{}Dr. {0} {1}">
+                                            <Binding Path="Doctor.User.FirstName"/>
+                                            <Binding Path="Doctor.User.LastName"/>
+                                        </MultiBinding>
+                                    </TextBlock.Text>
+                                </TextBlock>
+                                    <TextBlock Text="Chuyên khoa Tim mạch • Tái khám định kỳ" Style="{StaticResource CustomBaseTextBlockStyle}" Foreground="White" Opacity="0.8"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
                     </StackPanel>
+                </Border>
 
-                    <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
-                        <Button Content="📅 Đặt lịch khám mới" Background="{StaticResource PrimaryColor}" Foreground="White" Padding="15,10" BorderThickness="0">
+                <Border Style="{StaticResource CardStyle}"
+                        Grid.Row="1">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid Margin="0,0,0,20">
+                            <TextBlock Text="💊 Today's medication takes" FontSize="22" FontWeight="SemiBold" Foreground="#0f172a"/>
+                            <Button Content="See all" Style="{StaticResource OutlineButtonStyle}"
+                                    HorizontalAlignment="Right"/>
+                        </Grid>
+                        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                                      VerticalScrollBarVisibility="Auto"
+                                      Grid.Row="1">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="15"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Border
+                                    Background="White"
+                                    BorderBrush="#e2e8f0"
+                                    BorderThickness="0,1,1,1"
+                                    CornerRadius="8"
+                                    Margin="0,0,0,20">
+
+                                    <Grid>
+                                        <Border
+                                            BorderBrush="#4A90E2"
+                                            BorderThickness="6,1,1,1"
+                                            Style="{StaticResource BaseCustomBorderStyle}"/>
+
+                                        <Grid Margin="24,16">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="*"/>
+                                            </Grid.RowDefinitions>
+
+                                            <Grid Margin="0,0,0,16">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock 
+                                                    Grid.Column="0" 
+                                                    Text="Next dose" 
+                                                    Foreground="{StaticResource AccentBlue}" 
+                                                    FontSize="16" 
+                                                    FontWeight="Medium"/>
+                                            </Grid>
+
+                                            <TextBlock
+                                                Grid.Row="1"
+                                                Text="You don't have any current next medications to take."
+                                                Visibility="{Binding IsPendingEmpty,
+                                                                     Converter={StaticResource BoolToVisibilityConverter}}"
+                                                Style="{StaticResource SecondaryTextTextBlockStyle}"/>
+                                            
+                                            <ItemsControl ItemsSource="{Binding PendingMedicationAdherences}"
+                                                          Grid.Row="1">
+                                                <ItemsControl.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <Border Style="{StaticResource TakenMedicationBorderStyle}"
+                                                                Grid.Row="1">
+                                                            <Grid>
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="*"/>
+                                                                    <ColumnDefinition Width="Auto"/>
+                                                                </Grid.ColumnDefinitions>
+                                                                <StackPanel>
+                                                                    <TextBlock FontWeight="SemiBold" FontSize="15">
+                                                                        <TextBlock.Text>
+                                                                            <MultiBinding StringFormat="{}{0} ({1})">
+                                                                                <Binding Path="PrescriptionItem.Medication.Name"/>
+                                                                                <Binding Path="PrescriptionItem.Medication.ActiveIngredient"/>
+                                                                            </MultiBinding>
+                                                                        </TextBlock.Text>
+                                                                    </TextBlock>
+                                                                    <TextBlock Foreground="{StaticResource SecondaryText}" FontSize="13" Margin="0,4,0,0">
+                                                                        <TextBlock.Text>
+                                                                            <MultiBinding StringFormat="{}{0} {1}s • {2}">
+                                                                                <Binding Path="PrescriptionItem.Quantity"/>
+                                                                                <Binding Path="PrescriptionItem.Medication.Form"/>
+                                                                                <Binding Path="PrescriptionItem.Instruction"/>
+                                                                            </MultiBinding>
+                                                                        </TextBlock.Text>
+                                                                    </TextBlock>
+                                                                </StackPanel>
+                                                                <Button Style="{StaticResource TakenMedicationButtonStyle}"
+                                                                        Command="{Binding DataContext.TakeMedicineButtonCommand,
+                                                                                            RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                                                        CommandParameter="{Binding}"
+                                                                        Grid.Column="1"/>
+                                                            </Grid>
+                                                        </Border>
+                                                    </DataTemplate>
+                                                </ItemsControl.ItemTemplate>
+                                            </ItemsControl>
+                                        </Grid>
+                                    </Grid>
+                                </Border>
+
+
+                                <!--Grid Margin="0,0,0,24">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="*"/>
+                                        </Grid.RowDefinitions>
+                                        <TextBlock Text="🌅 Buổi sáng (07:00 - 09:00)" Foreground="{StaticResource PrimaryColor}" FontWeight="SemiBold" Margin="0,0,0,12"
+                                                    FontSize="18"/>
+                                        <Border Background="#F1F5F9" CornerRadius="10" Padding="16,12" Opacity="0.6"
+                                                Grid.Row="1">
+                                            <Grid>
+                                                <StackPanel>
+                                                    <TextBlock Text="Amlodipine 5mg" FontWeight="SemiBold" FontSize="15"/>
+                                                    <TextBlock Text="1 viên • Uống sau ăn sáng" Foreground="{StaticResource SecondaryText}" FontSize="13" Margin="0,4,0,0"/>
+                                                </StackPanel>
+                                                <Border HorizontalAlignment="Right" Width="28" Height="28" CornerRadius="14" Background="#22c55e" BorderThickness="0">
+                                                    <TextBlock Text="✓" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+                                                </Border>
+                                            </Grid>
+                                        </Border>
+                                    </Grid>
+
+                                    <StackPanel>
+                                        <TextBlock Text="☀️ Buổi trưa (11:00 - 13:00)" Foreground="#f59e0b" FontWeight="SemiBold" Margin="0,0,0,12"
+                                                    FontSize="18"/>
+                                        <Border Background="#F1F5F9" CornerRadius="10" Padding="16,12">
+                                            <Grid>
+                                                <StackPanel>
+                                                    <TextBlock Text="Metformin 500mg" FontWeight="SemiBold" FontSize="15"/>
+                                                    <TextBlock Text="1 viên • Uống ngay trong bữa ăn" Foreground="{StaticResource SecondaryText}" FontSize="13" Margin="0,4,0,0"/>
+                                                </StackPanel>
+                                                <Border HorizontalAlignment="Right" Width="28" Height="28" CornerRadius="14" BorderBrush="#cbd5e1" BorderThickness="2" Background="Transparent"/>
+                                            </Grid>
+                                        </Border>
+                                    </StackPanel-->
+                                <Border
+                                    Background="White"
+                                    BorderBrush="#e2e8f0"
+                                    BorderThickness="0,1,1,1"
+                                    CornerRadius="8"
+                                    Margin="0,0,0,20"
+                                    Grid.Row="2">
+
+                                    <Grid>
+                                        <Border
+                                            BorderBrush="{StaticResource DangerColor}"
+                                            BorderThickness="6,1,1,1"
+                                            Style="{StaticResource BaseCustomBorderStyle}"/>
+
+                                        <Grid Margin="24,16">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="*"/>
+                                            </Grid.RowDefinitions>
+
+                                            <Grid Margin="0,0,0,16">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock 
+                                                    Grid.Column="0" 
+                                                    Text="Missed doses" 
+                                                    Foreground="{StaticResource DangerColor}" 
+                                                    FontSize="16" 
+                                                    FontWeight="Medium"/>
+                                            </Grid>
+
+                                            <TextBlock
+                                                Grid.Row="1"
+                                                Text="You don't have any current missed medications to take."
+                                                Visibility="{Binding IsMissedEmpty,
+                                                                     Converter={StaticResource BoolToVisibilityConverter}}"
+                                                Style="{StaticResource SecondaryTextTextBlockStyle}"/>
+
+                                            <ItemsControl ItemsSource="{Binding MissedMedicationAdherences}"
+                                                            Grid.Row="1">
+                                                <ItemsControl.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <Border Style="{StaticResource TakenMedicationBorderStyle}"
+                                                                Grid.Row="1">
+                                                            <Grid>
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="*"/>
+                                                                    <ColumnDefinition Width="Auto"/>
+                                                                </Grid.ColumnDefinitions>
+                                                                <StackPanel>
+                                                                    <TextBlock FontWeight="SemiBold" FontSize="15">
+                                                                        <TextBlock.Text>
+                                                                            <MultiBinding StringFormat="{}{0} ({1})">
+                                                                                <Binding Path="PrescriptionItem.Medication.Name"/>
+                                                                                <Binding Path="PrescriptionItem.Medication.ActiveIngredient"/>
+                                                                            </MultiBinding>
+                                                                        </TextBlock.Text>
+                                                                    </TextBlock>
+                                                                    <TextBlock Foreground="{StaticResource SecondaryText}" FontSize="13" Margin="0,4,0,0">
+                                                                        <TextBlock.Text>
+                                                                            <MultiBinding StringFormat="{}{0} {1}s • {2}">
+                                                                                <Binding Path="PrescriptionItem.Quantity"/>
+                                                                                <Binding Path="PrescriptionItem.Medication.Form"/>
+                                                                                <Binding Path="PrescriptionItem.Instruction"/>
+                                                                            </MultiBinding>
+                                                                        </TextBlock.Text>
+                                                                    </TextBlock>
+                                                                </StackPanel>
+                                                                <Button Style="{StaticResource TakenMedicationButtonStyle}"
+                                                                        Command="{Binding DataContext.TakeMedicineButtonCommand,
+                                                                                            RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                                                        CommandParameter="{Binding}"
+                                                                        Grid.Column="1"/>
+                                                            </Grid>
+                                                        </Border>
+                                                    </DataTemplate>
+                                                </ItemsControl.ItemTemplate>
+                                            </ItemsControl>
+                                        </Grid>
+                                    </Grid>
+                                </Border>
+                            </Grid>
+                        </ScrollViewer>
+                    </Grid>
+                </Border>
+            </Grid>
+
+            <StackPanel Grid.Column="2">
+
+                <Border Style="{StaticResource CardStyle}" Background="#F0F9FF" BorderBrush="#bae6fd">
+                    <StackPanel>
+                        <TextBlock Text="Recent vital signs" FontSize="16" FontWeight="SemiBold" Foreground="#0f172a" Margin="0,0,0,20"/>
+
+                        <Grid Margin="0,0,0,16">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0">
+                                <TextBlock Text="Weight" FontSize="14" Foreground="{StaticResource SecondaryText}"/>
+                                <TextBlock>
+                                        <Run Text="{Binding RecentExam.Weight}" 
+                                                FontSize="22" FontWeight="Bold" Foreground="{StaticResource PrimaryColor}"/>
+                                        <Run Text=" kg" FontSize="14" Foreground="{StaticResource PrimaryColor}"/>
+                                </TextBlock>
+                            </StackPanel>
+                            <StackPanel Grid.Column="1">
+                                <TextBlock Text="Height" FontSize="14" Foreground="{StaticResource SecondaryText}"/>
+                                <TextBlock>
+                                    <Run Text="{Binding RecentExam.Height}" FontSize="22" FontWeight="Bold" Foreground="{StaticResource PrimaryColor}"/>
+                                    <Run Text=" cm" FontSize="14" Foreground="{StaticResource PrimaryColor}"/>
+                                </TextBlock>
+                            </StackPanel>
+                        </Grid>
+                    <TextBlock Text="{Binding RecentExam.MedicalRecord.Appointment.AppointmentDateTime, StringFormat={}Last update: {0:dd/MM/yyyy}}" FontSize="13" Foreground="{StaticResource SecondaryText}"/>
+                    </StackPanel>
+                </Border>
+
+                <Border Style="{StaticResource CardStyle}">
+                    <StackPanel>
+                        <TextBlock Text="📋 Lịch sử khám gần đây" FontSize="18" FontWeight="SemiBold" Foreground="#0f172a" Margin="0,0,0,20"/>
+
+                        <Grid Margin="0,0,0,16">
+                            <StackPanel>
+                                <TextBlock Text="20 Thg 10, 2023" FontWeight="SemiBold" FontSize="16"/>
+                                <TextBlock Text="Tái khám Tim mạch" Foreground="{StaticResource SecondaryText}" Margin="0,4,0,0"/>
+                            </StackPanel>
+                            <TextBlock Text="→" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="{StaticResource BorderColor}" FontSize="18"/>
+                            <Rectangle VerticalAlignment="Bottom" Height="1" Fill="{StaticResource BorderColor}" Margin="0,16,0,-16"/>
+                        </Grid>
+
+                        <Grid Margin="0,16,0,16">
+                            <StackPanel>
+                                <TextBlock Text="15 Thg 08, 2023" FontWeight="SemiBold" FontSize="16"/>
+                                <TextBlock Text="Khám tổng quát" Foreground="{StaticResource SecondaryText}" Margin="0,4,0,0"/>
+                            </StackPanel>
+                            <TextBlock Text="→" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="{StaticResource BorderColor}" FontSize="18"/>
+                            <Rectangle VerticalAlignment="Bottom" Height="1" Fill="{StaticResource BorderColor}" Margin="0,16,0,-16"/>
+                        </Grid>
+
+                        <Button Content="Xem toàn bộ hồ sơ" Background="Transparent" BorderBrush="{StaticResource BorderColor}" BorderThickness="1" Foreground="{StaticResource SecondaryText}" Margin="0,16,0,0" Padding="10">
                             <Button.Resources>
                                 <Style TargetType="Border">
                                     <Setter Property="CornerRadius" Value="8"/>
                                 </Style>
                             </Button.Resources>
                         </Button>
-
-                        <Border Width="40" Height="40" CornerRadius="20" Background="White" BorderBrush="{StaticResource BorderColor}" BorderThickness="1" Margin="16,0">
-                            <Grid>
-                                <TextBlock Text="🔔" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                <Border Width="10" Height="10" CornerRadius="5" Background="#EF4444" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,8,8,0" BorderBrush="White" BorderThickness="2"/>
-                            </Grid>
-                        </Border>
-
-                        <Border Width="48" Height="48" CornerRadius="24" Background="#CBD5E1"/>
                     </StackPanel>
-                </Grid>
+                </Border>
 
-                <Grid Grid.Row="1">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="2*"/>
-                        <ColumnDefinition Width="24"/>
-                        <ColumnDefinition Width="1*"/>
-                    </Grid.ColumnDefinitions>
-
-                    <Grid Grid.Column="0">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
-                        <Border Style="{StaticResource CardStyle}" BorderThickness="0">
-                            <Border.Background>
-                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                                    <GradientStop Color="#0284c7" Offset="0"/>
-                                    <GradientStop Color="#0ea5e9" Offset="1"/>
-                                </LinearGradientBrush>
-                            </Border.Background>
-                            <StackPanel>
-                                <Grid Margin="0,0,0,20">
-                                    <TextBlock 
-                                        Text="🗓️ Your next appointment" 
-                                        Foreground="White" 
-                                        FontSize="18" 
-                                        FontWeight="SemiBold" 
-                                        VerticalAlignment="Center"/>
-                                    <Border Background="#33FFFFFF" CornerRadius="20" HorizontalAlignment="Right" Padding="12,4">
-                                        <TextBlock Text="{Binding MostUpcomingAppointment.AppointmentDateTime,
-                                                                  Converter={StaticResource AppointmentDateToDay}}" Foreground="White" FontSize="12"/>
-                                    </Border>
-                                </Grid>
-
-                                <Grid Margin="0,16,0,0">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
-
-                                    <StackPanel Grid.Column="0">
-                                        <TextBlock Text="Time" Foreground="White" Opacity="0.8" Style="{StaticResource CustomBaseTextBlockStyle}"/>
-                                        <TextBlock Text="{Binding MostUpcomingAppointment.AppointmentDateTime, 
-                                                                  Converter={StaticResource TimeRangeConverter}}" 
-                                                   Foreground="White" FontWeight="Bold" FontSize="18" Margin="0,4"/>
-                                    <TextBlock Foreground="White" Opacity="0.8" Style="{StaticResource CustomBaseTextBlockStyle}">
-                                        <TextBlock.Text>
-                                            <MultiBinding StringFormat="{}{0:dd, MMM yyyy}">
-                                                <Binding Path="MostUpcomingAppointment.AppointmentDateTime"/>
-                                            </MultiBinding>
-                                        </TextBlock.Text>
-                                    </TextBlock>
-                                    </StackPanel>
-
-                                    <Border Grid.Column="1" Width="1" Background="White" Opacity="0.3" Margin="32,0"/>
-
-                                    <StackPanel Grid.Column="2">
-                                    <TextBlock Text="Clinical room" Foreground="White" Opacity="0.8" Style="{StaticResource CustomBaseTextBlockStyle}"/>
-                                        <TextBlock Text="{Binding MostUpcomingAppointment.Location}" Foreground="White" FontWeight="Bold" FontSize="18" Margin="0,4"/>
-                                    <TextBlock Text="Medicare Hospital" Foreground="White" Opacity="0.8" Style="{StaticResource CustomBaseTextBlockStyle}"/>
-                                    </StackPanel>
-                                </Grid>
-
-                                <Border BorderBrush="#33FFFFFF" BorderThickness="0,1,0,0" Margin="0,24,0,0" Padding="0,24,0,0">
-                                    <StackPanel Orientation="Horizontal">
-                                        <Border Width="40" Height="40" CornerRadius="20" Background="#33FFFFFF"/>
-                                        <StackPanel Margin="12,0,0,0" VerticalAlignment="Center">
-                                        <TextBlock Foreground="White" FontWeight="SemiBold" Style="{StaticResource CustomBaseTextBlockStyle}" FontSize="18">
-                                            <TextBlock.Text>
-                                                <MultiBinding StringFormat="{}Dr. {0} {1}">
-                                                    <Binding Path="Doctor.User.FirstName"/>
-                                                    <Binding Path="Doctor.User.LastName"/>
-                                                </MultiBinding>
-                                            </TextBlock.Text>
-                                        </TextBlock>
-                                            <TextBlock Text="Chuyên khoa Tim mạch • Tái khám định kỳ" Style="{StaticResource CustomBaseTextBlockStyle}" Foreground="White" Opacity="0.8"/>
-                                        </StackPanel>
-                                    </StackPanel>
-                                </Border>
-                            </StackPanel>
-                        </Border>
-
-                        <Border Style="{StaticResource CardStyle}"
-                                Grid.Row="1">
-                            <StackPanel>
-                                <Grid Margin="0,0,0,20">
-                                    <TextBlock Text="💊 Today's medication takes" FontSize="22" FontWeight="SemiBold" Foreground="#0f172a"/>
-                                    <Button Content="See all" Style="{StaticResource OutlineButtonStyle}"
-                                            HorizontalAlignment="Right"/>
-                                 </Grid>
-                                
-                                
-                                <Grid Margin="0,0,0,24">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto"/>
-                                        <RowDefinition Height="*"/>
-                                    </Grid.RowDefinitions>
-                                    <TextBlock Text="🌅 Buổi sáng (07:00 - 09:00)" Foreground="{StaticResource PrimaryColor}" FontWeight="SemiBold" Margin="0,0,0,12"
-                                               FontSize="18"/>
-                                    <Border Background="#F1F5F9" CornerRadius="10" Padding="16,12" Opacity="0.6"
-                                            Grid.Row="1">
-                                        <Grid>
-                                            <StackPanel>
-                                                <TextBlock Text="Amlodipine 5mg" FontWeight="SemiBold" FontSize="15"/>
-                                                <TextBlock Text="1 viên • Uống sau ăn sáng" Foreground="{StaticResource SecondaryText}" FontSize="13" Margin="0,4,0,0"/>
-                                            </StackPanel>
-                                            <Border HorizontalAlignment="Right" Width="28" Height="28" CornerRadius="14" Background="#22c55e" BorderThickness="0">
-                                                <TextBlock Text="✓" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
-                                            </Border>
-                                        </Grid>
-                                    </Border>
-                                </Grid>
-
-                                <StackPanel>
-                                    <TextBlock Text="☀️ Buổi trưa (11:00 - 13:00)" Foreground="#f59e0b" FontWeight="SemiBold" Margin="0,0,0,12"
-                                               FontSize="18"/>
-                                    <Border Background="#F1F5F9" CornerRadius="10" Padding="16,12">
-                                        <Grid>
-                                            <StackPanel>
-                                                <TextBlock Text="Metformin 500mg" FontWeight="SemiBold" FontSize="15"/>
-                                                <TextBlock Text="1 viên • Uống ngay trong bữa ăn" Foreground="{StaticResource SecondaryText}" FontSize="13" Margin="0,4,0,0"/>
-                                            </StackPanel>
-                                            <Border HorizontalAlignment="Right" Width="28" Height="28" CornerRadius="14" BorderBrush="#cbd5e1" BorderThickness="2" Background="Transparent"/>
-                                        </Grid>
-                                    </Border>
-                                </StackPanel>
-
-                            </StackPanel>
-                        </Border>
-                    </Grid>
-
-                    <StackPanel Grid.Column="2">
-
-                        <Border Style="{StaticResource CardStyle}" Background="#F0F9FF" BorderBrush="#bae6fd">
-                            <StackPanel>
-                                <TextBlock Text="Chỉ số sinh hiệu mới nhất" FontSize="16" FontWeight="SemiBold" Foreground="#0f172a" Margin="0,0,0,20"/>
-
-                                <Grid Margin="0,0,0,16">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <StackPanel Grid.Column="0">
-                                        <TextBlock Text="Weight" FontSize="14" Foreground="{StaticResource SecondaryText}"/>
-                                        <TextBlock>
-                                                <Run Text="{Binding RecentExam.Weight}" 
-                                                     FontSize="22" FontWeight="Bold" Foreground="{StaticResource PrimaryColor}"/>
-                                                <Run Text=" kg" FontSize="14" Foreground="{StaticResource PrimaryColor}"/>
-                                        </TextBlock>
-                                    </StackPanel>
-                                    <StackPanel Grid.Column="1">
-                                        <TextBlock Text="Height" FontSize="14" Foreground="{StaticResource SecondaryText}"/>
-                                        <TextBlock>
-                                            <Run Text="{Binding RecentExam.Height}" FontSize="22" FontWeight="Bold" Foreground="{StaticResource PrimaryColor}"/>
-                                            <Run Text=" cm" FontSize="14" Foreground="{StaticResource PrimaryColor}"/>
-                                        </TextBlock>
-                                    </StackPanel>
-                                </Grid>
-                                <TextBlock Text="Cập nhật lần cuối: 20/10/2023" FontSize="13" Foreground="{StaticResource SecondaryText}"/>
-                            </StackPanel>
-                        </Border>
-
-                        <Border Style="{StaticResource CardStyle}">
-                            <StackPanel>
-                                <TextBlock Text="📋 Lịch sử khám gần đây" FontSize="18" FontWeight="SemiBold" Foreground="#0f172a" Margin="0,0,0,20"/>
-
-                                <Grid Margin="0,0,0,16">
-                                    <StackPanel>
-                                        <TextBlock Text="20 Thg 10, 2023" FontWeight="SemiBold" FontSize="16"/>
-                                        <TextBlock Text="Tái khám Tim mạch" Foreground="{StaticResource SecondaryText}" Margin="0,4,0,0"/>
-                                    </StackPanel>
-                                    <TextBlock Text="→" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="{StaticResource BorderColor}" FontSize="18"/>
-                                    <Rectangle VerticalAlignment="Bottom" Height="1" Fill="{StaticResource BorderColor}" Margin="0,16,0,-16"/>
-                                </Grid>
-
-                                <Grid Margin="0,16,0,16">
-                                    <StackPanel>
-                                        <TextBlock Text="15 Thg 08, 2023" FontWeight="SemiBold" FontSize="16"/>
-                                        <TextBlock Text="Khám tổng quát" Foreground="{StaticResource SecondaryText}" Margin="0,4,0,0"/>
-                                    </StackPanel>
-                                    <TextBlock Text="→" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="{StaticResource BorderColor}" FontSize="18"/>
-                                    <Rectangle VerticalAlignment="Bottom" Height="1" Fill="{StaticResource BorderColor}" Margin="0,16,0,-16"/>
-                                </Grid>
-
-                                <Button Content="Xem toàn bộ hồ sơ" Background="Transparent" BorderBrush="{StaticResource BorderColor}" BorderThickness="1" Foreground="{StaticResource SecondaryText}" Margin="0,16,0,0" Padding="10">
-                                    <Button.Resources>
-                                        <Style TargetType="Border">
-                                            <Setter Property="CornerRadius" Value="8"/>
-                                        </Style>
-                                    </Button.Resources>
-                                </Button>
-                            </StackPanel>
-                        </Border>
-
-                    </StackPanel>
-                </Grid>
-            </Grid>
-        </ScrollViewer>
+            </StackPanel>
+        </Grid>
+        <Grid Visibility="{Binding IsLoading, Converter={StaticResource BoolToVisibilityConverter}}"
+              Grid.RowSpan="2" 
+              Background="#80FFFFFF" 
+              d:IsHidden="False">
+            <fa:ImageAwesome 
+                Icon="Spinner" 
+                Spin="True" 
+                Height="48" 
+                Width="48"/>
+        </Grid>
+    </Grid>
 </Page>

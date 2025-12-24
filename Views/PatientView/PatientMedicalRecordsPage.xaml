@@ -1,0 +1,241 @@
+﻿<Page x:Class="PersonalizedHealthcareTrackingSystemFinal.Views.PatientView.PatientMedicalRecordsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:PersonalizedHealthcareTrackingSystemFinal.Views.PatientView"
+      mc:Ignorable="d" 
+      d:DesignHeight="1000" d:DesignWidth="1500"
+      Title="PatientMedicalRecordsPage">
+
+    <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Border Grid.Row="0" Style="{StaticResource PageHeaderBorderStyle}" Padding="32">
+                <StackPanel>
+                    <DockPanel Margin="0,0,0,24">
+                        <StackPanel DockPanel.Dock="Left">
+                            <TextBlock Text="Personal Health Record (PHR)" FontSize="28" FontWeight="Bold" Foreground="{StaticResource DarkText}"/>
+                            <TextBlock Text="Medical history, diagnoses, and vital signs tracking." Foreground="{StaticResource TextSecondary}" Margin="0,4,0,0"/>
+                        </StackPanel>
+                        <Button Style="{StaticResource OutlineButtonStyle}" DockPanel.Dock="Right" Content="🖨️ Print / Export PDF" FontSize="14" Padding="16,8" Width="223"/>
+                    </DockPanel>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="16"/>
+                            <ColumnDefinition Width="200"/>
+                            <ColumnDefinition Width="16"/>
+                            <ColumnDefinition Width="200"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Border Grid.Column="0" CornerRadius="8" BorderBrush="{StaticResource LightBorder}" BorderThickness="1" Background="White" Padding="12,8">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="🔍" VerticalAlignment="Center" Margin="0,0,8,0" Foreground="{StaticResource TextSecondary}"/>
+                                <TextBox Grid.Column="1" BorderThickness="0" Background="Transparent" VerticalContentAlignment="Center" 
+                                     Text="Search by diagnosis, doctor, or medication..."/>
+                            </Grid>
+                        </Border>
+
+                        <ComboBox Grid.Column="2" Padding="12,8" SelectedIndex="0">
+                            <ComboBoxItem Content="All Time"/>
+                            <ComboBoxItem Content="Last 6 Months"/>
+                            <ComboBoxItem Content="Year 2023"/>
+                        </ComboBox>
+
+                        <ComboBox Grid.Column="4" Padding="12,8" SelectedIndex="0">
+                            <ComboBoxItem Content="All Visit Types"/>
+                            <ComboBoxItem Content="In-Person Visit"/>
+                            <ComboBoxItem Content="Telehealth"/>
+                        </ComboBox>
+                    </Grid>
+                </StackPanel>
+            </Border>
+
+            <ScrollViewer Grid.Row="1" Padding="32">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="320"/>
+                        <ColumnDefinition Width="32"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0">
+                        <Border Style="{StaticResource CardStyle}">
+                            <StackPanel>
+                                <DockPanel Margin="0,0,0,20">
+                                    <TextBlock Text="Vital Signs Summary" FontWeight="Bold" FontSize="16"/>
+                                    <TextBlock Text="Oct 27, 2023" DockPanel.Dock="Right" FontSize="12" Foreground="{StaticResource TextSecondary}" VerticalAlignment="Bottom"/>
+                                </DockPanel>
+
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="20"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+
+                                    <StackPanel Grid.Row="0" Grid.Column="0">
+                                        <TextBlock Text="Blood Pressure" Foreground="{StaticResource TextSecondary}" FontSize="13"/>
+                                        <StackPanel Orientation="Horizontal" Margin="0,4">
+                                            <TextBlock Text="140/90" FontSize="20" FontWeight="Bold" Foreground="{StaticResource DangerColor}"/>
+                                            <TextBlock Text=" mmHg" FontSize="12" Foreground="{StaticResource TextSecondary}" VerticalAlignment="Bottom" Margin="2,0,0,3"/>
+                                        </StackPanel>
+                                        <TextBlock Text="↑ High" FontSize="12" Foreground="{StaticResource DangerColor}"/>
+                                    </StackPanel>
+
+                                    <StackPanel Grid.Row="0" Grid.Column="1">
+                                        <TextBlock Text="Heart Rate" Foreground="{StaticResource TextSecondary}" FontSize="13"/>
+                                        <StackPanel Orientation="Horizontal" Margin="0,4">
+                                            <TextBlock Text="88" FontSize="20" FontWeight="Bold" Foreground="{StaticResource DarkText}"/>
+                                            <TextBlock Text=" bpm" FontSize="12" Foreground="{StaticResource TextSecondary}" VerticalAlignment="Bottom" Margin="2,0,0,3"/>
+                                        </StackPanel>
+                                        <TextBlock Text="→ Stable" FontSize="12" Foreground="{StaticResource SuccessColor}"/>
+                                    </StackPanel>
+
+                                    <StackPanel Grid.Row="2" Grid.Column="0">
+                                        <TextBlock Text="Weight" Foreground="{StaticResource TextSecondary}" FontSize="13"/>
+                                        <StackPanel Orientation="Horizontal" Margin="0,4">
+                                            <TextBlock Text="78" FontSize="20" FontWeight="Bold" Foreground="{StaticResource DarkText}"/>
+                                            <TextBlock Text=" kg" FontSize="12" Foreground="{StaticResource TextSecondary}" VerticalAlignment="Bottom" Margin="2,0,0,3"/>
+                                        </StackPanel>
+                                    </StackPanel>
+
+                                    <StackPanel Grid.Row="2" Grid.Column="1">
+                                        <TextBlock Text="BMI" Foreground="{StaticResource TextSecondary}" FontSize="13"/>
+                                        <StackPanel Orientation="Horizontal" Margin="0,4">
+                                            <TextBlock Text="26.5" FontSize="20" FontWeight="Bold" Foreground="{StaticResource StatusPendingBackground}"/>
+                                            <TextBlock Text=" (Over)" FontSize="12" Foreground="{StaticResource TextSecondary}" VerticalAlignment="Bottom" Margin="2,0,0,3"/>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Grid>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Style="{StaticResource CardStyle}" BorderBrush="{StaticResource DangerColor}" BorderThickness="1">
+                            <StackPanel>
+                                <TextBlock Text="⚠️ Allergies &amp; Alerts" FontWeight="Bold" FontSize="16" Foreground="{StaticResource DangerColor}" Margin="0,0,0,16"/>
+                                <WrapPanel>
+                                    <Border Background="{StaticResource DangerBg}" BorderBrush="{StaticResource StatTagBorderBrush}" BorderThickness="1" Margin="0,0,8,8" Padding="10,6" CornerRadius="20">
+                                        <TextBlock Text="🚫 Penicillin (Severe)" FontWeight="SemiBold" Foreground="{StaticResource DangerColor}"/>
+                                    </Border>
+                                    <Border Background="#fff7ed" BorderBrush="#fdba74" BorderThickness="1" CornerRadius="20" Padding="10,6" Margin="0,0,8,8">
+                                        <TextBlock Text="⚠️ Seafood (Mild)" FontWeight="SemiBold" Foreground="{StaticResource StatusPendingBackground}"/>
+                                    </Border>
+                                </WrapPanel>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="2">
+                        <TextBlock Text="Medical History Timeline" FontSize="20" FontWeight="Bold" Margin="0,0,0,24"/>
+
+                        <Border Style="{StaticResource CardStyle}" Padding="0" BorderBrush="{StaticResource PrimaryColor}">
+                            <Border.Effect>
+                                <DropShadowEffect Color="#0284c7" Opacity="0.1" BlurRadius="12" ShadowDepth="4"/>
+                            </Border.Effect>
+                            <StackPanel>
+                                <Border Background="{StaticResource LightWaitingStatusBorder}" Padding="24" BorderBrush="{StaticResource LightBorder}" BorderThickness="0,0,0,1" CornerRadius="16,16,0,0">
+                                    <DockPanel>
+                                        <StackPanel Orientation="Horizontal" DockPanel.Dock="Left">
+                                            <Border BorderBrush="{StaticResource PrimaryColor}" BorderThickness="2" CornerRadius="12" Padding="12,8" Background="White" Margin="0,0,16,0">
+                                                <StackPanel>
+                                                    <TextBlock Text="27" FontSize="20" FontWeight="Bold" Foreground="{StaticResource PrimaryColor}" HorizontalAlignment="Center"/>
+                                                    <TextBlock Text="Oct" FontSize="12" Foreground="{StaticResource TextSecondary}" HorizontalAlignment="Center"/>
+                                                </StackPanel>
+                                            </Border>
+                                            <StackPanel VerticalAlignment="Center">
+                                                <TextBlock Text="Cardiology Follow-up" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                                                <TextBlock Text="Dr. Tran Minh Tuan • General Hospital" Foreground="{StaticResource TextSecondary}"/>
+                                            </StackPanel>
+                                        </StackPanel>
+                                        <TextBlock Text="▼ Details" DockPanel.Dock="Right" VerticalAlignment="Center" Foreground="{StaticResource PrimaryColor}" FontWeight="Bold"/>
+                                    </DockPanel>
+                                </Border>
+
+                                <Grid Margin="24">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="32"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <StackPanel Grid.Column="0">
+                                        <TextBlock Text="DIAGNOSIS" FontSize="12" Foreground="{StaticResource TextSecondary}" FontWeight="Bold" Margin="0,0,0,8"/>
+                                        <TextBlock Text="Stage 1 Hypertension, Mild Dyslipidemia." FontSize="15" FontWeight="SemiBold" Foreground="{StaticResource PrimaryColor}" TextWrapping="Wrap" Margin="0,0,0,24"/>
+
+                                        <TextBlock Text="TREATMENT PLAN" FontSize="12" Foreground="{StaticResource TextSecondary}" FontWeight="Bold" Margin="0,0,0,8"/>
+                                        <TextBlock Text="Continue current medication. Maintain low-sodium diet. Exercise 30 mins/day. Follow up in 1 month." TextWrapping="Wrap" LineHeight="20"/>
+                                    </StackPanel>
+
+                                    <Border Grid.Column="2" Background="{StaticResource BgLight}" CornerRadius="12" Padding="16">
+                                        <StackPanel>
+                                            <TextBlock Text="Prescription (#RX-8821)" FontWeight="Bold" Margin="0,0,0,12"/>
+                                            <StackPanel Margin="0,0,0,8">
+                                                <TextBlock Text="💊 Amlodipine 5mg" FontWeight="SemiBold"/>
+                                                <TextBlock Text="30 tabs (1 tab/morning)" Foreground="{StaticResource TextSecondary}" FontSize="13"/>
+                                            </StackPanel>
+                                            <StackPanel>
+                                                <TextBlock Text="💊 Atorvastatin 20mg" FontWeight="SemiBold"/>
+                                                <TextBlock Text="30 tabs (1 tab/evening)" Foreground="{StaticResource TextSecondary}" FontSize="13"/>
+                                            </StackPanel>
+                                            <Button Content="View Full Rx →" Style="{StaticResource QuickAccessButtonStyle}" Foreground="{StaticResource PrimaryColor}" Margin="0,12,0,0" Padding="0"/>
+                                        </StackPanel>
+                                    </Border>
+                                </Grid>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Style="{StaticResource CardStyle}" Padding="20">
+                            <DockPanel>
+                                <StackPanel Orientation="Horizontal" DockPanel.Dock="Left">
+                                    <Border BorderBrush="{StaticResource LightBorder}" BorderThickness="2" CornerRadius="12" Padding="12,8" Background="White" Margin="0,0,16,0">
+                                        <StackPanel>
+                                            <TextBlock Text="15" FontSize="20" FontWeight="Bold" Foreground="{StaticResource TextSecondary}" HorizontalAlignment="Center"/>
+                                            <TextBlock Text="May" FontSize="12" Foreground="{StaticResource TextSecondary}" HorizontalAlignment="Center"/>
+                                        </StackPanel>
+                                    </Border>
+                                    <StackPanel VerticalAlignment="Center">
+                                        <TextBlock Text="General Checkup" FontSize="16" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                                        <TextBlock Text="Dr. Le Thi Lan • City Clinic" Foreground="{StaticResource TextSecondary}"/>
+                                    </StackPanel>
+                                </StackPanel>
+                                <TextBlock Text="▶ View Details" DockPanel.Dock="Right" VerticalAlignment="Center" Foreground="{StaticResource TextSecondary}"/>
+                            </DockPanel>
+                        </Border>
+
+                        <Border Style="{StaticResource CardStyle}" Padding="20">
+                            <DockPanel>
+                                <StackPanel Orientation="Horizontal" DockPanel.Dock="Left">
+                                    <Border BorderBrush="{StaticResource LightBorder}" BorderThickness="2" CornerRadius="12" Padding="12,8" Background="White" Margin="0,0,16,0">
+                                        <StackPanel>
+                                            <TextBlock Text="02" FontSize="20" FontWeight="Bold" Foreground="{StaticResource TextSecondary}" HorizontalAlignment="Center"/>
+                                            <TextBlock Text="Feb" FontSize="12" Foreground="{StaticResource TextSecondary}" HorizontalAlignment="Center"/>
+                                        </StackPanel>
+                                    </Border>
+                                    <StackPanel VerticalAlignment="Center">
+                                        <TextBlock Text="Gastroenterology Endoscopy" FontSize="16" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                                        <TextBlock Text="Dr. Pham Hoang • GI Dept." Foreground="{StaticResource TextSecondary}"/>
+                                    </StackPanel>
+                                </StackPanel>
+                                <TextBlock Text="▶ View Details" DockPanel.Dock="Right" VerticalAlignment="Center" Foreground="{StaticResource TextSecondary}"/>
+                            </DockPanel>
+                        </Border>
+
+                    </StackPanel>
+                </Grid>
+            </ScrollViewer>
+        </Grid>
+    </Page>

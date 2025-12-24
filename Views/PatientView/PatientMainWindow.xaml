@@ -82,6 +82,20 @@
                         </StackPanel>
                     </ListBoxItem>
 
+                    <ListBoxItem Tag="Medication Schedule">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:ImageAwesome Icon="Calendar" Width="20" Height="20" Margin="0,0,10,0" VerticalAlignment="Center" Foreground="White"/>
+                            <TextBlock Text="Medication Schedule"/>
+                        </StackPanel>
+                    </ListBoxItem>
+
+                    <ListBoxItem Tag="Medical Records">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:ImageAwesome Icon="Clipboard" Width="20" Height="20" Margin="0,0,10,0" VerticalAlignment="Center" Foreground="White"/>
+                            <TextBlock Text="Medical Records"/>
+                        </StackPanel>
+                    </ListBoxItem>
+
                     <ListBoxItem Tag="Settings">
                         <StackPanel Orientation="Horizontal">
                             <fa:ImageAwesome Icon="Cog" Width="20" Height="20" Margin="0,0,10,0" VerticalAlignment="Center" Foreground="White"/>
@@ -111,11 +125,11 @@
                         </Ellipse>
 
                         <StackPanel Orientation="Vertical" Margin="10,0,0,0" VerticalAlignment="Center">
-                            <TextBlock Text="Nguyễn Đại Hưng"
+                            <TextBlock Text="{Binding PatientName}"
                                        Foreground="White"
                                        FontWeight="SemiBold"
                                        FontSize="14"/>
-                            <TextBlock Text="hun9nd@gmail.com"
+                            <TextBlock Text="{Binding PatientEmail}"
                                        Foreground="#BDC3C7"
                                        FontSize="11"
                                        TextTrimming="CharacterEllipsis"
@@ -126,7 +140,7 @@
             </Grid>
         </Border>
 
-        <Frame x:Name="MainContent"
+        <Frame x:Name="PatientMainContent"
                Grid.Column="1"
                NavigationUIVisibility="Hidden"
                Background="#ECF0F1"/>

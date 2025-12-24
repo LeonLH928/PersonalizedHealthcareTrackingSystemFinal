@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.Messaging;
 using Microsoft.Extensions.DependencyInjection;
 using PersonalizedHealthcareTrackingSystemFinal.Messages;
+using PersonalizedHealthcareTrackingSystemFinal.ViewModels.PharmacistViewModel;
 using PersonalizedHealthcareTrackingSystemFinal.Views.PharmacistView;
 using System;
 using System.CodeDom;
@@ -26,9 +27,10 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Views.PharmacistView
     public partial class PharmacistMainWindow : Window
     {
         private readonly IServiceProvider _serviceProvider = null!;
-        public PharmacistMainWindow(IServiceProvider serviceProvider)
+        public PharmacistMainWindow(IServiceProvider serviceProvider, PharmacistMainWindowViewModel vm)
         {
             InitializeComponent();
+            DataContext = vm;
             _serviceProvider = serviceProvider;
             Loaded += (s, e) =>
             {
@@ -59,9 +61,17 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Views.PharmacistView
                     var PatientQueuePage = _serviceProvider.GetRequiredService<PharmacistQueuePage>();
                     PharmacistMainContent.Navigate(PatientQueuePage);
                     break;
-                case "Inventory Management":
+                case "Inventory":
                     var InventoryManagementPage = _serviceProvider.GetRequiredService<InventoryManagementPage>();
                     PharmacistMainContent.Navigate(InventoryManagementPage);
+                    break;
+                case "History":
+                    var HistoryPage = _serviceProvider.GetRequiredService<PharmacistHistoryPage>();
+                    PharmacistMainContent.Navigate(HistoryPage);
+                    break;
+                case "Cancelled":
+                    var CancelledPage = _serviceProvider.GetRequiredService<PharmacistCancelledPage>();
+                    PharmacistMainContent.Navigate(CancelledPage);
                     break;
             }
         }

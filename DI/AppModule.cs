@@ -66,6 +66,8 @@ public static class AppModule
         services.AddTransient<Views.PatientView.PatientHomePage>();
         services.AddTransient<Views.PatientView.PatientBookingPage>();
         services.AddTransient<Views.PatientView.PatientSetting>();
+        services.AddTransient<Views.PatientView.PatientMedicationSchedulePage>();
+        services.AddTransient<Views.PatientView.PatientMedicalRecordsPage>();
         services.AddTransient<Views.PatientView.PatientBookingConfirmationWindow>();
 
         services.AddTransient<Views.DoctorView.DoctorMainWindow>();
@@ -82,6 +84,8 @@ public static class AppModule
         services.AddTransient<Views.PharmacistView.PharmacistQueuePage>();
         services.AddTransient<Views.PharmacistView.PharmacistDashboard>();
         services.AddTransient<Views.PharmacistView.InventoryManagementPage>();
+        services.AddTransient<Views.PharmacistView.PharmacistHistoryPage>();
+        services.AddTransient<Views.PharmacistView.PharmacistCancelledPage>();
 
         // Register ViewModels
         services.AddTransient<IntroductionWindowViewModel>();
@@ -91,14 +95,21 @@ public static class AppModule
         services.AddTransient<ViewModels.PatientViewModel.PatientHomePageViewModel>();
         services.AddTransient<ViewModels.PatientViewModel.PatientBookingPageViewModel>();
         services.AddTransient<ViewModels.PatientViewModel.PatientBookingConfirmationWindowViewModel>();
+        services.AddTransient<ViewModels.PatientViewModel.PatientMainWindowViewModel>();
 
         services.AddTransient<ViewModels.DoctorViewModel.DoctorDashboardPageViewModel>();
         services.AddTransient<ViewModels.DoctorViewModel.DoctorConsultationWindowViewModel>();
         services.AddTransient<ViewModels.DoctorViewModel.AddDrugWindowViewModel>();
         services.AddTransient<ViewModels.DoctorViewModel.DoctorMainWindowViewModel>();
+        services.AddTransient<ViewModels.DoctorViewModel.DoctorWaitingListPageViewModel>();
+        services.AddTransient<ViewModels.DoctorViewModel.DoctorPharmacyInventoryPageViewModel>();
 
         services.AddTransient<ViewModels.PharmacistViewModel.PharmacistQueuePageViewModel>();
         services.AddTransient<ViewModels.PharmacistViewModel.PharmacistDashboardPageViewModel>();
+        services.AddTransient<ViewModels.PharmacistViewModel.PharmacistMainWindowViewModel>();
+        services.AddTransient<ViewModels.PharmacistViewModel.InventoryManagementPageViewModel>();
+        services.AddTransient<ViewModels.PharmacistViewModel.PharmacistHistoryViewModel>();
+        services.AddTransient<ViewModels.PharmacistViewModel.PharmacistCancelledViewModel>();
 
         // Register Repositories
         services.AddScoped<IAppointmentRepository, AppointmentRepository>();
@@ -118,6 +129,8 @@ public static class AppModule
         services.AddScoped<IDoctorRepository, DoctorRepository>();
         services.AddScoped<IDoctorScheduleRepository, DoctorScheduleRepository>();
         services.AddScoped<IPharmacistRepository, PharmacistRepository>();
+        services.AddScoped<IMedicationAdherenceRepository, MedicationAdherenceRepository>();
+        services.AddScoped<IMedicationStockLogRepository, MedicationStockLogRepository>();
 
         // Register Services
         services.AddScoped<IAppointmentService, AppointmentService>();
@@ -134,6 +147,8 @@ public static class AppModule
         services.AddScoped<ICurrentUserStoreService, CurrentUserStoreService>();
         services.AddScoped<IDoctorScheduleService, DoctorScheduleService>();
         services.AddScoped<IPharmacistService, PharmacistService>();
+        services.AddScoped<IMedicationAdherenceService, MedicationAdherenceService>();
+        services.AddScoped<IMedicationStockLogService, MedicationStockLogService>();
 
         return services;
     }
