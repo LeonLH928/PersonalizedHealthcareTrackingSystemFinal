@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using PersonalizedHealthcareTrackingSystemFinal.ViewModels.PatientViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,9 +22,11 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Views.PatientView
     public partial class PatientMainWindow : Window
     {
         private readonly IServiceProvider _serviceProvider;
-        public PatientMainWindow(IServiceProvider serviceProvider)
+        public PatientMainWindow(IServiceProvider serviceProvider, PatientMainWindowViewModel vm)
         {
             InitializeComponent();
+
+            DataContext = vm;
 
             _serviceProvider = serviceProvider;
             Loaded += (s, e) =>
