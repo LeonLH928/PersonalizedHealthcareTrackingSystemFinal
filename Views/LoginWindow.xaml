@@ -109,7 +109,8 @@
                 <Button Command="{Binding LoginCommand}" 
                         Content="LOG IN" 
                         Style="{StaticResource TealButtonStyle}" 
-                        Height="50" Margin="0,0,0,25"/>
+                        Height="50" Margin="0,0,0,25"
+                        IsDefault="True"/>
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                     <TextBlock Text="Don't have an account? " 
