@@ -100,6 +100,7 @@ public static class AppModule
         services.AddTransient<ViewModels.DoctorViewModel.DoctorDashboardPageViewModel>();
         services.AddTransient<ViewModels.DoctorViewModel.DoctorConsultationWindowViewModel>();
         services.AddTransient<ViewModels.DoctorViewModel.AddDrugWindowViewModel>();
+        services.AddTransient<ViewModels.DoctorViewModel.DoctorMainWindowViewModel>();
         services.AddTransient<ViewModels.DoctorViewModel.DoctorWaitingListPageViewModel>();
         services.AddTransient<ViewModels.DoctorViewModel.DoctorPharmacyInventoryPageViewModel>();
 
