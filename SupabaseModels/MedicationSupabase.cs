@@ -19,6 +19,9 @@ namespace PersonalizedHealthcareTrackingSystemFinal.SupabaseModels
         
         [Column("Form")]
         public Form Form { get; set; }
+        
+        [Column("Category")]
+        public MedicationCategory Category { get; set; } = MedicationCategory.Other;
 
         [Column("BaseUnit")]
         public string BaseUnit { get; set; } = "";

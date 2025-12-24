@@ -1,5 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using PersonalizedHealthcareTrackingSystemFinal.ViewModels.PatientViewModel;
+﻿using CommunityToolkit.Mvvm.Messaging;
+using PersonalizedHealthcareTrackingSystemFinal.Messages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,8 +35,15 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Views.PatientView
             {
                 Sidebar.SelectedItem = Sidebar.Items[0];
                 var HomePage = _serviceProvider.GetRequiredService<PatientHomePage>();
-                MainContent.Navigate(HomePage);
+                PatientMainContent.Navigate(HomePage);
             };
+            WeakReferenceMessenger.Default.Register<PageTypeMessage>(this, (r, m) =>
+            {
+                var page = _serviceProvider.GetRequiredService(m.Value);
+                PatientMainContent.Navigate(page);
+                if (m.Value == typeof(PatientBookingPage))
+                    Sidebar.SelectedItem = Sidebar.Items[1];
+            });
         }
 
         private void NavigateToPage(string NamePage)
@@ -43,25 +52,25 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Views.PatientView
             {
                 case "Home":
                     var HomePage = _serviceProvider.GetRequiredService<PatientHomePage>();
-                    MainContent.Navigate(HomePage);
+                    PatientMainContent.Navigate(HomePage);
                     break;
                 case "Booking":
                     var BookingPage = _serviceProvider.GetRequiredService<PatientBookingPage>();
-                    MainContent.Navigate(BookingPage);
+                    PatientMainContent.Navigate(BookingPage);
                     break;
                 case "Medication Schedule":
                     var MedicationSchedulePage = _serviceProvider.GetRequiredService<PatientMedicationSchedulePage>();
-                    MainContent.Navigate(MedicationSchedulePage);
+                    PatientMainContent.Navigate(MedicationSchedulePage);
                     break;
 
                 case "Medical Records":
                     var MedicalRecordsPage = _serviceProvider.GetRequiredService<PatientMedicalRecordsPage>();
-                    MainContent.Navigate(MedicalRecordsPage);
+                    PatientMainContent.Navigate(MedicalRecordsPage);
                     break;
 
                 case "Settings":
                     var SettingPage = _serviceProvider.GetRequiredService<PatientSetting>();
-                    MainContent.Navigate(SettingPage);
+                    PatientMainContent.Navigate(SettingPage);
                     break;
             }
         }

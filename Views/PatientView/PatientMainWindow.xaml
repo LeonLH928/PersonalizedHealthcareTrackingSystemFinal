@@ -140,7 +140,7 @@
             </Grid>
         </Border>
 
-        <Frame x:Name="MainContent"
+        <Frame x:Name="PatientMainContent"
                Grid.Column="1"
                NavigationUIVisibility="Hidden"
                Background="#ECF0F1"/>

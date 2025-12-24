@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PersonalizedHealthcareTrackingSystemFinal.ViewModels.PharmacistViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,9 +22,10 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Views.PharmacistView
     /// </summary>
     public partial class InventoryManagementPage : Page
     {
-        public InventoryManagementPage()
+        public InventoryManagementPage(InventoryManagementPageViewModel vm)
         {
             InitializeComponent();
+            DataContext = vm;
         }
 
         private void AdjustButton_Click(object sender, RoutedEventArgs e)

@@ -1,9 +1,13 @@
 ﻿using Microsoft.IdentityModel.Tokens;
 using PersonalizedHealthcareTrackingSystemFinal.Models;
+using System.Collections;
 using System.Diagnostics;
 using System.Globalization;
+using System.Text.RegularExpressions;
 using System.Windows;
+using System.Windows.Automation.Peers;
 using System.Windows.Data;
+using System.Windows.Media;
 
 namespace PersonalizedHealthcareTrackingSystemFinal.Helpers;
 public class GreaterThanOneToVisibilityConverter : IValueConverter
@@ -344,6 +348,21 @@ public class UrgentToVisibility : IValueConverter
     }
 }
 
+public class NormalStockToVisibility : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        if (value is int stock && stock >= 20)
+            return Visibility.Visible;
+        return Visibility.Collapsed;
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}
+
 public class NullDateTimeToCurrentDate : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -433,6 +452,129 @@ public class IsCurrentNotSundayAndSmallerThanCurrentToVisibility : IValueConvert
          || dt != null && dt.Value.DayOfWeek != DayOfWeek.Sunday && dt.Value >= DateTime.Now)
             return Visibility.Visible;
         return Visibility.Collapsed;
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}
+
+public class AppointmentStatusToBorderBrush : IValueConverter
+{
+    private static readonly BrushConverter _converter = new();
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        if (value is not StatusAppointment sa)
+            return value;
+        string hexColor = sa switch
+        {
+            StatusAppointment.Happening => "#26B4E2",
+            StatusAppointment.Scheduled => "#3b82f6", 
+            StatusAppointment.Completed => "#22c55e", 
+            StatusAppointment.Cancelled => "#ECA0A8", 
+            _ => "#354863"
+        };
+        return (Brush)_converter.ConvertFromString(hexColor)!;
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}
+
+public class AppointmentStatusToBackground : IValueConverter
+{
+    private static readonly BrushConverter _converter = new();
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        if (value is not StatusAppointment sa)
+            return value;
+        string hexColor = sa switch
+        {
+            StatusAppointment.Happening => "#ACC7E0",
+            StatusAppointment.Scheduled => "#eff6ff",
+            StatusAppointment.Completed => "#f0fdf4",
+            StatusAppointment.Cancelled => "#fee2e2",
+            _ => "#E2E8F0"
+        };
+        return (Brush)_converter.ConvertFromString(hexColor)!;
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}
+public class AppointmentStatusToVisibility : IValueConverter
+{
+    private static readonly BrushConverter _converter = new();
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        if (value is not StatusAppointment sa)
+            return value;
+        return sa switch
+        {
+            StatusAppointment.Happening => Visibility.Visible,
+            StatusAppointment.Scheduled => Visibility.Visible,
+            _ => Visibility.Collapsed
+        };
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}
+
+public class CollectionToVisibilityConverter : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        int count = 0;
+
+        if (value is ICollection collection)
+            count = collection.Count;
+
+        bool isVisible = count > 0;
+
+        return isVisible ? Visibility.Visible : Visibility.Collapsed;
+    }
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}
+
+public class EmptyCollectionToVisibilityConverter : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        int count = 0;
+
+        if (value is ICollection collection)
+            count = collection.Count;
+
+        bool isVisible = count == 0;
+
+        return isVisible ? Visibility.Visible : Visibility.Collapsed;
+    }
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}
+
+public class PascalCaseToSpaceConverter : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        if (value == null) return string.Empty;
+
+        string text = value.ToString()!;
+
+        return Regex.Replace(text, "([a-z])([A-Z])", "$1 $2");
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

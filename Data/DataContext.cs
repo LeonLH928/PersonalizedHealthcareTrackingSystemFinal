@@ -21,7 +21,9 @@ public class DataContext : DbContext
     public DbSet<PrescriptionItemModel> PrescriptionItems { get; set; } = null!;
     public DbSet<MedicationModel> Medications { get; set; } = null!;
     public DbSet<MedicationStockLogModel> MedicationStockLogs { get; set; } = null!;
-    public DbSet<MedicationInteractionModel> MedicationInteractions { get; set; } = null!; protected override void OnModelCreating(ModelBuilder modelBuilder)
+    public DbSet<MedicationInteractionModel> MedicationInteractions { get; set; } = null!; 
+    public DbSet<MedicationAdherenceModel> MedicationAdherences { get; set; } = null!; 
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
 
@@ -109,13 +111,20 @@ public class DataContext : DbContext
             .WithOne(pi => pi.Prescription)
             .HasForeignKey(pi => pi.PrescriptionID)
             .OnDelete(DeleteBehavior.Cascade);
-        
+
         // Medications -> PrescriptionItems
         modelBuilder.Entity<MedicationModel>()
             .HasMany(m => m.PrescriptionItems)
             .WithOne(pi => pi.Medication)
             .HasForeignKey(pi => pi.MedicationID)
             .OnDelete(DeleteBehavior.Restrict);
+
+        // MedicationAdherences -> PrescriptionItems
+        modelBuilder.Entity<PrescriptionItemModel>()
+            .HasMany(i => i.MedicationAdherences)
+            .WithOne(ma => ma.PrescriptionItem)
+            .HasForeignKey(ma => ma.PrescriptionItemID)
+            .OnDelete(DeleteBehavior.Cascade);
 
         // Medications -> MedicationStockLogs
         modelBuilder.Entity<MedicationModel>()
