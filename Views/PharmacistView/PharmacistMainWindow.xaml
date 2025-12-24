@@ -140,11 +140,11 @@
                         </Ellipse>
 
                         <StackPanel Orientation="Vertical" Margin="10,0,0,0" VerticalAlignment="Center">
-                            <TextBlock Text="Nguyễn Đại Hưng"
+                            <TextBlock Text="{Binding PharmacistName}"
                                            Foreground="White"
                                            FontWeight="SemiBold"
                                            FontSize="14"/>
-                            <TextBlock Text="hun9nd@gmail.com"
+                            <TextBlock Text="{Binding PharmacistEmail}"
                                            Foreground="#BDC3C7"
                                            FontSize="11"
                                            TextTrimming="CharacterEllipsis"

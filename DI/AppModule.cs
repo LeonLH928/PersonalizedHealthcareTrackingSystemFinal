@@ -102,6 +102,7 @@ public static class AppModule
 
         services.AddTransient<ViewModels.PharmacistViewModel.PharmacistQueuePageViewModel>();
         services.AddTransient<ViewModels.PharmacistViewModel.PharmacistDashboardPageViewModel>();
+        services.AddTransient<ViewModels.PharmacistViewModel.PharmacistMainWindowViewModel>();
 
         // Register Repositories
         services.AddScoped<IAppointmentRepository, AppointmentRepository>();
