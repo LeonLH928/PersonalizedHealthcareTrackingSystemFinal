@@ -214,6 +214,49 @@ public class PrescriptionRepository : IPrescriptionRepository
 
         return prescriptions == null ? [] : prescriptions;
     }
+    public async Task<IEnumerable<PrescriptionModel>> GetAllPrescriptionsByPatientIDAsync(string PatientID)
+    {
+        var response = await _client.From<PrescriptionModel>()
+                                    .Select("""
+                                                *,
+                                                MR:MedicalRecords(
+                                                    *,
+                                                    Appointment:Appointments(
+                                                        *,
+                                                        Patient:Patients(
+                                                            *,
+                                                            User:Users(*)
+                                                        ),
+                                                        Doctor:Doctors(
+                                                            *,
+                                                            User:Users(*)
+                                                        )
+                                                    )
+                                                ),
+                                                P:Pharmacists(
+                                                    *,
+                                                    User:Users(*)
+                                                )
+                                             """)
+                                    .Get();
+
+        var content = response.Content!;
+        content = content.Replace("\"MedicalRecords\"", "\"temp\"")
+                         .Replace("\"MR\"", "\"MedicalRecord\"")
+                         .Replace("\"Pharmacists\"", "\"temp\"")
+                         .Replace("\"P\"", "\"Pharmacist\"");
+
+        var prescriptions = JsonSerializer.Deserialize<List<PrescriptionModel>>(content, options);
+
+        if (prescriptions == null)
+            return [];
+
+        prescriptions = prescriptions.Where(p => p.MedicalRecord.Appointment.PatientID == PatientID)
+                                     .ToList();
+
+        return prescriptions;
+    }
+
     public async Task<IEnumerable<PrescriptionModel>> SearchByText(string SearchText)
     {
         var response = await _client.From<PrescriptionModel>()

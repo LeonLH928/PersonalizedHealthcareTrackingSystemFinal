@@ -1,6 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:converters="clr-namespace:PersonalizedHealthcareTrackingSystemFinal.Helpers">
+                    xmlns:converters="clr-namespace:PersonalizedHealthcareTrackingSystemFinal.Helpers"
+                    xmlns:models="clr-namespace:PersonalizedHealthcareTrackingSystemFinal.Models">
 
     <converters:BloodPressureToSafetyConverter x:Key="BloodPressureToSafetyConverter"/>
     <converters:PulseToSafetyConverter x:Key="PulseToSafetyConverter"/>
@@ -130,5 +131,20 @@
                 <Setter Property="Foreground" Value="{StaticResource StatTagTextBlock}"/>
             </DataTrigger>
         </Style.Triggers>
+    </Style>
+    
+    <Style x:Key="DayHeaderStyle" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="#808080"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontFamily" Value="Segoe UI"/>
+        <Setter Property="Margin" Value="0,0,0,20"/>
+    </Style>
+    
+    <Style x:Key="DateTextStyle" TargetType="TextBlock">
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="FontFamily" Value="Segoe UI"/>
     </Style>
 </ResourceDictionary>
