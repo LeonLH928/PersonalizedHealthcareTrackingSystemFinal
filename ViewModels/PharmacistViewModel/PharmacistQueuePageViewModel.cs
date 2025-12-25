@@ -153,12 +153,12 @@ public partial class PharmacistQueuePageViewModel : ObservableObject
     public async Task UpdateSelectedClinicalExaminations(string RecordID)
     {
         SelectedClinicalExamination = (await _clinicalExaminationService.GetClinicalExaminationByMedicalRecordIDAsync(RecordID))!;
-        SelectedAllClinicalExaminations = [.. await _clinicalExaminationService.GetClinicalExaminationsByPatientID(
+        SelectedAllClinicalExaminations = [.. await _clinicalExaminationService.GetClinicalExaminationsByPatientIDAsync(
                                                     SelectedClinicalExamination.MedicalRecord.Appointment.PatientID)];
     }
     public async Task UpdateSelectedItems(string PrescriptionID)
     {
-        var models = await _prescriptionItemService.GetAllPrescriptionItemsByPrescriptionID(PrescriptionID);
+        var models = await _prescriptionItemService.GetAllPrescriptionItemsByPrescriptionIDAsync(PrescriptionID);
         SelectedAllPrescriptionItems = [.. 
             models.Select(item => new PrescriptionItemViewModel(item))];
     }
@@ -213,7 +213,7 @@ public partial class PharmacistQueuePageViewModel : ObservableObject
         IsBusy = true;
         try
         {
-            var prescriptions = await _prescriptionService.SearchByText(SearchText);
+            var prescriptions = await _prescriptionService.SearchByTextAsync(SearchText);
             PrescriptionsPending.Clear();
             PrescriptionsDispensing.Clear();
             foreach (var p in prescriptions)

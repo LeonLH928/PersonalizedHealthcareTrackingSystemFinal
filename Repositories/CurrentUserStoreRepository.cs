@@ -16,7 +16,7 @@ public class CurrentUserStoreRepository : ICurrentUserStoreRepository
         await _client.InitializeAsync();
     }
     public UserModel CurrentUser { get; set; } = null!;
-    public async Task SetUser(UserModel User)
+    public async Task SetUserAsync(UserModel User)
     {
         CurrentUser = User;
         await _client
@@ -25,7 +25,7 @@ public class CurrentUserStoreRepository : ICurrentUserStoreRepository
                 .Set(u => u.IsActive, true)
                 .Update();        
     }
-    public async Task ClearUser()
+    public async Task ClearUserAsync()
     {
         await _client
                 .From<UserModel>()

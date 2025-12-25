@@ -71,9 +71,9 @@ public partial class PatientHomePageViewModel : ObservableObject
             }
             MostUpcomingAppointment = (await _appointmentService.GetNearestAppointmentByPatientIDAsync(Patient.PatientID))!;
             Doctor = (await _doctorService.GetDoctorByUserIDAsync(MostUpcomingAppointment.Doctor.UserID))!;
-            RecentExam = (await _clinicalExamination.GetLatestClinicalExaminationByPatientID(Patient.PatientID))!;
-            PendingMedicationAdherences = [.. await _medicationAdherenceService.GetPendingAdherencesByPatientID(Patient.PatientID)];
-            MissedMedicationAdherences = [.. await _medicationAdherenceService.GetMissedAdherencesByPatientID(Patient.PatientID)];
+            RecentExam = (await _clinicalExamination.GetLatestClinicalExaminationByPatientIDAsync(Patient.PatientID))!;
+            PendingMedicationAdherences = [.. await _medicationAdherenceService.GetPendingAdherencesByPatientIDAsync(Patient.PatientID)];
+            MissedMedicationAdherences = [.. await _medicationAdherenceService.GetMissedAdherencesByPatientIDAsync(Patient.PatientID)];
         }
         catch (Exception e)
         {
@@ -104,7 +104,7 @@ public partial class PatientHomePageViewModel : ObservableObject
         {
             adherence.Status = Models.AdherenceStatus.Taken;
             adherence.TakenDateTime = DateTime.UtcNow;
-            await _medicationAdherenceService.UpsertAdherence(adherence);
+            await _medicationAdherenceService.UpsertAdherenceAsync(adherence);
             MessageBox.Show($"Update successfully!", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
             await LoadDataAsync();
         }

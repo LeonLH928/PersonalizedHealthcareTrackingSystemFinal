@@ -48,7 +48,7 @@ public partial class AddDrugWindowViewModel : ObservableObject
         IsLoading = true;
         try
         {
-            var medications = await _medicationService.GetAllMedications();
+            var medications = await _medicationService.GetAllMedicationsAsync();
             Medications = [.. medications];
         }
         catch (Exception e)
@@ -78,7 +78,7 @@ public partial class AddDrugWindowViewModel : ObservableObject
         IsBusy = true;
         try
         {
-            var medications = await _medicationService.SearchByText(SearchText);
+            var medications = await _medicationService.SearchByTextAsync(SearchText);
             Medications = [.. medications];
         }
         finally
@@ -123,7 +123,7 @@ public partial class AddDrugWindowViewModel : ObservableObject
         try
         {
             SearchText = "";
-            var medications = await _medicationService.GetAllMedications();
+            var medications = await _medicationService.GetAllMedicationsAsync();
             Medications = [.. medications];
         }
         catch (Exception e)

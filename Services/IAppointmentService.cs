@@ -13,7 +13,7 @@ public interface IAppointmentService
     Task<AppointmentModel?> GetNearestAppointmentByDoctorIDAsync(string DoctorID);
     Task<AppointmentModel?> GetNearestAppointmentByPatientIDAsync(string PatientID);
     Task<AppointmentModel?> GetAppointmentByIDAsync(string AppointmentID);
-    Task<IEnumerable<AppointmentModel>> SearchByText(string SearchText);
-    Task<IEnumerable<AppointmentModel>> GetAppointmentsSortByLatest(string DoctorID);
-    Task<IEnumerable<AppointmentModel>> GetAppointmentsSortByNameAZ(string DoctorID);
+    Task<IEnumerable<AppointmentModel>> SearchByTextAsync(string SearchText);
+    Task<IEnumerable<AppointmentModel>> GetAppointmentsSortByLatestAsync(string DoctorID);
+    Task<IEnumerable<AppointmentModel>> GetAppointmentsSortByNameAZAsync(string DoctorID);
 }

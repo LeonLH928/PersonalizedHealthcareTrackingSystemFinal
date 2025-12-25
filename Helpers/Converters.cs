@@ -3,6 +3,8 @@ using PersonalizedHealthcareTrackingSystemFinal.Models;
 using System.Collections;
 using System.Diagnostics;
 using System.Globalization;
+using System.Net;
+using System.Text.Json;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Automation.Peers;
@@ -575,6 +577,37 @@ public class PascalCaseToSpaceConverter : IValueConverter
         string text = value.ToString()!;
 
         return Regex.Replace(text, "([a-z])([A-Z])", "$1 $2");
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}
+
+public class AdherenceToQuantityPerDayConverter : IValueConverter
+{
+    private Dictionary<TimeSpan, string> timeMapping = new()
+        {
+            { new TimeSpan(8, 0, 0), "morning" },
+            {  new TimeSpan(13, 0, 0), "afternoon" },
+            { new TimeSpan(18, 0, 0), "evening" },
+            { new TimeSpan(21, 0, 0), "night" }
+        };
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        if (value is not SupabaseModels.MedicationAdherenceModel adherence)
+            return value;
+
+        timeMapping.TryGetValue(adherence.ScheduledDateTime.TimeOfDay, out string? time);
+
+        if (time == null) return value;
+
+        string cleanJson = WebUtility.HtmlDecode(adherence.PrescriptionItem.DoseScheduleJSON);
+        Dictionary<string, JsonElement>? schedule;
+        schedule = JsonSerializer.Deserialize<Dictionary<string, JsonElement>>(cleanJson);
+
+        return schedule!.GetValueOrDefault(time);
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

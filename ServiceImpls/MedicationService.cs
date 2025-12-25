@@ -10,37 +10,37 @@ public class MedicationService : IMedicationService
     {
         _medicationRepository = medicationRepository;
     }
-    public async Task<IEnumerable<MedicationModel>> SearchByText(string SearchText)
+    public async Task<IEnumerable<MedicationModel>> SearchByTextAsync(string SearchText)
     {
-        return await _medicationRepository.SearchByText(SearchText);
+        return await _medicationRepository.SearchByTextAsync(SearchText);
     }
-    public async Task<IEnumerable<MedicationModel>> GetAllMedications()
+    public async Task<IEnumerable<MedicationModel>> GetAllMedicationsAsync()
     {
-        return await _medicationRepository.GetAllMedications();
+        return await _medicationRepository.GetAllMedicationsAsync();
     }
-    public async Task<IEnumerable<MedicationModel>> GetAllMedicationsByIDs(List<string> MedicationIDs)
+    public async Task<IEnumerable<MedicationModel>> GetAllMedicationsByIDsAsync(List<string> MedicationIDs)
     {
-        return await _medicationRepository.GetAllMedicationsByIDs(MedicationIDs);
+        return await _medicationRepository.GetAllMedicationsByIDsAsync(MedicationIDs);
     }
-    public async Task<IEnumerable<MedicationModel>> GetAllLowStockMedications()
+    public async Task<IEnumerable<MedicationModel>> GetAllLowStockMedicationsAsync()
     {
-        var medications = await _medicationRepository.GetAllMedications();
+        var medications = await _medicationRepository.GetAllMedicationsAsync();
         return medications.Where(m => m.StockTotalQuantity < 20);
     }
-    public async Task<IEnumerable<MedicationModel>> GetAllZeroStockMedications()
+    public async Task<IEnumerable<MedicationModel>> GetAllZeroStockMedicationsAsync()
     {
-        var medications = await _medicationRepository.GetAllMedications();
+        var medications = await _medicationRepository.GetAllMedicationsAsync();
         return medications.Where(m => m.StockTotalQuantity == 0);
     }
-    public async Task<IEnumerable<MedicationModel>> GetAllAvailableMedications()
+    public async Task<IEnumerable<MedicationModel>> GetAllAvailableMedicationsAsync()
     {
-        var medications = await _medicationRepository.GetAllMedications();
+        var medications = await _medicationRepository.GetAllMedicationsAsync();
         return medications.Where(m => m.StockTotalQuantity > 20);
     }
-    public async Task<IEnumerable<MedicationModel>> GetAllMedicationsByCategory(string Category)
+    public async Task<IEnumerable<MedicationModel>> GetAllMedicationsByCategoryAsync(string Category)
     {
         IEnumerable<MedicationModel> resultCategory = [];
-        var medications = await GetAllMedications();
+        var medications = await GetAllMedicationsAsync();
         switch (Category)
         {
             case "All Categories":

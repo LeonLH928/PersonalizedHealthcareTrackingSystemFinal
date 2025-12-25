@@ -10,8 +10,8 @@ public class MedicationInteractionService : IMedicationInteractionService
     {
         _medicationInteractionRepository = mediicationInteractionRepository;
     }
-    public async Task<IEnumerable<MedicationInteractionModel>> GetAllMedicationInteractionsByMedicationIDs(List<string> MedicationIDs)
+    public async Task<IEnumerable<MedicationInteractionModel>> GetAllMedicationInteractionsByMedicationIDsAsync(List<string> MedicationIDs)
     {
-        return await _medicationInteractionRepository.GetAllMedicationInteractionsByMedicationIDs(MedicationIDs);
+        return await _medicationInteractionRepository.GetAllMedicationInteractionsByMedicationIDsAsync(MedicationIDs);
     }
 }

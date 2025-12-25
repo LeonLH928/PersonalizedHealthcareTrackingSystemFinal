@@ -95,6 +95,7 @@ public static class AppModule
         services.AddTransient<ViewModels.PatientViewModel.PatientHomePageViewModel>();
         services.AddTransient<ViewModels.PatientViewModel.PatientBookingPageViewModel>();
         services.AddTransient<ViewModels.PatientViewModel.PatientBookingConfirmationWindowViewModel>();
+        services.AddTransient<ViewModels.PatientViewModel.PatientMedicationSchedulePageViewModel>();
         services.AddTransient<ViewModels.PatientViewModel.PatientMainWindowViewModel>();
 
         services.AddTransient<ViewModels.DoctorViewModel.DoctorDashboardPageViewModel>();

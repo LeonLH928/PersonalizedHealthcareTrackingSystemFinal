@@ -55,16 +55,16 @@ public class AppointmentService : IAppointmentService
         var Appointments = await _appointmentRepository.GetAllAppointmentsByDoctorIDAsync(DoctorID);
         return Appointments.Where(a => a.Status == Models.StatusAppointment.No_show);
     }
-    public async Task<IEnumerable<AppointmentModel>> SearchByText(string SearchText)
+    public async Task<IEnumerable<AppointmentModel>> SearchByTextAsync(string SearchText)
     {
-        return await _appointmentRepository.SearchByText(SearchText);
+        return await _appointmentRepository.SearchByTextAsync(SearchText);
     }
-    public async Task<IEnumerable<AppointmentModel>> GetAppointmentsSortByLatest(string DoctorID)
+    public async Task<IEnumerable<AppointmentModel>> GetAppointmentsSortByLatestAsync(string DoctorID)
     {
         var Appointments = await _appointmentRepository.GetAllAppointmentsByDoctorIDAsync(DoctorID);
         return Appointments.OrderByDescending(a => a.AppointmentDateTime);
     }
-    public async Task<IEnumerable<AppointmentModel>> GetAppointmentsSortByNameAZ(string DoctorID)
+    public async Task<IEnumerable<AppointmentModel>> GetAppointmentsSortByNameAZAsync(string DoctorID)
     {
         var Appointments = await _appointmentRepository.GetAllAppointmentsByDoctorIDAsync(DoctorID);
         return Appointments.OrderBy(a => a.Patient.User.FirstName);

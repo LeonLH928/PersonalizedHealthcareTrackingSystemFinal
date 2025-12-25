@@ -3,11 +3,11 @@
 namespace PersonalizedHealthcareTrackingSystemFinal.Services;
 public interface IMedicationService
 {
-    Task<IEnumerable<MedicationModel>> SearchByText(string SearchText);
-    Task<IEnumerable<MedicationModel>> GetAllMedications();
-    Task<IEnumerable<MedicationModel>> GetAllMedicationsByIDs(List<string> MedicationIDs);
-    Task<IEnumerable<MedicationModel>> GetAllLowStockMedications();
-    Task<IEnumerable<MedicationModel>> GetAllZeroStockMedications();
-    Task<IEnumerable<MedicationModel>> GetAllAvailableMedications();
-    Task<IEnumerable<MedicationModel>> GetAllMedicationsByCategory(string Category);
+    Task<IEnumerable<MedicationModel>> SearchByTextAsync(string SearchText);
+    Task<IEnumerable<MedicationModel>> GetAllMedicationsAsync();
+    Task<IEnumerable<MedicationModel>> GetAllMedicationsByIDsAsync(List<string> MedicationIDs);
+    Task<IEnumerable<MedicationModel>> GetAllLowStockMedicationsAsync();
+    Task<IEnumerable<MedicationModel>> GetAllZeroStockMedicationsAsync();
+    Task<IEnumerable<MedicationModel>> GetAllAvailableMedicationsAsync();
+    Task<IEnumerable<MedicationModel>> GetAllMedicationsByCategoryAsync(string Category);
 }
