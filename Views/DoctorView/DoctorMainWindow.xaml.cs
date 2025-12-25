@@ -1,5 +1,6 @@
 ﻿using LiveChartsCore.Painting;
 using Microsoft.Extensions.DependencyInjection;
+using PersonalizedHealthcareTrackingSystemFinal.ViewModels.DoctorViewModel;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -23,10 +24,11 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Views.DoctorView
     public partial class DoctorMainWindow : Window
     {
         private readonly IServiceProvider _serviceProvider = null!;
-        public DoctorMainWindow(IServiceProvider serviceProvider)
+        public DoctorMainWindow(IServiceProvider serviceProvider, DoctorMainWindowViewModel vm)
         {
             InitializeComponent();
             _serviceProvider = serviceProvider;
+            DataContext = vm;
             Loaded += (s, e) =>
             {
                 Sidebar.SelectedItem = Sidebar.Items[0];

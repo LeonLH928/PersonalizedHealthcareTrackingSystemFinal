@@ -96,15 +96,18 @@ public static class AppModule
         services.AddTransient<ViewModels.PatientViewModel.PatientBookingPageViewModel>();
         services.AddTransient<ViewModels.PatientViewModel.PatientBookingConfirmationWindowViewModel>();
         services.AddTransient<ViewModels.PatientViewModel.PatientMedicationSchedulePageViewModel>();
+        services.AddTransient<ViewModels.PatientViewModel.PatientMainWindowViewModel>();
 
         services.AddTransient<ViewModels.DoctorViewModel.DoctorDashboardPageViewModel>();
         services.AddTransient<ViewModels.DoctorViewModel.DoctorConsultationWindowViewModel>();
         services.AddTransient<ViewModels.DoctorViewModel.AddDrugWindowViewModel>();
+        services.AddTransient<ViewModels.DoctorViewModel.DoctorMainWindowViewModel>();
         services.AddTransient<ViewModels.DoctorViewModel.DoctorWaitingListPageViewModel>();
         services.AddTransient<ViewModels.DoctorViewModel.DoctorPharmacyInventoryPageViewModel>();
 
         services.AddTransient<ViewModels.PharmacistViewModel.PharmacistQueuePageViewModel>();
         services.AddTransient<ViewModels.PharmacistViewModel.PharmacistDashboardPageViewModel>();
+        services.AddTransient<ViewModels.PharmacistViewModel.PharmacistMainWindowViewModel>();
         services.AddTransient<ViewModels.PharmacistViewModel.InventoryManagementPageViewModel>();
         services.AddTransient<ViewModels.PharmacistViewModel.PharmacistHistoryViewModel>();
         services.AddTransient<ViewModels.PharmacistViewModel.PharmacistCancelledViewModel>();
