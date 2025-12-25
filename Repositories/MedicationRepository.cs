@@ -17,7 +17,7 @@ public class MedicationRepository : IMedicationRepository
     {
         await _client.InitializeAsync();
     }
-    public async Task<IEnumerable<MedicationModel>> SearchByText(string SearchText)
+    public async Task<IEnumerable<MedicationModel>> SearchByTextAsync(string SearchText)
     {
         var cleanText = $"%{SearchText.Trim()}%";
 
@@ -38,7 +38,7 @@ public class MedicationRepository : IMedicationRepository
 
         return response.Models;
     }
-    public async Task<IEnumerable<MedicationModel>> GetAllMedications()
+    public async Task<IEnumerable<MedicationModel>> GetAllMedicationsAsync()
     {
         var response = await _client
                                     .From<MedicationModel>()
@@ -46,7 +46,7 @@ public class MedicationRepository : IMedicationRepository
                                     .Get();
         return response.Models;
     }
-    public async Task<IEnumerable<MedicationModel>> GetAllMedicationsByIDs(List<string> MedicationIDs)
+    public async Task<IEnumerable<MedicationModel>> GetAllMedicationsByIDsAsync(List<string> MedicationIDs)
     {
         var response = await _client
                                     .From<MedicationModel>()

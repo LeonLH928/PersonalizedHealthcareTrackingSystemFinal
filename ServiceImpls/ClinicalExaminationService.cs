@@ -18,14 +18,14 @@ public class ClinicalExaminationService : IClinicalExaminationService
     {
         await _clinicalExaminationRepository.AddClinicalExaminationAsync(NewExam);
     }
-    public async Task<ClinicalExaminationModel?> GetLatestClinicalExaminationByPatientID(string PatientID)
+    public async Task<ClinicalExaminationModel?> GetLatestClinicalExaminationByPatientIDAsync(string PatientID)
     {
         var LatestRecord = await _medicalRecordRepository.GetLatestMedicalRecordByPatientIDAsync(PatientID);
         if (LatestRecord == null)
             return null;   
         return await _clinicalExaminationRepository.GetClinicalExaminationByMedicalRecordIDAsync(LatestRecord.RecordID);
     }
-    public async Task<IEnumerable<ClinicalExaminationModel>> GetClinicalExaminationsByPatientID(string PatientID)
+    public async Task<IEnumerable<ClinicalExaminationModel>> GetClinicalExaminationsByPatientIDAsync(string PatientID)
     {
         var Records = await _medicalRecordRepository.GetAllMedicalRecordsByPatientIDAsync(PatientID);
         var RecordsList = Records.Select(r => r.RecordID).ToList();

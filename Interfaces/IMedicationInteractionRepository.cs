@@ -3,5 +3,5 @@
 namespace PersonalizedHealthcareTrackingSystemFinal.Interfaces;
 public interface IMedicationInteractionRepository
 {
-    Task<IEnumerable<MedicationInteractionModel>> GetAllMedicationInteractionsByMedicationIDs(List<string> MedicationIDs);
+    Task<IEnumerable<MedicationInteractionModel>> GetAllMedicationInteractionsByMedicationIDsAsync(List<string> MedicationIDs);
 }

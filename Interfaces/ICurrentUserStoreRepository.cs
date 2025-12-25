@@ -4,8 +4,8 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Interfaces;
 public interface ICurrentUserStoreRepository
 {
     UserModel CurrentUser { get; }
-    Task SetUser(UserModel user);
-    Task ClearUser();
+    Task SetUserAsync(UserModel user);
+    Task ClearUserAsync();
     bool IsLoggedIn => CurrentUser != null;
     UserModel? GetCurrentUser();
 }

@@ -21,7 +21,7 @@ public class MedicationInteractionRepository : IMedicationInteractionRepository
     {
         await _client.InitializeAsync();
     }
-    public async Task<IEnumerable<MedicationInteractionModel>> GetAllMedicationInteractionsByMedicationIDs(List<string> MedicationIDs)
+    public async Task<IEnumerable<MedicationInteractionModel>> GetAllMedicationInteractionsByMedicationIDsAsync(List<string> MedicationIDs)
     {
         var response = await _client
                                     .From<MedicationInteractionModel>()

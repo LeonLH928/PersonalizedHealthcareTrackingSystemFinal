@@ -17,11 +17,11 @@ public class PrescriptionItemService : IPrescriptionItemService
     {
         await _prescriptionItemRepository.AddPrescriptionItemAsync(NewItem);
     }
-    public async Task<IEnumerable<PrescriptionItemModel>> GetAllPrescriptionItemsByPrescriptionID(string PrescriptionID)
+    public async Task<IEnumerable<PrescriptionItemModel>> GetAllPrescriptionItemsByPrescriptionIDAsync(string PrescriptionID)
     {
-        return await _prescriptionItemRepository.GetAllPrescriptionItemsByPrescriptionID(PrescriptionID);
+        return await _prescriptionItemRepository.GetAllPrescriptionItemsByPrescriptionIDAsync(PrescriptionID);
     }
-    public async Task<IEnumerable<PrescriptionItemModel>> FilterAsNeeded(List<PrescriptionItemModel> items)
+    public async Task<IEnumerable<PrescriptionItemModel>> FilterAsNeededAsync(List<PrescriptionItemModel> items)
     {
         List<PrescriptionItemModel> result = new();
         foreach (var item in items)

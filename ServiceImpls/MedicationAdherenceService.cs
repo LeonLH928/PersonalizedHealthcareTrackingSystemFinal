@@ -14,25 +14,25 @@ public class MedicationAdherenceService : IMedicationAdherenceService
     {
         _medicationAdherenceRepository = medicationAdherenceRepository;
     }
-    public async Task<IEnumerable<MedicationAdherenceModel>> GetAllAdherencesByPatientID(string PatientID)
+    public async Task<IEnumerable<MedicationAdherenceModel>> GetAllAdherencesByPatientIDAsync(string PatientID)
     {
-        return await _medicationAdherenceRepository.GetAllAdherencesByPatientID(PatientID);
+        return await _medicationAdherenceRepository.GetAllAdherencesByPatientIDAsync(PatientID);
     }
-    public async Task<IEnumerable<MedicationAdherenceModel>> GetPendingAdherencesByPatientID(string PatientID)
+    public async Task<IEnumerable<MedicationAdherenceModel>> GetPendingAdherencesByPatientIDAsync(string PatientID)
     {
-        return await _medicationAdherenceRepository.GetPendingAdherencesByPatientID(PatientID);
+        return await _medicationAdherenceRepository.GetPendingAdherencesByPatientIDAsync(PatientID);
     }
-    public async Task<IEnumerable<MedicationAdherenceModel>> GetMissedAdherencesByPatientID(string PatientID)
+    public async Task<IEnumerable<MedicationAdherenceModel>> GetMissedAdherencesByPatientIDAsync(string PatientID)
     {
-        return await _medicationAdherenceRepository.GetMissedAdherencesByPatientID(PatientID);
+        return await _medicationAdherenceRepository.GetMissedAdherencesByPatientIDAsync(PatientID);
     }
-    public async Task UpsertAdherence(MedicationAdherenceModel NewAdherence)
+    public async Task UpsertAdherenceAsync(MedicationAdherenceModel NewAdherence)
     {
-        await _medicationAdherenceRepository.UpsertAdherence(NewAdherence);
+        await _medicationAdherenceRepository.UpsertAdherenceAsync(NewAdherence);
     }
     public async Task<IEnumerable<MedicationAdherenceModel>> GetTodayAdherencesByPatientIDAsync(string PatientID)
     {
-        var adherences = await GetAllAdherencesByPatientID(PatientID);
+        var adherences = await GetAllAdherencesByPatientIDAsync(PatientID);
         return adherences.Where(a => a.ScheduledDateTime.Date == DateTime.Now.Date);
     }
     public async Task<List<MedicationAdherenceModel>> CreateMedicationAdherenceBatchAsync(IEnumerable<PrescriptionItemModel> items)

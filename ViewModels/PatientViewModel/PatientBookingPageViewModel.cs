@@ -115,7 +115,7 @@ public partial class PatientBookingPageViewModel : ObservableObject
         IsBusy = true;
         try
         {
-            var doctors = await _doctorService.SearchByText(SearchText);
+            var doctors = await _doctorService.SearchByTextAsync(SearchText);
             Doctors = [.. doctors.Select(d => new Wrappers.DoctorViewModel(d))];
         }
         finally

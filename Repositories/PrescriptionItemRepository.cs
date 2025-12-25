@@ -29,7 +29,7 @@ public class PrescriptionItemRepository : IPrescriptionItemRepository
         await _client.From<PrescriptionItemModel>()
                      .Upsert(NewItem);
     }
-    public async Task<IEnumerable<PrescriptionItemModel>> GetAllPrescriptionItemsByPrescriptionID(string PrescriptionID)
+    public async Task<IEnumerable<PrescriptionItemModel>> GetAllPrescriptionItemsByPrescriptionIDAsync(string PrescriptionID)
     {
         var response = await _client.From<PrescriptionItemModel>()
                                     .Select("""

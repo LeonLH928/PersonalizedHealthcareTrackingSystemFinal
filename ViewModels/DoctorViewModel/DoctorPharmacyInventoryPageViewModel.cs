@@ -39,7 +39,7 @@ public partial class DoctorPharmacyInventoryPageViewModel : ObservableObject
             SelectedCategory = "All Categories";
             SelectedStatus = "Status: All";
 
-            Medications = [.. await _medicationService.GetAllMedications()];
+            Medications = [.. await _medicationService.GetAllMedicationsAsync()];
             TotalItems = Medications.Count();
         }
         catch (Exception e)
@@ -88,9 +88,9 @@ public partial class DoctorPharmacyInventoryPageViewModel : ObservableObject
             IEnumerable<MedicationModel> result = [];
 
             if (!SearchText.IsNullOrEmpty())
-                result = await _medicationService.SearchByText(SearchText);
+                result = await _medicationService.SearchByTextAsync(SearchText);
             else
-                result = await _medicationService.GetAllMedications();
+                result = await _medicationService.GetAllMedicationsAsync();
 
             switch (SelectedStatus)
             {

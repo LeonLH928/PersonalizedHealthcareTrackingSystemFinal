@@ -257,7 +257,7 @@ public class PrescriptionRepository : IPrescriptionRepository
         return prescriptions;
     }
 
-    public async Task<IEnumerable<PrescriptionModel>> SearchByText(string SearchText)
+    public async Task<IEnumerable<PrescriptionModel>> SearchByTextAsync(string SearchText)
     {
         var response = await _client.From<PrescriptionModel>()
                                     .Select("""

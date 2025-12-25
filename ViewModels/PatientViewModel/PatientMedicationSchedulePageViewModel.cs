@@ -95,10 +95,10 @@ public partial class PatientMedicationSchedulePageViewModel : ObservableObject
             LatestPrescription = await _prescriptionService.GetLatestPrescriptionByPatientIDAsync(Patient!.PatientID);
             if (LatestPrescription != null)
             {
-                var LatestPrescriptionItems = await _prescriptionItemService.GetAllPrescriptionItemsByPrescriptionID(LatestPrescription.PrescriptionID);
+                var LatestPrescriptionItems = await _prescriptionItemService.GetAllPrescriptionItemsByPrescriptionIDAsync(LatestPrescription.PrescriptionID);
                 var LatestAdherences = await _medicationAdherenceService.GetTodayAdherencesByPatientIDAsync(Patient.PatientID);
 
-                AsNeededAdherences = [.. await _prescriptionItemService.FilterAsNeeded(LatestPrescriptionItems.ToList())];
+                AsNeededAdherences = [.. await _prescriptionItemService.FilterAsNeededAsync(LatestPrescriptionItems.ToList())];
 
                 MorningAdherences = [.. LatestAdherences.Where(a => a.ScheduledDateTime.Hour == timeMapping.GetValueOrDefault("morning").Hour)];
                 AfternoonAdherences = [.. LatestAdherences.Where(a => a.ScheduledDateTime.Hour == timeMapping.GetValueOrDefault("afternoon").Hour)];
@@ -187,10 +187,10 @@ public partial class PatientMedicationSchedulePageViewModel : ObservableObject
                 LatestPrescription = await _prescriptionService.GetLatestPrescriptionByPatientIDAsync(Patient!.PatientID);
                 if (LatestPrescription != null)
                 {
-                    var LatestPrescriptionItems = await _prescriptionItemService.GetAllPrescriptionItemsByPrescriptionID(LatestPrescription.PrescriptionID);
+                    var LatestPrescriptionItems = await _prescriptionItemService.GetAllPrescriptionItemsByPrescriptionIDAsync(LatestPrescription.PrescriptionID);
                     var LatestAdherences = await _medicationAdherenceService.CreateMedicationAdherenceBatchAsync(LatestPrescriptionItems);
                     foreach (var adherence in LatestAdherences)
-                        await _medicationAdherenceService.UpsertAdherence(adherence);
+                        await _medicationAdherenceService.UpsertAdherenceAsync(adherence);
                 }
             }
         }
@@ -211,7 +211,7 @@ public partial class PatientMedicationSchedulePageViewModel : ObservableObject
         {
             adherence.Status = Models.AdherenceStatus.Taken;
             adherence.TakenDateTime = DateTime.UtcNow;
-            await _medicationAdherenceService.UpsertAdherence(adherence);
+            await _medicationAdherenceService.UpsertAdherenceAsync(adherence);
             MessageBox.Show($"Update successfully!", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
             await LoadDataAsync();
         }

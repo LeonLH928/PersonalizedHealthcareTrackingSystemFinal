@@ -62,7 +62,7 @@ public partial class PharmacistDashboardPageViewModel : ObservableObject
                 .Where(p => p.Status == Models.PrescriptionStatus.Completed)
                 .Count();
             LowStockMedications = [.. 
-                await _medicationService.GetAllLowStockMedications()];
+                await _medicationService.GetAllLowStockMedicationsAsync()];
             LowStockTotal = LowStockMedications.Count();
             LatestPrescriptions = [.. AllPrescriptions.OrderByDescending(p => p.PrescriptionDateTime)
                                                       .Take(10)];

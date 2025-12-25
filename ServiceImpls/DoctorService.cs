@@ -18,8 +18,8 @@ public class DoctorService : IDoctorService
     {
         return await _doctorRepository.GetAllDoctorsAsync();
     }
-    public async Task<IEnumerable<DoctorModel>> SearchByText(string SearchText)
+    public async Task<IEnumerable<DoctorModel>> SearchByTextAsync(string SearchText)
     {
-        return await _doctorRepository.SearchByText(SearchText);
+        return await _doctorRepository.SearchByTextAsync(SearchText);
     }
 }
