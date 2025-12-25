@@ -142,9 +142,9 @@ public partial class DoctorConsultationWindowViewModel : ObservableObject,
             var Patient = await _patientService.GetPatientByIDAsync(LatestAppointment.PatientID);
             var User = await _userService.GetUserByIDAsync(Patient!.UserID);
             var Records = await _medicalRecordService.GetAllMedicalRecordsByPatientIDAsync(Patient.PatientID);
-            var Examinations = await _clinicalExaminationService.GetClinicalExaminationsByPatientID(Patient.PatientID);
+            var Examinations = await _clinicalExaminationService.GetClinicalExaminationsByPatientIDAsync(Patient.PatientID);
 
-            LatestClinicalExamination = await _clinicalExaminationService.GetLatestClinicalExaminationByPatientID(Patient.PatientID);
+            LatestClinicalExamination = await _clinicalExaminationService.GetLatestClinicalExaminationByPatientIDAsync(Patient.PatientID);
             ClinicalExaminations = [.. Examinations];
             MedicalRecords = [.. Records];
             FullName = User.FirstName + " " + User.LastName;
@@ -218,7 +218,7 @@ public partial class DoctorConsultationWindowViewModel : ObservableObject,
     {
         try
         {
-            var medications = await _medicationService.GetAllMedicationsByIDs(MedicationIDs);
+            var medications = await _medicationService.GetAllMedicationsByIDsAsync(MedicationIDs);
             SelectedMedications = [.. medications];
             await LoadInteractions();
         }
@@ -248,7 +248,7 @@ public partial class DoctorConsultationWindowViewModel : ObservableObject,
         try
         {
             var MedicationIDs = SelectedMedications.Select(m => m.MedicationID).ToList();
-            var interactions = await _medicationInteractionService.GetAllMedicationInteractionsByMedicationIDs(MedicationIDs);
+            var interactions = await _medicationInteractionService.GetAllMedicationInteractionsByMedicationIDsAsync(MedicationIDs);
             MedicationInteractions = [.. interactions];
         }
         catch (Exception e)

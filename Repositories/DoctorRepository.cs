@@ -55,7 +55,7 @@ public class DoctorRepository : IDoctorRepository
 
         return list == null ? [] : list;
     }
-    public async Task<IEnumerable<DoctorModel>> SearchByText(string SearchText)
+    public async Task<IEnumerable<DoctorModel>> SearchByTextAsync(string SearchText)
     {
         var response = await _client.From<DoctorModel>()
                                     .Select("*, U:Users(*)")

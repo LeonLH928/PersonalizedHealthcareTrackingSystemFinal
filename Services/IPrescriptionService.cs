@@ -1,4 +1,5 @@
 ﻿using PersonalizedHealthcareTrackingSystemFinal.SupabaseModels;
+using System.Windows.Markup;
 
 namespace PersonalizedHealthcareTrackingSystemFinal.Services;
 public interface IPrescriptionService
@@ -9,5 +10,7 @@ public interface IPrescriptionService
     Task<IEnumerable<PrescriptionModel>> GetAllCompletedPrescriptionsAsync();
     Task<IEnumerable<PrescriptionModel>> GetAllCancelledPrescriptionsAsync();
     Task<IEnumerable<PrescriptionModel>> GetAllPrescriptionsAsync();
-    Task<IEnumerable<PrescriptionModel>> SearchByText(string SearchText);
+    Task<IEnumerable<PrescriptionModel>> GetAllPrescriptionsByPatientIDAsync(string PatientID);
+    Task<IEnumerable<PrescriptionModel>> SearchByTextAsync(string SearchText);
+    Task<PrescriptionModel?> GetLatestPrescriptionByPatientIDAsync(string PatientID);
 }

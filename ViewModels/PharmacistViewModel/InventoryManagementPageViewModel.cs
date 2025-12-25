@@ -21,7 +21,7 @@ public partial class InventoryManagementPageViewModel : ObservableObject
     private MedicationModel selectedMedication = null!;
     public async Task LoadDataAsync()
     {
-        Medications = [.. await _medicationService.GetAllMedications()];
+        Medications = [.. await _medicationService.GetAllMedicationsAsync()];
     }
     [RelayCommand]
     public void AdjustButton(MedicationModel medication)

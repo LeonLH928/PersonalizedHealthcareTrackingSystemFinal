@@ -3,7 +3,7 @@
 namespace PersonalizedHealthcareTrackingSystemFinal.Interfaces;
 public interface IMedicationRepository
 {
-    Task<IEnumerable<MedicationModel>> SearchByText(string SearchText);
-    Task<IEnumerable<MedicationModel>> GetAllMedications();
-    Task<IEnumerable<MedicationModel>> GetAllMedicationsByIDs(List<string> MedicationIDs);
+    Task<IEnumerable<MedicationModel>> SearchByTextAsync(string SearchText);
+    Task<IEnumerable<MedicationModel>> GetAllMedicationsAsync();
+    Task<IEnumerable<MedicationModel>> GetAllMedicationsByIDsAsync(List<string> MedicationIDs);
 }

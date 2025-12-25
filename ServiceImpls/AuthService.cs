@@ -43,13 +43,13 @@ public class AuthService : IAuthService
         if (user.PasswordHash != password) 
             throw new Exception("Invalid password");
 
-        await _currentUserStore.SetUser(user);
+        await _currentUserStore.SetUserAsync(user);
 
         return user;
     }
     public void SignOut()
     {
-        _currentUserStore.ClearUser();
+        _currentUserStore.ClearUserAsync();
     }
     public async Task<SupabaseModels.UserModel> SignUpAsync(string email, string password, UserRole role, string firstName, string lastName, string username, string phoneNumber)
     {

@@ -143,7 +143,7 @@ public class AppointmentRepository : IAppointmentRepository
 
         return appointment;
     }
-    public async Task<IEnumerable<AppointmentModel>> SearchByText(string SearchText)
+    public async Task<IEnumerable<AppointmentModel>> SearchByTextAsync(string SearchText)
     {
         var response = await _client.From<AppointmentModel>()
                                     .Select("""

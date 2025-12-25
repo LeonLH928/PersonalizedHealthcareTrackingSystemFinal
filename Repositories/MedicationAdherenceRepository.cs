@@ -20,7 +20,7 @@ public class MedicationAdherenceRepository : IMedicationAdherenceRepository
     {
         await _client.InitializeAsync();
     }
-    public async Task<IEnumerable<MedicationAdherenceModel>> GetAllAdherencesByPatientID(string PatientID)
+    public async Task<IEnumerable<MedicationAdherenceModel>> GetAllAdherencesByPatientIDAsync(string PatientID)
     {
         var response = await _client.From<MedicationAdherenceModel>()
                                     .Select("""
@@ -58,7 +58,7 @@ public class MedicationAdherenceRepository : IMedicationAdherenceRepository
         var medicationAdherences = tempMedicationAdherences!.Where(ma => ma.PrescriptionItem.Prescription.MedicalRecord.Appointment.PatientID == PatientID);
         return medicationAdherences == null ? [] : medicationAdherences;
     }
-    public async Task<IEnumerable<MedicationAdherenceModel>> GetPendingAdherencesByPatientID(string PatientID)
+    public async Task<IEnumerable<MedicationAdherenceModel>> GetPendingAdherencesByPatientIDAsync(string PatientID)
     {
         var response = await _client.From<MedicationAdherenceModel>()
                                     .Select("""
@@ -97,7 +97,7 @@ public class MedicationAdherenceRepository : IMedicationAdherenceRepository
         var medicationAdherences = tempMedicationAdherences!.Where(ma => ma.PrescriptionItem.Prescription.MedicalRecord.Appointment.PatientID == PatientID);
         return medicationAdherences == null ? [] : medicationAdherences;
     }
-    public async Task<IEnumerable<MedicationAdherenceModel>> GetMissedAdherencesByPatientID(string PatientID)
+    public async Task<IEnumerable<MedicationAdherenceModel>> GetMissedAdherencesByPatientIDAsync(string PatientID)
     {
         var response = await _client.From<MedicationAdherenceModel>()
                                     .Select("""
@@ -136,7 +136,7 @@ public class MedicationAdherenceRepository : IMedicationAdherenceRepository
         var medicationAdherences = tempMedicationAdherences!.Where(ma => ma.PrescriptionItem.Prescription.MedicalRecord.Appointment.PatientID == PatientID);
         return medicationAdherences == null ? [] : medicationAdherences;
     }
-    public async Task UpsertAdherence(MedicationAdherenceModel NewAdherence)
+    public async Task UpsertAdherenceAsync(MedicationAdherenceModel NewAdherence)
     {
         await _client.From<MedicationAdherenceModel>()
                      .Upsert(NewAdherence);

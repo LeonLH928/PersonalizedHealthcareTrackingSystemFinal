@@ -37,8 +37,18 @@ public class PrescriptionService : IPrescriptionService
     {
         return await _prescriptionRepository.GetAllPrescriptionsAsync();
     }
-    public async Task<IEnumerable<PrescriptionModel>> SearchByText(string SearchText)
+    public async Task<IEnumerable<PrescriptionModel>> SearchByTextAsync(string SearchText)
     {
-        return await _prescriptionRepository.SearchByText(SearchText);
+        return await _prescriptionRepository.SearchByTextAsync(SearchText);
+    }
+    public async Task<IEnumerable<PrescriptionModel>> GetAllPrescriptionsByPatientIDAsync(string PatientID)
+    {
+        return await _prescriptionRepository.GetAllPrescriptionsByPatientIDAsync(PatientID);
+    }
+    public async Task<PrescriptionModel?> GetLatestPrescriptionByPatientIDAsync(string PatientID)
+    {
+        var prescriptions = (await GetAllPrescriptionsByPatientIDAsync(PatientID))
+                            .OrderByDescending(p => p.PrescriptionDateTime);
+        return prescriptions.FirstOrDefault();
     }
 }

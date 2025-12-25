@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PersonalizedHealthcareTrackingSystemFinal.ViewModels.PatientViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,10 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Views.PatientView
     /// </summary>
     public partial class PatientMedicationSchedulePage : Page
     {
-        public PatientMedicationSchedulePage()
+        public PatientMedicationSchedulePage(PatientMedicationSchedulePageViewModel vm)
         {
             InitializeComponent();
+            DataContext = vm;
         }
     }
 }

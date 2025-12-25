@@ -144,7 +144,7 @@ public partial class DoctorWaitingListPageViewModel : ObservableObject
         {
             IEnumerable<AppointmentModel> query = [];
             if (!SearchText.IsNullOrEmpty())
-                query = await _appointmentService.SearchByText(SearchText);
+                query = await _appointmentService.SearchByTextAsync(SearchText);
 
             IEnumerable<AppointmentModel> result = [];
 
