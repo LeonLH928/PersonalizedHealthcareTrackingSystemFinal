@@ -128,7 +128,7 @@
                                              Foreground="White"/>
                             <TextBlock Text="Pharmacy Inventory"/>
                         </StackPanel>
-                    </ListBoxItem>  
+                    </ListBoxItem>
 
                 </ListBox>
 
@@ -137,32 +137,55 @@
                         BorderThickness="0,1,0,0"
                         BorderBrush="#3A4A58"
                         VerticalAlignment="Bottom"
-                        HorizontalAlignment="Center">
-                    <StackPanel
-                            Orientation="Horizontal"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Center"
-                            Margin="12,12,12,12">
-                        <Ellipse Width="30" Height="30"
-                                     Margin="0,0,5,0"
-                                     Stroke="White" StrokeThickness="1">
+                        HorizontalAlignment="Stretch">
+                    <Grid Margin="12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Ellipse Grid.Column="0"
+                                 Width="30" Height="30"
+                                 Stroke="White" StrokeThickness="1">
                             <Ellipse.Fill>
                                 <ImageBrush ImageSource="/Resources/Avatar/doctor.jpg"/>
                             </Ellipse.Fill>
                         </Ellipse>
 
-                        <StackPanel Orientation="Vertical" Margin="10,0,0,0" VerticalAlignment="Center">
+                        <StackPanel Grid.Column="1" 
+                                    Orientation="Vertical" 
+                                    VerticalAlignment="Center"
+                                    Margin="10,0,5,0">
+
                             <TextBlock Text="{Binding DoctorName}"
-                                           Foreground="White"
-                                           FontWeight="SemiBold"
-                                           FontSize="14"/>
+                                       Foreground="White"
+                                       FontWeight="SemiBold"
+                                       FontSize="14"
+                                       TextTrimming="CharacterEllipsis"/>
+
                             <TextBlock Text="{Binding DoctorEmail}"
-                                           Foreground="#BDC3C7"
-                                           FontSize="11"
-                                           TextTrimming="CharacterEllipsis"
-                                           Width="150"/>
+                                       Foreground="#BDC3C7"
+                                       FontSize="11"
+                                       TextTrimming="CharacterEllipsis"/>
                         </StackPanel>
-                    </StackPanel>
+
+                        <Button Grid.Column="2"
+                                Style="{StaticResource AdjustButton}"
+                                Background="Transparent" 
+                                BorderThickness="0" 
+                                Cursor="Hand"   
+                                VerticalAlignment="Center"
+                                Command="{Binding SignOutCommand}"
+                                CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}">
+
+                            <fa:ImageAwesome Icon="SignOut" 
+                                             Width="25" 
+                                             Height="25" 
+                                             Foreground="#E74C3C" 
+                                             VerticalAlignment="Center"/>
+                        </Button>
+                    </Grid>
                 </Border>
             </Grid>
         </Border>

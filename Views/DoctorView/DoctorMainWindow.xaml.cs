@@ -23,7 +23,7 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Views.DoctorView
     /// </summary>
     public partial class DoctorMainWindow : Window
     {
-        private readonly IServiceProvider _serviceProvider = null!;
+        private readonly IServiceProvider _serviceProvider;
         public DoctorMainWindow(IServiceProvider serviceProvider, DoctorMainWindowViewModel vm)
         {
             InitializeComponent();
