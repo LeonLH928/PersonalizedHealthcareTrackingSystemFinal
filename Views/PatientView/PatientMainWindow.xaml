@@ -26,7 +26,7 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 
-                <Image Source="/Resources/Logo/logo.png"                       
+                <Image Source="/Resources/Logo/icon.png"                       
                        HorizontalAlignment="Left" 
                        Height="100"
                        Width="100" Margin="59.5,0,0,0"/>
@@ -154,13 +154,13 @@
                                 Command="{Binding SignOutCommand}"
                                 CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}">
 
-                                <fa:ImageAwesome Icon="SignOut" 
+                            <fa:ImageAwesome Icon="SignOut" 
                                                  Width="25" 
                                                  Height="25" 
                                                  Foreground="#E74C3C" 
                                                  VerticalAlignment="Center"/>
                         </Button>
-                    </Grid>
+                    </StackPanel>
                 </Border>
             </Grid>
         </Border>

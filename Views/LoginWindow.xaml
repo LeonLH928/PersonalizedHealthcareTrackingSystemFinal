@@ -24,7 +24,7 @@
                         HorizontalAlignment="Center" 
                         Width="450">
 
-                <Image Source="/Resources/Logo/logo.png" Width="100" Height="100" Margin="0,0,0,20"/>
+                <Image Source="/Resources/Logo/icon.png" Width="100" Height="100" Margin="0,0,0,20"/>
 
                 <TextBlock Text="PERSONALIZED HEALTHCARE TRACKING SYSTEM" 
                            Foreground="White" FontSize="18" FontWeight="Bold" 

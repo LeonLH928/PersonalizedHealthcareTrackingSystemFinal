@@ -40,7 +40,7 @@
     <None Remove="Resources\Fonts\Poppins-ThinItalic.ttf" />
     <None Remove="Resources\Logo\icon.png" />
     <None Remove="Resources\Logo\logo.ico" />
-    <None Remove="Resources\Logo\logo.png" />
+    <None Remove="Resources\Logo\icon.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -87,7 +87,7 @@
     <Resource Include="Resources\Logo\logo.ico">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Resources\Logo\logo.png">
+    <Resource Include="Resources\Logo\icon.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>

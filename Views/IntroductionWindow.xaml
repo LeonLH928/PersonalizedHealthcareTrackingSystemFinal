@@ -26,7 +26,7 @@
                        HorizontalAlignment="Center" Height="500" Width="780">
 
 
-                <Image Source="/Resources/Logo/logo.png"
+                <Image Source="/Resources/Logo/icon.png"
                        Width="150"
                        Height="150"
                        Margin="0,0,0,30"/>
