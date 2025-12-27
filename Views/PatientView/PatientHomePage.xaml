@@ -149,7 +149,7 @@
                                         </MultiBinding>
                                     </TextBlock.Text>
                                 </TextBlock>
-                                    <TextBlock Text="Chuyên khoa Tim mạch • Tái khám định kỳ" Style="{StaticResource CustomBaseTextBlockStyle}" Foreground="White" Opacity="0.8"/>
+                                <TextBlock Text="{Binding Doctor.Specialization}" Style="{StaticResource CustomBaseTextBlockStyle}" Foreground="White" Opacity="0.8"/>
                                 </StackPanel>
                             </StackPanel>
                         </Border>
@@ -166,6 +166,7 @@
                         <Grid Margin="0,0,0,20">
                             <TextBlock Text="💊 Today's medication takes" FontSize="22" FontWeight="SemiBold" Foreground="#0f172a"/>
                             <Button Content="See all" Style="{StaticResource OutlineButtonStyle}"
+                                    Command="{Binding SeeAllButtonCommand}"
                                     HorizontalAlignment="Right"/>
                         </Grid>
                         <ScrollViewer HorizontalScrollBarVisibility="Disabled"
@@ -417,27 +418,30 @@
 
                 <Border Style="{StaticResource CardStyle}">
                     <StackPanel>
-                        <TextBlock Text="📋 Lịch sử khám gần đây" FontSize="18" FontWeight="SemiBold" Foreground="#0f172a" Margin="0,0,0,20"/>
+                        <TextBlock Text="📋 Recent examinations" FontSize="18" FontWeight="SemiBold" Foreground="#0f172a" Margin="0,0,0,20"/>
 
-                        <Grid Margin="0,0,0,16">
-                            <StackPanel>
-                                <TextBlock Text="20 Thg 10, 2023" FontWeight="SemiBold" FontSize="16"/>
-                                <TextBlock Text="Tái khám Tim mạch" Foreground="{StaticResource SecondaryText}" Margin="0,4,0,0"/>
-                            </StackPanel>
-                            <TextBlock Text="→" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="{StaticResource BorderColor}" FontSize="18"/>
-                            <Rectangle VerticalAlignment="Bottom" Height="1" Fill="{StaticResource BorderColor}" Margin="0,16,0,-16"/>
-                        </Grid>
+                        <ItemsControl ItemsSource="{Binding RecentRecords}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Margin="0,16,0,16">
+                                        <StackPanel>
+                                            <TextBlock FontWeight="SemiBold" FontSize="16">
+                                                <TextBlock.Text>
+                                                    <Binding Path="Appointment.AppointmentDateTime" StringFormat="{}{0:dd, MMM yyyy}"/>
+                                                </TextBlock.Text>
+                                            </TextBlock>
+                                            <TextBlock Text="{Binding Appointment.ChiefComplaint}" Foreground="{StaticResource SecondaryText}" Margin="0,4,0,0"/>
+                                        </StackPanel>
+                                        <Rectangle VerticalAlignment="Bottom" Height="1" Fill="{StaticResource BorderColor}" Margin="0,16,0,-16"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
 
-                        <Grid Margin="0,16,0,16">
-                            <StackPanel>
-                                <TextBlock Text="15 Thg 08, 2023" FontWeight="SemiBold" FontSize="16"/>
-                                <TextBlock Text="Khám tổng quát" Foreground="{StaticResource SecondaryText}" Margin="0,4,0,0"/>
-                            </StackPanel>
-                            <TextBlock Text="→" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="{StaticResource BorderColor}" FontSize="18"/>
-                            <Rectangle VerticalAlignment="Bottom" Height="1" Fill="{StaticResource BorderColor}" Margin="0,16,0,-16"/>
-                        </Grid>
-
-                        <Button Content="Xem toàn bộ hồ sơ" Background="Transparent" BorderBrush="{StaticResource BorderColor}" BorderThickness="1" Foreground="{StaticResource SecondaryText}" Margin="0,16,0,0" Padding="10">
+                        <Button Content="See all records" 
+                                Background="Transparent" BorderBrush="{StaticResource BorderColor}" BorderThickness="1" Foreground="{StaticResource SecondaryText}" Margin="0,16,0,0" Padding="10"
+                                FontSize="18"
+                                Command="{Binding SeeAllRecordsButtonCommand}">
                             <Button.Resources>
                                 <Style TargetType="Border">
                                     <Setter Property="CornerRadius" Value="8"/>

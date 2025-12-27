@@ -308,5 +308,41 @@ public class PrescriptionRepository : IPrescriptionRepository
 
         return prescriptions;
     }
+    public async Task<PrescriptionModel> GetPrescriptionByMedicalRecordIDAsync(string RecordID)
+    {
+        var response = await _client.From<PrescriptionModel>()
+                                    .Select("""
+                                                *,
+                                                MR:MedicalRecords(
+                                                    *,
+                                                    Appointment:Appointments(
+                                                        *,
+                                                        Patient:Patients(
+                                                            *,
+                                                            User:Users(*)
+                                                        ),
+                                                        Doctor:Doctors(
+                                                            *,
+                                                            User:Users(*)
+                                                        )
+                                                    )
+                                                ),
+                                                P:Pharmacists(
+                                                    *,
+                                                    User:Users(*)
+                                                )
+                                             """)
+                                    .Where(p => p.RecordID == RecordID)
+                                    .Get();
 
+        var content = response.Content!;
+        content = content.Replace("\"MedicalRecords\"", "\"temp\"")
+                         .Replace("\"MR\"", "\"MedicalRecord\"")
+                         .Replace("\"Pharmacists\"", "\"temp\"")
+                         .Replace("\"P\"", "\"Pharmacist\"");
+
+        var prescriptions = JsonSerializer.Deserialize<List<PrescriptionModel>>(content, options);
+
+        return (prescriptions!.FirstOrDefault())!;
+    }
 }

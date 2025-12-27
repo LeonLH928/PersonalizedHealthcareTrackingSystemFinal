@@ -204,6 +204,7 @@ public partial class PatientMedicationSchedulePageViewModel : ObservableObject
         }
 
     }
+
     [RelayCommand]
     public async Task TakeMedicineButton(MedicationAdherenceModel adherence)
     {

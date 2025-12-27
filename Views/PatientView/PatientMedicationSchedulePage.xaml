@@ -72,7 +72,8 @@
                                 </StackPanel>
                             </Grid>
 
-                            <TextBlock Text="Take your medicine!" FontWeight="SemiBold" Foreground="{StaticResource SuccessColor}" HorizontalAlignment="Center"
+                            <TextBlock Text="Remember to take your medicine!" FontWeight="SemiBold" Foreground="{StaticResource SuccessColor}" HorizontalAlignment="Center"
+                                       TextAlignment="Center"
                                        Style="{StaticResource CustomBaseTextBlockStyle}"/>
                             <TextBlock Text="{Binding NextDose, StringFormat={}Next dose at: {0:HH:mm}}" Foreground="{StaticResource TextSecondary}" HorizontalAlignment="Center" Margin="0,4,0,0"
                                        Style="{StaticResource SecondaryTextTextBlockStyle}"/>
@@ -436,7 +437,7 @@
                                                         <TextBlock Text="💊" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
                                                     </Border>
                                                     <StackPanel VerticalAlignment="Center">
-                                                        <TextBlock Text="{Binding PrescriptionItem.Medication.Name}" FontWeight="Bold" FontSize="16"/>
+                                                        <TextBlock Text="{Binding Medication.Name}" FontWeight="Bold" FontSize="16"/>
                                                         <StackPanel Orientation="Horizontal" Margin="0,4,0,0">
                                                             <Border Background="{StaticResource BgLight}" CornerRadius="10" Padding="8,2" HorizontalAlignment="Left" Margin="0,4,0,0">
                                                                 <TextBlock 
@@ -444,9 +445,9 @@
                                                                     Foreground="{StaticResource TextSecondary}">
                                                                     <TextBlock.Text>
                                                                         <MultiBinding StringFormat="{}Total of {0} {1}s • {2}">
-                                                                            <Binding Path="PrescriptionItem.Quantity"/>
-                                                                            <Binding Path="PrescriptionItem.Medication.Form"/>
-                                                                            <Binding Path="PrescriptionItem.Instruction"/>
+                                                                            <Binding Path="Quantity"/>
+                                                                            <Binding Path="Medication.Form"/>
+                                                                            <Binding Path="Instruction"/>
                                                                         </MultiBinding>
                                                                     </TextBlock.Text>
                                                                 </TextBlock>

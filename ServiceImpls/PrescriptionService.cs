@@ -51,4 +51,8 @@ public class PrescriptionService : IPrescriptionService
                             .OrderByDescending(p => p.PrescriptionDateTime);
         return prescriptions.FirstOrDefault();
     }
+    public async Task<PrescriptionModel> GetPrescriptionByMedicalRecordIDAsync(string RecordID)
+    {
+        return await _prescriptionRepository.GetPrescriptionByMedicalRecordIDAsync(RecordID);
+    }
 }

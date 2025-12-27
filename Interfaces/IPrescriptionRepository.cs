@@ -11,4 +11,5 @@ public interface IPrescriptionRepository
     Task<IEnumerable<PrescriptionModel>> GetAllPrescriptionsAsync();
     Task<IEnumerable<PrescriptionModel>> GetAllPrescriptionsByPatientIDAsync(string PatientID);
     Task<IEnumerable<PrescriptionModel>> SearchByTextAsync(string SearchText);
+    Task<PrescriptionModel> GetPrescriptionByMedicalRecordIDAsync(string RecordID);
 }

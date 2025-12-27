@@ -18,4 +18,8 @@ public class MedicalRecordService : IMedicalRecordService
     {
         return await _medicalRecordRepository.GetAllMedicalRecordsByPatientIDAsync(PatientID);
     }
+    public async Task<IEnumerable<MedicalRecordModel>> SearchByTextAsync(string SearchText)
+    {
+        return await _medicalRecordRepository.SearchByTextAsync(SearchText);
+    }
 }

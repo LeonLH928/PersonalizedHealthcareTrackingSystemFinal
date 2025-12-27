@@ -6,5 +6,6 @@ public interface IMedicalRecordRepository
 {
     Task AddMedicalRecordAsync(MedicalRecordModel NewRecord);
     Task<IEnumerable<MedicalRecordModel>> GetAllMedicalRecordsByPatientIDAsync(string PatientID);
+    Task<IEnumerable<MedicalRecordModel>> SearchByTextAsync(string SearchText);
     Task<MedicalRecordModel?> GetLatestMedicalRecordByPatientIDAsync(string PatientID);
 }
