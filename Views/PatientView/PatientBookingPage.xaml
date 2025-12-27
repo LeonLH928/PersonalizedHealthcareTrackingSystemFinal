@@ -15,7 +15,7 @@
         <converters:LocalToUtcDisplayConverter x:Key="LocalToUtcDisplayConverter"/>
         <converters:NullDateTimeToCurrentDate x:Key="NullDateTimeToCurrentDate"/>
         <converters:IsCurrentNotNullToVisibility x:Key="IsCurrentNotNullToVisibility"/>
-        <converters:IsCurrentSmallerThanCurrentToVisibility x:Key="IsCurrentSmallerThanCurrentToVisibility"/>
+        <converters:IsCurrentSmallerEqualThanCurrentToVisibility x:Key="IsCurrentSmallerEqualThanCurrentToVisibility"/>
         <converters:IsCurrentNullToVisibility x:Key="IsCurrentNullToVisibility"/>
         <converters:IsCurrentSundayToVisibility x:Key="IsCurrentSundayToVisibility"/>
         <converters:IsCurrentNotSundayAndSmallerThanCurrentToVisibility x:Key="IsCurrentNotSundayAndSmallerThanCurrentToVisibility"/>
@@ -99,16 +99,6 @@
                             Style="{StaticResource ReloadButtonStyle}"
                             VerticalAlignment="Center"/>
                     </Grid>
-
-
-                    <StackPanel>
-                        <TextBlock Text="Specialty" Style="{StaticResource FormLabel}"/>
-                        <ComboBox Style="{StaticResource FormComboBox}">
-                            <ComboBoxItem Content="All specialties"/>
-                            <ComboBoxItem Content="Cardiology" IsSelected="True"/>
-                            <ComboBoxItem Content="Neurology"/>
-                        </ComboBox>
-                    </StackPanel>
 
                 </StackPanel>
 
@@ -575,7 +565,7 @@
                         
                         <StackPanel
                                 Visibility="{Binding SelectedDate,
-                                Converter={StaticResource IsCurrentSmallerThanCurrentToVisibility}}">
+                                Converter={StaticResource IsCurrentSmallerEqualThanCurrentToVisibility}}">
                             <TextBlock Text="The appointment's date must be greater than the current date."
                                        Style="{StaticResource CustomBaseTextBlockStyle}"
                                        FontWeight="SemiBold"

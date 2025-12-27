@@ -43,6 +43,10 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Views.PatientView
                 PatientMainContent.Navigate(page);
                 if (m.Value == typeof(PatientBookingPage))
                     Sidebar.SelectedItem = Sidebar.Items[1];
+                else if (m.Value == typeof(PatientMedicationSchedulePage))
+                    Sidebar.SelectedItem = Sidebar.Items[2];
+                else if (m.Value == typeof(PatientMedicalRecordsPage))
+                    Sidebar.SelectedItem = Sidebar.Items[3];
             });
         }
 
@@ -66,11 +70,6 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Views.PatientView
                 case "Medical Records":
                     var MedicalRecordsPage = _serviceProvider.GetRequiredService<PatientMedicalRecordsPage>();
                     PatientMainContent.Navigate(MedicalRecordsPage);
-                    break;
-
-                case "Settings":
-                    var SettingPage = _serviceProvider.GetRequiredService<PatientSetting>();
-                    PatientMainContent.Navigate(SettingPage);
                     break;
             }
         }

@@ -78,7 +78,6 @@ public class DoctorRepository : IDoctorRepository
          || d.User.LastName.ToLower().Contains(SearchText.ToLower().Trim())
             );
 
-        Debug.Write($"\n{doctors.Count()}\n");
         return doctors;
     }
 }

@@ -25,6 +25,10 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Views.PatientView
         {
             InitializeComponent();
             DataContext = vm;
+            Loaded += async (_, _) =>
+            {
+                await ((PatientHomePageViewModel)DataContext).InitializeAsync();
+            };
         }
     }
 }

@@ -15,10 +15,13 @@
         </Grid.ColumnDefinitions>
 
         <Border 
-            Style="{StaticResource SidebarBorderStyle}">
+            Style="{StaticResource SidebarBorderStyle}"
+            Background="#f1f5f9"
+            BorderBrush="{StaticResource LightBorder}"
+            BorderThickness="0,0,1,0">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="110"/>
+                    <RowDefinition Height="150"/>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
@@ -63,9 +66,11 @@
                                 Height="20" 
                                 Margin="0,0,10,0" 
                                 VerticalAlignment="Center" 
-                                Foreground="White"/>
+                                Foreground="#64748b"/>
 
-                            <TextBlock Text="Home"/>
+                            <TextBlock Text="Home"
+                                       Foreground="#64748b"
+                                       FontSize="16"/>
                         </StackPanel>
                     </ListBoxItem>
 
@@ -77,38 +82,37 @@
                                 Height="20" 
                                 Margin="0,0,10,0" 
                                 VerticalAlignment="Center" 
-                                Foreground="White"/>
-                            <TextBlock Text="Booking"/>
+                                Foreground="#64748b"/>
+                            <TextBlock Text="Booking"
+                                       Foreground="#64748b"
+                                       FontSize="16"/>
                         </StackPanel>
                     </ListBoxItem>
 
                     <ListBoxItem Tag="Medication Schedule">
                         <StackPanel Orientation="Horizontal">
-                            <fa:ImageAwesome Icon="Calendar" Width="20" Height="20" Margin="0,0,10,0" VerticalAlignment="Center" Foreground="White"/>
-                            <TextBlock Text="Medication Schedule"/>
+                            <fa:ImageAwesome Icon="Calendar" Width="20" Height="20" Margin="0,0,10,0" VerticalAlignment="Center" Foreground="#64748b"/>
+                            <TextBlock Text="Medication Schedule"
+                                       Foreground="#64748b"
+                                       FontSize="16"/>
                         </StackPanel>
                     </ListBoxItem>
 
                     <ListBoxItem Tag="Medical Records">
                         <StackPanel Orientation="Horizontal">
-                            <fa:ImageAwesome Icon="Clipboard" Width="20" Height="20" Margin="0,0,10,0" VerticalAlignment="Center" Foreground="White"/>
-                            <TextBlock Text="Medical Records"/>
-                        </StackPanel>
-                    </ListBoxItem>
-
-                    <ListBoxItem Tag="Settings">
-                        <StackPanel Orientation="Horizontal">
-                            <fa:ImageAwesome Icon="Cog" Width="20" Height="20" Margin="0,0,10,0" VerticalAlignment="Center" Foreground="White"/>
-                            <TextBlock Text="Settings"/>
+                            <fa:ImageAwesome Icon="Clipboard" Width="20" Height="20" Margin="0,0,10,0" VerticalAlignment="Center" Foreground="#64748b"/>
+                            <TextBlock Text="Medical Records"
+                                       Foreground="#64748b"
+                                       FontSize="16"/>
                         </StackPanel>
                     </ListBoxItem>
 
                 </ListBox>
 
                 <Border Grid.Row="2"
-                        Background="#1A252F"
+                        Background="#f1f5f9"
                         BorderThickness="0,1,0,0"
-                        BorderBrush="#3A4A58"
+                        BorderBrush="#64748b"
                         VerticalAlignment="Bottom"
                         HorizontalAlignment="Center">
                     <StackPanel
@@ -118,7 +122,7 @@
                             Margin="12,12,12,12">
                         <Ellipse Width="30" Height="30"
                                  Margin="0,0,5,0"
-                                 Stroke="White" StrokeThickness="1">
+                                 Stroke="#1A252F" StrokeThickness="1">
                             <Ellipse.Fill>
                                 <ImageBrush ImageSource="/Resources/Avatar/Patient.jpg"/>
                             </Ellipse.Fill>
@@ -126,11 +130,11 @@
 
                         <StackPanel Orientation="Vertical" Margin="10,0,0,0" VerticalAlignment="Center">
                             <TextBlock Text="{Binding PatientName}"
-                                       Foreground="White"
+                                       Foreground="#64748b"
                                        FontWeight="SemiBold"
                                        FontSize="14"/>
                             <TextBlock Text="{Binding PatientEmail}"
-                                       Foreground="#BDC3C7"
+                                       Foreground="#64748b"
                                        FontSize="11"
                                        TextTrimming="CharacterEllipsis"
                                        Width="150"/>

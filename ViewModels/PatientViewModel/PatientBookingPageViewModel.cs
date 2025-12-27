@@ -183,7 +183,7 @@ public partial class PatientBookingPageViewModel : ObservableObject
             MorningSlots.Clear();
             AfternoonSlots.Clear();
 
-            DateTime targetDate = SelectedDate ?? DateTime.Now;
+            DateTime targetDate = SelectedDate ?? DateTime.UtcNow;
 
             var (schedule, bookedAppointments) = await _doctorScheduleService
                     .GetScheduleAndAppointmentsAsync(SelectedDoctor.Doctor.DoctorID, targetDate);
@@ -197,9 +197,9 @@ public partial class PatientBookingPageViewModel : ObservableObject
                 bool isWorking = TimeOnly.FromDateTime(schedule.StartTime).AddHours(-7) <= slotStart
                               && TimeOnly.FromDateTime(schedule.EndTime).AddHours(-7) >= slotEnd;
 
-                bool isBooked = bookedAppointments.Any(appt =>
-                    TimeOnly.FromDateTime(appt.AppointmentDateTime).AddHours(-7) < slotEnd &&
-                    TimeOnly.FromDateTime(appt.AppointmentDateTime).AddHours(-7) > slotStart);
+                bool isBooked = bookedAppointments.Any(a =>
+                    TimeOnly.FromDateTime(a.AppointmentDateTime) < slotEnd &&
+                    TimeOnly.FromDateTime(a.AppointmentDateTime) >= slotStart);
 
                 return isWorking && !isBooked;
             }
@@ -252,7 +252,7 @@ public partial class PatientBookingPageViewModel : ObservableObject
         await UpdateSlots();
     }
     [RelayCommand]
-    public void SelectTimeButton(Wrappers.TimeSlotViewModel TimeSlot)
+    public async Task SelectTimeButton(Wrappers.TimeSlotViewModel TimeSlot)
     {
         if (Application.Current.Windows.OfType<PatientBookingConfirmationWindow>().FirstOrDefault() == null)
         {
@@ -264,7 +264,8 @@ public partial class PatientBookingPageViewModel : ObservableObject
                     $"{SelectedDoctor.Doctor.User.FirstName} {SelectedDoctor.Doctor.User.LastName}",
                     SelectedDoctor.Doctor.DoctorID,
                     CurrentUser.PatientID,
-                    targetDate
+                    targetDate,
+                    this
                 )));
         }
     }

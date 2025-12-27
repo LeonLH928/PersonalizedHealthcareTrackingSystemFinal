@@ -59,7 +59,7 @@ public class AppointmentRepository : IAppointmentRepository
                                             P:Patients(*, User:Users(*)),
                                             D:Doctors(*, User:Users(*))
                                             """)
-                                    .Where(a => a.AppointmentDateTime == datetime && a.DoctorID == DoctorID)
+                                    .Where(a => a.DoctorID == DoctorID)
                                     .Get();
 
         var content = response.Content!;
@@ -69,6 +69,8 @@ public class AppointmentRepository : IAppointmentRepository
                          .Replace("\"D\"", "\"Doctor\"");
 
         var appointments = JsonSerializer.Deserialize<List<AppointmentModel>>(content, options);
+
+        appointments = appointments!.Where(a => a.AppointmentDateTime.Date == datetime.Date).ToList();
 
         return appointments == null ? [] : appointments;
     }

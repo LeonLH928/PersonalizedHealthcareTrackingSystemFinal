@@ -107,36 +107,47 @@ public class BloodPressureToSafetyConverter : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        if (value is not string s)
-            return value;
-        var bp = s.Split("/");
-        var Systolic = double.Parse(bp[0]);
-        var Diastolic = double.Parse(bp[1]);
-        if (Systolic >= 90 || Systolic < 120 &&
-            Diastolic >= 60 || Diastolic < 80)
+        if (value is not string s || string.IsNullOrWhiteSpace(s))
             return Safety.Normal;
-        else if (Systolic >= 120 || Systolic < 140 &&
-                 Diastolic >= 80 || Diastolic < 90)
+
+        var bp = s.Split("/");
+
+        if (bp.Length != 2)
+            return Safety.Normal;
+
+        bool sysParsed = double.TryParse(bp[0], out double systolic);
+        bool diaParsed = double.TryParse(bp[1], out double diastolic);
+
+        if (!sysParsed || !diaParsed)
+            return Safety.Normal;
+        
+        if (systolic >= 140 || diastolic >= 90)
+            return Safety.Dangerous;
+        else if (systolic >= 120 || diastolic >= 80)
             return Safety.Concerned;
-        return Safety.Dangerous;
-    }
+
+        return Safety.Normal;
+    }   
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
     {
         throw new NotImplementedException();
     }
 }
+
 public class PulseToSafetyConverter : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        if (value is not double pulse)
-            return value;
-        return pulse switch
+        if (double.TryParse(value?.ToString(), out double pulse))
         {
-            >= 60 and <= 100 => Safety.Normal,
-            _ => Safety.Dangerous
-        };
+            return pulse switch
+            {
+                >= 60 and <= 100 => Safety.Normal,
+                _ => Safety.Dangerous
+            };
+        }
+        return Safety.Normal;
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -144,18 +155,21 @@ public class PulseToSafetyConverter : IValueConverter
         throw new NotImplementedException();
     }
 }
+
 public class SpO2ToSafetyConverter : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        if (value is not double spo2)
-            return value;
-        return spo2 switch
+        if (double.TryParse(value?.ToString(), out double spo2))
         {
-            >= 95 and <= 100 => Safety.Normal,
-            >= 90 and <= 94 => Safety.Concerned,
-            _ => Safety.Dangerous
-        };
+            return spo2 switch
+            {
+                >= 95 and <= 100 => Safety.Normal,
+                >= 90 and <= 95 => Safety.Concerned,
+                _ => Safety.Dangerous
+            };
+        }
+        return Safety.Normal;
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -163,18 +177,21 @@ public class SpO2ToSafetyConverter : IValueConverter
         throw new NotImplementedException();
     }
 }
+
 public class TemperatureToSafetyConverter : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        if (value is not double temp)
-            return value;
-        return temp switch
+        if (double.TryParse(value?.ToString(), out double temp))
         {
-            >= 36.1 and <= 37.2 => Safety.Normal,
-            >= 35 or <= 38 => Safety.Concerned,
-            _ => Safety.Dangerous
-        };
+            return temp switch
+            {
+                >= 36.1 and <= 37.2 => Safety.Normal,
+                >= 35.0 and <= 38.0 => Safety.Concerned,
+                _ => Safety.Dangerous
+            };
+        }
+        return Safety.Normal;
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -182,17 +199,20 @@ public class TemperatureToSafetyConverter : IValueConverter
         throw new NotImplementedException();
     }
 }
+
 public class RespiratoryRateToSafetyConverter : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        if (value is not double temp)
-            return value;
-        return temp switch
+        if (double.TryParse(value?.ToString(), out double rate))
         {
-            >= 12 and <= 16 => Safety.Normal,
-            _ => Safety.Dangerous
-        };
+            return rate switch
+            {
+                >= 12 and <= 16 => Safety.Normal,
+                _ => Safety.Dangerous
+            };
+        }
+        return Safety.Normal;
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -413,12 +433,12 @@ public class IsCurrentNotNullToVisibility : IValueConverter
         throw new NotImplementedException();
     }
 }
-public class IsCurrentSmallerThanCurrentToVisibility : IValueConverter
+public class IsCurrentSmallerEqualThanCurrentToVisibility : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
         var dt = value as DateTime?;
-        if (dt != null && dt.Value < DateTime.Now)
+        if (dt != null && dt.Value <= DateTime.Now)
             return Visibility.Visible;
         return Visibility.Collapsed;
     }

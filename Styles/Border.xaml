@@ -25,7 +25,7 @@
                         <Storyboard>
                             <DoubleAnimation 
                                 Storyboard.TargetProperty="(Border.Width)"
-                                To="220" Duration="0:0:0.3"/>
+                                To="250" Duration="0:0:0.3"/>
                         </Storyboard>
                     </BeginStoryboard>
                 </Trigger.EnterActions>

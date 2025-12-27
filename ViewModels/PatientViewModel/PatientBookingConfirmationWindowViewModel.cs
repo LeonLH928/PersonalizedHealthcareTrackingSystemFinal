@@ -7,6 +7,7 @@ using PersonalizedHealthcareTrackingSystemFinal.Services;
 using PersonalizedHealthcareTrackingSystemFinal.SupabaseModels;
 using PersonalizedHealthcareTrackingSystemFinal.Views.DoctorView;
 using PersonalizedHealthcareTrackingSystemFinal.Views.PatientView;
+using System.Diagnostics;
 using System.Windows;
 
 namespace PersonalizedHealthcareTrackingSystemFinal.ViewModels.PatientViewModel;
@@ -19,6 +20,7 @@ public partial class PatientBookingConfirmationWindowViewModel : ObservableObjec
     private string patientIDMessage = "";
     private DateTime selectedDateMessage = DateTime.Now;
     private TimeOnly selectedSlotMessage;
+    private PatientBookingPageViewModel patientBookingPageViewModel = null!;
     public PatientBookingConfirmationWindowViewModel(IAppointmentService appointmentService)
     {
         _appointmentService = appointmentService;
@@ -58,7 +60,7 @@ public partial class PatientBookingConfirmationWindowViewModel : ObservableObjec
     }
     public void Receive(ConfirmationBookingMessage message)
     {
-        (selectedSlotMessage, doctorFullnameMessage, selectedDoctorIDMessage, patientIDMessage, selectedDateMessage) = message.Value;
+        (selectedSlotMessage, doctorFullnameMessage, selectedDoctorIDMessage, patientIDMessage, selectedDateMessage, patientBookingPageViewModel) = message.Value;
         _ = LoadDataAsync();
     }
     [RelayCommand]
@@ -69,6 +71,7 @@ public partial class PatientBookingConfirmationWindowViewModel : ObservableObjec
             if (ChiefComplaint.IsNullOrEmpty())
             {
                 MessageBox.Show($"Please provide your reason!", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
             }
             DateTime TargetDateTime = new(DateOnly.FromDateTime(SelectedDate), selectedSlotMessage);
 
@@ -95,6 +98,7 @@ public partial class PatientBookingConfirmationWindowViewModel : ObservableObjec
                 MessageBoxImage.Information
             );
 
+            await patientBookingPageViewModel.UpdateSlots();
             CloseWindowButton();
         }
         catch (Exception e)

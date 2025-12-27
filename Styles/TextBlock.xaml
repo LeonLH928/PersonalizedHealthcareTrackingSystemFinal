@@ -35,13 +35,114 @@
     <Style x:Key="BMIStatusTextBlockStyle" TargetType="TextBlock" BasedOn="{StaticResource CustomBaseTextBlockStyle}">
         <Setter Property="Foreground" Value="{StaticResource MediumCompletedStatusBorder}"/>
         <Style.Triggers>
-            <DataTrigger Binding="{Binding BMIStatus}" Value="Overweight">
+            <DataTrigger Binding="{Binding Path=Text, 
+                                   RelativeSource={RelativeSource Self}}"
+                         Value="{x:Static models:StatusBMI.Overweight}">
                 <Setter Property="Foreground" Value="{StaticResource UrgentTagTextBlock}"/>
             </DataTrigger>
-            <DataTrigger Binding="{Binding BMIStatus}" Value="Underweight">
+            <DataTrigger Binding="{Binding Path=Text, 
+                                   RelativeSource={RelativeSource Self}}"
+                         Value="{x:Static models:StatusBMI.Underweight}">
                 <Setter Property="Foreground" Value="{StaticResource HappeningStatusBorder}"/>
             </DataTrigger>
-            <DataTrigger Binding="{Binding BMIStatus}" Value="Obese">
+            <DataTrigger Binding="{Binding Path=Text, 
+                                   RelativeSource={RelativeSource Self}}"
+                         Value="{x:Static models:StatusBMI.Obese}">
+                <Setter Property="Foreground" Value="{StaticResource StatTagTextBlock}"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+    
+    <!-- Blood pressure Text Block Style -->
+    <Style x:Key="BloodPressureTextBlockStyle" TargetType="TextBlock" BasedOn="{StaticResource CustomBaseTextBlockStyle}">
+        <Setter Property="Foreground" Value="{StaticResource DarkText}"/>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding Path=Text, 
+                                   RelativeSource={RelativeSource Self}, 
+                                   Converter={StaticResource BloodPressureToSafetyConverter}}"
+                         Value="{x:Static converters:Safety.Concerned}">
+                <Setter Property="Foreground" Value="{StaticResource UrgentTagTextBlock}"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Path=Text, 
+                                   RelativeSource={RelativeSource Self}, 
+                                   Converter={StaticResource BloodPressureToSafetyConverter}}"
+                         Value="{x:Static converters:Safety.Dangerous}">
+                <Setter Property="Foreground" Value="{StaticResource StatTagTextBlock}"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+    
+    <!-- Pulse Text Block Style -->
+    <Style x:Key="PulseTextBlockStyle" TargetType="TextBlock" BasedOn="{StaticResource CustomBaseTextBlockStyle}">
+        <Setter Property="Foreground" Value="{StaticResource DarkText}"/>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding Path=Text, 
+                                   RelativeSource={RelativeSource Self}, 
+                                   Converter={StaticResource PulseToSafetyConverter}}"
+                         Value="{x:Static converters:Safety.Concerned}">
+                <Setter Property="Foreground" Value="{StaticResource UrgentTagTextBlock}"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Path=Text, 
+                                   RelativeSource={RelativeSource Self}, 
+                                   Converter={StaticResource PulseToSafetyConverter}}"
+                         Value="{x:Static converters:Safety.Dangerous}">
+                <Setter Property="Foreground" Value="{StaticResource StatTagTextBlock}"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+    
+    <!-- SpO2 Text Block Style -->
+    <Style x:Key="SpO2TextBlockStyle" TargetType="TextBlock" BasedOn="{StaticResource CustomBaseTextBlockStyle}">
+        <Setter Property="Foreground" Value="{StaticResource DarkText}"/>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding Path=Text, 
+                                   RelativeSource={RelativeSource Self}, 
+                                   Converter={StaticResource SpO2ToSafetyConverter}}"
+                         Value="{x:Static converters:Safety.Concerned}">
+                <Setter Property="Foreground" Value="{StaticResource UrgentTagTextBlock}"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Path=Text, 
+                                   RelativeSource={RelativeSource Self}, 
+                                   Converter={StaticResource SpO2ToSafetyConverter}}"
+                         Value="{x:Static converters:Safety.Dangerous}">
+                <Setter Property="Foreground" Value="{StaticResource StatTagTextBlock}"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- Temperature Text Block Style -->
+    <Style x:Key="TemperatureTextBlockStyle" TargetType="TextBlock" BasedOn="{StaticResource CustomBaseTextBlockStyle}">
+        <Setter Property="Foreground" Value="{StaticResource DarkText}"/>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding Path=Text, 
+                                   RelativeSource={RelativeSource Self}, 
+                                   Converter={StaticResource TemperatureToSafetyConverter}}"
+                         Value="{x:Static converters:Safety.Concerned}">
+                <Setter Property="Foreground" Value="{StaticResource UrgentTagTextBlock}"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Path=Text, 
+                                   RelativeSource={RelativeSource Self}, 
+                                   Converter={StaticResource TemperatureToSafetyConverter}}"
+                         Value="{x:Static converters:Safety.Dangerous}">
+                <Setter Property="Foreground" Value="{StaticResource StatTagTextBlock}"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+    
+    <!-- Repiratory Rate Text Block Style -->
+    <Style x:Key="RespiratoryRateTextBlockStyle" TargetType="TextBlock" BasedOn="{StaticResource CustomBaseTextBlockStyle}">
+        <Setter Property="Foreground" Value="{StaticResource DarkText}"/>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding Path=Text, 
+                                   RelativeSource={RelativeSource Self}, 
+                                   Converter={StaticResource RespiratoryRateToSafetyConverter}}"
+                         Value="{x:Static converters:Safety.Concerned}">
+                <Setter Property="Foreground" Value="{StaticResource UrgentTagTextBlock}"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Path=Text, 
+                                   RelativeSource={RelativeSource Self}, 
+                                   Converter={StaticResource RespiratoryRateToSafetyConverter}}"
+                         Value="{x:Static converters:Safety.Dangerous}">
                 <Setter Property="Foreground" Value="{StaticResource StatTagTextBlock}"/>
             </DataTrigger>
         </Style.Triggers>
@@ -109,28 +210,6 @@
         <Setter Property="FontWeight" Value="SemiBold"/>
         <Setter Property="Foreground" Value="{StaticResource DarkText}"/>
         <Setter Property="Margin" Value="0,0,0,16"/>
-    </Style>
-
-    <!-- Blood Pressure Safety Text Block Style-->
-    <Style x:Key="BloodPressureSafetyTextBlockStyle" TargetType="TextBlock" BasedOn="{StaticResource CustomBaseTextBlockStyle}">
-        <Setter Property="FontSize" Value="20"/>
-        <Style.Triggers>
-            <DataTrigger Binding="{Binding SelectedClinicalExamination.BloodPressure,
-                                           Converter={StaticResource BloodPressureToSafetyConverter}}" 
-                         Value="{x:Static converters:Safety.Normal}">
-                <Setter Property="Foreground" Value="{StaticResource MediumCompletedStatusBorder}"/>
-            </DataTrigger>
-            <DataTrigger Binding="{Binding SelectedClinicalExamination.BloodPressure,
-                                           Converter={StaticResource BloodPressureToSafetyConverter}}"
-                         Value="{x:Static converters:Safety.Concerned}">
-                <Setter Property="Foreground" Value="{StaticResource UrgentTagTextBlock}"/>
-            </DataTrigger>
-            <DataTrigger Binding="{Binding SelectedClinicalExamination.BloodPressure,
-                                           Converter={StaticResource BloodPressureToSafetyConverter}}" 
-                         Value="{x:Static converters:Safety.Dangerous}">
-                <Setter Property="Foreground" Value="{StaticResource StatTagTextBlock}"/>
-            </DataTrigger>
-        </Style.Triggers>
     </Style>
     
     <Style x:Key="DayHeaderStyle" TargetType="TextBlock">

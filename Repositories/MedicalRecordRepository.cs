@@ -42,7 +42,7 @@ public class MedicalRecordRepository : IMedicalRecordRepository
                                     .From<MedicalRecordModel>()
                                     .Select("""
                                            *,
-                                           Appointment:Appointments(
+                                           AP:Appointments(
                                                *,
                                                Patient:Patients(
                                                    *,
@@ -58,7 +58,11 @@ public class MedicalRecordRepository : IMedicalRecordRepository
                                     .Order("VisitTime", Supabase.Postgrest.Constants.Ordering.Descending)
                                     .Get();
         
-        var records = JsonSerializer.Deserialize<List<MedicalRecordModel>>(recordsResponse.Content!, options);
+        var content = recordsResponse.Content!;
+        content = content.Replace("\"Appointments\"", "\"tempAP\"")
+                         .Replace("\"AP\"", "\"Appointment\"");
+
+        var records = JsonSerializer.Deserialize<List<MedicalRecordModel>>(content, options);
 
         return records == null ? [] : records;
     }
@@ -76,7 +80,7 @@ public class MedicalRecordRepository : IMedicalRecordRepository
                                     .From<MedicalRecordModel>()
                                     .Select("""
                                            *,
-                                           Appointment:Appointments(
+                                           AP:Appointments(
                                                *,
                                                Patient:Patients(
                                                    *,
@@ -92,8 +96,55 @@ public class MedicalRecordRepository : IMedicalRecordRepository
                                     .Filter("AppointmentID", Supabase.Postgrest.Constants.Operator.In, appointmentIds)
                                     .Order("VisitTime", Supabase.Postgrest.Constants.Ordering.Descending)
                                     .Limit(1)
-                                    .Single();
+                                    .Get();
 
-        return response;
+        var content = response.Content!;
+        content = content.Replace("\"Appointments\"", "\"tempAP\"")
+                         .Replace("\"AP\"", "\"Appointment\"");
+
+        var records = JsonSerializer.Deserialize<List<MedicalRecordModel>>(content, options);
+
+        return records!.FirstOrDefault();
+    }
+    public async Task<IEnumerable<MedicalRecordModel>> SearchByTextAsync(string SearchText)
+    {
+        var response = await _client
+                                    .From<MedicalRecordModel>()
+                                    .Select("""
+                                           *,
+                                           AP:Appointments(
+                                               *,
+                                               Patient:Patients(
+                                                   *,
+                                                   User:Users(*)
+                                               ),
+                                               Doctor:Doctors(
+                                                   *,
+                                                   User:Users(*)
+                                               )
+                                           )
+            
+                                    """)
+                                    .Get();
+
+        var content = response.Content!;
+        content = content.Replace("\"Appointments\"", "\"tempAP\"")
+                         .Replace("\"AP\"", "\"Appointment\"");
+
+        var models = JsonSerializer.Deserialize<List<MedicalRecordModel>>(content, options);
+
+        if (models == null)
+            return [];
+
+        SearchText = SearchText.Replace("Dr.", "").ToLower().Trim();
+
+        var records = models.Where(r =>
+            r.Appointment.Doctor.User.FirstName.ToLower().Contains(SearchText)
+         || r.Appointment.Doctor.User.LastName.ToLower().Contains(SearchText)
+         || r.Diagnosis.ToLower().Contains(SearchText)
+         || r.Appointment.ChiefComplaint.ToLower().Contains(SearchText)
+            );
+
+        return records;
     }
 }
