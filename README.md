@@ -67,8 +67,6 @@
     - **Kê đơn Thuốc Thông minh & An toàn (Smart E-Prescribing):**
         - Tìm kiếm thuốc từ kho dược (`Medications`).
         - **Cảnh báo Tương tác thuốc (Drug Interaction Alert):** Khi bác sĩ chọn 2 loại thuốc trở lên, hệ thống tự động kiểm tra bảng `MedicationInteractions`. Nếu có tương tác mức độ `severe` hoặc `contraindicated`, hệ thống sẽ hiện cảnh báo đỏ ngay lập tức để bác sĩ thay đổi thuốc.
-    - **Quản lý Tái khám (Follow-up Tracking):**
-        - Đặt ngày tái khám (`next_visit_date`). Hệ thống sẽ tự động nhắc bệnh nhân khi gần đến ngày đó.
 #### 3. Phân hệ dành cho Dược sĩ 
 **Mục tiêu:** Đảm bảo an toàn dùng thuốc, cấp phát nhanh chóng và quản lý kho chính xác.
 - **Tính năng cốt lõi:**
