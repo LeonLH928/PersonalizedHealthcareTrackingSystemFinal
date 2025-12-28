@@ -3,7 +3,7 @@
 namespace PersonalizedHealthcareTrackingSystemFinal.Interfaces;
 public interface IAppointmentRepository
 {
-    Task AddAppointmentAsync(AppointmentModel NewAppointment);
+    Task UpsertAppointmentAsync(AppointmentModel NewAppointment);
     Task<IEnumerable<AppointmentModel>> GetAllAppointmentsByDoctorIDAsync(string DoctorID);
     Task<IEnumerable<AppointmentModel>> GetAllAppointmentsByDatetimeAndDoctorIDAsync(DateTime datetime, string DoctorID);
     Task<AppointmentModel?> GetNearestAppointmentByDoctorIDAsync(string DoctorID);

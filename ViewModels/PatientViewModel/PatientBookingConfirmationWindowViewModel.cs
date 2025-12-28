@@ -89,7 +89,7 @@ public partial class PatientBookingConfirmationWindowViewModel : ObservableObjec
                 DoctorID = selectedDoctorIDMessage
             };
 
-            await _appointmentService.AddAppointmentAsync(NewAppointment);
+            await _appointmentService.UpsertAppointmentAsync(NewAppointment);
 
             MessageBox.Show(
                 $"Book successfully!\nTime: {SelectedSlot}",

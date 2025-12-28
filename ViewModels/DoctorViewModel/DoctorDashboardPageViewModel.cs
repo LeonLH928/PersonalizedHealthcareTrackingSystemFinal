@@ -155,7 +155,7 @@ public partial class DoctorDashboardPageViewModel : ObservableObject
         {
             var Popup = _serviceProvider.GetRequiredService<DoctorConsultationWindow>();
             Popup.Show();
-            WeakReferenceMessenger.Default.Send(new SelectedAppointmentIDMessage(NearestUpcoming.AppointmentID));
+            WeakReferenceMessenger.Default.Send(new SelectedAppointmentIDMessage(NearestUpcoming!.AppointmentID));
         }
     }
     protected override void OnPropertyChanged(PropertyChangedEventArgs e)
@@ -168,6 +168,16 @@ public partial class DoctorDashboardPageViewModel : ObservableObject
             e.PropertyName == nameof(Cancelleds))
         {
             InitializeChart();
+        }
+    }
+    [RelayCommand]
+    public async Task SeeMedicalRecordsButton()
+    {
+        if (Application.Current.Windows.OfType<SeeMedicalRecordWindow>().FirstOrDefault() == null)
+        {
+            var Popup = _serviceProvider.GetRequiredService<SeeMedicalRecordWindow>();
+            Popup.Show();
+            WeakReferenceMessenger.Default.Send(new SelectedPatientIDMessage(NearestUpcoming!.PatientID));
         }
     }
 }

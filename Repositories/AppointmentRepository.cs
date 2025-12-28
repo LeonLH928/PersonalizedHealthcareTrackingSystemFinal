@@ -25,7 +25,7 @@ public class AppointmentRepository : IAppointmentRepository
         await _client.InitializeAsync();
     }
     
-    public async Task AddAppointmentAsync(AppointmentModel NewAppointment)
+    public async Task UpsertAppointmentAsync(AppointmentModel NewAppointment)
     {
         await _client.From<AppointmentModel>()
                      .Upsert(NewAppointment);

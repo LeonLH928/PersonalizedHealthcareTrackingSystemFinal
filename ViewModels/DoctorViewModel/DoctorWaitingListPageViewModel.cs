@@ -194,5 +194,26 @@ public partial class DoctorWaitingListPageViewModel : ObservableObject
             IsBusy = false;
         }
     }
+    [RelayCommand]
+    public async Task CancelButton(AppointmentModel SelectedAppointment)
+    {
+        var result = MessageBox.Show("Do you want to cancel?", "Information", MessageBoxButton.YesNo, MessageBoxImage.Information);
+        if (result == MessageBoxResult.Yes)
+        {
+            SelectedAppointment.Status = Models.StatusAppointment.Cancelled;
+            await _appointmentService.UpsertAppointmentAsync(SelectedAppointment);
+            await LoadDataAsync();
+        }
+    }
+    [RelayCommand]
+    public async Task SeeMedicalRecordsButton(AppointmentModel SelectedAppointment)
+    {
+        if (Application.Current.Windows.OfType<SeeMedicalRecordWindow>().FirstOrDefault() == null)
+        {
+            var Popup = _serviceProvider.GetRequiredService<SeeMedicalRecordWindow>(); 
+            Popup.Show();
+            WeakReferenceMessenger.Default.Send(new SelectedPatientIDMessage(SelectedAppointment.PatientID));
+        }
+    }
 }
 

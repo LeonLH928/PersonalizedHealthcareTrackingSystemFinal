@@ -289,13 +289,20 @@
                                             Style="{StaticResource CustomBaseTextBlockStyle}"
                                             FontSize="16"/>
 
-                                        <TextBlock
+                                        <StackPanel
                                             Grid.Column="1"
-                                            HorizontalAlignment="Right"
-                                            Text="{Binding LatestClinicalExamination.Temperature, StringFormat={}{0}℃}"
-                                            Style="{StaticResource CustomBaseTextBlockStyle}"
-                                            FontSize="16"
-                                            FontWeight="SemiBold"/>
+                                            Orientation="Horizontal"
+                                            HorizontalAlignment="Right">
+                                            <TextBlock
+                                                Text="{Binding LatestClinicalExamination.Temperature}"
+                                                Style="{StaticResource TemperatureTextBlockStyle}"
+                                                FontWeight="SemiBold"/>
+                                            <TextBlock
+                                                Text=" ℃"
+                                                VerticalAlignment="Bottom"
+                                                FontSize="14"
+                                                Style="{StaticResource SecondaryTextTextBlockStyle}"/>
+                                        </StackPanel>
                                     </Grid>
 
                                     <Rectangle
@@ -310,14 +317,25 @@
                                             Text="Height: "
                                             Style="{StaticResource CustomBaseTextBlockStyle}"
                                             FontSize="16"/>
-
-                                        <TextBlock
+                                        
+                                        <StackPanel
                                             Grid.Column="1"
-                                            HorizontalAlignment="Right"
-                                            Text="{Binding LatestClinicalExamination.Height, StringFormat={}{0} cm}"
-                                            Style="{StaticResource CustomBaseTextBlockStyle}"
-                                            FontSize="16"
-                                            FontWeight="SemiBold"/>
+                                            Orientation="Horizontal"
+                                            HorizontalAlignment="Right">
+                                            <TextBlock
+                                                Grid.Column="1"
+                                                HorizontalAlignment="Right"
+                                                Text="{Binding LatestClinicalExamination.Height}"
+                                                Style="{StaticResource CustomBaseTextBlockStyle}"
+                                                FontSize="16"
+                                                FontWeight="SemiBold"/>
+                                            
+                                            <TextBlock
+                                                Text=" cm"
+                                                VerticalAlignment="Bottom"
+                                                FontSize="14"
+                                                Style="{StaticResource SecondaryTextTextBlockStyle}"/>
+                                        </StackPanel>
                                     </Grid>
 
                                     <Rectangle
@@ -333,13 +351,24 @@
                                             Style="{StaticResource CustomBaseTextBlockStyle}"
                                             FontSize="16"/>
 
-                                        <TextBlock
+                                        <StackPanel
                                             Grid.Column="1"
-                                            HorizontalAlignment="Right"
-                                            Text="{Binding LatestClinicalExamination.Weight, StringFormat={}{0} kg}"
-                                            Style="{StaticResource CustomBaseTextBlockStyle}"
-                                            FontSize="16"
-                                            FontWeight="SemiBold"/>
+                                            Orientation="Horizontal"
+                                            HorizontalAlignment="Right">
+                                            <TextBlock
+                                                Grid.Column="1"
+                                                HorizontalAlignment="Right"
+                                                Text="{Binding LatestClinicalExamination.Weight}"
+                                                Style="{StaticResource CustomBaseTextBlockStyle}"
+                                                FontSize="16"
+                                                FontWeight="SemiBold"/>
+                                            <TextBlock
+                                                Text=" kg"
+                                                VerticalAlignment="Bottom"
+                                                FontSize="14"
+                                                Style="{StaticResource SecondaryTextTextBlockStyle}"/>
+                                        </StackPanel>
+
                                     </Grid>
 
                                     <Rectangle
@@ -355,13 +384,22 @@
                                             Style="{StaticResource CustomBaseTextBlockStyle}"
                                             FontSize="16"/>
 
-                                        <TextBlock
+                                        <StackPanel
                                             Grid.Column="1"
-                                            HorizontalAlignment="Right"
-                                            Text="{Binding LatestClinicalExamination.Pulse, StringFormat={}{0} bpm}"
-                                            Style="{StaticResource CustomBaseTextBlockStyle}"
-                                            FontSize="16"
-                                            FontWeight="SemiBold"/>
+                                            Orientation="Horizontal"
+                                            HorizontalAlignment="Right">
+                                            <TextBlock
+                                                HorizontalAlignment="Right"
+                                                Text="{Binding LatestClinicalExamination.Pulse}"
+                                                Style="{StaticResource PulseTextBlockStyle}"
+                                                FontWeight="SemiBold"/>
+                                            <TextBlock
+                                                Text=" bpm"
+                                                VerticalAlignment="Bottom"
+                                                FontSize="14"
+                                                Style="{StaticResource SecondaryTextTextBlockStyle}"/>
+                                        </StackPanel>
+
                                     </Grid>
 
                                     <Rectangle
@@ -376,14 +414,24 @@
                                             Text="Blood pressure: "
                                             Style="{StaticResource CustomBaseTextBlockStyle}"
                                             FontSize="16"/>
-
-                                        <TextBlock
+                                        
+                                        <StackPanel
                                             Grid.Column="1"
-                                            HorizontalAlignment="Right"
-                                            Text="{Binding LatestClinicalExamination.BloodPressure, StringFormat={}{0} mmHG}"
-                                            Style="{StaticResource CustomBaseTextBlockStyle}"
-                                            FontSize="16"
-                                            FontWeight="SemiBold"/>
+                                            Orientation="Horizontal"
+                                            HorizontalAlignment="Right">
+                                            <TextBlock
+                                                Grid.Column="1"
+                                                HorizontalAlignment="Right"
+                                                Text="{Binding LatestClinicalExamination.BloodPressure}"
+                                                Style="{StaticResource BloodPressureTextBlockStyle}"
+                                                FontSize="16"
+                                                FontWeight="SemiBold"/>
+                                            <TextBlock
+                                                Text=" mmHg"
+                                                VerticalAlignment="Bottom"
+                                                FontSize="14"
+                                                Style="{StaticResource SecondaryTextTextBlockStyle}"/>
+                                        </StackPanel>
                                     </Grid>
 
                                     <Rectangle
@@ -445,13 +493,24 @@
                                             Style="{StaticResource CustomBaseTextBlockStyle}"
                                             FontSize="16"/>
 
-                                        <TextBlock
+                                        <StackPanel
                                             Grid.Column="1"
-                                            HorizontalAlignment="Right"
-                                            Text="{Binding LatestClinicalExamination.RespiratoryRate, StringFormat={}{0} bpm}"
-                                            Style="{StaticResource CustomBaseTextBlockStyle}"
-                                            FontSize="16"
-                                            FontWeight="SemiBold"/>
+                                            Orientation="Horizontal"
+                                            HorizontalAlignment="Right">
+                                            <TextBlock
+                                                Grid.Column="1"
+                                                HorizontalAlignment="Right"
+                                                Text="{Binding LatestClinicalExamination.RespiratoryRate}"
+                                                Style="{StaticResource RespiratoryRateTextBlockStyle}"
+                                                FontSize="16"
+                                                FontWeight="SemiBold"/>
+                                            <TextBlock
+                                                Text=" bpm"
+                                                VerticalAlignment="Bottom"
+                                                FontSize="14"
+                                                Style="{StaticResource SecondaryTextTextBlockStyle}"/>
+                                        </StackPanel>
+
                                     </Grid>
 
                                     <Rectangle
@@ -467,14 +526,25 @@
                                             Text="Oxygen saturation: "
                                             Style="{StaticResource CustomBaseTextBlockStyle}"
                                             FontSize="16"/>
-
-                                        <TextBlock
+                                        
+                                        <StackPanel
                                             Grid.Column="1"
-                                            HorizontalAlignment="Right"
-                                            Text="{Binding LatestClinicalExamination.OxygenSaturation, StringFormat={}{0}%}"
-                                            Style="{StaticResource CustomBaseTextBlockStyle}"
-                                            FontSize="16"
-                                            FontWeight="SemiBold"/>
+                                            Orientation="Horizontal"
+                                            HorizontalAlignment="Right">
+                                            <TextBlock
+                                                Grid.Column="1"
+                                                HorizontalAlignment="Right"
+                                                Text="{Binding LatestClinicalExamination.OxygenSaturation}"
+                                                Style="{StaticResource SpO2TextBlockStyle}"
+                                                FontSize="16"
+                                                FontWeight="SemiBold"/>
+                                            <TextBlock
+                                                Text=" %"
+                                                VerticalAlignment="Bottom"
+                                                FontSize="14"
+                                                Style="{StaticResource SecondaryTextTextBlockStyle}"/>
+                                        </StackPanel>
+
                                     </Grid>
 
                                     <Rectangle
