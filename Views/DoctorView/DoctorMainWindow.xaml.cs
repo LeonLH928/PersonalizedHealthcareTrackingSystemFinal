@@ -50,21 +50,6 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Views.DoctorView
                     DoctorMainContent.Navigate(WaitingListPage);
                     break;
 
-                case "Examination And Prescription":
-                    var ExaminationAndPrescriptionPage = _serviceProvider.GetRequiredService<DoctorExaminationAndPrescriptionPage>();
-                    DoctorMainContent.Navigate(ExaminationAndPrescriptionPage);
-                    break;
-
-                case "Patient List":
-                    var PatientListPage = _serviceProvider.GetRequiredService<DoctorPatientListPage>();
-                    DoctorMainContent.Navigate(PatientListPage);
-                    break;
-
-                case "Work Schedule":
-                    var WorkSchedulePage = _serviceProvider.GetRequiredService<DoctorWorkSchedulePage>();
-                    DoctorMainContent.Navigate(WorkSchedulePage);
-                    break;
-
                 case "Pharmacy Inventory":
                     var PharmacyInventoryPage = _serviceProvider.GetRequiredService<DoctorPharmacyInventoryPage>();
                     DoctorMainContent.Navigate(PharmacyInventoryPage);

@@ -74,10 +74,8 @@ public static class AppModule
         services.AddTransient<Views.DoctorView.DoctorConsultationWindow>();
         services.AddTransient<Views.DoctorView.DoctorUpcomingsPage>();
         services.AddTransient<Views.DoctorView.AddDrugWindow>();
-        services.AddTransient<Views.DoctorView.DoctorExaminationAndPrescriptionPage>();
-        services.AddTransient<Views.DoctorView.DoctorPatientListPage>();
-        services.AddTransient<Views.DoctorView.DoctorWorkSchedulePage>();
         services.AddTransient<Views.DoctorView.DoctorPharmacyInventoryPage>();
+        services.AddTransient<Views.DoctorView.SeeMedicalRecordWindow>();
 
         services.AddTransient<Views.PharmacistView.PharmacistMainWindow>();
         services.AddTransient<Views.PharmacistView.PharmacistQueuePage>();
@@ -104,6 +102,7 @@ public static class AppModule
         services.AddTransient<ViewModels.DoctorViewModel.DoctorMainWindowViewModel>();
         services.AddTransient<ViewModels.DoctorViewModel.DoctorWaitingListPageViewModel>();
         services.AddTransient<ViewModels.DoctorViewModel.DoctorPharmacyInventoryPageViewModel>();
+        services.AddTransient<ViewModels.DoctorViewModel.SeeMedicalRecordWindowViewModel>();
 
         services.AddTransient<ViewModels.PharmacistViewModel.PharmacistQueuePageViewModel>();
         services.AddTransient<ViewModels.PharmacistViewModel.PharmacistDashboardPageViewModel>();

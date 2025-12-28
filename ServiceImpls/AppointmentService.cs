@@ -10,9 +10,9 @@ public class AppointmentService : IAppointmentService
     {
         _appointmentRepository = appointmentRepository;
     }
-    public async Task AddAppointmentAsync(AppointmentModel NewAppointment)
+    public async Task UpsertAppointmentAsync(AppointmentModel NewAppointment)
     {
-        await _appointmentRepository.AddAppointmentAsync(NewAppointment);
+        await _appointmentRepository.UpsertAppointmentAsync(NewAppointment);
     }
     public async Task<IEnumerable<AppointmentModel>> GetAllAppointmentsByDoctorIDAsync(string DoctorID)
     {

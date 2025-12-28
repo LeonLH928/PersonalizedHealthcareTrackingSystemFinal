@@ -309,10 +309,10 @@ public partial class DoctorConsultationWindowViewModel : ObservableObject,
                 Priority = LatestAppointment.Priority,
                 VisitNumber = LatestAppointment.VisitNumber + 1,
             };
-            await _appointmentService.AddAppointmentAsync(NewAppointment);
+            await _appointmentService.UpsertAppointmentAsync(NewAppointment);
 
             LatestAppointment.Status = Models.StatusAppointment.Completed;
-            await _appointmentService.AddAppointmentAsync(LatestAppointment);
+            await _appointmentService.UpsertAppointmentAsync(LatestAppointment);
 
             ClinicalExaminationModel NewClinicalExamination = new()
             {

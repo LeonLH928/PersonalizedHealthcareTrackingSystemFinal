@@ -401,7 +401,8 @@
                                                 Grid.Column="1"
                                                 Style="{StaticResource OutlineButtonStyle}"
                                                 Margin="5,0,0,0"
-                                                Content="See medical records">
+                                                Content="See medical records"
+                                                Command="{Binding SeeMedicalRecordsButtonCommand}">
                                             </Button>
 
                                         </Grid>
