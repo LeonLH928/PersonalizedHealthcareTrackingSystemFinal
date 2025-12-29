@@ -679,13 +679,14 @@
                             <TextBlock
                                 Text="Drug Details &amp; Inventory Check"
                                 Style="{StaticResource CustomBaseTextBlockStyle}"
-                                  FontSize="24"
+                                FontSize="24"
                                 FontWeight="Bold"
                                 Margin="0,0,0,10"/>
 
                             <DataGrid
                                 ItemsSource="{Binding SelectedAllPrescriptionItems}"
-                                Style="{StaticResource DefaultDataGridStyle}">
+                                Style="{StaticResource DefaultDataGridStyle}"
+                                RowHeight="NaN">
                                 <DataGrid.Columns>
                                     <DataGridTextColumn
                                         Binding="{Binding Item.Medication.MedicationID}"
