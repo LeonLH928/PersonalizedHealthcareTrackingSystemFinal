@@ -1,81 +1,155 @@
-# Personalized Healthcare Tracking System
-# Ý tưởng phần mềm
-Được xây dựng dựa trên quy trình khám bệnh và kê thuốc:
-1. Bệnh nhân tới bệnh viện / phòng khám để bóc số. Tới lượt bệnh nhân, lấy sổ điền thông tin cơ bản, trình bày lí do tới hôm nay khám và nhận được số phòng. Tới phòng, bác sĩ bắt đầu khám lâm sàn cho bệnh nhân.
-2. Bác sĩ bắt đầu xem lịch hẹn của mình, kiểm tra thông tin bệnh nhân bao gồm:
-	1. Họ tên bệnh nhân
-	2. Lí do khám
-   Sau khi kiểm tra, bác sĩ bắt đầu khám lâm sàn cơ bản:
-	3. Bệnh nhân gặp những Triệu chứng nào ?
-	4. Tiền sử bệnh ?
-	5. Lịch sử bệnh di truyền ở gia đình ?
-	6. Thói quen đời sống ?
-	7. Thông tin dị ứng ?
-   Sau khi khám lâm sàn, bác sĩ thực hiện khám cận lâm sàn dựa trên thông tin lâm sàn (có thể đi chụp CT, cắt sinh thiết, ...). Cuối cùng, bác sĩ đưa ra chẩn đoán và kê thuốc:
-	8. Bệnh gì ?
-	9. Kê thuốc gì ?
-	10. Liều lượng, tần suất sử dụng ?
-   Cuối cùng, bác sĩ lưu thông tin tái khám:
-	11. Thông tin bệnh nhân.
-	12. Chẩn đoán bệnh.
-	13. Ngày tái khám.
-	14. Lần khám.
-	15. Trạng thái (Cách bao lâu, đã tái khám hoặc không tái khám sau 7 ngày).
-	16. Đợt kê thuốc gần nhất, liều lượng, tần suất.
-3. Sau khi kê thuốc, bệnh nhân đi qua quầy bán thuốc, dược sĩ sẽ quản lý lại thông tin thuốc sau:
-	1. Cảnh báo tác dụng phụ của thuốc, cách lưu trữ thuốc.
-	2. Kiểm tra thuốc, liều lượng đã kê phù hợp với bệnh nhân (độ tuổi, cân nặng, và chẩn đoán bệnh).
-	3. Sau khi kiểm tra, trừ số thuốc trong kho đã đưa cho bệnh nhân.
-4. Đối với bệnh nhân, các thông tin bệnh nhân cần biết như sau:
-	1. Về tái khám:
-		1. Ngày tái khám.
-		2. Lí do khám (Bệnh).
-		3. Bác sĩ khám.
-		4. Địa điểm khám.
-		5. Ghi chú (Bệnh viện không làm vào giờ nào, v.v).
-		6. Cách bao lâu ?
-		7. Tình trạng cuộc hẹn (Cách bao lâu, đã tái khám hoặc không tái khám sau 7 ngày).
-	2. Sử dụng thuốc:
-		1. Tên thuốc
-		2. Cho bệnh gì.
-		3. Tần suất, với mỗi thời điểm uống, cho biết liều lượng.
-		4. Trạng thái (Cách bao lâu hoặc đã qua).
-# Mục đích phần mềm
-#### 1. Phân hệ dành cho Bệnh nhân 
-**Mục tiêu:** Trao quyền chủ động quản lý sức khỏe, không bao giờ quên lịch khám và thuốc.
-- **Tính năng cốt lõi:**
-    - **Đặt lịch hẹn thông minh (Smart Booking):**
-        - Xem danh sách bác sĩ và chuyên khoa (`Doctors`).
-        - Xem lịch trống của bác sĩ theo thời gian thực (dựa trên `DoctorSchedules` và các `Appointments` đã đặt).
-        - Đặt lịch và nhận xác nhận ngay lập tức.
-    - **Nhắc nhở Lịch hẹn (Appointment Reminders):**
-        - Hệ thống gửi Push Notification nhắc nhở trước 1 ngày và trước 2 giờ khi có lịch hẹn sắp đến (dựa trên trạng thái `scheduled` trong bảng `Appointments`).
-    - **Trợ lý Uống thuốc ảo (Virtual Medication Assistant) - _Tính năng đinh_:**
-        - Sau khi đi khám, đơn thuốc điện tử (`Prescriptions`) tự động xuất hiện trên app.
-        - App sẽ phân tích trường `frequency` (tần suất) và `instruction` (chỉ dẫn - vd: sau ăn) trong bảng `PrescriptionItems` để tạo ra các **Lịch nhắc uống thuốc tự động** trên điện thoại. (Ví dụ: Sáng 8h, Chiều 14h).
-    - **Hồ sơ Sức khỏe Điện tử Cá nhân (Personal Health Record - PHR):**
-        - Xem lại lịch sử các lần khám trước, chẩn đoán là gì (`MedicalRecords`), các chỉ số sinh hiệu lúc đó ra sao (`ClinicalExaminations`).
-#### 2. Phân hệ dành cho Bác sĩ
-**Mục tiêu:** Tối ưu hóa quy trình khám chữa bệnh, giảm giấy tờ, hỗ trợ ra quyết định lâm sàng.
-- **Tính năng cốt lõi:**
-    - **Bảng điều khiển & Hàng đợi bệnh nhân (Dashboard & Patient Queue):**
-        - Xem danh sách bệnh nhân đã đặt lịch hôm nay.
-        - Biết được bệnh nhân nào đã đến (Checked-in) và đang chờ ở ngoài.
-    - **Bệnh án Điện tử (EMR):**
-        - Giao diện nhập liệu nhanh các chỉ số sinh hiệu, triệu chứng vào bảng `ClinicalExaminations`.
-        - Xem nhanh lịch sử bệnh án và dị ứng của bệnh nhân trước khi bắt đầu khám.
-    - **Kê đơn Thuốc Thông minh & An toàn (Smart E-Prescribing):**
-        - Tìm kiếm thuốc từ kho dược (`Medications`).
-        - **Cảnh báo Tương tác thuốc (Drug Interaction Alert):** Khi bác sĩ chọn 2 loại thuốc trở lên, hệ thống tự động kiểm tra bảng `MedicationInteractions`. Nếu có tương tác mức độ `severe` hoặc `contraindicated`, hệ thống sẽ hiện cảnh báo đỏ ngay lập tức để bác sĩ thay đổi thuốc.
-#### 3. Phân hệ dành cho Dược sĩ 
-**Mục tiêu:** Đảm bảo an toàn dùng thuốc, cấp phát nhanh chóng và quản lý kho chính xác.
-- **Tính năng cốt lõi:**
-    - **Hàng đợi Đơn thuốc Thời gian thực (Real-time Prescription Queue):**
-        - Ngay khi bác sĩ kê đơn xong, đơn thuốc xuất hiện trên màn hình của dược sĩ với trạng thái `pending`. Không cần bệnh nhân phải cầm giấy chạy qua lại.
-    - **Duyệt & Kiểm tra Lâm sàng (Clinical Verification):**
-        - Dược sĩ mở đơn thuốc, hệ thống hiển thị kèm thông tin tuổi, (cân nặng/chiều cao - _nếu bạn sửa DB_) của bệnh nhân để dược sĩ kiểm tra liều lượng có phù hợp không.
-        - Nếu ổn, bấm "Duyệt" -> Trạng thái đơn chuyển sang `verified`, điền tên dược sĩ duyệt.
-    - **Cấp phát & Trừ kho tự động (Dispensing & Auto-Inventory):**
-        - Khi giao thuốc cho bệnh nhân, bấm "Hoàn tất cấp phát" -> Trạng thái chuyển sang `dispensed`.
-        - Hệ thống tự động trừ số lượng thuốc tương ứng trong cột `stock_quantity` của bảng `Medications`.    
-    - **Cảnh báo tồn kho (Low Stock Alert):** Báo cáo các loại thuốc sắp hết hàng dựa trên `stock_quantity`.
+<div align="center">
+
+# 🏥 PERSONALIZED HEALTHCARE TRACKING SYSTEM
+
+**Hệ thống Theo dõi & Quản lý Chăm sóc Sức khỏe Cá nhân Hóa**
+
+[![Platform](https://img.shields.io/badge/Platform-Desktop-blue.svg)]
+[![Architecture](https://img.shields.io/badge/Architecture-Multi--Role-success.svg)]
+[![Database](https://img.shields.io/badge/Database-Supabase-green.svg)]
+[![Status](https://img.shields.io/badge/Status-Design%20%26%20Development-yellow.svg)]
+
+<p align="center">
+  <a href="#-giới-thiệu-about">Giới thiệu</a> •
+  <a href="#-mục-tiêu--phạm-vi-project-goals">Mục tiêu</a> •
+  <a href="#-phân-hệ-chức-năng-core-modules">Phân hệ</a> •
+  <a href="#-quy-trình-nghiệp-vụ-business-workflow">Quy trình</a> •
+  <a href="#-định-hướng-kiến-trúc-system-architecture">Kiến trúc</a>
+</p>
+
+</div>
+
+---
+
+## 📖 Giới thiệu (About)
+
+**Personalized Healthcare Tracking System** là một hệ thống phần mềm được thiết kế nhằm **số hóa toàn bộ quy trình khám chữa bệnh**, từ tiếp nhận bệnh nhân, khám lâm sàng – cận lâm sàng, kê đơn thuốc, cấp phát thuốc cho đến theo dõi tái khám và sử dụng thuốc sau điều trị.
+
+Hệ thống tập trung vào **cá nhân hóa việc chăm sóc sức khỏe**, giúp:
+- Bệnh nhân **không quên lịch khám, không quên uống thuốc**
+- Bác sĩ **giảm giấy tờ, tăng hiệu quả ra quyết định lâm sàng**
+- Dược sĩ **đảm bảo an toàn dùng thuốc và quản lý kho chính xác**
+
+Dự án được xây dựng theo mô hình **đa phân hệ – đa vai trò**, phù hợp triển khai tại **bệnh viện, phòng khám, hoặc hệ thống y tế quy mô vừa và lớn**.
+
+---
+
+## 🎯 Mục tiêu & Phạm vi Project (Project Goals)
+
+### 🎯 Mục tiêu chính
+- Số hóa bệnh án và quy trình khám chữa bệnh
+- Giảm sai sót trong kê đơn và cấp phát thuốc
+- Hỗ trợ bệnh nhân chủ động theo dõi sức khỏe dài hạn
+
+### 📌 Phạm vi
+- Quản lý khám bệnh ngoại trú
+- Kê đơn thuốc điện tử (E-Prescription)
+- Theo dõi tái khám và sử dụng thuốc
+- Quản lý kho dược
+
+---
+
+## 🧩 Phân hệ Chức năng (Core Modules)
+
+### 👤 1. Phân hệ dành cho **Bệnh nhân**
+**Mục tiêu:** Trao quyền chủ động quản lý sức khỏe cá nhân.
+
+#### Tính năng chính:
+- 📅 **Đặt lịch hẹn thông minh (Smart Booking)**
+  - Xem danh sách bác sĩ & chuyên khoa
+  - Xem lịch trống theo thời gian thực
+  - Đặt lịch và nhận xác nhận ngay
+
+- ⏰ **Nhắc nhở lịch hẹn (Appointment Reminders)**
+  - Nhắc trước 1 ngày và 2 giờ
+  - Theo dõi trạng thái cuộc hẹn (đã khám / quá hạn)
+
+- 💊 **Trợ lý uống thuốc ảo – Tính năng cốt lõi**
+  - Đơn thuốc điện tử tự động hiển thị
+  - Phân tích tần suất & hướng dẫn dùng thuốc
+  - Tạo lịch nhắc uống thuốc chi tiết theo ngày & giờ
+
+- 📂 **Hồ sơ sức khỏe điện tử cá nhân (PHR)**
+  - Lịch sử khám bệnh
+  - Chẩn đoán, chỉ số sinh hiệu
+  - Tiền sử bệnh & dị ứng
+
+---
+
+### 🩺 2. Phân hệ dành cho **Bác sĩ**
+**Mục tiêu:** Tối ưu quy trình khám, hỗ trợ quyết định lâm sàng.
+
+#### Tính năng chính:
+- 📋 **Dashboard & hàng đợi bệnh nhân**
+  - Danh sách bệnh nhân theo ngày
+  - Trạng thái: đã check-in / đang chờ
+
+- 🧠 **Bệnh án điện tử (EMR)**
+  - Nhập triệu chứng, tiền sử, sinh hiệu
+  - Xem nhanh lịch sử bệnh & dị ứng
+
+- 💊 **Kê đơn thuốc thông minh (Smart E-Prescribing)**
+  - Tìm kiếm thuốc từ kho
+  - ⚠️ **Cảnh báo tương tác thuốc**
+    - Kiểm tra tương tác nghiêm trọng (`severe`, `contraindicated`)
+    - Cảnh báo ngay trong lúc kê đơn
+
+---
+
+### 💊 3. Phân hệ dành cho **Dược sĩ**
+**Mục tiêu:** Đảm bảo an toàn dùng thuốc & quản lý kho hiệu quả.
+
+#### Tính năng chính:
+- 📥 **Hàng đợi đơn thuốc thời gian thực**
+  - Nhận đơn ngay khi bác sĩ kê xong
+
+- 🔍 **Kiểm tra lâm sàng (Clinical Verification)**
+  - Kiểm tra liều lượng theo tuổi, cân nặng
+  - Duyệt đơn và ghi nhận dược sĩ phụ trách
+
+- 📦 **Cấp phát & trừ kho tự động**
+  - Trừ tồn kho ngay khi cấp thuốc
+  - Theo dõi lịch sử cấp phát
+
+- 🚨 **Cảnh báo tồn kho thấp**
+  - Phát hiện thuốc sắp hết
+  - Hỗ trợ lập kế hoạch nhập kho
+
+---
+
+## 🏗 Định hướng Kiến trúc (System Architecture)
+
+- **Multi-Role Architecture**
+  - Patient App
+  - Doctor Portal
+  - Pharmacist Portal
+
+- **Layered Design**
+  - Presentation Layer
+  - Business Logic Layer
+  - Data Access Layer
+  - Database Layer
+
+- **Khả năng mở rộng**
+  - Tích hợp xét nghiệm, chẩn đoán hình ảnh
+  - AI hỗ trợ chẩn đoán trong tương lai
+
+---
+
+## 📌 Kết luận
+
+**Personalized Healthcare Tracking System** hướng đến một hệ sinh thái y tế hiện đại, nơi mọi chủ thể (bệnh nhân – bác sĩ – dược sĩ) đều được hỗ trợ bằng công nghệ, giúp **nâng cao chất lượng điều trị, giảm sai sót và tối ưu trải nghiệm y tế**.
+
+---
+
+## 👥 Nhóm Tác giả (Authors) 
+
+| STT | Sinh viên thực hiện | MSSV |
+| :--: | :--- | :--- |
+| **1** | **Nguyễn Đại Hưng** | 24520601 |
+| **2** | **Lê Huỳnh Anh Tuấn** | 24521928 | 
+
+---
+
+© 2025 **Personalized Healthcare Tracking System**  
+*Healthcare Software Project*
