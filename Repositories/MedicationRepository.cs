@@ -55,4 +55,9 @@ public class MedicationRepository : IMedicationRepository
                                     .Get();
         return response.Models;
     }
+    public async Task UpsertMedication(MedicationModel NewMedication)
+    {
+        await _client.From<MedicationModel>()
+                     .Upsert(NewMedication);
+    }
 }

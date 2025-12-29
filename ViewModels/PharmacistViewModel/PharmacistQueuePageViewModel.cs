@@ -10,6 +10,7 @@ using PersonalizedHealthcareTrackingSystemFinal.SupabaseModels;
 using PersonalizedHealthcareTrackingSystemFinal.ViewModels.PharmacistViewModel.Wrappers;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace PersonalizedHealthcareTrackingSystemFinal.ViewModels.PharmacistViewModel;
@@ -20,17 +21,20 @@ public partial class PharmacistQueuePageViewModel : ObservableObject
     private readonly IClinicalExaminationService _clinicalExaminationService;
     private readonly IPrescriptionItemService _prescriptionItemService;
     private readonly ICurrentUserStoreService _currentUserService;
+    private readonly IMedicationService _medicationService;
     private readonly IPharmacistService _pharmacistService;
     public PharmacistQueuePageViewModel(IPrescriptionService prescriptionService,
                                         IClinicalExaminationService clinicalExamination,
                                         IPrescriptionItemService prescriptionItemService,
                                         ICurrentUserStoreService currentUserService,
+                                        IMedicationService medicationService,
                                         IPharmacistService pharmacistService)
     {
         _prescriptionService = prescriptionService;
         _clinicalExaminationService = clinicalExamination;
         _prescriptionItemService = prescriptionItemService;
         _currentUserService = currentUserService;
+        _medicationService = medicationService;
         _pharmacistService = pharmacistService;
 
         _ = LoadDataAsync();
@@ -69,12 +73,17 @@ public partial class PharmacistQueuePageViewModel : ObservableObject
     private ObservableCollection<PrescriptionItemViewModel> selectedAllPrescriptionItems = [];
     [ObservableProperty]
     private string searchText = "";
+    [ObservableProperty]
+    private bool isOpen = false;
+    [ObservableProperty]
+    private string reason = "";
     public async Task LoadDataAsync()
     {
         SelectedPendingPrescription = SelectedDispensingPrescription = null!;
         PrescriptionsDispensing.Clear();
         PrescriptionsPending.Clear();
         IsLoadingBar = true;
+        IsOpen = false;
         try
         {
             CurrentUser = _currentUserService.GetCurrentUser()!;
@@ -175,7 +184,7 @@ public partial class PharmacistQueuePageViewModel : ObservableObject
         try
         {
             SelectedPendingPrescription.Status = Models.PrescriptionStatus.Dispensed;
-            await _prescriptionService.AddPrescriptionAsync(SelectedPendingPrescription);
+            await _prescriptionService.UpsertPrescriptionAsync(SelectedPendingPrescription);
             _ = LoadDataAsync();
             MessageBox.Show("Verify successfully!", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
         }
@@ -195,8 +204,16 @@ public partial class PharmacistQueuePageViewModel : ObservableObject
                     MessageBox.Show($"Dispense unsuccesfully: All drugs are not dispensed yet", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
                     return;
                 }
+            var tasks = new List<Task>();
+            foreach (var item in SelectedAllPrescriptionItems)
+            {
+                var medication = item.Item.Medication;
+                medication.StockTotalQuantity -= item.Item.Quantity;
+                tasks.Add(_medicationService.UpsertMedication(medication));
+            }
+            await Task.WhenAll(tasks); 
             SelectedDispensingPrescription.Status = Models.PrescriptionStatus.Completed;
-            await _prescriptionService.AddPrescriptionAsync(SelectedDispensingPrescription);
+            await _prescriptionService.UpsertPrescriptionAsync(SelectedDispensingPrescription);
             MessageBox.Show($"Dispense successfully", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
         }
         catch (Exception e)
@@ -228,5 +245,30 @@ public partial class PharmacistQueuePageViewModel : ObservableObject
         {
             IsBusy = false;
         }
+    }
+    [RelayCommand]
+    public void RefuseButton()
+    {
+        IsOpen = true;
+    }
+    [RelayCommand]
+    public void CloseButton()
+    {
+        IsOpen = false;
+    }
+    [RelayCommand]
+    public async Task YesButton()
+    {
+        if (Reason.IsNullOrEmpty())
+        {
+            MessageBox.Show($"Please enter your reason!", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+            return;
+        }
+        SelectedPendingPrescription.Status = Models.PrescriptionStatus.Cancelled;
+        SelectedPendingPrescription.CancelledAt = DateTime.Now;
+        SelectedPendingPrescription.Reason = Reason;
+        await _prescriptionService.UpsertPrescriptionAsync(SelectedPendingPrescription);
+        MessageBox.Show("Cancel successfully!", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+        await LoadDataAsync();
     }
 }

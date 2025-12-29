@@ -13,6 +13,14 @@ public class UserRepository : IUserRepository
     {
         _client = client;
     }
+    public async Task<IEnumerable<UserModel>> GetAllUsersAsync()
+    {
+        var result = await _client
+                                .From<UserModel>()
+                                .Get();
+
+        return result.Models;    
+    }
     public async Task<UserModel> GetUserByIDAsync(string userId)
     {
         var result = await _client

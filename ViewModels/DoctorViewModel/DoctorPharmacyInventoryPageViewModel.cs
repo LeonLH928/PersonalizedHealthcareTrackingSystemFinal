@@ -57,7 +57,10 @@ public partial class DoctorPharmacyInventoryPageViewModel : ObservableObject
         SearchText = query ?? "";
 
         if (SearchText.IsNullOrEmpty())
+        {
             MessageBox.Show("Please enter text!", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+            return;
+        }
 
         IsBusy = true;
         try

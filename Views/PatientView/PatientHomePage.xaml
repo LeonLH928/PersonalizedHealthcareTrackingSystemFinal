@@ -139,7 +139,11 @@
 
                         <Border BorderBrush="#33FFFFFF" BorderThickness="0,1,0,0" Margin="0,24,0,0" Padding="0,24,0,0">
                             <StackPanel Orientation="Horizontal">
-                                <Border Width="40" Height="40" CornerRadius="20" Background="#33FFFFFF"/>
+                                <Border Width="40" Height="40" CornerRadius="20">
+                                    <Border.Background>
+                                        <ImageBrush ImageSource="/Resources/Avatar/doctor.jpg" Stretch="UniformToFill"/>
+                                    </Border.Background>
+                                </Border>
                                 <StackPanel Margin="12,0,0,0" VerticalAlignment="Center">
                                 <TextBlock Foreground="White" FontWeight="SemiBold" Style="{StaticResource CustomBaseTextBlockStyle}" FontSize="18">
                                     <TextBlock.Text>

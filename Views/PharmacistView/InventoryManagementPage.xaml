@@ -16,6 +16,8 @@
         <converters:ZeroStockToVisibility x:Key="ZeroStockToVisibility"/> 
         <converters:LowStockToVisibility x:Key="LowStockToVisibility"/>
         <converters:NormalStockToVisibility x:Key="NormalStockToVisibility"/>
+        <converters:PascalCaseToSpaceConverter x:Key="PascalCaseToSpaceConverter"/>
+        <converters:EqualityToBooleanConverter x:Key="EqualityToBooleanConverter"/>
     </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -38,7 +40,7 @@
                                Style="{StaticResource SecondaryTextTextBlockStyle}"/>
                 </StackPanel>
 
-                <StackPanel Orientation="Horizontal" 
+                <!--StackPanel Orientation="Horizontal" 
                           HorizontalAlignment="Right"
                           VerticalAlignment="Center">
                     <Button Content="📄 Export Report"
@@ -46,7 +48,7 @@
                             Style="{StaticResource OutlineButtonStyle}"/>
                     <Button Style="{StaticResource PharmacistPrimaryButton}"
                             Content="+ Stock new batch"/>
-                </StackPanel>
+                </StackPanel-->
             </Grid>
         </Border>
 
@@ -60,44 +62,64 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
                 <!-- Search Box -->
-                <TextBox
-                            Tag="Find by patient ID, drug ID, etc."
-                            FontSize="14"
-                            Style="{StaticResource SearchInputTextBoxStyle}"
-                            Margin="0,0,10,0"
-                            VerticalAlignment="Center"
-                            Text="{Binding SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                <TextBox Margin="0 0 10 0"
+                    Style="{StaticResource SearchInputTextBoxStyle}"
+                    Tag="Search by name, ID,..."
+                    Text="{Binding SearchText, Mode=TwoWay, UpdateSourceTrigger=LostFocus}">
                     <TextBox.InputBindings>
-                        <KeyBinding Key="Enter" Command="{Binding SearchCommand}"/>
+                        <KeyBinding Key="Enter" 
+                                    Command="{Binding SearchCommand}"
+                                    CommandParameter="{Binding Text, 
+                                                               RelativeSource={RelativeSource AncestorType=TextBox}}"/>
                     </TextBox.InputBindings>
                 </TextBox>
 
-                <!-- Status Filter -->
-                <ComboBox Grid.Column="1"
-                        Style="{StaticResource FormComboBox}"
-                        MinWidth="150"
-                        Padding="16,10"
-                        BorderBrush="{StaticResource BorderColor}"
-                        Margin="0,0,16,0">
-                    <ComboBoxItem Content="All Statuses" IsSelected="True"/>
-                    <ComboBoxItem Content="⚠️ Low Stock"/>
-                    <ComboBoxItem Content="🚫 Out of Stock"/>
-                </ComboBox>
+                <StackPanel Grid.Column="1" Orientation="Horizontal">
+                    <Button
+                        Grid.Column="1"
+                        Content="&#128472;"
+                        Command="{Binding ReloadButtonCommand}"
+                        Style="{StaticResource ReloadButtonStyle}"
+                        Margin="0 0 12 0"/>
+                    
+                    <!-- Status Filter -->
+                    <ComboBox 
+                            Style="{StaticResource FormComboBox}"
+                            MinWidth="150"
+                            Padding="16,10"
+                            BorderBrush="{StaticResource BorderColor}"
+                            Margin="0,0,16,0"
+                            SelectedValuePath="Content"
+                            SelectedValue="{Binding SelectedStatus}">
+                        <ComboBoxItem Content="Status: All" IsSelected="True"/>
+                        <ComboBoxItem Content="✅ Available"/>
+                        <ComboBoxItem Content="⚠️ Low Stock"/>
+                        <ComboBoxItem Content="🚫 Out of Stock"/>
+                    </ComboBox>
 
-                <!-- Group Filter -->
-                <ComboBox Grid.Column="2"
-                        Style="{StaticResource FormComboBox}"
-                        MinWidth="150"
-                        Padding="16,10"
-                        BorderBrush="{StaticResource BorderColor}">
-                    <ComboBoxItem Content="Group: All" IsSelected="True"/>
-                    <ComboBoxItem Content="Antibiotics"/>
-                    <ComboBoxItem Content="Cardiovascular"/>
-                </ComboBox>
+                    <!-- Group Filter -->
+                    <ComboBox 
+                            Style="{StaticResource FormComboBox}"
+                            MinWidth="150"
+                            Padding="16,10"
+                            BorderBrush="{StaticResource BorderColor}"
+                            Margin="0,0,16,0"
+                            SelectedValuePath="Content"
+                            SelectedValue="{Binding SelectedCategory}">
+                        <ComboBoxItem Content="All Categories" IsSelected="True"/>
+                        <ComboBoxItem Content="Antibiotics"/>
+                        <ComboBoxItem Content="Painkillers"/>
+                        <ComboBoxItem Content="Chronic Condition"/>
+                        <ComboBoxItem Content="Supplement"/>
+                        <ComboBoxItem Content="Respiratory"/>
+                        <ComboBoxItem Content="Mental Health"/>
+                        <ComboBoxItem Content="Allergy"/>
+                        <ComboBoxItem Content="Other"/>
+                    </ComboBox>
+                </StackPanel>
             </Grid>
         </Border>
 
@@ -156,6 +178,13 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
+
+                    <!-- Category Column -->
+                    <DataGridTextColumn Header="Category" 
+                                    ElementStyle="{StaticResource ColumnTextBlockStyle}"
+                                    Width="*"
+                                    Binding="{Binding Category, StringFormat={}{0},
+                                                      Converter={StaticResource PascalCaseToSpaceConverter}}"/>
 
                     <!-- Form/Unit Column -->
                     <DataGridTextColumn Header="Form / Unit" 
@@ -343,7 +372,9 @@
                                            Grid.Column="0"
                                            Content="+ Add Stock"
                                            GroupName="AdjType"
-                                           IsChecked="True"
+                                           IsChecked="{Binding SelectedOption, 
+                                                               Converter={StaticResource EqualityToBooleanConverter}, 
+                                                               ConverterParameter=+ Add Stock}"                                           
                                            HorizontalAlignment="Stretch"
                                            VerticalAlignment="Stretch"
                                            HorizontalContentAlignment="Center"
@@ -359,7 +390,7 @@
                                                   CornerRadius="6"
                                                   Margin="4">
                                                 <ContentPresenter HorizontalAlignment="Center"
-                                                                VerticalAlignment="Center"/>
+                                                                  VerticalAlignment="Center"/>
                                             </Border>
                                             <ControlTemplate.Triggers>
                                                 <Trigger Property="IsChecked" Value="True">
@@ -375,6 +406,9 @@
                                 <RadioButton x:Name="RadioRemove"
                                            Grid.Column="1"
                                            Content="- Remove/Discard"
+                                           IsChecked="{Binding SelectedOption, 
+                                                               Converter={StaticResource EqualityToBooleanConverter}, 
+                                                               ConverterParameter=- Remove/Discard}"                                           
                                            GroupName="AdjType"
                                            HorizontalAlignment="Stretch"
                                            VerticalAlignment="Stretch"
@@ -417,6 +451,7 @@
                                    BorderBrush="{StaticResource BorderColor}"
                                    BorderThickness="1"
                                    FontWeight="Bold"
+                                   Text="{Binding ChangeQuantity}"
                                    FontSize="17"
                                    Foreground="{StaticResource SidebarActive}">
                                 <TextBox.Resources>
@@ -480,7 +515,7 @@
                             <Button Style="{StaticResource PharmacistPrimaryButton}"
                                     Grid.Column="1"
                                     Padding="24,12"
-                                    Click="SaveAdjustment_Click"
+                                    Command="{Binding SaveAdjustmentButtonCommand}"
                                     FontSize="16"
                                     Content="💾 Save Adjustment"/>
                         </Grid>
@@ -488,5 +523,25 @@
                 </ScrollViewer>
             </Grid>
         </Border>
+        <Grid Visibility="{Binding IsLoading, Converter={StaticResource BoolToVisibilityConverter}}"
+              Grid.RowSpan="3" 
+              Background="#80FFFFFF" 
+              d:IsHidden="False">
+            <fa:ImageAwesome 
+                Icon="Spinner" 
+                Spin="True" 
+                Height="48" 
+                Width="48"/>
+        </Grid>
+        <Grid Visibility="{Binding IsBusy, Converter={StaticResource BoolToVisibilityConverter}}"
+              Grid.RowSpan="3" 
+              Background="#80FFFFFF" 
+              d:IsHidden="False">
+            <fa:ImageAwesome 
+                Icon="Spinner" 
+                Spin="True" 
+                Height="48" 
+                Width="48"/>
+        </Grid>
     </Grid>
 </Page>

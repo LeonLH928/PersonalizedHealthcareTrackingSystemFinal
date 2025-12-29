@@ -127,10 +127,13 @@
                                                     <ColumnDefinition Width="*"/>
                                                 </Grid.ColumnDefinitions>
 
-                                                <Ellipse Grid.Column="0" Width="64" Height="64"
-                                                         Fill="#e2e8f0" Margin="0,0,16,0"/>
 
-                                                <StackPanel Grid.Column="1">
+                                            <Image Source="/Resources/Avatar/doctor.jpg"                
+                                                   Grid.Column="0" 
+                                                   Height="64"
+                                                   Width="64" Margin="0,0,16,0"/>
+
+                                            <StackPanel Grid.Column="1">
                                                     <TextBlock 
                                                         FontSize="16" FontWeight="SemiBold"
                                                         Foreground="{StaticResource DarkText}">
@@ -274,8 +277,11 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <Ellipse Width="80" Height="80" Fill="#cbd5e1" Margin="0,0,16,0"/>
-                        
+                        <Image Source="/Resources/Avatar/doctor.jpg"                
+                                Height="80"
+                                Width="80" Margin="0,0,16,0"/>
+
+
                         <StackPanel Grid.Column="1">
                             <TextBlock 
                                 FontSize="26"

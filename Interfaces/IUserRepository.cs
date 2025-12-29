@@ -5,6 +5,7 @@ namespace PersonalizedHealthcareTrackingSystemFinal.Interfaces;
 public interface IUserRepository
 {
     Task<UserModel> GetUserByIDAsync(string userId);
+    Task<IEnumerable<UserModel>> GetAllUsersAsync();
     Task<UserModel> GetUserByUsernameAsync(string username);
     Task<bool> UsernameExistsAsync(string username);
     Task<bool> EmailExistsAsync(string email);

@@ -15,8 +15,7 @@
         ResizeMode="NoResize"
         Icon="/Resources/Logo/logo.ico"
         BorderThickness="0"
-        
-    FontFamily="/PersonalizedHealthcareTrackingSystemFinal;component/Resources/Fonts/#Poppins">
+        FontFamily="/PersonalizedHealthcareTrackingSystemFinal;component/Resources/Fonts/#Poppins">
 
     <Border Background="#11161F" CornerRadius="20" BorderThickness="1" BorderBrush="#333">
         <Grid>
@@ -89,23 +88,34 @@
                     </ToggleButton>
                 </Grid>
 
-                <TextBlock Text="Forget Password?" 
-                           Foreground="{StaticResource TextGray}"
-                           TextDecorations="Underline" 
-                           Cursor="Hand" 
-                           HorizontalAlignment="Right" 
-                           Margin="0,0,5,30"
-                           FontSize="12">
-                    <TextBlock.Style>
-                        <Style TargetType="TextBlock">
-                            <Style.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Foreground" Value="{StaticResource PrimaryTeal}"/>
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </TextBlock.Style>
-                </TextBlock>
+                <Button Background="Transparent"
+                        HorizontalAlignment="Right"
+                        Margin="0,0,5,30"
+                        BorderBrush="Transparent"
+                        Cursor="Hand"
+                        Command="{Binding ForgetPasswordButtonCommand}">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="Transparent">
+                                <ContentPresenter/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                    
+                    <TextBlock Text="Forget Password?" 
+                               Foreground="{StaticResource TextGray}"
+                               TextDecorations="Underline">
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Foreground" Value="{StaticResource PrimaryTeal}"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                </Button>
 
                 <Button Command="{Binding LoginCommand}" 
                         Content="LOG IN" 

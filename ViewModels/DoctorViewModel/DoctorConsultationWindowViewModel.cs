@@ -342,7 +342,7 @@ public partial class DoctorConsultationWindowViewModel : ObservableObject,
                 Priority = LatestAppointment.Priority,
                 DispensedAt = null!
             };
-            await _prescriptionService.AddPrescriptionAsync(NewPrescription);
+            await _prescriptionService.UpsertPrescriptionAsync(NewPrescription);
 
             foreach (var medication in SelectedMedications)
             {
