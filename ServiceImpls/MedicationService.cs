@@ -73,4 +73,8 @@ public class MedicationService : IMedicationService
         }
         return resultCategory;
     }
+    public async Task UpsertMedication(MedicationModel NewMedication)
+    {
+        await _medicationRepository.UpsertMedication(NewMedication);
+    }
 }

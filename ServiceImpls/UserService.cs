@@ -10,6 +10,10 @@ public class UserService : IUserService
     {
         _userRepository = userRepository; 
     }
+    public async Task<IEnumerable<UserModel>> GetAllUsers()
+    {
+        return await _userRepository.GetAllUsersAsync();
+    }
     public async Task<UserModel> GetUserByIDAsync(string UserID)
     {
         return await _userRepository.GetUserByIDAsync(UserID);

@@ -4,7 +4,7 @@ using System.Windows.Markup;
 namespace PersonalizedHealthcareTrackingSystemFinal.Services;
 public interface IPrescriptionService
 {
-    Task AddPrescriptionAsync(PrescriptionModel NewPrescription);
+    Task UpsertPrescriptionAsync(PrescriptionModel NewPrescription);
     Task<IEnumerable<PrescriptionModel>> GetAllPendingPrescriptionsAsync();
     Task<IEnumerable<PrescriptionModel>> GetAllDispensingPrescriptionsAsync();
     Task<IEnumerable<PrescriptionModel>> GetAllCompletedPrescriptionsAsync();

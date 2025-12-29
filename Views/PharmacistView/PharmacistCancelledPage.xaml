@@ -46,45 +46,32 @@
                         FontSize="14"
                         Style="{StaticResource SearchInputTextBoxStyle}"
                         VerticalAlignment="Center"
-                        Text="{Binding SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.ColumnSpan="2">
+                        Text="{Binding SearchText, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" Grid.ColumnSpan="2">
                         <TextBox.InputBindings>
-                            <KeyBinding Key="Enter" Command="{Binding SearchCommand}"/>
+                            <KeyBinding Key="Enter" 
+                                    Command="{Binding SearchCommand}"
+                                    CommandParameter="{Binding Text, 
+                                    RelativeSource={RelativeSource AncestorType=TextBox}}"/>
                         </TextBox.InputBindings>
                     </TextBox>
                 </Grid>
 
                 <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="20">
-                    <ComboBox Grid.Column="2"
-                        Style="{StaticResource FormComboBox}"
-                        MinWidth="150"
-                        Padding="16,10"
-                        BorderBrush="{StaticResource BorderColor}"
-                        Margin="0,0,16,0">
-                        <ComboBoxItem Content="Cancelled By: All" IsSelected="True"/>
-                        <ComboBoxItem Content="👨‍⚕️ Doctor"/>
-                        <ComboBoxItem Content="⚙️ System (Auto)"/>
-                        <ComboBoxItem Content="👤 Patient Request"/>
-                    </ComboBox>
-
-                    <ComboBox Grid.Column="2"
-                        Style="{StaticResource FormComboBox}"
-                        MinWidth="150"
-                        Padding="16,10"
-                        BorderBrush="{StaticResource BorderColor}"
-                        Margin="0,0,16,0">
-                        <ComboBoxItem Content="Group: All" IsSelected="True"/>
-                        <ComboBoxItem Content="Antibiotics"/>
-                        <ComboBoxItem Content="Cardiovascular"/>
-                    </ComboBox>
+                    <Button
+                        Grid.Column="1"
+                        Content="&#128472;"
+                        Command="{Binding ReloadButtonCommand}"
+                        Style="{StaticResource ReloadButtonStyle}"
+                        Margin="0 0 12 0"/>
 
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                         <TextBlock Text="From:" VerticalAlignment="Center" Foreground="{StaticResource TextSecondary}" Margin="0,0,8,0"/>
-                        <DatePicker Style="{StaticResource StandardDatePicker}" SelectedDate="2024-01-01" Width="180"/>
+                        <DatePicker Style="{StaticResource StandardDatePicker}" SelectedDate="{Binding FromDate}" Width="180"/>
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="10">
                         <TextBlock Text="To:" VerticalAlignment="Center" Foreground="{StaticResource TextSecondary}" Margin="0,0,8,0"/>
-                        <DatePicker Style="{StaticResource StandardDatePicker}" SelectedDate="2025-01-01" Width="180"/>
+                        <DatePicker Style="{StaticResource StandardDatePicker}" SelectedDate="{Binding ToDate}" Width="180"/>
                     </StackPanel>
                 </StackPanel>
             </Grid>
@@ -231,8 +218,8 @@
                         <DataTemplate>
                             <StackPanel VerticalAlignment="Center">
                                 <TextBlock 
-                    FontWeight="SemiBold"
-                    Style="{StaticResource CustomBaseTextBlockStyle}">
+                                    FontWeight="SemiBold"
+                                    Style="{StaticResource CustomBaseTextBlockStyle}">
                                     <TextBlock.Text>
                                         <MultiBinding StringFormat="{}{0} {1}">
                                             <Binding Path="Pharmacist.User.FirstName"/>
@@ -244,28 +231,34 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-
-                <DataGridTemplateColumn Header="Actions" Width="*">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal" Margin="8">
-                                <Button Style="{StaticResource BtnSecondary}" Content="👁️ Details" Padding="10,6" FontSize="12"/>
-                                <Button Style="{StaticResource BtnSecondary}" Content="🖨️ Reprint" Padding="10,6" FontSize="12"/>
-                            </StackPanel>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
 
         <Grid Grid.Row="3" Margin="0,16,0,0">
-            <TextBlock Text="Showing 1-3 of 25 cancelled records" VerticalAlignment="Center" Foreground="{StaticResource TextSecondary}"/>
+            <TextBlock Text="{Binding PaginationSummary}" VerticalAlignment="Center" Foreground="{StaticResource TextSecondary}"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button Content="← Previous" Style="{StaticResource BtnSecondary}" Padding="12,6" Margin="0,0,4,0" IsEnabled="False"/>
-                <Button Content="1" Style="{StaticResource BtnPrimary}" Background="{StaticResource DangerColor}" Padding="12,6" Margin="0,0,4,0"/>
-                <Button Content="2" Style="{StaticResource BtnSecondary}" Padding="12,6" Margin="0,0,4,0"/>
-                <Button Content="Next →" Style="{StaticResource BtnSecondary}" Padding="12,6"/>
+                <Button Content="← Previous" Style="{StaticResource BtnSecondary}" Padding="12,6" Margin="0,0,10,0"
+                        Command="{Binding PreviousPageCommand}"
+                        IsEnabled="{Binding CanGoPrevious}"/>
+                <Border Background="{StaticResource DangerColor}" CornerRadius="4" Padding="12,5" Margin="0,0,10,0">
+                    <TextBlock Text="{Binding CurrentPage}" 
+                       Foreground="White" FontWeight="Bold"/>
+                </Border>
+                <Button Content="Next →" Style="{StaticResource BtnSecondary}" Padding="12,6" 
+                        Command="{Binding NextPageCommand}"
+                        IsEnabled="{Binding CanGoNext}"/>
             </StackPanel>
         </Grid>
+        <Grid Visibility="{Binding IsLoading, Converter={StaticResource BoolToVisibilityConverter}}"
+              Grid.RowSpan="3" 
+              Background="#80FFFFFF" 
+              d:IsHidden="False">
+            <fa:ImageAwesome 
+                Icon="Spinner" 
+                Spin="True" 
+                Height="48" 
+                Width="48" />
+        </Grid>
+
     </Grid>
 </Page>

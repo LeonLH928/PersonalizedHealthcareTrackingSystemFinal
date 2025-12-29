@@ -12,6 +12,8 @@
     <Page.Resources>
         <converters:YearToAgeConverter x:Key="YearToAgeConverter"/>
         <converters:AddOneConverter x:Key="AddOneConverter"/>
+        <converters:StatToVisibility x:Key="StatToVisibility"/>
+        <converters:UrgentToVisibility x:Key="UrgentToVisibility"/>
         <converters:StringToVisibility x:Key="StringToVisibility"/>
         <converters:LocalToUtcDisplayConverter x:Key="LocalToUtcDisplayConverter"/>
     </Page.Resources>
@@ -143,7 +145,7 @@
                                     <ListBox.ItemTemplate>
                                         <DataTemplate>
                                             <Border
-                                                Style="{StaticResource PharmacistQueueCardBorderStyle}"
+                                                Style="{StaticResource PriorityCardBorderStyle}"
                                                 Margin="0,10">
                                                 <Grid>
                                                     <Grid.ColumnDefinitions>
@@ -151,10 +153,26 @@
                                                         <ColumnDefinition Width="*"/>
                                                     </Grid.ColumnDefinitions>
                                                     <StackPanel>
-                                                        <TextBlock
-                                                                Style="{StaticResource SecondaryTextTextBlockStyle}"
-                                                                Text="{Binding PrescriptionID, StringFormat={}#{0}}"
-                                                                Margin="0,0,0,10"/>
+                                                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                                            <TextBlock
+                                                                    Style="{StaticResource SecondaryTextTextBlockStyle}"
+                                                                    Text="{Binding PrescriptionID, StringFormat={}#{0}}"
+                                                                    Margin="0,0,0,10"/>
+                                                            <TextBlock Text="🔥 STAT" FontWeight="Bold" Foreground="#DC2626"
+                                                                       FontSize="12"
+                                                                       Style="{StaticResource CustomBaseTextBlockStyle}"
+                                                                       Margin="10,3,0,0"
+                                                                       Visibility="{Binding Priority,
+                                                                                            Converter={StaticResource StatToVisibility}}"/>
+                                                            
+                                                            <TextBlock Text="⚠️ URGENT" Style="{StaticResource CustomBaseTextBlockStyle}" 
+                                                                       FontSize="12"
+                                                                       Margin="10,3,0,0"
+                                                                       FontWeight="Bold" Foreground="{StaticResource UrgentTagBorder}"
+                                                                       Visibility="{Binding Priority,
+                                                                                            Converter={StaticResource UrgentToVisibility}}"/>
+                                                            
+                                                        </StackPanel>
                                                         <TextBlock
                                                                 Style="{StaticResource CustomBaseTextBlockStyle}"
                                                                 FontSize="18"
@@ -477,7 +495,7 @@
                                                                         HorizontalAlignment="Center">
                                                                 <TextBlock
                                                                     Text="{Binding SelectedClinicalExamination.BloodPressure}"
-                                                                    Style="{StaticResource BloodPressureSafetyTextBlockStyle}"
+                                                                    Style="{StaticResource BloodPressureTextBlockStyle}"
                                                                     FontWeight="SemiBold"/>
 
                                                                 <TextBlock
@@ -507,7 +525,7 @@
                                                                         HorizontalAlignment="Center">
                                                                 <TextBlock
                                                                     Text="{Binding SelectedClinicalExamination.Pulse}"
-                                                                    Style="{StaticResource BloodPressureSafetyTextBlockStyle}"
+                                                                    Style="{StaticResource PulseTextBlockStyle}"
                                                                     FontWeight="SemiBold"/>
 
                                                                 <TextBlock
@@ -536,7 +554,7 @@
                                                                         HorizontalAlignment="Center">
                                                                 <TextBlock
                                                                     Text="{Binding SelectedClinicalExamination.OxygenSaturation}"
-                                                                    Style="{StaticResource BloodPressureSafetyTextBlockStyle}"
+                                                                    Style="{StaticResource SpO2TextBlockStyle}"
                                                                     FontWeight="SemiBold"/>
 
                                                                 <TextBlock
@@ -565,7 +583,7 @@
                                                                         HorizontalAlignment="Center">
                                                                 <TextBlock
                                                                     Text="{Binding SelectedClinicalExamination.Temperature}"
-                                                                    Style="{StaticResource BloodPressureSafetyTextBlockStyle}"
+                                                                    Style="{StaticResource TemperatureTextBlockStyle}"
                                                                     FontWeight="SemiBold"/>
 
                                                                 <TextBlock
@@ -595,7 +613,7 @@
                                                                         HorizontalAlignment="Center">
                                                                 <TextBlock
                                                                     Text="{Binding SelectedClinicalExamination.RespiratoryRate}"
-                                                                    Style="{StaticResource BloodPressureSafetyTextBlockStyle}"
+                                                                    Style="{StaticResource RespiratoryRateTextBlockStyle}"
                                                                     FontWeight="SemiBold"/>
 
                                                                 <TextBlock
@@ -674,16 +692,31 @@
                                         Header="Medication ID"
                                         Width="*"
                                         ElementStyle="{StaticResource ColumnTextBlockStyle}"/>
+                                    <DataGridTemplateColumn Header="Name"
+                                                            Width="*">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Style="{StaticResource ColumnTextBlockStyle}">
+                                                    <TextBlock.Text>
+                                                        <MultiBinding StringFormat="{}{0} ({1})">
+                                                            <Binding Path="Item.Medication.Name"/>
+                                                            <Binding Path="Item.Medication.ActiveIngredient"/>
+                                                        </MultiBinding>
+                                                    </TextBlock.Text>
+                                                </TextBlock>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
                                     <DataGridTextColumn
-                                        Binding="{Binding Item.Medication.Name}"
-                                        Width="*"
-                                        Header="Drug name &amp; Dosage"
-                                        ElementStyle="{StaticResource ColumnTextBlockStyle}"/>
+                                            Binding="{Binding Item.DurationDays, StringFormat={}{0} days}"
+                                            Width="*"
+                                            Header="Duration"
+                                            ElementStyle="{StaticResource ColumnTextBlockStyle}"/>
                                     <DataGridTextColumn
-                                        Binding="{Binding Item.Medication.ActiveIngredient}"
-                                        Width="*"
-                                        Header="Active Ingredients"
-                                        ElementStyle="{StaticResource ColumnTextBlockStyle}"/>
+                                            Binding="{Binding Item.Frequency}"
+                                            Width="*"
+                                            Header="Frequency"
+                                            ElementStyle="{StaticResource ColumnTextBlockStyle}"/>
                                     <DataGridTemplateColumn Header="Prescription's quantity"
                                                             Width="*">
                                         <DataGridTemplateColumn.CellTemplate>
@@ -700,10 +733,15 @@
                                         </DataGridTemplateColumn.CellTemplate>
                                     </DataGridTemplateColumn>
                                     <DataGridTextColumn
-                                        Binding="{Binding Item.Instruction}"
-                                        Width="*"
-                                        Header="Instruction"
-                                        ElementStyle="{StaticResource ColumnTextBlockStyle}"/>
+                                            Binding="{Binding Item.Instruction}"
+                                            Width="*"
+                                            Header="Instruction"
+                                            ElementStyle="{StaticResource ColumnTextBlockStyle}"/>
+                                    <DataGridTextColumn
+                                            Binding="{Binding Item.Indication}"
+                                            Width="*"
+                                            Header="Indication"
+                                            ElementStyle="{StaticResource ColumnTextBlockStyle}"/>
                                     <DataGridTemplateColumn Header="Check inventory"
                                                             Width="*">
                                         <DataGridTemplateColumn.CellTemplate>
@@ -762,6 +800,11 @@
                             </MultiBinding>
                         </TextBlock.Text>
                     </TextBlock>
+                    <Button
+                        Style="{StaticResource CancelOutlineButtonStyle}"
+                        Content="✕ Refuse"
+                        Command="{Binding RefuseButtonCommand}"
+                        Margin="0,0,20,0"/>
                     <Button
                         Style="{StaticResource PharmacistPrimaryButton}"
                         Margin="0,0,10,0"
@@ -1126,6 +1169,79 @@
                         </StackPanel>
                     </Button>
                 </StackPanel>
+            </Border>
+        </Grid>
+        <Grid Grid.RowSpan="3" 
+              Grid.Column="1"
+              Background="#11000000"
+              Visibility="{Binding IsOpen, Converter={StaticResource BoolToVisibilityConverter}}">
+
+            <Border Background="White"
+                    Width="500"
+                    Style="{StaticResource BaseCustomBorderStyle}"
+                    HorizontalAlignment="Center"
+                    Padding="20,10"
+                    VerticalAlignment="Center">
+
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="20" ShadowDepth="0" Opacity="0.4"/>
+                </Border.Effect>
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0" Margin="0,0,0,15">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Text="Cancel prescription" 
+                                   Style="{StaticResource PageHeaderTextBlockStyle}"
+                                   FontWeight="Bold"
+                                   VerticalAlignment="Center"/>
+
+                        <Button Grid.Column="1"
+                                Content="✕"
+                                Style="{StaticResource CloseWindowButton}"
+                                Command="{Binding CloseButtonCommand}"/>
+                    </Grid>
+
+                    <StackPanel Grid.Row="1" 
+                                Margin="0,0,0,30">
+                        <TextBlock Text="Reason for cancellation" 
+                                   Style="{StaticResource SecondaryTextTextBlockStyle}"
+                                   Margin="0,0,0,10"
+                                   Foreground="Gray"/>
+
+                        <TextBox  
+                            Height="80" 
+                            Style="{StaticResource CurrentExamTextTextBoxStyle}"
+                            Text="{Binding Reason, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="2" 
+                                Orientation="Horizontal" 
+                                HorizontalAlignment="Right"
+                                Margin="0,0,0,10">
+
+                        <Button Content="Yes"
+                                Width="120" Height="50"
+                                Margin="0,0,20,0"
+                                Style="{StaticResource PharmacistPrimaryButton}"
+                                Command="{Binding YesButtonCommand}"/>
+
+                        <Button Content="No"
+                                Width="120" Height="50"
+                                Style="{StaticResource OutlineButtonStyle}"
+                                Command="{Binding CloseButtonCommand}"/>
+                    </StackPanel>
+                </Grid>
             </Border>
         </Grid>
         <Grid Visibility="{Binding IsLoadingBar, Converter={StaticResource BoolToVisibilityConverter}}"

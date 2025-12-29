@@ -10,4 +10,5 @@ public interface IMedicationService
     Task<IEnumerable<MedicationModel>> GetAllZeroStockMedicationsAsync();
     Task<IEnumerable<MedicationModel>> GetAllAvailableMedicationsAsync();
     Task<IEnumerable<MedicationModel>> GetAllMedicationsByCategoryAsync(string Category);
+    Task UpsertMedication(MedicationModel NewMedication);
 }

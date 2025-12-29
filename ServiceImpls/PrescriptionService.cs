@@ -13,9 +13,9 @@ public class PrescriptionService : IPrescriptionService
     {
         _prescriptionRepository = prescriptionRepository;
     }
-    public async Task AddPrescriptionAsync(PrescriptionModel NewPrescription)
+    public async Task UpsertPrescriptionAsync(PrescriptionModel NewPrescription)
     {
-        await _prescriptionRepository.AddPrescriptionAsync(NewPrescription);
+        await _prescriptionRepository.UpsertPrescriptionAsync(NewPrescription);
     }
     public async Task<IEnumerable<PrescriptionModel>> GetAllPendingPrescriptionsAsync()
     {

@@ -61,6 +61,7 @@ public static class AppModule
         services.AddTransient<IntroductionWindow>();
         services.AddTransient<LoginWindow>();
         services.AddTransient<SignUpWindow>();
+        services.AddTransient<ForgetPasswordWindow>();
 
         services.AddTransient<Views.PatientView.PatientMainWindow>();
         services.AddTransient<Views.PatientView.PatientHomePage>();
@@ -88,6 +89,7 @@ public static class AppModule
         services.AddTransient<IntroductionWindowViewModel>();
         services.AddTransient<LoginWindowViewModel>();
         services.AddTransient<SignUpWindowViewModel>();
+        services.AddTransient<ForgetPasswordWindowViewModel>();
 
         services.AddTransient<ViewModels.PatientViewModel.PatientHomePageViewModel>();
         services.AddTransient<ViewModels.PatientViewModel.PatientBookingPageViewModel>();

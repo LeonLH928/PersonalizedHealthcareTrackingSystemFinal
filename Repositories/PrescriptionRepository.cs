@@ -26,7 +26,7 @@ public class PrescriptionRepository : IPrescriptionRepository
     {
         await _client.InitializeAsync();
     }
-    public async Task AddPrescriptionAsync(PrescriptionModel NewPrescription)
+    public async Task UpsertPrescriptionAsync(PrescriptionModel NewPrescription)
     {
         await _client.From<PrescriptionModel>()
                      .Upsert(NewPrescription);
@@ -304,6 +304,8 @@ public class PrescriptionRepository : IPrescriptionRepository
          || p.MedicalRecord.Appointment.Doctor.User.LastName.ToLower().Contains(SearchText)
          || p.MedicalRecord.Appointment.Patient.User.LastName.ToLower().Contains(SearchText)
          || p.MedicalRecord.Appointment.Patient.User.FirstName.ToLower().Contains(SearchText)
+         || p.Status == Models.PrescriptionStatus.Completed && p.Pharmacist.User.FirstName.ToLower().Contains(SearchText)
+         || p.Status == Models.PrescriptionStatus.Completed && p.Pharmacist.User.LastName.ToLower().Contains(SearchText)
             );
 
         return prescriptions;
